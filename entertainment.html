@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LayoverX Entertainment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#9d4300",
+                        "inverse-primary": "#c0c1ff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "on-primary-container": "#fffbff",
+                        "tertiary-container": "#007cb1",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#07006c",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary": "#00628d",
+                        "secondary-fixed-dim": "#ffb690",
+                        "on-secondary-fixed-variant": "#783200",
+                        "inverse-on-surface": "#eaf1ff",
+                        "primary-fixed": "#e1e0ff",
+                        "surface": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#001e2f",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-background": "#0b1c30",
+                        "secondary-fixed": "#ffdbca",
+                        "surface-variant": "#d3e4fe",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "surface-container": "#e5eeff",
+                        "primary-container": "#6063ee",
+                        "primary": "#4648d4",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#464554",
+                        "on-secondary-container": "#5c2400",
+                        "on-tertiary-container": "#fcfcff",
+                        "tertiary-fixed": "#c9e6ff",
+                        "on-secondary-fixed": "#341100",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "outline": "#767586",
+                        "background": "#f8f9ff",
+                        "outline-variant": "#c7c4d7",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#494bd6",
+                        "inverse-surface": "#213145",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#fd761a",
+                        "surface-container-high": "#dce9ff"
+                    },
+                    "spacing": {
+                        "node-padding": "1.25rem"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            font-size: 1.25rem;
+        }
+        .nav-dropdown {
+            opacity: 0;
+            transform: translateY(10px);
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+        }
+        .nav-item:hover .nav-dropdown,
+        .nav-item:focus-within .nav-dropdown,
+        .nav-dropdown.open {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .entity-card {
+            transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+        }
+        .entity-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(11, 28, 48, 0.12);
+        }
+        .listing-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 0;
+            transition: gap 360ms ease-in-out;
+        }
+        .listing-panel {
+            width: 100%;
+            max-width: 560px;
+            transition: transform 360ms ease-in-out, opacity 360ms ease-in-out, visibility 360ms ease-in-out;
+        }
+        #level-1-panel {
+            transform: translateX(0);
+        }
+        #level-2-panel {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(50px);
+        }
+        .listing-layout.show-details {
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+        .listing-layout.show-details #level-1-panel {
+            transform: translateX(-24px);
+        }
+        .listing-layout.show-details #level-2-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        .sorting-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .sorting-label {
+            font-size: 14px;
+            color: #666;
+        }
+        .sorting-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .sort-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            color: #334155;
+        }
+        .sort-btn:hover {
+            border-color: #ff6b3d;
+        }
+        .sort-btn.active {
+            background: #ff6b3d;
+            color: white;
+            border-color: #ff6b3d;
+        }
+        @media (max-width: 767px) {
+            .listing-layout {
+                justify-content: center;
+            }
+            .listing-layout.show-details {
+                justify-content: center;
+                gap: 1.5rem;
+            }
+            .listing-layout.show-details #level-1-panel {
+                transform: translateX(0);
+            }
+            .sorting-bar {
+                justify-content: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .sorting-options {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-node-description antialiased overflow-x-hidden">
+<header class="fixed top-0 w-full z-50 bg-neutral-950/75 backdrop-blur-md shadow-2xl shadow-black/40 border-b border-white/10">
+<div class="max-w-7xl mx-auto px-6 md:px-8 py-4 flex justify-between items-center gap-6">
+<div class="flex items-center gap-8 lg:gap-12">
+<a class="text-2xl font-black tracking-tighter text-white" href="index.html">LayoverX</a>
+<nav class="hidden md:flex items-center gap-6 lg:gap-8 font-['Plus_Jakarta_Sans'] text-sm tracking-wide">
+<div class="relative nav-item">
+<button aria-expanded="false" class="flex items-center gap-1 text-orange-500 border-b-2 border-orange-500 pb-1 transition-colors" type="button">
+<span>Explore</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+<div class="nav-dropdown absolute left-0 top-full pt-4 min-w-[240px]">
+<div class="rounded-2xl border border-white/10 bg-[#1e2020]/95 backdrop-blur-xl shadow-2xl shadow-black/40 p-3 space-y-1">
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition duration-200" href="hotel.html">Hotels &amp; Stays</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition duration-200" href="restaurant.html">Food &amp; Dining</a>
+<a class="block rounded-xl px-4 py-3 text-orange-500 bg-white/5 transition duration-200" href="entertainment.html">Gaming &amp; Entertainment</a>
+</div>
+</div>
+</div>
+</nav>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto space-y-12 px-4 sm:px-6 md:px-8 pt-6 pb-16">
+<section class="pl-6 pt-2">
+<h2 class="text-node-title-lg font-node-title-lg text-on-background tracking-tight">GAMING &amp; ENTERTAINMENT NEAR MUMBAI AIRPORT</h2>
+</section>
+<div class="listing-layout relative" id="listing-layout">
+<div class="space-y-6 relative z-10 listing-panel" id="level-1-panel">
+<div class="flex items-center justify-between mb-4">
+<span class="bg-primary text-white text-meta-label px-3 py-1 font-bold">LEVEL 1: LISTING</span>
+<span class="text-meta-label font-meta-label text-primary font-bold">THEME: BLUE/PURPLE</span>
+</div>
+<div class="bg-surface-container-lowest border-2 border-primary-container p-node-padding rounded shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<h3 class="text-node-title-md font-node-title-md text-primary">Entertainment Listing Page</h3>
+<span class="bg-green-100 text-green-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase">Finalized</span>
+</div>
+<div class="space-y-4">
+<div class="border-2 border-dashed border-outline-variant p-3">
+<p class="text-meta-label text-outline mb-2">VENUE INVENTORY (8 FOUND)</p>
+<div class="rounded-lg flex gap-3">
+<div class="space-y-4 w-full">
+<div>
+<p class="text-[10px] font-bold text-primary mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">workspace_premium</span> PREMIUM VENUES</p>
+<div class="grid grid-cols-2 gap-2" id="premium-venues"></div>
+</div>
+<div class="pt-2 border-t border-outline-variant/30">
+<p class="text-[10px] font-bold text-outline mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">stadia_controller</span> STANDARD VENUES</p>
+<div class="grid grid-cols-2 gap-2" id="standard-venues"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sorting-bar">
+<span class="sorting-label">Sort by</span>
+<div class="sorting-options">
+<button class="sort-btn active" data-sort="price-low" type="button">Price: Low - High</button>
+<button class="sort-btn" data-sort="price-high" type="button">Price: High - Low</button>
+<button class="sort-btn" data-sort="distance" type="button">Distance</button>
+<button class="sort-btn" data-sort="rating" type="button">Rating</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6 relative z-10 listing-panel hidden" id="level-2-panel" aria-hidden="true">
+<div class="flex items-center justify-between mb-4">
+<span class="bg-secondary text-white text-meta-label px-3 py-1 font-bold">LEVEL 2: DETAILS</span>
+<span class="text-meta-label font-meta-label text-secondary font-bold">THEME: ORANGE</span>
+</div>
+<div class="bg-surface-container-lowest border-2 border-secondary p-node-padding rounded shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<h3 class="text-node-title-md font-node-title-md text-secondary">Entertainment Detail Page</h3>
+<span class="bg-purple-100 text-purple-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase">In Progress</span>
+</div>
+<div class="space-y-4">
+<div class="border border-outline-variant p-3 bg-secondary/5">
+<p class="text-meta-label text-secondary mb-1">ENTITY HEADER</p>
+<h4 class="text-node-title-md font-bold" id="venue-name">KidZania Mumbai</h4>
+<div class="flex gap-2 mt-1 flex-wrap">
+<span class="text-[10px] bg-secondary-fixed text-on-secondary-fixed px-1 font-semibold" id="venue-rating">4.7 rating</span>
+<span class="text-[10px] text-outline" id="venue-distance">7.9 km from BOM</span>
+<span class="text-[10px] text-outline" id="venue-travel">20-35 min away</span>
+</div>
+<p class="text-[10px] text-secondary mt-2" id="venue-activity">Edutainment, roleplay</p>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="border border-outline-variant p-2 text-center bg-surface">
+<span class="material-symbols-outlined text-secondary">grid_view</span>
+<p class="text-[10px] mt-1 font-bold">Media Gallery</p>
+</div>
+<div class="border border-outline-variant p-2 text-center bg-surface">
+<span class="material-symbols-outlined text-secondary">sports_esports</span>
+<p class="text-[10px] mt-1 font-bold">Activities / Experiences</p>
+</div>
+</div>
+<div class="border border-outline-variant p-3 bg-surface-container">
+<p class="text-meta-label text-outline mb-2">KEY DIFFERENTIATORS</p>
+<ul class="text-[11px] space-y-1" id="venue-differentiators"></ul>
+</div>
+<div class="border-2 border-secondary p-3 rounded bg-secondary-fixed/20">
+<p class="text-meta-label text-secondary font-bold mb-2">TIME-BASED PACKAGES (VIEW ONLY)</p>
+<div class="grid grid-cols-2 gap-2 text-center" id="venue-packages"></div>
+<p class="mt-3 text-[11px] text-secondary/80">To book, go to main planner.</p>
+<a class="inline-flex mt-2 text-[11px] font-semibold text-secondary hover:text-on-secondary-fixed-variant transition-colors" href="index.html">Go to Planner</a>
+</div>
+<div class="border border-outline-variant p-3 bg-surface-container-low">
+<p class="text-meta-label text-outline mb-2">FEATURES</p>
+<ul class="text-[11px] space-y-1">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>Priority access</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>Pre-booked slots</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>Airport proximity</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>Group friendly</li>
+</ul>
+</div>
+<div class="grid grid-cols-2 gap-3 text-meta-label">
+<div class="border border-outline-variant p-2 rounded">
+<p class="text-outline mb-1">REVIEWS</p>
+<p class="font-semibold text-secondary" id="venue-reviews">524 Verified</p>
+<div class="mt-2 text-[10px] text-outline space-y-1">
+<p>Family fun</p>
+<p>Quick activity</p>
+<p>Group experience</p>
+</div>
+</div>
+<div class="border border-outline-variant p-2 rounded">
+<p class="text-outline mb-1">CATEGORY</p>
+<p class="font-semibold text-secondary" id="venue-type">Premium</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        const entertainmentData = [
+            {
+                name: "JUMPP Play Center",
+                activities: "Kids soft play, trampolines",
+                distance: "3.6 km from BOM",
+                travelTime: "15-25 min away",
+                type: "Standard",
+                price: "Rs 650+",
+                priceValue: 650,
+                rating: "4.3 rating",
+                ratingValue: 4.3,
+                reviews: "276 Verified",
+                distanceKm: 3.6,
+                differentiators: ["Dedicated kids play zone", "Safe supervised indoor setup", "Great for family transit breaks"],
+                packages: [{duration: "30 MIN", price: "Rs 350", includes: "Quick play access"}, {duration: "1 HR", price: "Rs 650", includes: "Standard play session"}, {duration: "2 HR", price: "Rs 1100", includes: "Extended family slot"}, {duration: "3 HR", price: "Rs 1500", includes: "Play + snack combo"}, {duration: "HALF DAY", price: "Rs 2200", includes: "Multi-session access"}, {duration: "FULL DAY", price: "Rs 3200", includes: "Unlimited day pass"}]
+            },
+            {
+                name: "KidZania Mumbai",
+                activities: "Edutainment, roleplay professions",
+                distance: "7.9 km from BOM",
+                travelTime: "20-35 min away",
+                type: "Premium",
+                price: "Rs 1320+",
+                priceValue: 1320,
+                rating: "4.7 rating",
+                ratingValue: 4.7,
+                reviews: "524 Verified",
+                distanceKm: 7.9,
+                differentiators: ["60+ roleplay professions", "Immersive child-size city", "High educational entertainment value"],
+                packages: [{duration: "30 MIN", price: "Rs 650", includes: "Express entry window"}, {duration: "1 HR", price: "Rs 920", includes: "Short roleplay pack"}, {duration: "2 HR", price: "Rs 1180", includes: "Multi-activity pass"}, {duration: "3 HR", price: "Rs 1320", includes: "Core KidZania entry"}, {duration: "HALF DAY", price: "Rs 1850", includes: "Extended profession access"}, {duration: "FULL DAY", price: "Rs 2400", includes: "Unlimited full-day access"}]
+            },
+            {
+                name: "Clue Hunt",
+                activities: "Escape room challenge",
+                distance: "5.4 km from BOM",
+                travelTime: "18-28 min away",
+                type: "Premium",
+                price: "Rs 1656+",
+                priceValue: 1656,
+                rating: "4.6 rating",
+                ratingValue: 4.6,
+                reviews: "318 Verified",
+                distanceKm: 5.4,
+                differentiators: ["High-intensity puzzle missions", "Team collaboration focused", "Time-bound immersive storytelling"],
+                packages: [{duration: "30 MIN", price: "Rs 900", includes: "Mini challenge room"}, {duration: "1 HR", price: "Rs 1656", includes: "Standard escape room"}, {duration: "2 HR", price: "Rs 2450", includes: "Double scenario pack"}, {duration: "3 HR", price: "Rs 3200", includes: "Group marathon mode"}, {duration: "HALF DAY", price: "Rs 4200", includes: "Multi-room challenge circuit"}, {duration: "FULL DAY", price: "Rs 5900", includes: "Corporate-level game day"}]
+            },
+            {
+                name: "Timezone",
+                activities: "Arcade, bowling, VR",
+                distance: "6.8 km from BOM",
+                travelTime: "20-30 min away",
+                type: "Standard",
+                price: "Rs 460+",
+                priceValue: 460,
+                rating: "4.4 rating",
+                ratingValue: 4.4,
+                reviews: "402 Verified",
+                distanceKm: 6.8,
+                differentiators: ["Arcade + bowling + VR mix", "Great for quick group sessions", "Flexible game card options"],
+                packages: [{duration: "30 MIN", price: "Rs 280", includes: "Starter game card"}, {duration: "1 HR", price: "Rs 460", includes: "Core game card"}, {duration: "2 HR", price: "Rs 850", includes: "Arcade + VR credits"}, {duration: "3 HR", price: "Rs 1200", includes: "Extended entertainment card"}, {duration: "HALF DAY", price: "Rs 1800", includes: "Family activity bundle"}, {duration: "FULL DAY", price: "Rs 2600", includes: "Unlimited gameplay block"}]
+            },
+            {
+                name: "Shott Gaming",
+                activities: "Interactive gaming arena",
+                distance: "6.2 km from BOM",
+                travelTime: "18-28 min away",
+                type: "Premium",
+                price: "Rs 900+",
+                priceValue: 900,
+                rating: "4.5 rating",
+                ratingValue: 4.5,
+                reviews: "287 Verified",
+                distanceKm: 6.2,
+                differentiators: ["Competitive gaming bays", "Modern e-sports infrastructure", "Great for group tournaments"],
+                packages: [{duration: "30 MIN", price: "Rs 450", includes: "Quick gaming burst"}, {duration: "1 HR", price: "Rs 900", includes: "Arena gameplay pass"}, {duration: "2 HR", price: "Rs 1500", includes: "Extended arena access"}, {duration: "3 HR", price: "Rs 2100", includes: "Tournament mode access"}, {duration: "HALF DAY", price: "Rs 3200", includes: "Team activity package"}, {duration: "FULL DAY", price: "Rs 4500", includes: "All-day premium access"}]
+            },
+            {
+                name: "Zero Latency India",
+                activities: "Free-roam VR arena",
+                distance: "8.6 km from BOM",
+                travelTime: "22-35 min away",
+                type: "Premium",
+                price: "Rs 1100+",
+                priceValue: 1100,
+                rating: "4.7 rating",
+                ratingValue: 4.7,
+                reviews: "261 Verified",
+                distanceKm: 8.6,
+                differentiators: ["Free-roam multiplayer VR", "Immersive next-gen simulations", "High-impact action experiences"],
+                packages: [{duration: "30 MIN", price: "Rs 700", includes: "VR intro session"}, {duration: "1 HR", price: "Rs 1100", includes: "Standard VR mission"}, {duration: "2 HR", price: "Rs 1850", includes: "Dual mission pack"}, {duration: "3 HR", price: "Rs 2500", includes: "Extended VR circuit"}, {duration: "HALF DAY", price: "Rs 3600", includes: "Team VR event"}, {duration: "FULL DAY", price: "Rs 5100", includes: "Unlimited scenario access"}]
+            },
+            {
+                name: "SMAAASH",
+                activities: "Sports simulators, arcade",
+                distance: "7.1 km from BOM",
+                travelTime: "20-32 min away",
+                type: "Premium",
+                price: "Rs 999+",
+                priceValue: 999,
+                rating: "4.5 rating",
+                ratingValue: 4.5,
+                reviews: "349 Verified",
+                distanceKm: 7.1,
+                differentiators: ["Sports + simulator hybrid", "Bowling and cricket simulators", "Best for mixed-age groups"],
+                packages: [{duration: "30 MIN", price: "Rs 499", includes: "Quick simulator entry"}, {duration: "1 HR", price: "Rs 999", includes: "Sports + arcade pass"}, {duration: "2 HR", price: "Rs 1650", includes: "Extended gaming combo"}, {duration: "3 HR", price: "Rs 2300", includes: "Group activity package"}, {duration: "HALF DAY", price: "Rs 3400", includes: "Full simulator suite"}, {duration: "FULL DAY", price: "Rs 4800", includes: "Unlimited entertainment access"}]
+            },
+            {
+                name: "Snow Kingdom",
+                activities: "Indoor snow park",
+                distance: "9.2 km from BOM",
+                travelTime: "25-40 min away",
+                type: "Standard",
+                price: "Rs 799+",
+                priceValue: 799,
+                rating: "4.4 rating",
+                ratingValue: 4.4,
+                reviews: "293 Verified",
+                distanceKm: 9.2,
+                differentiators: ["Unique indoor snow experience", "Family-friendly weather escape", "Photo-friendly themed zones"],
+                packages: [{duration: "30 MIN", price: "Rs 399", includes: "Snow intro pass"}, {duration: "1 HR", price: "Rs 799", includes: "Standard snow entry"}, {duration: "2 HR", price: "Rs 1350", includes: "Snow + activities"}, {duration: "3 HR", price: "Rs 1890", includes: "Extended snow park window"}, {duration: "HALF DAY", price: "Rs 2700", includes: "Family fun package"}, {duration: "FULL DAY", price: "Rs 3900", includes: "Unlimited day access"}]
+            }
+        ];
+
+        let isDetailVisible = false;
+        let selectedVenue = null;
+
+        const venueName = document.getElementById('venue-name');
+        const venueRating = document.getElementById('venue-rating');
+        const venueDistance = document.getElementById('venue-distance');
+        const venueTravel = document.getElementById('venue-travel');
+        const venueActivity = document.getElementById('venue-activity');
+        const venueReviews = document.getElementById('venue-reviews');
+        const venueType = document.getElementById('venue-type');
+        const premiumVenuesContainer = document.getElementById('premium-venues');
+        const standardVenuesContainer = document.getElementById('standard-venues');
+        const venueDifferentiators = document.getElementById('venue-differentiators');
+        const venuePackages = document.getElementById('venue-packages');
+        const listingLayout = document.getElementById('listing-layout');
+        const level2Panel = document.getElementById('level-2-panel');
+        const sortButtons = document.querySelectorAll('.sort-btn');
+
+        function createVenueCard(venue) {
+            const tone = venue.type === 'Premium'
+                ? 'entity-card p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10'
+                : 'entity-card p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface block hover:bg-surface-container-low';
+            return `<a class="${tone}" href="entertainment.html?name=${encodeURIComponent(venue.name)}" data-venue-name="${venue.name}">
+                <div class="flex items-start justify-between gap-1">
+                    <span class="font-semibold">${venue.name}</span>
+                    <span class="text-[9px] px-1 py-0.5 rounded ${venue.type === 'Premium' ? 'bg-secondary-fixed text-on-secondary-fixed' : 'bg-outline-variant/30 text-outline'}">${venue.type}</span>
+                </div>
+                <p class="text-[10px] text-outline mt-1">${venue.activities}</p>
+                <p class="text-[10px] text-outline">${venue.distance} • ${venue.price}</p>
+            </a>`;
+        }
+
+        function renderDetail(venue) {
+            venueName.textContent = venue.name;
+            venueRating.textContent = venue.rating;
+            venueDistance.textContent = venue.distance;
+            venueTravel.textContent = venue.travelTime;
+            venueActivity.textContent = venue.activities;
+            venueReviews.textContent = venue.reviews;
+            venueType.textContent = venue.type;
+            venueDifferentiators.innerHTML = venue.differentiators.map((item) => `<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>${item}</li>`).join('');
+            venuePackages.innerHTML = venue.packages.map((pkg) => `<div class="bg-white p-2 rounded border border-secondary-fixed"><p class="text-[9px] text-outline">${pkg.duration}</p><p class="font-bold text-[11px]">${pkg.price}</p><p class="text-[9px] text-outline mt-1">${pkg.includes}</p></div>`).join('');
+        }
+
+        function attachVenueListeners() {
+            document.querySelectorAll('[data-venue-name]').forEach((card) => {
+                card.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const name = card.getAttribute('data-venue-name');
+                    const selected = entertainmentData.find((item) => item.name === name);
+                    if (!selected) return;
+                    selectedVenue = selected;
+                    renderDetail(selected);
+                    if (!isDetailVisible) {
+                        level2Panel.classList.remove('hidden');
+                        level2Panel.setAttribute('aria-hidden', 'false');
+                        requestAnimationFrame(() => listingLayout.classList.add('show-details'));
+                        isDetailVisible = true;
+                    }
+                });
+            });
+        }
+
+        function renderListing(sortBy = 'price-low') {
+            const sorted = [...entertainmentData].sort((a, b) => {
+                if (sortBy === 'rating') return b.ratingValue - a.ratingValue;
+                if (sortBy === 'distance') return a.distanceKm - b.distanceKm;
+                if (sortBy === 'price-high') return b.priceValue - a.priceValue;
+                return a.priceValue - b.priceValue;
+            });
+            premiumVenuesContainer.innerHTML = sorted.filter((item) => item.type === 'Premium').map(createVenueCard).join('');
+            standardVenuesContainer.innerHTML = sorted.filter((item) => item.type === 'Standard').map(createVenueCard).join('');
+            attachVenueListeners();
+        }
+
+        sortButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                sortButtons.forEach((btn) => btn.classList.remove('active'));
+                button.classList.add('active');
+                renderListing(button.getAttribute('data-sort') || 'price-low');
+            });
+        });
+
+        renderDetail(entertainmentData[0]);
+        renderListing();
+</script>
+</body></html>
