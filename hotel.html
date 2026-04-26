@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LayoverX Hotels Sitemap</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#9d4300",
+                        "inverse-primary": "#c0c1ff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "on-primary-container": "#fffbff",
+                        "tertiary-container": "#007cb1",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#07006c",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary": "#00628d",
+                        "secondary-fixed-dim": "#ffb690",
+                        "on-secondary-fixed-variant": "#783200",
+                        "inverse-on-surface": "#eaf1ff",
+                        "primary-fixed": "#e1e0ff",
+                        "surface": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#001e2f",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-background": "#0b1c30",
+                        "secondary-fixed": "#ffdbca",
+                        "surface-variant": "#d3e4fe",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "surface-container": "#e5eeff",
+                        "primary-container": "#6063ee",
+                        "primary": "#4648d4",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#464554",
+                        "on-secondary-container": "#5c2400",
+                        "on-tertiary-container": "#fcfcff",
+                        "tertiary-fixed": "#c9e6ff",
+                        "on-secondary-fixed": "#341100",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "outline": "#767586",
+                        "background": "#f8f9ff",
+                        "outline-variant": "#c7c4d7",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#494bd6",
+                        "inverse-surface": "#213145",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#fd761a",
+                        "surface-container-high": "#dce9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "connector-thickness": "2px",
+                        "stack-gap": "2rem",
+                        "level-indent": "4rem",
+                        "node-padding": "1.25rem",
+                        "grid-size": "8px"
+                    },
+                    "fontFamily": {
+                        "node-title-lg": ["Manrope"],
+                        "node-title-md": ["Manrope"],
+                        "meta-label": ["Inter"],
+                        "node-description": ["Inter"],
+                        "connector-text": ["Inter"]
+                    },
+                    "fontSize": {
+                        "node-title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "node-title-md": ["16px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "meta-label": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "node-description": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "connector-text": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            font-size: 1.25rem;
+        }
+        .nav-dropdown {
+            opacity: 0;
+            transform: translateY(10px);
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+        }
+        .nav-item:hover .nav-dropdown,
+        .nav-item:focus-within .nav-dropdown,
+        .nav-dropdown.open {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-node-description antialiased overflow-x-hidden">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-neutral-950/75 backdrop-blur-md shadow-2xl shadow-black/40 border-b border-white/10">
+<div class="max-w-7xl mx-auto px-6 md:px-8 py-4 flex justify-between items-center gap-6">
+<div class="flex items-center gap-8 lg:gap-12">
+<a class="text-2xl font-black tracking-tighter text-white" href="index.html">LayoverX</a>
+<nav class="hidden md:flex items-center gap-6 lg:gap-8 font-['Plus_Jakarta_Sans'] text-sm tracking-wide">
+<div class="relative nav-item">
+<button aria-expanded="false" class="flex items-center gap-1 text-orange-500 border-b-2 border-orange-500 pb-1 transition-colors" type="button">
+<span>Explore</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+<div class="nav-dropdown absolute left-0 top-full pt-4 min-w-[240px]">
+<div class="rounded-2xl border border-white/10 bg-[#1e2020]/95 backdrop-blur-xl shadow-2xl shadow-black/40 p-3 space-y-1">
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="hotel.html">All Experiences</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="hotel.html">Hotels &amp; Stays</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Food &amp; Dining</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Spa &amp; Wellness</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Entertainment</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">City Tours</a>
+</div>
+</div>
+</div>
+<div class="relative nav-item">
+<button aria-expanded="false" class="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors" type="button">
+<span>Partner With Us</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+<div class="nav-dropdown absolute left-0 top-full pt-4 min-w-[280px]">
+<div class="rounded-2xl border border-white/10 bg-[#1e2020]/95 backdrop-blur-xl shadow-2xl shadow-black/40 p-3 space-y-1">
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="hotel.html">Hotels</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Restaurants &amp; Cafes</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Spa &amp; Wellness</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Entertainment &amp; Gaming</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Transport Services</a>
+<a class="block rounded-xl px-4 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">City Tour Operators</a>
+</div>
+</div>
+</div>
+<a class="text-neutral-400 hover:text-white transition-colors" href="index.html#about-us">About</a>
+<a class="text-neutral-400 hover:text-white transition-colors" href="index.html#contact">Contact</a>
+</nav>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-[#c8c6c5] hover:text-white hover:bg-white/[0.06] transition-colors" href="#">Sign In</a>
+<a class="bg-[#ff5a33] text-[#590e00] px-6 py-2.5 rounded-full text-sm font-semibold inline-flex items-center" href="hotel.html">Plan Layover</a>
+</div>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation menu" class="md:hidden w-11 h-11 rounded-full border border-white/10 bg-white/5 text-white flex items-center justify-center" data-mobile-menu-toggle type="button">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="md:hidden hidden border-t border-white/10 bg-neutral-950/95 backdrop-blur-xl" id="mobile-menu">
+<div class="px-6 py-5 space-y-3 font-['Plus_Jakarta_Sans']">
+<div class="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
+<button aria-expanded="false" class="w-full flex items-center justify-between px-4 py-4 text-left text-white" data-mobile-dropdown-trigger="mobile-explore" type="button">
+<span>Explore</span>
+<span class="material-symbols-outlined text-[18px] transition-transform">expand_more</span>
+</button>
+<div class="hidden px-3 pb-3" data-mobile-dropdown="mobile-explore">
+<div class="space-y-1 rounded-xl bg-[#1e2020]/80 p-2">
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="hotel.html">All Experiences</a>
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="hotel.html">Hotels &amp; Stays</a>
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="#">Food &amp; Dining</a>
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="#">Spa &amp; Wellness</a>
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="#">Entertainment</a>
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="#">City Tours</a>
+</div>
+</div>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
+<button aria-expanded="false" class="w-full flex items-center justify-between px-4 py-4 text-left text-white" data-mobile-dropdown-trigger="mobile-partner" type="button">
+<span>Partner With Us</span>
+<span class="material-symbols-outlined text-[18px] transition-transform">expand_more</span>
+</button>
+<div class="hidden px-3 pb-3" data-mobile-dropdown="mobile-partner">
+<div class="space-y-1 rounded-xl bg-[#1e2020]/80 p-2">
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="hotel.html">Hotels</a>
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="#">Restaurants &amp; Cafes</a>
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="#">Spa &amp; Wellness</a>
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="#">Entertainment &amp; Gaming</a>
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="#">Transport Services</a>
+<a class="block rounded-lg px-3 py-3 text-[#c8c6c5] hover:text-white hover:bg-white/5 transition" href="#">City Tour Operators</a>
+</div>
+</div>
+</div>
+<a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-[#c8c6c5] hover:text-white transition" href="index.html#about-us">About</a>
+<a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-[#c8c6c5] hover:text-white transition" href="index.html#contact">Contact</a>
+<a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-[#c8c6c5] hover:text-white transition" href="#">Sign In</a>
+<a class="w-full bg-[#ff5a33] text-[#590e00] px-6 py-3 rounded-2xl text-sm font-semibold mt-3 text-center block" href="hotel.html">Plan Layover</a>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto space-y-12 px-4 sm:px-6 md:px-8 pt-28 pb-16">
+<!-- Header & Breadcrumbs -->
+<section class="border-l-4 border-primary pl-6 py-2">
+<h2 class="text-node-title-lg font-node-title-lg text-on-background tracking-tight">LAYOVERX - HOTELS SITEMAP (UPDATED)</h2>
+<div class="flex items-center gap-3 mt-4 text-meta-label font-meta-label uppercase text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">explore</span> EXPLORE</span>
+<span class="material-symbols-outlined">chevron_right</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">hotel</span> HOTELS</span>
+<span class="material-symbols-outlined">chevron_right</span>
+<span class="flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span> HOTEL DETAIL PAGE</span>
+</div>
+</section>
+<!-- SITEMAP CANVAS -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 relative">
+<!-- Connection Arrow (Simulated) -->
+<div class="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0">
+<div class="flex flex-col items-center gap-2">
+<div class="w-[100px] h-0.5 bg-outline-variant relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 border-l-8 border-l-outline-variant border-y-4 border-y-transparent"></div>
+</div>
+<span class="text-connector-text font-connector-text bg-white px-2 py-1 border border-outline-variant rounded">User Selects Hotel</span>
+</div>
+</div>
+<!-- LEVEL 1: HOTELS LISTING PAGE -->
+<div class="space-y-6 relative z-10">
+<div class="flex items-center justify-between mb-4">
+<span class="bg-primary text-white text-meta-label px-3 py-1 font-bold">LEVEL 1: LISTING</span>
+<span class="text-meta-label font-meta-label text-primary font-bold">THEME: BLUE/PURPLE</span>
+</div>
+<!-- Main Card Container -->
+<div class="bg-surface-container-lowest border-2 border-primary-container p-node-padding rounded shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<h3 class="text-node-title-md font-node-title-md text-primary">Hotels Listing Page</h3>
+<span class="bg-green-100 text-green-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase">Finalized</span>
+</div>
+<!-- Component Blocks -->
+<div class="space-y-4">
+<!-- Navigation Block -->
+<div class="border border-outline-variant p-3 bg-surface">
+<p class="text-meta-label text-outline mb-1">GLOBAL NAVIGATION</p>
+<p class="text-node-description font-node-description">Logo | Explore | Partner With Us | About | Contact | Sign In</p>
+</div>
+<!-- Header Block -->
+<div class="border border-outline-variant p-3 bg-primary/5">
+<p class="text-meta-label text-primary mb-1">HERO SECTION</p>
+<p class="text-node-description font-node-description font-semibold">"Hotels Near Mumbai Airport"</p>
+<p class="text-[11px] text-on-surface-variant">Dynamic subtitle based on search parameters.</p>
+</div>
+<!-- Filter Block -->
+<div class="border border-outline-variant p-3">
+<p class="text-meta-label text-outline mb-1">SEARCH &amp; FILTERS</p>
+<div class="grid grid-cols-2 gap-2 text-node-description">
+<span class="bg-surface-container-high px-2 py-1 rounded">Duration (2, 4, 8h)</span>
+<span class="bg-surface-container-high px-2 py-1 rounded">Price Range</span>
+<span class="bg-surface-container-high px-2 py-1 rounded">Distance</span>
+<span class="bg-surface-container-high px-2 py-1 rounded">Amenities</span>
+</div>
+</div>
+<!-- Grid Preview -->
+<div class="border-2 border-dashed border-outline-variant p-3">
+<p class="text-meta-label text-outline mb-2">HOTEL INVENTORY (12 HOTELS FOUND)</p>
+<div class="rounded-lg flex gap-3"><div class="space-y-4 w-full"><div><p class="text-[10px] font-bold text-primary mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">workspace_premium</span> PREMIUM HOTELS (8)</p><div class="grid grid-cols-2 gap-2"><div class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface">The Orchid Hotel</div><div class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface">Hotel Sahara Star</div><div class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface">Taj Santacruz</div><div class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface">JW Marriott Sahar</div><div class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface">ITC Maratha</div><div class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface">The Leela Mumbai</div><div class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface">Aurika Mumbai</div><div class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface">Grand Hyatt</div></div></div><div class="pt-2 border-t border-outline-variant/30"> <p class="text-[10px] font-bold text-outline mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">hotel</span> STANDARD HOTELS (4)</p><div class="grid grid-cols-2 gap-2"><div class="p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface">Hotel Bawa Intl.</div><div class="p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface">Hotel Midland</div><div class="p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface">Lemon Tree Premier</div><div class="p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface">Holiday Inn</div></div></div></div></div>
+</div>
+<!-- Footer Actions -->
+<div class="flex justify-between items-center text-meta-label pt-2">
+<span class="text-outline">SORT: Price, Rating, Popularity</span>
+<span class="text-primary font-bold">Pagination / Load More</span>
+</div>
+</div>
+</div>
+</div>
+<!-- LEVEL 2: HOTEL DETAIL PAGE -->
+<div class="space-y-6 relative z-10">
+<div class="flex items-center justify-between mb-4">
+<span class="bg-secondary text-white text-meta-label px-3 py-1 font-bold">LEVEL 2: DETAILS</span>
+<span class="text-meta-label font-meta-label text-secondary font-bold">THEME: ORANGE</span>
+</div>
+<!-- Main Card Container -->
+<div class="bg-surface-container-lowest border-2 border-secondary p-node-padding rounded shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<h3 class="text-node-title-md font-node-title-md text-secondary">Hotel Detail Page</h3>
+<span class="bg-purple-100 text-purple-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase">In Progress</span>
+</div>
+<!-- Component Blocks -->
+<div class="space-y-4">
+<!-- Detail Header -->
+<div class="border border-outline-variant p-3 bg-secondary/5">
+<p class="text-meta-label text-secondary mb-1">ENTITY HEADER</p>
+<h4 class="text-node-title-md font-bold">The Orchid Hotel, Mumbai</h4>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] bg-secondary-fixed text-on-secondary-fixed px-1 font-semibold">4.8 rating</span><span class="text-[10px] text-outline">Vile Parle, Mumbai</span>
+</div>
+</div>
+<!-- Gallery & Room Options -->
+<div class="grid grid-cols-2 gap-3">
+<div class="border border-outline-variant p-2 text-center bg-surface">
+<span class="material-symbols-outlined text-secondary">grid_view</span>
+<p class="text-[10px] mt-1 font-bold">Media Gallery</p>
+</div>
+<div class="border border-outline-variant p-2 text-center bg-surface">
+<span class="material-symbols-outlined text-secondary">bed</span>
+<p class="text-[10px] mt-1 font-bold">Room Options</p>
+</div>
+</div>
+<!-- Feature List -->
+<div class="border border-outline-variant p-3 bg-surface-container">
+<p class="text-meta-label text-outline mb-2">KEY DIFFERENTIATORS</p>
+<ul class="text-[11px] space-y-1">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span> Flexible hourly stay</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span> Complimentary Airport Shuttle</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span> Express Transit Check-in</li>
+</ul>
+</div>
+<!-- Pricing Table Block -->
+<div class="border-2 border-secondary p-3 rounded bg-secondary-fixed/20">
+<p class="text-meta-label text-secondary font-bold mb-2">HOURLY TIERED PRICING</p>
+<div class="grid grid-cols-4 gap-1 text-center">
+<div class="bg-white p-1 rounded border border-secondary-fixed"><p class="text-[9px] text-outline">2 HR</p><p class="font-bold text-[11px]">Rs 1200</p></div>
+<div class="bg-white p-1 rounded border border-secondary-fixed"><p class="text-[9px] text-outline">4 HR</p><p class="font-bold text-[11px]">Rs 1800</p></div>
+<div class="bg-white p-1 rounded border border-secondary-fixed"><p class="text-[9px] text-outline">8 HR</p><p class="font-bold text-[11px]">Rs 2800</p></div>
+<div class="bg-white p-1 rounded border border-secondary bg-secondary/10"><p class="text-[9px] text-secondary font-bold">FULL</p><p class="font-bold text-[11px]">Rs 4500</p></div>
+</div>
+<button class="w-full mt-3 bg-secondary text-white font-bold py-2 rounded-lg text-sm tracking-wide">PLAN LAYOVER</button>
+</div>
+<!-- Reviews & FAQ -->
+<div class="grid grid-cols-2 gap-3 text-meta-label">
+<div class="border border-outline-variant p-2 rounded">
+<p class="text-outline mb-1">REVIEWS</p>
+<p class="font-semibold text-secondary">482 Verified</p>
+</div>
+<div class="border border-outline-variant p-2 rounded">
+<p class="text-outline mb-1">CONTACT</p>
+<p class="font-semibold text-secondary">Quick Inquiry</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ANNOTATION / LEGEND -->
+<section class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="border-2 border-dashed border-outline-variant p-4 bg-surface rounded">
+<h5 class="text-meta-label font-bold text-outline uppercase mb-3">Logic Annotations</h5>
+<ul class="text-[12px] space-y-2 text-on-surface-variant">
+<li class="flex gap-2"><strong>[1]</strong> Price sorting logic adjusts based on selected duration bucket.</li>
+<li class="flex gap-2"><strong>[2]</strong> Detailed Page shifts theme to Orange to signify "Conversion Focused" state.</li>
+<li class="flex gap-2"><strong>[3]</strong> Shuttle availability is a primary filter for layover users.</li>
+</ul>
+</div>
+<div class="md:col-span-2 border-t-2 border-outline-variant pt-4">
+<h5 class="text-meta-label font-bold text-outline uppercase mb-3">Sitemap Legend</h5>
+<div class="flex flex-wrap gap-6">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-primary"></span>
+<span class="text-xs font-semibold">Discovery (Blue)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-secondary"></span>
+<span class="text-xs font-semibold">Decision (Orange)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-green-500 rounded-full"></span>
+<span class="text-xs">Finalized UI</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-purple-500 rounded-full"></span>
+<span class="text-xs">In Wireframe</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Anchor -->
+<footer class="bg-[#121212] border-t border-white/5 mt-20">
+<div class="w-full py-12 px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
+<div class="lg:col-span-2">
+<h4 class="text-xl font-bold text-white mb-4">LayoverX</h4>
+<p class="text-neutral-400 font-['Plus_Jakarta_Sans'] text-sm leading-relaxed max-w-sm">
+                    Transforming layovers into meaningful travel experiences worldwide.
+                </p>
+<p class="text-neutral-500 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest leading-relaxed mt-4">
+                    (c) 2026 LayoverX. All rights reserved.
+                </p>
+<div class="flex gap-4 mt-6">
+<a class="text-neutral-500 hover:text-orange-500 transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="text-neutral-500 hover:text-orange-500 transition-colors" href="#">
+<span class="material-symbols-outlined">rss_feed</span>
+</a>
+<a class="text-neutral-500 hover:text-orange-500 transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+</div>
+</div>
+<div>
+<p class="text-orange-500 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest mb-6">Company</p>
+<ul class="space-y-4">
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="index.html#about-us">About</a></li>
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Careers</a></li>
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="index.html#contact">Contact</a></li>
+</ul>
+</div>
+<div>
+<p class="text-orange-500 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest mb-6">Explore</p>
+<ul class="space-y-4">
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="hotel.html">Experiences</a></li>
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="hotel.html">Airports</a></li>
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">City Guides</a></li>
+</ul>
+</div>
+<div>
+<p class="text-orange-500 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest mb-6">Support</p>
+<ul class="space-y-4">
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="index.html#contact">Help Center</a></li>
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Safety</a></li>
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Cancellation</a></li>
+</ul>
+</div>
+<div>
+<p class="text-orange-500 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest mb-6">Legal</p>
+<ul class="space-y-4">
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Privacy Policy</a></li>
+<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+        const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileDropdownTriggers = document.querySelectorAll('[data-mobile-dropdown-trigger]');
+
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden', isOpen);
+                mobileMenuToggle.setAttribute('aria-expanded', String(!isOpen));
+                const icon = mobileMenuToggle.querySelector('.material-symbols-outlined');
+                if (icon) icon.textContent = isOpen ? 'menu' : 'close';
+            });
+        }
+
+        mobileDropdownTriggers.forEach((trigger) => {
+            trigger.addEventListener('click', () => {
+                const key = trigger.getAttribute('data-mobile-dropdown-trigger');
+                const target = document.querySelector(`[data-mobile-dropdown="${key}"]`);
+                if (!target) return;
+
+                const isOpen = !target.classList.contains('hidden');
+                target.classList.toggle('hidden', isOpen);
+                trigger.setAttribute('aria-expanded', String(!isOpen));
+
+                const icon = trigger.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
+            });
+        });
+</script>
+</body></html>
