@@ -382,11 +382,7 @@
 <!-- Feature List -->
 <div class="border border-outline-variant p-3 bg-surface-container">
 <p class="text-meta-label text-outline mb-2">KEY DIFFERENTIATORS</p>
-<ul class="text-[11px] space-y-1">
-<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span> Flexible hourly stay</li>
-<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span> Complimentary Airport Shuttle</li>
-<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span> Express Transit Check-in</li>
-</ul>
+<ul class="text-[11px] space-y-1" id="hotel-differentiators"></ul>
 </div>
 <!-- Pricing Table Block -->
 <div class="border-2 border-secondary p-3 rounded bg-secondary-fixed/20">
@@ -486,6 +482,97 @@
             { id: 11, name: "Lemon Tree Premier", rating: "4.4 rating", ratingValue: 4.4, distance: "3.4 km from BOM", reviews: "248 Verified", popularity: 248, type: "Standard", priceValue: 1100, price: { twoHr: "Rs 1100", fourHr: "Rs 1650", eightHr: "Rs 2500", full: "Rs 3900" } },
             { id: 12, name: "Holiday Inn Mumbai", rating: "4.3 rating", ratingValue: 4.3, distance: "4.2 km from BOM", reviews: "231 Verified", popularity: 231, type: "Standard", priceValue: 1000, price: { twoHr: "Rs 1000", fourHr: "Rs 1500", eightHr: "Rs 2350", full: "Rs 3600" } }
         ];
+        const hotelData = {
+            "The Orchid Hotel, Mumbai": {
+                differentiators: [
+                    "Asia's first eco-friendly certified hotel",
+                    "Close proximity to Mumbai Airport (BOM)",
+                    "Sustainable luxury experience"
+                ]
+            },
+            "Hotel Sahara Star, Mumbai": {
+                differentiators: [
+                    "Iconic glass dome architecture",
+                    "Largest pillar-less convention space",
+                    "Direct airport access"
+                ]
+            },
+            "Aurika Mumbai": {
+                differentiators: [
+                    "Modern luxury business hotel",
+                    "Premium design and interiors",
+                    "Close to key business districts"
+                ]
+            },
+            "ITC Maratha, Mumbai": {
+                differentiators: [
+                    "Luxury hotel inspired by Maratha heritage",
+                    "Award-winning fine dining",
+                    "High-end business and banquet facilities"
+                ]
+            },
+            "The Leela Mumbai": {
+                differentiators: [
+                    "Lush landscaped gardens",
+                    "Resort-like experience in the city",
+                    "Premium luxury hospitality"
+                ]
+            },
+            "JW Marriott Sahar, Mumbai": {
+                differentiators: [
+                    "Ultra-luxury near airport",
+                    "World-class spa and wellness",
+                    "Fine dining and nightlife"
+                ]
+            },
+            "Grand Hyatt Mumbai": {
+                differentiators: [
+                    "Large multi-purpose complex",
+                    "Serviced apartments available",
+                    "Extensive dining and event spaces"
+                ]
+            },
+            "Taj Santacruz, Mumbai": {
+                differentiators: [
+                    "Signature Taj luxury experience",
+                    "Spacious premium rooms",
+                    "Excellent airport connectivity"
+                ]
+            },
+            "Hotel Midland": {
+                differentiators: [
+                    "Budget-friendly stay",
+                    "Convenient airport access",
+                    "Simple and functional rooms"
+                ]
+            },
+            "Hotel Bawa Intl.": {
+                differentiators: [
+                    "Affordable comfort near airport",
+                    "Quick check-in for transit guests",
+                    "Good value for money"
+                ]
+            },
+            "Holiday Inn Mumbai": {
+                differentiators: [
+                    "Reliable international brand",
+                    "Business-friendly amenities",
+                    "Consistent service quality"
+                ]
+            },
+            "Lemon Tree Premier": {
+                differentiators: [
+                    "Mid-range premium comfort",
+                    "Modern rooms and facilities",
+                    "Great value business stay"
+                ]
+            }
+        };
+        const defaultDifferentiators = [
+            "Comfortable stay",
+            "Good location",
+            "Reliable service"
+        ];
 
         const params = new URLSearchParams(window.location.search);
         const requestedId = Number(params.get('id') || 1);
@@ -508,12 +595,21 @@
         const sortOptions = document.getElementById('sortOptions');
         const listingLayout = document.getElementById('listing-layout');
         const level2Panel = document.getElementById('level-2-panel');
+        const hotelDifferentiators = document.getElementById('hotel-differentiators');
 
         function createHotelLink(hotel) {
             const baseClass = hotel.type === 'Premium'
                 ? 'hotel-card p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10'
                 : 'hotel-card p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface block hover:bg-surface-container-low';
             return `<a class="${baseClass}" href="hotel.html?id=${hotel.id}" data-hotel-id="${hotel.id}">${hotel.name}</a>`;
+        }
+
+        function renderDifferentiators(hotelNameValue) {
+            if (!hotelDifferentiators) return;
+            const differentiators = hotelData[hotelNameValue]?.differentiators || defaultDifferentiators;
+            hotelDifferentiators.innerHTML = differentiators
+                .map((item) => `<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>${item}</li>`)
+                .join('');
         }
 
         function updateHotelDetails(hotel) {
@@ -528,6 +624,7 @@
             price4hr.textContent = hotel.price.fourHr;
             price8hr.textContent = hotel.price.eightHr;
             priceFull.textContent = hotel.price.full;
+            renderDifferentiators(hotel.name);
         }
 
         function handleHotelSelection(hotel) {
