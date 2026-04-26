@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>LayoverX Restaurants Explorer</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      vertical-align: middle;
+      font-size: 1.1rem;
+    }
+    .listing-layout {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0;
+      transition: gap 300ms ease, justify-content 300ms ease;
+    }
+    .listing-panel {
+      width: 100%;
+      max-width: 620px;
+      transition: transform 300ms ease, opacity 300ms ease, visibility 300ms ease;
+    }
+    #level-1-panel {
+      transform: translateX(0);
+    }
+    #level-2-panel {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(50px);
+    }
+    .listing-layout.show-details {
+      justify-content: flex-start;
+      gap: 2rem;
+    }
+    .listing-layout.show-details #level-1-panel {
+      transform: translateX(-24px);
+    }
+    .listing-layout.show-details #level-2-panel {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+    .restaurant-card {
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    .restaurant-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+    }
+    @media (max-width: 767px) {
+      .listing-layout,
+      .listing-layout.show-details {
+        justify-content: center;
+        gap: 1.25rem;
+      }
+      .listing-layout.show-details #level-1-panel {
+        transform: translateX(0);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .listing-layout,
+      .listing-panel,
+      .restaurant-card {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased overflow-x-hidden">
+  <header class="sticky top-0 z-50 bg-slate-950/90 text-white border-b border-white/10 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between">
+      <a class="text-2xl font-black tracking-tight" href="index.html">LayoverX</a>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+        <a class="hover:text-white transition-colors" href="index.html">Explore</a>
+        <a class="hover:text-white transition-colors" href="hotel.html">Hotels</a>
+        <a class="text-orange-400 border-b border-orange-400 pb-1" href="restaurant.html">Restaurants</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-6 pb-16 space-y-8">
+    <section class="pl-1">
+      <h1 class="font-['Manrope'] text-2xl sm:text-3xl font-extrabold tracking-tight">Restaurants Near Mumbai Airport</h1>
+      <p class="text-slate-600 mt-2">Discover curated dining experiences for your layover</p>
+    </section>
+
+    <div class="listing-layout relative" id="listing-layout">
+      <section class="listing-panel space-y-5" id="level-1-panel" aria-label="Restaurant listing">
+        <div class="bg-white border border-slate-200 rounded-xl shadow-sm p-4 sm:p-5 space-y-4">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
+            <select id="filterCuisine" class="rounded-lg border-slate-300 focus:border-indigo-500 focus:ring-indigo-500">
+              <option value="all">Cuisine</option>
+              <option value="Indian">Indian</option>
+              <option value="Asian">Asian</option>
+              <option value="Cafe">Cafe</option>
+              <option value="Buffet">Buffet</option>
+            </select>
+            <select id="filterDistance" class="rounded-lg border-slate-300 focus:border-indigo-500 focus:ring-indigo-500">
+              <option value="all">Distance</option>
+              <option value="near">Near</option>
+              <option value="mid">Mid</option>
+              <option value="far">Far</option>
+            </select>
+            <select id="filterPrice" class="rounded-lg border-slate-300 focus:border-indigo-500 focus:ring-indigo-500">
+              <option value="all">Price Range</option>
+              <option value="low">Low</option>
+              <option value="mid">Mid</option>
+              <option value="high">High</option>
+            </select>
+            <select id="filterType" class="rounded-lg border-slate-300 focus:border-indigo-500 focus:ring-indigo-500">
+              <option value="all">Type</option>
+              <option value="Premium">Premium</option>
+              <option value="Standard">Standard</option>
+            </select>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="restaurant-grid"></div>
+        </div>
+      </section>
+
+      <section class="listing-panel space-y-5 hidden" id="level-2-panel" aria-hidden="true" aria-label="Restaurant details">
+        <div class="bg-white border border-orange-200 rounded-xl shadow-sm p-4 sm:p-5 space-y-4">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h2 class="font-['Manrope'] text-xl font-bold text-orange-700" id="restaurant-name">Thai Naam</h2>
+              <p class="text-sm text-slate-600" id="restaurant-cuisine">Asian</p>
+              <p class="text-xs text-slate-500 mt-1" id="restaurant-location-meta">2.1 km from BOM • 12 min</p>
+              <p class="text-xs mt-1 text-amber-600 font-semibold" id="restaurant-rating">4.5 ★</p>
+            </div>
+            <img alt="Restaurant placeholder" class="w-28 h-20 object-cover rounded-lg border border-slate-200" id="restaurant-image" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=400&q=80"/>
+          </div>
+
+          <div class="border border-slate-200 rounded-lg p-3 bg-slate-50">
+            <p class="text-xs uppercase tracking-wider text-slate-500 mb-2">Menu Highlights</p>
+            <ul class="text-sm space-y-1" id="restaurant-menu"></ul>
+            <p class="text-xs text-slate-600 mt-2">Price range: <span class="font-semibold" id="restaurant-price-range">Rs 1200 - Rs 2400</span></p>
+          </div>
+
+          <div class="border border-slate-200 rounded-lg p-3">
+            <p class="text-xs uppercase tracking-wider text-slate-500 mb-2">Layover Packages (View Only)</p>
+            <div class="grid grid-cols-2 gap-2" id="restaurant-packages"></div>
+          </div>
+
+          <div class="border border-slate-200 rounded-lg p-3 bg-slate-50">
+            <p class="text-xs uppercase tracking-wider text-slate-500 mb-2">Key Differentiators</p>
+            <ul class="text-sm space-y-1" id="restaurant-differentiators"></ul>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="rounded-lg border border-slate-200 p-2">Fast service for layovers</div>
+            <div class="rounded-lg border border-slate-200 p-2">Reserved seating</div>
+            <div class="rounded-lg border border-slate-200 p-2">Airport proximity</div>
+            <div class="rounded-lg border border-slate-200 p-2">Curated menus</div>
+          </div>
+
+          <div class="rounded-lg border border-slate-200 p-3 bg-white">
+            <p class="text-xs uppercase tracking-wider text-slate-500 mb-2">Reviews</p>
+            <p class="text-sm font-semibold text-slate-800" id="restaurant-review-rating">4.5 ★ overall</p>
+            <div class="flex flex-wrap gap-2 mt-2 text-xs">
+              <span class="px-2 py-1 bg-slate-100 rounded-full">Quick meal</span>
+              <span class="px-2 py-1 bg-slate-100 rounded-full">Business dining</span>
+              <span class="px-2 py-1 bg-slate-100 rounded-full">Family friendly</span>
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-500">To reserve, go to main planner.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const restaurantData = [
+      {
+        name: "Cafe Coffee Day / Food Court",
+        cuisine: "Cafe",
+        distance: "0.3 km from BOM",
+        travelTime: "4 min",
+        type: "Standard",
+        avgPrice: 650,
+        rating: 4.1,
+        distanceBand: "near",
+        priceBand: "low",
+        image: "https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=400&q=80",
+        priceRange: "Rs 300 - Rs 900",
+        differentiators: ["Quick bites inside airport zone", "Transit-friendly service speed", "Affordable snack and coffee combos"],
+        menuHighlights: ["Cold Coffee", "Veg Wrap", "Cheese Garlic Toast", "Brownie Frappe"],
+        packages: [
+          { duration: "1 hr", price: "Rs 399", includes: "Coffee + snack combo" },
+          { duration: "1.5 hr", price: "Rs 549", includes: "Beverage + sandwich + dessert" },
+          { duration: "2 hr", price: "Rs 699", includes: "Meal combo with add-on drink" },
+          { duration: "3 hr", price: "Rs 899", includes: "Extended cafe meal + lounge seat" }
+        ]
+      },
+      {
+        name: "Thai Naam",
+        cuisine: "Asian",
+        distance: "2.1 km from BOM",
+        travelTime: "12 min",
+        type: "Premium",
+        avgPrice: 2800,
+        rating: 4.6,
+        distanceBand: "mid",
+        priceBand: "high",
+        image: "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=400&q=80",
+        priceRange: "Rs 1800 - Rs 3600",
+        differentiators: ["Authentic Thai flavors", "Award-winning signature curries", "Elegant fine dining setup"],
+        menuHighlights: ["Tom Yum Soup", "Som Tam Salad", "Green Curry", "Pad Thai", "Mango Sticky Rice"],
+        packages: [
+          { duration: "1 hr", price: "Rs 1199", includes: "Soup + appetizer set" },
+          { duration: "1.5 hr", price: "Rs 1699", includes: "Starter + main + beverage" },
+          { duration: "2 hr", price: "Rs 2199", includes: "3-course chef selection" },
+          { duration: "3 hr", price: "Rs 2999", includes: "Full Thai tasting menu" }
+        ]
+      },
+      {
+        name: "JW Cafe",
+        cuisine: "Buffet",
+        distance: "1.8 km from BOM",
+        travelTime: "10 min",
+        type: "Premium",
+        avgPrice: 3200,
+        rating: 4.7,
+        distanceBand: "mid",
+        priceBand: "high",
+        image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=400&q=80",
+        priceRange: "Rs 2200 - Rs 4200",
+        differentiators: ["Extensive global buffet", "Long layover friendly dining", "Luxury ambience with live counters"],
+        menuHighlights: ["Seafood Grill", "Sushi Counter", "Mediterranean Mezze", "Indian Main Course"],
+        packages: [
+          { duration: "1 hr", price: "Rs 1499", includes: "Express buffet plate" },
+          { duration: "1.5 hr", price: "Rs 1999", includes: "Buffet + dessert station" },
+          { duration: "2 hr", price: "Rs 2599", includes: "Premium buffet access" },
+          { duration: "3 hr", price: "Rs 3399", includes: "Extended buffet + beverage" }
+        ]
+      },
+      {
+        name: "Peshawri",
+        cuisine: "Indian",
+        distance: "2.4 km from BOM",
+        travelTime: "14 min",
+        type: "Premium",
+        avgPrice: 3600,
+        rating: 4.8,
+        distanceBand: "mid",
+        priceBand: "high",
+        image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=400&q=80",
+        priceRange: "Rs 2400 - Rs 4800",
+        differentiators: ["Iconic North-West Frontier cuisine", "Luxury kebab and tandoor specialties", "Signature heritage dining"],
+        menuHighlights: ["Dal Bukhara", "Sikandari Raan", "Jheenga", "Tandoori Roti"],
+        packages: [
+          { duration: "1 hr", price: "Rs 1599", includes: "Kebab platter + naan" },
+          { duration: "1.5 hr", price: "Rs 2199", includes: "Starter + main combo" },
+          { duration: "2 hr", price: "Rs 2899", includes: "Chef signature thali set" },
+          { duration: "3 hr", price: "Rs 3799", includes: "Heritage dining experience" }
+        ]
+      },
+      {
+        name: "Dum Pukht",
+        cuisine: "Indian",
+        distance: "2.5 km from BOM",
+        travelTime: "15 min",
+        type: "Premium",
+        avgPrice: 3400,
+        rating: 4.7,
+        distanceBand: "mid",
+        priceBand: "high",
+        image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=400&q=80",
+        priceRange: "Rs 2200 - Rs 4500",
+        differentiators: ["Awadhi slow-cooked specialties", "Royal dining ambience", "Fine curated tasting menus"],
+        menuHighlights: ["Kakori Kebab", "Dum Biryani", "Nihari", "Shahi Tukda"],
+        packages: [
+          { duration: "1 hr", price: "Rs 1499", includes: "Kebab and biryani duo" },
+          { duration: "1.5 hr", price: "Rs 2099", includes: "2-course Awadhi menu" },
+          { duration: "2 hr", price: "Rs 2699", includes: "Chef-curated dinner set" },
+          { duration: "3 hr", price: "Rs 3499", includes: "Royal multi-course experience" }
+        ]
+      },
+      {
+        name: "Bombay High",
+        cuisine: "Asian",
+        distance: "4.1 km from BOM",
+        travelTime: "22 min",
+        type: "Premium",
+        avgPrice: 3000,
+        rating: 4.5,
+        distanceBand: "far",
+        priceBand: "high",
+        image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=400&q=80",
+        priceRange: "Rs 1800 - Rs 3900",
+        differentiators: ["High-energy ambience", "Great cocktails and nightlife vibe", "Ideal for social layovers"],
+        menuHighlights: ["Sushi Rolls", "Crispy Prawns", "Signature Cocktails", "Dim Sum Platter"],
+        packages: [
+          { duration: "1 hr", price: "Rs 1099", includes: "Bar snacks + mocktail" },
+          { duration: "1.5 hr", price: "Rs 1699", includes: "Tapas + 2 beverages" },
+          { duration: "2 hr", price: "Rs 2299", includes: "Small plates + drinks pairing" },
+          { duration: "3 hr", price: "Rs 2999", includes: "Night out tasting circuit" }
+        ]
+      },
+      {
+        name: "Tiqri",
+        cuisine: "Indian",
+        distance: "1.9 km from BOM",
+        travelTime: "11 min",
+        type: "Standard",
+        avgPrice: 1800,
+        rating: 4.3,
+        distanceBand: "mid",
+        priceBand: "mid",
+        image: "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=400&q=80",
+        priceRange: "Rs 1200 - Rs 2400",
+        differentiators: ["Regional Indian menu", "Balanced quality and pricing", "Great for quick business meals"],
+        menuHighlights: ["Paneer Tikka", "Butter Chicken", "Dal Tadka", "Laccha Paratha"],
+        packages: [
+          { duration: "1 hr", price: "Rs 799", includes: "Express combo meal" },
+          { duration: "1.5 hr", price: "Rs 1099", includes: "Starter + main + drink" },
+          { duration: "2 hr", price: "Rs 1499", includes: "Full course meal" },
+          { duration: "3 hr", price: "Rs 1999", includes: "Relaxed multi-course seating" }
+        ]
+      },
+      {
+        name: "Boulevard",
+        cuisine: "Buffet",
+        distance: "2.2 km from BOM",
+        travelTime: "13 min",
+        type: "Standard",
+        avgPrice: 1900,
+        rating: 4.2,
+        distanceBand: "mid",
+        priceBand: "mid",
+        image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=400&q=80",
+        priceRange: "Rs 1300 - Rs 2600",
+        differentiators: ["All-day multi-cuisine dining", "Fast service windows", "Comfortable transit stop option"],
+        menuHighlights: ["Live Pasta", "Indian Buffet", "Salad Bar", "Dessert Counter"],
+        packages: [
+          { duration: "1 hr", price: "Rs 899", includes: "Compact buffet pass" },
+          { duration: "1.5 hr", price: "Rs 1299", includes: "Buffet + soup + dessert" },
+          { duration: "2 hr", price: "Rs 1699", includes: "Extended buffet access" },
+          { duration: "3 hr", price: "Rs 2199", includes: "Premium buffet seating" }
+        ]
+      },
+      {
+        name: "Mostly Grills",
+        cuisine: "Buffet",
+        distance: "5.0 km from BOM",
+        travelTime: "25 min",
+        type: "Premium",
+        avgPrice: 3100,
+        rating: 4.6,
+        distanceBand: "far",
+        priceBand: "high",
+        image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=400&q=80",
+        priceRange: "Rs 2000 - Rs 4100",
+        differentiators: ["Rooftop grill ambience", "Premium barbecue selection", "Great for evening layovers"],
+        menuHighlights: ["Grilled Lamb", "Seafood Skewers", "Paneer Steaks", "Live Dessert Grill"],
+        packages: [
+          { duration: "1 hr", price: "Rs 1399", includes: "Starter grill platter" },
+          { duration: "1.5 hr", price: "Rs 1899", includes: "Unlimited grill starters" },
+          { duration: "2 hr", price: "Rs 2499", includes: "Full grill buffet pass" },
+          { duration: "3 hr", price: "Rs 3199", includes: "Premium rooftop dining window" }
+        ]
+      },
+      {
+        name: "South of Vindhyas",
+        cuisine: "Indian",
+        distance: "2.0 km from BOM",
+        travelTime: "12 min",
+        type: "Premium",
+        avgPrice: 2600,
+        rating: 4.5,
+        distanceBand: "mid",
+        priceBand: "high",
+        image: "https://images.unsplash.com/photo-1596797038530-2c107aa36b54?auto=format&fit=crop&w=400&q=80",
+        priceRange: "Rs 1600 - Rs 3300",
+        differentiators: ["Authentic South Indian specialties", "Signature coastal recipes", "Fine dining with regional depth"],
+        menuHighlights: ["Appam with Stew", "Chettinad Chicken", "Prawn Moilee", "Filter Coffee Kulfi"],
+        packages: [
+          { duration: "1 hr", price: "Rs 999", includes: "South Indian thali express" },
+          { duration: "1.5 hr", price: "Rs 1499", includes: "Starter + curry + bread" },
+          { duration: "2 hr", price: "Rs 1999", includes: "Regional tasting set" },
+          { duration: "3 hr", price: "Rs 2699", includes: "Signature chef journey" }
+        ]
+      }
+    ];
+
+    let isDetailVisible = false;
+    let selectedRestaurant = null;
+
+    const listingLayout = document.getElementById("listing-layout");
+    const level2Panel = document.getElementById("level-2-panel");
+    const restaurantGrid = document.getElementById("restaurant-grid");
+    const filterCuisine = document.getElementById("filterCuisine");
+    const filterDistance = document.getElementById("filterDistance");
+    const filterPrice = document.getElementById("filterPrice");
+    const filterType = document.getElementById("filterType");
+
+    const restaurantName = document.getElementById("restaurant-name");
+    const restaurantCuisine = document.getElementById("restaurant-cuisine");
+    const restaurantLocationMeta = document.getElementById("restaurant-location-meta");
+    const restaurantRating = document.getElementById("restaurant-rating");
+    const restaurantImage = document.getElementById("restaurant-image");
+    const restaurantMenu = document.getElementById("restaurant-menu");
+    const restaurantPriceRange = document.getElementById("restaurant-price-range");
+    const restaurantPackages = document.getElementById("restaurant-packages");
+    const restaurantDifferentiators = document.getElementById("restaurant-differentiators");
+    const restaurantReviewRating = document.getElementById("restaurant-review-rating");
+
+    function createRestaurantCard(restaurant) {
+      return `
+        <article class="restaurant-card rounded-lg border border-slate-200 bg-white p-3">
+          <div class="flex items-start justify-between gap-2">
+            <h3 class="text-sm font-semibold">${restaurant.name}</h3>
+            <span class="text-[10px] px-2 py-0.5 rounded-full ${restaurant.type === "Premium" ? "bg-orange-100 text-orange-700" : "bg-slate-100 text-slate-700"}">${restaurant.type}</span>
+          </div>
+          <p class="text-xs text-slate-600 mt-1">${restaurant.cuisine} • ${restaurant.distance}</p>
+          <div class="flex items-center justify-between mt-2 text-xs">
+            <span class="text-slate-700">Avg for 2: Rs ${restaurant.avgPrice}</span>
+            <span class="text-amber-600 font-semibold">${restaurant.rating} ★</span>
+          </div>
+          <a href="restaurant.html?name=${encodeURIComponent(restaurant.name)}" data-restaurant-name="${restaurant.name}" class="inline-flex mt-3 text-xs font-semibold text-indigo-600 hover:text-indigo-700">View Details</a>
+        </article>
+      `;
+    }
+
+    function renderDetail(restaurant) {
+      restaurantName.textContent = restaurant.name;
+      restaurantCuisine.textContent = restaurant.cuisine;
+      restaurantLocationMeta.textContent = `${restaurant.distance} • ${restaurant.travelTime}`;
+      restaurantRating.textContent = `${restaurant.rating} ★`;
+      restaurantImage.src = restaurant.image;
+      restaurantPriceRange.textContent = restaurant.priceRange;
+      restaurantReviewRating.textContent = `${restaurant.rating} ★ overall`;
+
+      restaurantMenu.innerHTML = restaurant.menuHighlights
+        .map((dish) => `<li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-600 text-[14px]">restaurant</span>${dish}</li>`)
+        .join("");
+
+      restaurantDifferentiators.innerHTML = restaurant.differentiators
+        .map((item) => `<li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-600 text-[14px]">check_circle</span>${item}</li>`)
+        .join("");
+
+      restaurantPackages.innerHTML = restaurant.packages
+        .map((pkg) => `<div class="rounded-lg border border-slate-200 p-2 bg-slate-50">
+            <p class="text-xs font-semibold text-slate-800">${pkg.duration} • ${pkg.price}</p>
+            <p class="text-[11px] text-slate-600 mt-1">${pkg.includes}</p>
+          </div>`)
+        .join("");
+    }
+
+    function handleRestaurantSelection(restaurant) {
+      selectedRestaurant = restaurant;
+      renderDetail(restaurant);
+      if (!isDetailVisible) {
+        level2Panel.classList.remove("hidden");
+        level2Panel.setAttribute("aria-hidden", "false");
+        requestAnimationFrame(() => listingLayout.classList.add("show-details"));
+        isDetailVisible = true;
+      }
+    }
+
+    function attachCardListeners() {
+      document.querySelectorAll("[data-restaurant-name]").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          const name = link.getAttribute("data-restaurant-name");
+          const restaurant = restaurantData.find((item) => item.name === name);
+          if (restaurant) handleRestaurantSelection(restaurant);
+        });
+      });
+    }
+
+    function getFilteredRestaurants() {
+      return restaurantData.filter((item) => {
+        const cuisineMatch = filterCuisine.value === "all" || item.cuisine === filterCuisine.value;
+        const distanceMatch = filterDistance.value === "all" || item.distanceBand === filterDistance.value;
+        const priceMatch = filterPrice.value === "all" || item.priceBand === filterPrice.value;
+        const typeMatch = filterType.value === "all" || item.type === filterType.value;
+        return cuisineMatch && distanceMatch && priceMatch && typeMatch;
+      });
+    }
+
+    function renderListing() {
+      const filtered = getFilteredRestaurants();
+      restaurantGrid.innerHTML = filtered.length
+        ? filtered.map(createRestaurantCard).join("")
+        : `<div class="col-span-full text-sm text-slate-500 p-4 border border-dashed rounded-lg">No restaurants match the selected filters.</div>`;
+      attachCardListeners();
+    }
+
+    [filterCuisine, filterDistance, filterPrice, filterType].forEach((control) => {
+      control.addEventListener("change", renderListing);
+    });
+
+    const defaultRestaurant = restaurantData[0];
+    renderDetail(defaultRestaurant);
+    renderListing();
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LayoverX | Mumbai Airport Dining</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #131313;
+        }
+        .glass-card {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#353534",
+                      "primary": "#ffb693",
+                      "tertiary-fixed-dim": "#c8c6c6",
+                      "on-background": "#e5e2e1",
+                      "primary-fixed-dim": "#ffb693",
+                      "tertiary-container": "#9a9999",
+                      "on-secondary-fixed-variant": "#474746",
+                      "surface-container-high": "#2a2a2a",
+                      "on-primary-fixed-variant": "#7a3000",
+                      "surface-bright": "#3a3939",
+                      "outline": "#a98a7d",
+                      "on-tertiary-fixed-variant": "#474747",
+                      "tertiary": "#c8c6c6",
+                      "secondary": "#c8c6c5",
+                      "background": "#131313",
+                      "on-primary": "#561f00",
+                      "surface-container": "#201f1f",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "primary-fixed": "#ffdbcc",
+                      "surface-container-low": "#1c1b1b",
+                      "on-secondary-container": "#b7b5b4",
+                      "inverse-primary": "#a04100",
+                      "surface-container-highest": "#353534",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "inverse-surface": "#e5e2e1",
+                      "tertiary-fixed": "#e4e2e1",
+                      "on-error": "#690005",
+                      "inverse-on-surface": "#313030",
+                      "outline-variant": "#5a4136",
+                      "on-error-container": "#ffdad6",
+                      "on-surface": "#e5e2e1",
+                      "on-tertiary-fixed": "#1b1c1c",
+                      "error": "#ffb4ab",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-surface-variant": "#e2bfb0",
+                      "secondary-container": "#474746",
+                      "on-tertiary": "#303030",
+                      "on-tertiary-container": "#313131",
+                      "error-container": "#93000a",
+                      "on-primary-fixed": "#351000",
+                      "on-secondary": "#313030",
+                      "primary-container": "#ff6b00",
+                      "surface-tint": "#ffb693",
+                      "surface-dim": "#131313",
+                      "surface": "#131313",
+                      "secondary-fixed": "#e5e2e1",
+                      "on-primary-container": "#572000"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "24px",
+                      "xs": "4px",
+                      "base": "8px",
+                      "xl": "80px",
+                      "sm": "12px",
+                      "lg": "48px",
+                      "gutter": "24px",
+                      "margin": "32px"
+              },
+              "fontFamily": {
+                      "display": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "h3": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "h1": ["Inter"],
+                      "h2": ["Inter"]
+              },
+              "fontSize": {
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-sm": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "h3": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="bg-zinc-950/70 backdrop-blur-md font-inter text-sm font-medium tracking-tight border-b border-white/10 shadow-2xl shadow-black/50 docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-full">
+<div class="text-2xl font-black tracking-tighter text-orange-600 dark:text-orange-500">LayoverX</div>
+<div class="hidden md:flex items-center space-gap-8 gap-8">
+<a class="text-orange-500 font-bold border-b-2 border-orange-500 pb-1 transition-all duration-300" href="#">Explore</a>
+<a class="text-zinc-400 hover:text-white transition-colors hover:bg-white/5 rounded-lg p-2" href="#">Partner</a>
+<a class="text-zinc-400 hover:text-white transition-colors hover:bg-white/5 rounded-lg p-2" href="#">About</a>
+<a class="text-zinc-400 hover:text-white transition-colors hover:bg-white/5 rounded-lg p-2" href="#">Contact</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold active:scale-95 transition-all">Sign In</button>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-8 py-12">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="font-display text-display text-on-background mb-4">Layover-Friendly Restaurants Near Mumbai Airport</h1>
+<p class="font-body-lg text-body-lg text-zinc-400 max-w-2xl">Optimized dining experiences for transit passengers at BOM. High-speed service meet premium culinary standards.</p>
+</header>
+<!-- Quick Filters -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-16">
+<div class="bg-surface-container-low p-6 rounded-xl border border-white/5">
+<label class="text-label-sm font-label-sm text-zinc-500 block mb-2">AIRPORT</label>
+<div class="flex items-center gap-2 text-on-background">
+<span class="material-symbols-outlined text-primary">flight_takeoff</span>
+<span class="font-h3 text-h3">Mumbai BOM</span>
+</div>
+</div>
+<div class="md:col-span-3 bg-surface-container-low p-6 rounded-xl border border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<label class="text-label-sm font-label-sm text-zinc-500 block mb-2">MAX LAYOVER DURATION</label>
+<div class="flex gap-2">
+<button class="px-4 py-2 rounded-full bg-zinc-800 text-zinc-400 hover:bg-primary-container hover:text-on-primary-container transition-all">1 hr</button>
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-bold">1.5 hr</button>
+<button class="px-4 py-2 rounded-full bg-zinc-800 text-zinc-400 hover:bg-primary-container hover:text-on-primary-container transition-all">2 hr</button>
+<button class="px-4 py-2 rounded-full bg-zinc-800 text-zinc-400 hover:bg-primary-container hover:text-on-primary-container transition-all">3 hr</button>
+</div>
+</div>
+<div class="flex items-center gap-4 border-l border-white/10 pl-8">
+<div class="text-right">
+<span class="block text-label-sm text-zinc-500">SORT BY</span>
+<select class="bg-transparent border-none text-primary font-bold focus:ring-0 cursor-pointer">
+<option>Rating (High to Low)</option>
+<option>Price (Low to High)</option>
+<option>Distance (Closest)</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-64 space-y-8">
+<div>
+<h3 class="text-h3 font-h3 text-on-background mb-4">Cuisine</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 text-zinc-400 hover:text-white cursor-pointer">
+<input class="rounded border-zinc-700 bg-zinc-900 text-primary focus:ring-primary-container" type="checkbox"/> Indian Fine Dining
+                        </label>
+<label class="flex items-center gap-3 text-zinc-400 hover:text-white cursor-pointer">
+<input class="rounded border-zinc-700 bg-zinc-900 text-primary focus:ring-primary-container" type="checkbox"/> Continental
+                        </label>
+<label class="flex items-center gap-3 text-zinc-400 hover:text-white cursor-pointer">
+<input class="rounded border-zinc-700 bg-zinc-900 text-primary focus:ring-primary-container" type="checkbox"/> Thai &amp; Pan-Asian
+                        </label>
+<label class="flex items-center gap-3 text-zinc-400 hover:text-white cursor-pointer">
+<input class="rounded border-zinc-700 bg-zinc-900 text-primary focus:ring-primary-container" type="checkbox"/> Fast Casual
+                        </label>
+</div>
+</div>
+<div>
+<h3 class="text-h3 font-h3 text-on-background mb-4">Price Range</h3>
+<div class="grid grid-cols-4 gap-2">
+<button class="p-2 border border-zinc-800 rounded hover:border-primary text-zinc-400">$</button>
+<button class="p-2 border border-zinc-800 rounded hover:border-primary text-zinc-400">$$</button>
+<button class="p-2 border border-primary-container/30 bg-primary-container/10 rounded text-primary">$$$</button>
+<button class="p-2 border border-zinc-800 rounded hover:border-primary text-zinc-400">$$$$</button>
+</div>
+</div>
+<div>
+<h3 class="text-h3 font-h3 text-on-background mb-4">Restaurant Type</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 text-zinc-400 hover:text-white cursor-pointer">
+<input class="rounded-full border-zinc-700 bg-zinc-900 text-primary focus:ring-primary-container" name="type" type="radio"/> Premium Fine Dining
+                        </label>
+<label class="flex items-center gap-3 text-zinc-400 hover:text-white cursor-pointer">
+<input class="rounded-full border-zinc-700 bg-zinc-900 text-primary focus:ring-primary-container" name="type" type="radio"/> Express Buffets
+                        </label>
+<label class="flex items-center gap-3 text-zinc-400 hover:text-white cursor-pointer">
+<input class="rounded-full border-zinc-700 bg-zinc-900 text-primary focus:ring-primary-container" name="type" type="radio"/> Quick Service
+                        </label>
+</div>
+</div>
+</aside>
+<!-- Grid -->
+<div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 1: JW Cafe -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-56">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="luxury hotel buffet spread with elegant marble counters and warm ambient lighting in a high-end mumbai restaurant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC48_RdLtOm_cCQukoScVZjghmzOcDHrim9vC52_ZjzYuEbv32MEAsmSlbxv4sV_i6KhTXI7dB3sGcvkLdT7U0XWkdFjKMd4Y8kOmOmlttS6JWQkiByrS7sMTPwCdjrA42IddVQAKbgMLoXGzun37tdwiAvMYlMlPF1Mq-mUpWh2F0MlFYv6934EdF2TdtPMGFc49U29nbAPduVY4mKxwUhnICxo2Ur8En_3UjPjVBeSjxor-_WgR9ITCTvcBpwQpj9uXNtdMz3G8dY"/>
+<div class="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-orange-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-white">4.8</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-primary-container text-on-primary-container text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Premium Buffet</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-h2 font-h2 text-white">JW Cafe</h2>
+<span class="text-zinc-500 font-medium">$$$</span>
+</div>
+<p class="text-zinc-400 text-sm mb-4">International, Indian, Seafood</p>
+<div class="flex items-center gap-4 text-xs text-zinc-500 mb-6">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 0.8 km from BOM</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 15m Transit</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all">View Details</button>
+</div>
+</div>
+<!-- Card 2: Thai Naam -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-56">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="exquisite thai fine dining presentation with artistic plating on dark ceramic dish in a moody luxury setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8zvR2KP3C_N-xgOqOeyq9umB3bPk1QQFZqQK37ddFp2FA9WbcHoRChNiuX4iDnzFgbBfI5X7Lzvv83GfkIHFojrgxDLbpUoL8AJ90w0sE7FFZdNhGSLAo-0xjMJ0UmGVqhpjKKZfss7HN3lzCzZZTTEKoU1lBib11h3tsT5PzHUQBG7IJOqQoRYb-Oabm5i52VmweY0yrk5rd4d4AMdNm-uAfBl-eSowrprTuYRq6BOigPCJWVM2Gp_NnoRmzLr_7rUZsp2thpqRW"/>
+<div class="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-orange-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-white">4.7</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-primary-container text-on-primary-container text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Fine Dining</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-h2 font-h2 text-white">Thai Naam</h2>
+<span class="text-zinc-500 font-medium">$$$</span>
+</div>
+<p class="text-zinc-400 text-sm mb-4">Authentic Thai, Pan-Asian</p>
+<div class="flex items-center gap-4 text-xs text-zinc-500 mb-6">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 1.2 km from BOM</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 20m Transit</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all">View Details</button>
+</div>
+</div>
+<!-- Card 3: Peshawri -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-56">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="traditional rustic tandoori kitchen with copper vessels and glowing charcoal oven in a premium indian restaurant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwZfov4iX7UXg_PzXoy20VFHC-qg-nkQtHivW9lmcIMZDwO535q9Ru4PtZFjwmsrMlLWsZt8Cih0Y4NIB7pIktjXmT_BYS14WCuhQxNAT2AUYNxVxWs2Y3wKnE80e2lBJl67ftOvWc_PTO4X5IbBeDo8qjHiyik46QUyhwt5cjCLOFQBqw7Lf1j8nb8tS4PqGnLyK5OpKR8NWx-w6EvLSq2cmrosknqo11FmjdyaWjdPD0h7idjgNhYAYWtHAkfpDWa2Abcvw-1CT5"/>
+<div class="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-orange-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-white">4.9</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-primary-container text-on-primary-container text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Iconic Fine Dining</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-h2 font-h2 text-white">Peshawri</h2>
+<span class="text-zinc-500 font-medium">$$$$</span>
+</div>
+<p class="text-zinc-400 text-sm mb-4">North Indian, Mughlai</p>
+<div class="flex items-center gap-4 text-xs text-zinc-500 mb-6">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 0.5 km from BOM</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 10m Transit</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all">View Details</button>
+</div>
+</div>
+<!-- Card 4: Dum Pukht -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-56">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="royal awadhi biryani served in a silver handi with intricate garnish and luxury table setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1q288UiMiFwo1PJun3QJKEwTyh1Of6oTRcBWv7GFcMrUaZO7-1bGxzn_U7kGrWxjQrTDLB70nGs3T2ajkPW9SnuFk6USz8YqcQzv-knOwfeEguKQU2bA5KiJYyBFh-d1BE0MAoy12dPEUDzUEKiFVOf92NyOZpTqki7_ZGa5EUoMaKRlSsAugkImFMsboTm4VbMMYa_lBFbaxDmgkGKbBIt-7Gg0M7yR5Gm6DgBsWkVwsmQkjm8eyJDS0oH0_5_4_gkwK1aZ9xmw5"/>
+<div class="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-orange-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-white">4.9</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-primary-container text-on-primary-container text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Heritage Dining</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-h2 font-h2 text-white">Dum Pukht</h2>
+<span class="text-zinc-500 font-medium">$$$$</span>
+</div>
+<p class="text-zinc-400 text-sm mb-4">Awadhi, Lucknowi</p>
+<div class="flex items-center gap-4 text-xs text-zinc-500 mb-6">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 0.5 km from BOM</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 10m Transit</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all">View Details</button>
+</div>
+</div>
+<!-- Card 5: Bombay High -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-56">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="ultra-modern luxury bar with backlit liquor shelves and sleek dark leather seating in a kinetic noir style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdYd0MDezXnwzJxTQzcEd1nlopsdd97GxbybvLE6tE--Cie-JI8F4Vy--Q0zZYrm4g69mbvGGuSi6T40xdewz837_tfH4rcDT-24L8cpJf39wH9HUs7MUu4zmBwCP7TCSO6VrhipHMK30MxpzgTiPzbhEzivCNBsrvf8RlqPUKPUwiB0juB-_NwoosGAqAJbYaOv-JfapCcNtRZ702r3kx6omFbBTxWOMqp-KQ-gghrSZjXd6Us7AcappQk60iIE96a_yAs8JqYLlZ"/>
+<div class="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-orange-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-white">4.6</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-primary-container text-on-primary-container text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Premium Lounge</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-h2 font-h2 text-white">Bombay High</h2>
+<span class="text-zinc-500 font-medium">$$$</span>
+</div>
+<p class="text-zinc-400 text-sm mb-4">Bar, Finger Food, Global</p>
+<div class="flex items-center gap-4 text-xs text-zinc-500 mb-6">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 0.6 km from BOM</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 12m Transit</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all">View Details</button>
+</div>
+</div>
+<!-- Card 6: Tiqri -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-56">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="spacious modern restaurant with high ceilings and geometric architectural details in shades of grey and orange" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhXTPNGWotcieffqbckMPTCerFZRNbkTt0cmSQjbTDySRZYBFTcJLckJPlKs0LHQw0yXiQ-LBWs-lsrtAG65Oc2xKxKle7ZaLqwnfGYBnEl6wvYJ-HE9nOemnlgkE0NbUi9iifqPJF9nchcQGVn2ruhrApwIZmBOebCFMbnp8rCRI0NPBNOxC0PoXe9nzmjvxEWJZ8r1jVWVs92wIQk7snF2x91wF0BePvzwAJ_xp9-f0lslpEqkjvXWOMhIoFZl7x82LRvgM4h9_s"/>
+<div class="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-orange-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-white">4.5</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-primary-container text-on-primary-container text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Global Cuisine</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-h2 font-h2 text-white">Tiqri</h2>
+<span class="text-zinc-500 font-medium">$$$</span>
+</div>
+<p class="text-zinc-400 text-sm mb-4">European, Indian, Asian</p>
+<div class="flex items-center gap-4 text-xs text-zinc-500 mb-6">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 1.5 km from BOM</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 25m Transit</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all">View Details</button>
+</div>
+</div>
+<!-- Card 7: Boulevard -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-56">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="clean bright cafe with minimalist furniture and efficient layout designed for travelers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg57lpC2-n2Xhg8osPfA7uOyGOXIjb8jz6ip5aP-isEUw36kelFXTIrG8bKAarLPpUH7Qi3gfVdoMBvYNi9kbXatw0SwaI5yZyyz_xr-SMj2Gee1J4hS7UIWVQnl0nisqBfSI-8b66cakAlV7SvuWDK97nNCgiYFSJw78cYQiqi1sHLgbJC440ZskKY2DX7ukKQwShma_VqPucLYp7FdmOnZxSlTiB-CQZAP-vUrtKTDoe9beLim7_aIJSfgtsA68kpplj7xX--vNV"/>
+<div class="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-orange-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-white">4.2</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-zinc-800 text-zinc-300 text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Standard</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-h2 font-h2 text-white">Boulevard</h2>
+<span class="text-zinc-500 font-medium">$$</span>
+</div>
+<p class="text-zinc-400 text-sm mb-4">Multi-cuisine Coffee Shop</p>
+<div class="flex items-center gap-4 text-xs text-zinc-500 mb-6">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 0.9 km from BOM</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 15m Transit</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all">View Details</button>
+</div>
+</div>
+<!-- Card 8: Mostly Grills -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-56">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="rooftop restaurant with glowing amber lights and city skyline view at night in mumbai" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT1gvJx2v7A2R6MzVEdpgahRpEyvVvsjuHlf9fCCrXf5rJT3gG2YfSUkjaZ7ZHyzkgkXW6R5EsmhhfihGoOgNovhdqh7M2iBqBgzq4a8f-aKZbxaObBa2FWAI6usbA8RqUlv-3d5X0KGNy9t-AfnRHd_AzqAD1A4ZVVHrRfAdzMLYqLkF5gubp1ltF6mwNHL15eEpSW-SMdS3h8Oux9XMmBdw7XT6jEzWvXWSqPQMARwlfdmPlEMnzeb4eSxIAh4e5cb3YTUXYqw57"/>
+<div class="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-orange-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-white">4.3</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-zinc-800 text-zinc-300 text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Rooftop Grill</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-h2 font-h2 text-white">Mostly Grills</h2>
+<span class="text-zinc-500 font-medium">$$</span>
+</div>
+<p class="text-zinc-400 text-sm mb-4">Grills, Mediterranean, Kebab</p>
+<div class="flex items-center gap-4 text-xs text-zinc-500 mb-6">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 1.8 km from BOM</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 30m Transit</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all">View Details</button>
+</div>
+</div>
+<!-- Card 9: South of Vindhyas -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-56">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="traditional south indian thali served on a banana leaf with vibrant colors and various curries" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMiT-kHNKrgsHiWO2cZOMhI69MD-pfFVLEsPKu7oze23WQRQbVGweuNmweaDlLD5PdJobnfODn9P7oX3Zs2mtfX9Ue4kFzdVcCNT5QDwTiPNEPZCU1FVlryfhGBMUGiU3Qkk-PrDewX-0T8fvaRXSMBkX4xwYtu1opLltROMOW0rGYV_8MS5GJrYmGv9tUVgYdWz_9oQeuaR1V134Gp9LQOuJXUyJMRzObpzWWWkRalG_uFc7Nu4BeCUr4Z_IHZCv24dWzK-HdRlOI"/>
+<div class="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-orange-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-white">4.5</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-zinc-800 text-zinc-300 text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Regional Expert</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-h2 font-h2 text-white">South of Vindhyas</h2>
+<span class="text-zinc-500 font-medium">$$</span>
+</div>
+<p class="text-zinc-400 text-sm mb-4">South Indian Regional</p>
+<div class="flex items-center gap-4 text-xs text-zinc-500 mb-6">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 1.1 km from BOM</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 18m Transit</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all">View Details</button>
+</div>
+</div>
+<!-- Card 10: Cafe Coffee Day -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-56">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="modern airport cafe interior with wooden tables and neon coffee sign in a fast-paced transit hub" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVhUy70CVG1KAaiNgMOyRmnV8S__z_gUjbMCyVPXNi9pH7evy_BziHFxcNgGfsoEi1rNs8x5kX2vIMaEnw--4AGXFtx8WmOzILDi596QToPVq-upxUUk2vioQ9HLRZfRpGwYyLKj-Nczrr-zTcnngqXbI8sgyEIu5QDE6FCWHIsOOTkLzDOFrgqzo-J96wRunlFxhKEPP7Gg3A8ibW1xvaiOOoVGLuHgZxrcbEk_U3mPxVXpDvW8xqWhTNpCd749WR2I5Towtee8nV"/>
+<div class="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-orange-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-white">3.9</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-zinc-800 text-zinc-300 text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Quick Service</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-h2 font-h2 text-white">Cafe Coffee Day</h2>
+<span class="text-zinc-500 font-medium">$</span>
+</div>
+<p class="text-zinc-400 text-sm mb-4">Coffee, Sandwiches, Snacks</p>
+<div class="flex items-center gap-4 text-xs text-zinc-500 mb-6">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 0.1 km (Inside Terminal)</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 0m Transit</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all">View Details</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-zinc-950 font-inter text-xs uppercase tracking-widest text-zinc-500 border-t border-white/5 py-12 px-8 mt-24">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
+<div>
+<div class="text-lg font-bold text-white mb-2">LayoverX</div>
+<p class="normal-case tracking-normal">© 2024 LayoverX. Premium Kinetic Dining.</p>
+</div>
+<div class="flex flex-wrap gap-x-8 gap-y-4 md:justify-end">
+<a class="text-zinc-600 hover:text-orange-500 transition-colors" href="#">Privacy Policy</a>
+<a class="text-zinc-600 hover:text-orange-500 transition-colors" href="#">Terms of Service</a>
+<a class="text-zinc-600 hover:text-orange-500 transition-colors" href="#">Partner Login</a>
+<a class="text-zinc-600 hover:text-orange-500 transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>
