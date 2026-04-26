@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LayoverX Spa & Wellness</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#9d4300",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container": "#e5eeff",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "primary-container": "#6063ee",
+                        "primary": "#4648d4",
+                        "secondary-fixed": "#ffdbca",
+                        "secondary-fixed-dim": "#ffb690",
+                        "on-secondary-fixed": "#341100",
+                        "on-background": "#0b1c30",
+                        "on-surface": "#0b1c30",
+                        "outline": "#767586",
+                        "outline-variant": "#c7c4d7",
+                        "background": "#f8f9ff"
+                    },
+                    "spacing": {
+                        "node-padding": "1.25rem"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            font-size: 1.25rem;
+        }
+        .entity-card {
+            transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+        }
+        .entity-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(11, 28, 48, 0.12);
+        }
+        .listing-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 0;
+            transition: gap 360ms ease-in-out;
+        }
+        .listing-panel {
+            width: 100%;
+            max-width: 560px;
+            transition: transform 360ms ease-in-out, opacity 360ms ease-in-out, visibility 360ms ease-in-out;
+        }
+        #level-1-panel {
+            transform: translateX(0);
+        }
+        #level-2-panel {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(50px);
+        }
+        .listing-layout.show-details {
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+        .listing-layout.show-details #level-1-panel {
+            transform: translateX(-24px);
+        }
+        .listing-layout.show-details #level-2-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        .sorting-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .sorting-label {
+            font-size: 14px;
+            color: #666;
+        }
+        .sorting-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .sort-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            color: #334155;
+        }
+        .sort-btn:hover {
+            border-color: #ff6b3d;
+        }
+        .sort-btn.active {
+            background: #ff6b3d;
+            color: white;
+            border-color: #ff6b3d;
+        }
+        @media (max-width: 767px) {
+            .listing-layout {
+                justify-content: center;
+            }
+            .listing-layout.show-details {
+                justify-content: center;
+                gap: 1.5rem;
+            }
+            .listing-layout.show-details #level-1-panel {
+                transform: translateX(0);
+            }
+            .sorting-bar {
+                justify-content: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .sorting-options {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-['Inter'] antialiased overflow-x-hidden">
+<main class="max-w-7xl mx-auto space-y-12 px-4 sm:px-6 md:px-8 pt-10 pb-16">
+<section class="pl-6 pt-2">
+<h2 class="text-[18px] leading-6 font-bold tracking-tight">SPA &amp; WELLNESS NEAR MUMBAI AIRPORT</h2>
+</section>
+<div class="listing-layout relative" id="listing-layout">
+<div class="space-y-6 relative z-10 listing-panel" id="level-1-panel">
+<div class="flex items-center justify-between mb-4">
+<span class="bg-primary text-white text-[11px] px-3 py-1 font-bold">LEVEL 1: LISTING</span>
+<span class="text-[11px] text-primary font-bold">THEME: BLUE/PURPLE</span>
+</div>
+<div class="bg-surface-container-lowest border-2 border-primary-container p-node-padding rounded shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<h3 class="text-[16px] leading-5 font-semibold text-primary">Spa &amp; Wellness Listing Page</h3>
+<span class="bg-green-100 text-green-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase">Finalized</span>
+</div>
+<div class="space-y-4">
+<div class="border-2 border-dashed border-outline-variant p-3">
+<p class="text-[11px] text-outline mb-2">SPA INVENTORY (9 FOUND)</p>
+<div class="rounded-lg flex gap-3">
+<div class="space-y-4 w-full">
+<div>
+<p class="text-[10px] font-bold text-primary mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">workspace_premium</span> PREMIUM SPAS</p>
+<div class="grid grid-cols-2 gap-2" id="premium-spas"></div>
+</div>
+<div class="pt-2 border-t border-outline-variant/30">
+<p class="text-[10px] font-bold text-outline mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">spa</span> STANDARD SPAS</p>
+<div class="grid grid-cols-2 gap-2" id="standard-spas"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sorting-bar">
+<span class="sorting-label">Sort by</span>
+<div class="sorting-options">
+<button class="sort-btn active" data-sort="price-low" type="button">Price: Low - High</button>
+<button class="sort-btn" data-sort="price-high" type="button">Price: High - Low</button>
+<button class="sort-btn" data-sort="distance" type="button">Distance</button>
+<button class="sort-btn" data-sort="rating" type="button">Rating</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6 relative z-10 listing-panel hidden" id="level-2-panel" aria-hidden="true">
+<div class="flex items-center justify-between mb-4">
+<span class="bg-secondary text-white text-[11px] px-3 py-1 font-bold">LEVEL 2: DETAILS</span>
+<span class="text-[11px] text-secondary font-bold">THEME: ORANGE</span>
+</div>
+<div class="bg-surface-container-lowest border-2 border-secondary p-node-padding rounded shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<h3 class="text-[16px] leading-5 font-semibold text-secondary">Spa Detail Page</h3>
+<span class="bg-purple-100 text-purple-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase">In Progress</span>
+</div>
+<div class="space-y-4">
+<div class="border border-outline-variant p-3 bg-secondary/5">
+<p class="text-[11px] text-secondary mb-1">ENTITY HEADER</p>
+<h4 class="text-[16px] font-bold" id="spa-name">Jiva Spa - Taj Santacruz</h4>
+<div class="flex gap-2 mt-1 flex-wrap">
+<span class="text-[10px] bg-secondary-fixed text-on-secondary-fixed px-1 font-semibold" id="spa-rating">4.8 rating</span>
+<span class="text-[10px] text-outline" id="spa-distance">1.6 km from BOM</span>
+<span class="text-[10px] text-outline" id="spa-travel">6-18 min away</span>
+</div>
+<p class="text-[10px] text-secondary mt-2" id="spa-type">Ayurvedic luxury spa</p>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="border border-outline-variant p-2 text-center bg-surface">
+<span class="material-symbols-outlined text-secondary">grid_view</span>
+<p class="text-[10px] mt-1 font-bold">Media Gallery</p>
+</div>
+<div class="border border-outline-variant p-2 text-center bg-surface">
+<span class="material-symbols-outlined text-secondary">self_improvement</span>
+<p class="text-[10px] mt-1 font-bold">Treatments / Therapies</p>
+</div>
+</div>
+<div class="border border-outline-variant p-3 bg-surface-container">
+<p class="text-[11px] text-outline mb-2">KEY DIFFERENTIATORS</p>
+<ul class="text-[11px] space-y-1" id="spa-differentiators"></ul>
+</div>
+<div class="border-2 border-secondary p-3 rounded bg-secondary-fixed/20">
+<p class="text-[11px] text-secondary font-bold mb-2">TREATMENT PACKAGES (VIEW ONLY)</p>
+<div class="grid grid-cols-2 gap-2 text-center" id="spa-packages"></div>
+<p class="mt-3 text-[11px] text-secondary/80">To book, go to main planner.</p>
+<a class="inline-flex mt-2 text-[11px] font-semibold text-secondary hover:text-on-secondary-fixed transition-colors" href="index.html">Go to Planner</a>
+</div>
+<div class="border border-outline-variant p-3 bg-surface-container-low">
+<p class="text-[11px] text-outline mb-2">FEATURES</p>
+<ul class="text-[11px] space-y-1">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>Priority booking</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>Relaxation for layovers</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>Airport proximity</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>Certified therapists</li>
+</ul>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="border border-outline-variant p-2 rounded">
+<p class="text-outline mb-1 text-[11px]">REVIEWS</p>
+<p class="font-semibold text-secondary text-[13px]" id="spa-reviews">468 Verified</p>
+<div class="mt-2 text-[10px] text-outline space-y-1">
+<p>Relaxation</p>
+<p>Quick refresh</p>
+<p>Luxury experience</p>
+<p>Couples friendly</p>
+</div>
+</div>
+<div class="border border-outline-variant p-2 rounded">
+<p class="text-outline mb-1 text-[11px]">CATEGORY</p>
+<p class="font-semibold text-secondary text-[13px]" id="spa-category">Premium</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        const spaData = [
+            {
+                name: "Jiva Spa - Taj Santacruz",
+                type: "Ayurvedic luxury spa",
+                distance: "1.6 km from BOM",
+                travelTime: "6-18 min away",
+                price: "Rs 3960+",
+                priceValue: 3960,
+                rating: "4.8 rating",
+                ratingValue: 4.8,
+                reviews: "468 Verified",
+                category: "Premium",
+                distanceKm: 1.6,
+                differentiators: ["Ayurvedic + Panchakarma luxury", "Signature Taj wellness rituals", "Deep restorative therapies"],
+                packages: [{duration: "30 MIN", price: "Rs 2100", treatment: "Express stress relief"}, {duration: "1 HR", price: "Rs 3960", treatment: "Swedish Massage"}, {duration: "1.5 HR", price: "Rs 4840", treatment: "Deep Tissue Therapy"}, {duration: "2 HR", price: "Rs 9200", treatment: "Abhyanga + steam"}, {duration: "FULL DAY", price: "Rs 24640", treatment: "Panchakarma immersion"}]
+            },
+            {
+                name: "Quan Spa - JW Marriott",
+                type: "Luxury hydrotherapy spa",
+                distance: "1.8 km from BOM",
+                travelTime: "8-20 min away",
+                price: "Rs 4840+",
+                priceValue: 4840,
+                rating: "4.7 rating",
+                ratingValue: 4.7,
+                reviews: "392 Verified",
+                category: "Premium",
+                distanceKm: 1.8,
+                differentiators: ["Hydrotherapy + deep tissue focus", "Premium spa suites", "Curated stress detox journeys"],
+                packages: [{duration: "30 MIN", price: "Rs 2400", treatment: "Hydro reset"}, {duration: "1 HR", price: "Rs 4840", treatment: "Deep Tissue Massage"}, {duration: "1.5 HR", price: "Rs 6200", treatment: "Muscle recovery ritual"}, {duration: "2 HR", price: "Rs 9800", treatment: "Hydro + aromatherapy"}, {duration: "FULL DAY", price: "Rs 22800", treatment: "Luxury wellness day"}]
+            },
+            {
+                name: "The Spa - Leela Mumbai",
+                type: "Holistic wellness spa",
+                distance: "1.9 km from BOM",
+                travelTime: "8-22 min away",
+                price: "Rs 4200+",
+                priceValue: 4200,
+                rating: "4.7 rating",
+                ratingValue: 4.7,
+                reviews: "356 Verified",
+                category: "Premium",
+                distanceKm: 1.9,
+                differentiators: ["Holistic wellness philosophy", "Luxury ambience with calm gardens", "Balanced body-mind treatments"],
+                packages: [{duration: "30 MIN", price: "Rs 2200", treatment: "Quick calm ritual"}, {duration: "1 HR", price: "Rs 4200", treatment: "Swedish Flow"}, {duration: "1.5 HR", price: "Rs 5600", treatment: "Holistic relaxation"}, {duration: "2 HR", price: "Rs 8900", treatment: "Signature Leela therapy"}, {duration: "FULL DAY", price: "Rs 21000", treatment: "Complete wellness itinerary"}]
+            },
+            {
+                name: "Kerala Ayurveda Spa",
+                type: "Authentic Ayurvedic spa",
+                distance: "4.6 km from BOM",
+                travelTime: "14-28 min away",
+                price: "Rs 1840+",
+                priceValue: 1840,
+                rating: "4.5 rating",
+                ratingValue: 4.5,
+                reviews: "301 Verified",
+                category: "Standard",
+                distanceKm: 4.6,
+                differentiators: ["Authentic herbal therapy", "Traditional Ayurvedic oils", "Detox and rejuvenation focused"],
+                packages: [{duration: "30 MIN", price: "Rs 980", treatment: "Head + neck relief"}, {duration: "1 HR", price: "Rs 1840", treatment: "Abhyanga basic"}, {duration: "1.5 HR", price: "Rs 2600", treatment: "Herbal compress"}, {duration: "2 HR", price: "Rs 3900", treatment: "Ayur wellness combo"}, {duration: "FULL DAY", price: "Rs 14200", treatment: "Mini Panchakarma"}]
+            },
+            {
+                name: "Sawadhee Thai Spa",
+                type: "Traditional Thai healing spa",
+                distance: "5.1 km from BOM",
+                travelTime: "16-30 min away",
+                price: "Rs 1840+",
+                priceValue: 1840,
+                rating: "4.4 rating",
+                ratingValue: 4.4,
+                reviews: "288 Verified",
+                category: "Standard",
+                distanceKm: 5.1,
+                differentiators: ["Traditional Thai healing", "Stretch-based therapeutic sessions", "Fast rejuvenation for transit travelers"],
+                packages: [{duration: "30 MIN", price: "Rs 920", treatment: "Thai foot therapy"}, {duration: "1 HR", price: "Rs 1840", treatment: "Thai Massage"}, {duration: "1.5 HR", price: "Rs 2800", treatment: "Thai + oil combo"}, {duration: "2 HR", price: "Rs 4300", treatment: "Full body Thai ritual"}, {duration: "FULL DAY", price: "Rs 15600", treatment: "Day-long Thai healing"}]
+            },
+            {
+                name: "Four Fountains Spa",
+                type: "Express wellness spa",
+                distance: "3.7 km from BOM",
+                travelTime: "12-24 min away",
+                price: "Rs 1490+",
+                priceValue: 1490,
+                rating: "4.3 rating",
+                ratingValue: 4.3,
+                reviews: "334 Verified",
+                category: "Standard",
+                distanceKm: 3.7,
+                differentiators: ["Quick express services", "Urban stress relief concept", "Great value therapy menu"],
+                packages: [{duration: "30 MIN", price: "Rs 790", treatment: "Quick de-stress"}, {duration: "1 HR", price: "Rs 1490", treatment: "Swedish Express"}, {duration: "1.5 HR", price: "Rs 2200", treatment: "Deep release combo"}, {duration: "2 HR", price: "Rs 3200", treatment: "Relax + revive pack"}, {duration: "FULL DAY", price: "Rs 11800", treatment: "Multi-session wellness"}]
+            },
+            {
+                name: "Myrah Spa",
+                type: "Urban luxury spa",
+                distance: "6.3 km from BOM",
+                travelTime: "18-32 min away",
+                price: "Rs 2600+",
+                priceValue: 2600,
+                rating: "4.4 rating",
+                ratingValue: 4.4,
+                reviews: "279 Verified",
+                category: "Premium",
+                distanceKm: 6.3,
+                differentiators: ["Boutique luxury setting", "Custom therapy combinations", "Modern wellness experience"],
+                packages: [{duration: "30 MIN", price: "Rs 1300", treatment: "Urban refresh"}, {duration: "1 HR", price: "Rs 2600", treatment: "Signature Swedish"}, {duration: "1.5 HR", price: "Rs 3600", treatment: "Aroma + deep tissue"}, {duration: "2 HR", price: "Rs 5200", treatment: "Premium body ritual"}, {duration: "FULL DAY", price: "Rs 17800", treatment: "Luxury spa retreat"}]
+            },
+            {
+                name: "Heavenly Spa - Westin",
+                type: "Premium luxury spa",
+                distance: "8.4 km from BOM",
+                travelTime: "22-38 min away",
+                price: "Rs 5200+",
+                priceValue: 5200,
+                rating: "4.8 rating",
+                ratingValue: 4.8,
+                reviews: "247 Verified",
+                category: "Premium",
+                distanceKm: 8.4,
+                differentiators: ["Premium luxury rituals", "High-end therapist expertise", "Signature Westin wellness standards"],
+                packages: [{duration: "30 MIN", price: "Rs 2600", treatment: "Heavenly quick reset"}, {duration: "1 HR", price: "Rs 5200", treatment: "Heavenly Massage"}, {duration: "1.5 HR", price: "Rs 6900", treatment: "Detox body ritual"}, {duration: "2 HR", price: "Rs 9800", treatment: "Luxury fusion therapy"}, {duration: "FULL DAY", price: "Rs 26400", treatment: "Heavenly full-day escape"}]
+            },
+            {
+                name: "Rewa Escape Spa",
+                type: "Couples wellness spa",
+                distance: "5.8 km from BOM",
+                travelTime: "16-30 min away",
+                price: "Rs 2200+",
+                priceValue: 2200,
+                rating: "4.4 rating",
+                ratingValue: 4.4,
+                reviews: "263 Verified",
+                category: "Standard",
+                distanceKm: 5.8,
+                differentiators: ["Couples spa specializations", "Relaxed private treatment rooms", "Balanced pricing for quick refresh"],
+                packages: [{duration: "30 MIN", price: "Rs 1100", treatment: "Quick couple refresh"}, {duration: "1 HR", price: "Rs 2200", treatment: "Couple Swedish"}, {duration: "1.5 HR", price: "Rs 3200", treatment: "Aroma pair therapy"}, {duration: "2 HR", price: "Rs 4600", treatment: "Couple signature ritual"}, {duration: "FULL DAY", price: "Rs 16400", treatment: "Extended couples retreat"}]
+            }
+        ];
+
+        let isDetailVisible = false;
+        let selectedSpa = null;
+
+        const spaName = document.getElementById('spa-name');
+        const spaRating = document.getElementById('spa-rating');
+        const spaDistance = document.getElementById('spa-distance');
+        const spaTravel = document.getElementById('spa-travel');
+        const spaType = document.getElementById('spa-type');
+        const spaReviews = document.getElementById('spa-reviews');
+        const spaCategory = document.getElementById('spa-category');
+        const premiumSpasContainer = document.getElementById('premium-spas');
+        const standardSpasContainer = document.getElementById('standard-spas');
+        const spaDifferentiators = document.getElementById('spa-differentiators');
+        const spaPackages = document.getElementById('spa-packages');
+        const listingLayout = document.getElementById('listing-layout');
+        const level2Panel = document.getElementById('level-2-panel');
+        const sortButtons = document.querySelectorAll('.sort-btn');
+
+        function createSpaCard(spa) {
+            const tone = spa.category === 'Premium'
+                ? 'entity-card p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10'
+                : 'entity-card p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface block hover:bg-surface-container-low';
+            return `<a class="${tone}" href="spa.html?name=${encodeURIComponent(spa.name)}" data-spa-name="${spa.name}">
+                <div class="flex items-start justify-between gap-1">
+                    <span class="font-semibold">${spa.name}</span>
+                    <span class="text-[9px] px-1 py-0.5 rounded ${spa.category === 'Premium' ? 'bg-secondary-fixed text-on-secondary-fixed' : 'bg-outline-variant/30 text-outline'}">${spa.category}</span>
+                </div>
+                <p class="text-[10px] text-outline mt-1">${spa.type}</p>
+                <p class="text-[10px] text-outline">${spa.distance} • ${spa.price}</p>
+            </a>`;
+        }
+
+        function renderSpaDetail(spa) {
+            spaName.textContent = spa.name;
+            spaRating.textContent = spa.rating;
+            spaDistance.textContent = spa.distance;
+            spaTravel.textContent = spa.travelTime;
+            spaType.textContent = spa.type;
+            spaReviews.textContent = spa.reviews;
+            spaCategory.textContent = spa.category;
+            spaDifferentiators.innerHTML = spa.differentiators.map((item) => `<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-green-600">check_circle</span>${item}</li>`).join('');
+            spaPackages.innerHTML = spa.packages.map((pkg) => `<div class="bg-white p-2 rounded border border-secondary-fixed"><p class="text-[9px] text-outline">${pkg.duration}</p><p class="font-bold text-[11px]">${pkg.price}</p><p class="text-[9px] text-outline mt-1">${pkg.treatment}</p></div>`).join('');
+        }
+
+        function attachSpaListeners() {
+            document.querySelectorAll('[data-spa-name]').forEach((card) => {
+                card.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const name = card.getAttribute('data-spa-name');
+                    const selected = spaData.find((item) => item.name === name);
+                    if (!selected) return;
+                    selectedSpa = selected;
+                    renderSpaDetail(selected);
+                    if (!isDetailVisible) {
+                        level2Panel.classList.remove('hidden');
+                        level2Panel.setAttribute('aria-hidden', 'false');
+                        requestAnimationFrame(() => listingLayout.classList.add('show-details'));
+                        isDetailVisible = true;
+                    }
+                });
+            });
+        }
+
+        function renderListing(sortBy = 'price-low') {
+            const sorted = [...spaData].sort((a, b) => {
+                if (sortBy === 'rating') return b.ratingValue - a.ratingValue;
+                if (sortBy === 'distance') return a.distanceKm - b.distanceKm;
+                if (sortBy === 'price-high') return b.priceValue - a.priceValue;
+                return a.priceValue - b.priceValue;
+            });
+            premiumSpasContainer.innerHTML = sorted.filter((item) => item.category === 'Premium').map(createSpaCard).join('');
+            standardSpasContainer.innerHTML = sorted.filter((item) => item.category === 'Standard').map(createSpaCard).join('');
+            attachSpaListeners();
+        }
+
+        sortButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                sortButtons.forEach((btn) => btn.classList.remove('active'));
+                button.classList.add('active');
+                renderListing(button.getAttribute('data-sort') || 'price-low');
+            });
+        });
+
+        renderSpaDetail(spaData[0]);
+        renderListing();
+</script>
+</body></html>
