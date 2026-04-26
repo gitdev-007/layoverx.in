@@ -208,15 +208,39 @@
 </div>
 </header>
 <main class="max-w-7xl mx-auto space-y-12 px-4 sm:px-6 md:px-8 pt-28 pb-16">
+<!-- SITEMAP LEGEND -->
+<section>
+<div class="border-t-2 border-outline-variant pt-4">
+<h5 class="text-meta-label font-bold text-outline uppercase mb-3">Sitemap Legend</h5>
+<div class="flex flex-wrap gap-6">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-primary"></span>
+<span class="text-xs font-semibold">Discovery (Blue)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-secondary"></span>
+<span class="text-xs font-semibold">Decision (Orange)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-green-500 rounded-full"></span>
+<span class="text-xs">Finalized UI</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-purple-500 rounded-full"></span>
+<span class="text-xs">In Wireframe</span>
+</div>
+</div>
+</div>
+</section>
 <!-- Header & Breadcrumbs -->
 <section class="border-l-4 border-primary pl-6 py-2">
-<h2 class="text-node-title-lg font-node-title-lg text-on-background tracking-tight">LAYOVERX - HOTELS SITEMAP (UPDATED)</h2>
+<h2 class="text-node-title-lg font-node-title-lg text-on-background tracking-tight">LAYOVERX - HOTELS</h2>
 <div class="flex items-center gap-3 mt-4 text-meta-label font-meta-label uppercase text-outline">
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">explore</span> EXPLORE</span>
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="index.html"><span class="material-symbols-outlined text-sm">explore</span> EXPLORE</a>
 <span class="material-symbols-outlined">chevron_right</span>
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">hotel</span> HOTELS</span>
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="hotel.html"><span class="material-symbols-outlined text-sm">hotel</span> HOTELS</a>
 <span class="material-symbols-outlined">chevron_right</span>
-<span class="flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span> HOTEL DETAIL PAGE</span>
+<a class="flex items-center gap-1 text-primary hover:text-secondary transition-colors" href="hotel.html?id=1"><span class="material-symbols-outlined text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span> HOTEL DETAIL PAGE</a>
 </div>
 </section>
 <!-- SITEMAP CANVAS -->
@@ -255,16 +279,6 @@
 <p class="text-node-description font-node-description font-semibold">"Hotels Near Mumbai Airport"</p>
 <p class="text-[11px] text-on-surface-variant">Dynamic subtitle based on search parameters.</p>
 </div>
-<!-- Filter Block -->
-<div class="border border-outline-variant p-3">
-<p class="text-meta-label text-outline mb-1">SEARCH &amp; FILTERS</p>
-<div class="grid grid-cols-2 gap-2 text-node-description">
-<span class="bg-surface-container-high px-2 py-1 rounded">Duration (2, 4, 8h)</span>
-<span class="bg-surface-container-high px-2 py-1 rounded">Price Range</span>
-<span class="bg-surface-container-high px-2 py-1 rounded">Distance</span>
-<span class="bg-surface-container-high px-2 py-1 rounded">Amenities</span>
-</div>
-</div>
 <!-- Grid Preview -->
 <div class="border-2 border-dashed border-outline-variant p-3">
 <p class="text-meta-label text-outline mb-2">HOTEL INVENTORY (12 HOTELS FOUND)</p>
@@ -272,33 +286,22 @@
 <div class="space-y-4 w-full">
 <div>
 <p class="text-[10px] font-bold text-primary mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">workspace_premium</span> PREMIUM HOTELS (8)</p>
-<div class="grid grid-cols-2 gap-2">
-<a class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10 transition-colors" href="hotel.html?id=1">The Orchid Hotel</a>
-<a class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10 transition-colors" href="hotel.html?id=2">Hotel Sahara Star</a>
-<a class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10 transition-colors" href="hotel.html?id=3">Taj Santacruz</a>
-<a class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10 transition-colors" href="hotel.html?id=4">JW Marriott Sahar</a>
-<a class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10 transition-colors" href="hotel.html?id=5">ITC Maratha</a>
-<a class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10 transition-colors" href="hotel.html?id=6">The Leela Mumbai</a>
-<a class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10 transition-colors" href="hotel.html?id=7">Aurika Mumbai</a>
-<a class="p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10 transition-colors" href="hotel.html?id=8">Grand Hyatt</a>
-</div>
+<div class="grid grid-cols-2 gap-2" id="premium-hotels"></div>
 </div>
 <div class="pt-2 border-t border-outline-variant/30">
 <p class="text-[10px] font-bold text-outline mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">hotel</span> STANDARD HOTELS (4)</p>
-<div class="grid grid-cols-2 gap-2">
-<a class="p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface block hover:bg-surface-container-low transition-colors" href="hotel.html?id=9">Hotel Bawa Intl.</a>
-<a class="p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface block hover:bg-surface-container-low transition-colors" href="hotel.html?id=10">Hotel Midland</a>
-<a class="p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface block hover:bg-surface-container-low transition-colors" href="hotel.html?id=11">Lemon Tree Premier</a>
-<a class="p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface block hover:bg-surface-container-low transition-colors" href="hotel.html?id=12">Holiday Inn</a>
-</div>
+<div class="grid grid-cols-2 gap-2" id="standard-hotels"></div>
 </div>
 </div>
 </div>
 </div>
 <!-- Footer Actions -->
-<div class="flex justify-between items-center text-meta-label pt-2">
-<span class="text-outline">SORT: Price, Rating, Popularity</span>
-<span class="text-primary font-bold">Pagination / Load More</span>
+<div class="flex justify-end items-center text-meta-label pt-2">
+<select class="bg-surface border border-outline-variant rounded px-3 py-2 text-[12px] text-on-surface focus:border-primary focus:ring-0" id="sortOptions">
+<option value="price">Sort by Price</option>
+<option value="rating">Sort by Rating</option>
+<option value="popularity">Sort by Popularity</option>
+</select>
 </div>
 </div>
 </div>
@@ -371,38 +374,6 @@
 </div>
 </div>
 </div>
-<!-- ANNOTATION / LEGEND -->
-<section class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="border-2 border-dashed border-outline-variant p-4 bg-surface rounded">
-<h5 class="text-meta-label font-bold text-outline uppercase mb-3">Logic Annotations</h5>
-<ul class="text-[12px] space-y-2 text-on-surface-variant">
-<li class="flex gap-2"><strong>[1]</strong> Price sorting logic adjusts based on selected duration bucket.</li>
-<li class="flex gap-2"><strong>[2]</strong> Detailed Page shifts theme to Orange to signify "Conversion Focused" state.</li>
-<li class="flex gap-2"><strong>[3]</strong> Shuttle availability is a primary filter for layover users.</li>
-</ul>
-</div>
-<div class="md:col-span-2 border-t-2 border-outline-variant pt-4">
-<h5 class="text-meta-label font-bold text-outline uppercase mb-3">Sitemap Legend</h5>
-<div class="flex flex-wrap gap-6">
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 bg-primary"></span>
-<span class="text-xs font-semibold">Discovery (Blue)</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 bg-secondary"></span>
-<span class="text-xs font-semibold">Decision (Orange)</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 bg-green-500 rounded-full"></span>
-<span class="text-xs">Finalized UI</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 bg-purple-500 rounded-full"></span>
-<span class="text-xs">In Wireframe</span>
-</div>
-</div>
-</div>
-</section>
 </main>
 <!-- Footer Anchor -->
 <footer class="bg-[#121212] border-t border-white/5 mt-20">
@@ -462,18 +433,18 @@
 </footer>
 <script>
         const hotels = [
-            { id: 1, name: "The Orchid Hotel, Mumbai", rating: "4.8 rating", distance: "0.8 km from BOM", reviews: "482 Verified", type: "Premium", price: { twoHr: "Rs 1200", fourHr: "Rs 1800", eightHr: "Rs 2800", full: "Rs 4500" } },
-            { id: 2, name: "Hotel Sahara Star, Mumbai", rating: "4.7 rating", distance: "1.2 km from BOM", reviews: "438 Verified", type: "Premium", price: { twoHr: "Rs 1400", fourHr: "Rs 2100", eightHr: "Rs 3200", full: "Rs 4900" } },
-            { id: 3, name: "Taj Santacruz, Mumbai", rating: "4.9 rating", distance: "2.4 km from BOM", reviews: "521 Verified", type: "Premium", price: { twoHr: "Rs 1800", fourHr: "Rs 2600", eightHr: "Rs 3900", full: "Rs 5600" } },
-            { id: 4, name: "JW Marriott Sahar, Mumbai", rating: "4.8 rating", distance: "1.6 km from BOM", reviews: "467 Verified", type: "Premium", price: { twoHr: "Rs 1700", fourHr: "Rs 2500", eightHr: "Rs 3700", full: "Rs 5400" } },
-            { id: 5, name: "ITC Maratha, Mumbai", rating: "4.6 rating", distance: "2.1 km from BOM", reviews: "396 Verified", type: "Premium", price: { twoHr: "Rs 1500", fourHr: "Rs 2200", eightHr: "Rs 3400", full: "Rs 5000" } },
-            { id: 6, name: "The Leela Mumbai", rating: "4.8 rating", distance: "1.9 km from BOM", reviews: "455 Verified", type: "Premium", price: { twoHr: "Rs 1650", fourHr: "Rs 2400", eightHr: "Rs 3600", full: "Rs 5300" } },
-            { id: 7, name: "Aurika Mumbai", rating: "4.5 rating", distance: "3.0 km from BOM", reviews: "289 Verified", type: "Premium", price: { twoHr: "Rs 1450", fourHr: "Rs 2150", eightHr: "Rs 3300", full: "Rs 4850" } },
-            { id: 8, name: "Grand Hyatt Mumbai", rating: "4.7 rating", distance: "6.1 km from BOM", reviews: "512 Verified", type: "Premium", price: { twoHr: "Rs 1750", fourHr: "Rs 2550", eightHr: "Rs 3800", full: "Rs 5500" } },
-            { id: 9, name: "Hotel Bawa Intl.", rating: "4.2 rating", distance: "1.1 km from BOM", reviews: "214 Verified", type: "Standard", price: { twoHr: "Rs 900", fourHr: "Rs 1400", eightHr: "Rs 2200", full: "Rs 3400" } },
-            { id: 10, name: "Hotel Midland", rating: "4.1 rating", distance: "2.8 km from BOM", reviews: "176 Verified", type: "Standard", price: { twoHr: "Rs 850", fourHr: "Rs 1300", eightHr: "Rs 2050", full: "Rs 3200" } },
-            { id: 11, name: "Lemon Tree Premier", rating: "4.4 rating", distance: "3.4 km from BOM", reviews: "248 Verified", type: "Standard", price: { twoHr: "Rs 1100", fourHr: "Rs 1650", eightHr: "Rs 2500", full: "Rs 3900" } },
-            { id: 12, name: "Holiday Inn Mumbai", rating: "4.3 rating", distance: "4.2 km from BOM", reviews: "231 Verified", type: "Standard", price: { twoHr: "Rs 1000", fourHr: "Rs 1500", eightHr: "Rs 2350", full: "Rs 3600" } }
+            { id: 1, name: "The Orchid Hotel, Mumbai", rating: "4.8 rating", ratingValue: 4.8, distance: "0.8 km from BOM", reviews: "482 Verified", popularity: 482, type: "Premium", priceValue: 1200, price: { twoHr: "Rs 1200", fourHr: "Rs 1800", eightHr: "Rs 2800", full: "Rs 4500" } },
+            { id: 2, name: "Hotel Sahara Star, Mumbai", rating: "4.7 rating", ratingValue: 4.7, distance: "1.2 km from BOM", reviews: "438 Verified", popularity: 438, type: "Premium", priceValue: 1400, price: { twoHr: "Rs 1400", fourHr: "Rs 2100", eightHr: "Rs 3200", full: "Rs 4900" } },
+            { id: 3, name: "Taj Santacruz, Mumbai", rating: "4.9 rating", ratingValue: 4.9, distance: "2.4 km from BOM", reviews: "521 Verified", popularity: 521, type: "Premium", priceValue: 1800, price: { twoHr: "Rs 1800", fourHr: "Rs 2600", eightHr: "Rs 3900", full: "Rs 5600" } },
+            { id: 4, name: "JW Marriott Sahar, Mumbai", rating: "4.8 rating", ratingValue: 4.8, distance: "1.6 km from BOM", reviews: "467 Verified", popularity: 467, type: "Premium", priceValue: 1700, price: { twoHr: "Rs 1700", fourHr: "Rs 2500", eightHr: "Rs 3700", full: "Rs 5400" } },
+            { id: 5, name: "ITC Maratha, Mumbai", rating: "4.6 rating", ratingValue: 4.6, distance: "2.1 km from BOM", reviews: "396 Verified", popularity: 396, type: "Premium", priceValue: 1500, price: { twoHr: "Rs 1500", fourHr: "Rs 2200", eightHr: "Rs 3400", full: "Rs 5000" } },
+            { id: 6, name: "The Leela Mumbai", rating: "4.8 rating", ratingValue: 4.8, distance: "1.9 km from BOM", reviews: "455 Verified", popularity: 455, type: "Premium", priceValue: 1650, price: { twoHr: "Rs 1650", fourHr: "Rs 2400", eightHr: "Rs 3600", full: "Rs 5300" } },
+            { id: 7, name: "Aurika Mumbai", rating: "4.5 rating", ratingValue: 4.5, distance: "3.0 km from BOM", reviews: "289 Verified", popularity: 289, type: "Premium", priceValue: 1450, price: { twoHr: "Rs 1450", fourHr: "Rs 2150", eightHr: "Rs 3300", full: "Rs 4850" } },
+            { id: 8, name: "Grand Hyatt Mumbai", rating: "4.7 rating", ratingValue: 4.7, distance: "6.1 km from BOM", reviews: "512 Verified", popularity: 512, type: "Premium", priceValue: 1750, price: { twoHr: "Rs 1750", fourHr: "Rs 2550", eightHr: "Rs 3800", full: "Rs 5500" } },
+            { id: 9, name: "Hotel Bawa Intl.", rating: "4.2 rating", ratingValue: 4.2, distance: "1.1 km from BOM", reviews: "214 Verified", popularity: 214, type: "Standard", priceValue: 900, price: { twoHr: "Rs 900", fourHr: "Rs 1400", eightHr: "Rs 2200", full: "Rs 3400" } },
+            { id: 10, name: "Hotel Midland", rating: "4.1 rating", ratingValue: 4.1, distance: "2.8 km from BOM", reviews: "176 Verified", popularity: 176, type: "Standard", priceValue: 850, price: { twoHr: "Rs 850", fourHr: "Rs 1300", eightHr: "Rs 2050", full: "Rs 3200" } },
+            { id: 11, name: "Lemon Tree Premier", rating: "4.4 rating", ratingValue: 4.4, distance: "3.4 km from BOM", reviews: "248 Verified", popularity: 248, type: "Standard", priceValue: 1100, price: { twoHr: "Rs 1100", fourHr: "Rs 1650", eightHr: "Rs 2500", full: "Rs 3900" } },
+            { id: 12, name: "Holiday Inn Mumbai", rating: "4.3 rating", ratingValue: 4.3, distance: "4.2 km from BOM", reviews: "231 Verified", popularity: 231, type: "Standard", priceValue: 1000, price: { twoHr: "Rs 1000", fourHr: "Rs 1500", eightHr: "Rs 2350", full: "Rs 3600" } }
         ];
 
         const params = new URLSearchParams(window.location.search);
@@ -490,6 +461,30 @@
         const price4hr = document.getElementById('price-4hr');
         const price8hr = document.getElementById('price-8hr');
         const priceFull = document.getElementById('price-full');
+        const premiumHotelsContainer = document.getElementById('premium-hotels');
+        const standardHotelsContainer = document.getElementById('standard-hotels');
+        const sortOptions = document.getElementById('sortOptions');
+
+        function createHotelLink(hotel) {
+            const baseClass = hotel.type === 'Premium'
+                ? 'p-2 bg-primary/5 border border-primary/20 rounded text-[11px] font-medium text-on-surface block hover:bg-primary/10 transition-colors'
+                : 'p-2 bg-surface border border-outline-variant rounded text-[11px] text-on-surface block hover:bg-surface-container-low transition-colors';
+            return `<a class="${baseClass}" href="hotel.html?id=${hotel.id}">${hotel.name}</a>`;
+        }
+
+        function renderHotelListings(sortBy = 'price') {
+            const sortedHotels = [...hotels].sort((a, b) => {
+                if (sortBy === 'rating') return b.ratingValue - a.ratingValue;
+                if (sortBy === 'popularity') return b.popularity - a.popularity;
+                return a.priceValue - b.priceValue;
+            });
+
+            const premiumHotels = sortedHotels.filter((hotel) => hotel.type === 'Premium').map(createHotelLink).join('');
+            const standardHotels = sortedHotels.filter((hotel) => hotel.type === 'Standard').map(createHotelLink).join('');
+
+            premiumHotelsContainer.innerHTML = premiumHotels;
+            standardHotelsContainer.innerHTML = standardHotels;
+        }
 
         if (selectedHotel) {
             document.title = `${selectedHotel.name} | LayoverX Hotels`;
@@ -516,6 +511,11 @@
             price8hr.textContent = '-';
             priceFull.textContent = '-';
         }
+
+        renderHotelListings(sortOptions.value);
+        sortOptions.addEventListener('change', (event) => {
+            renderHotelListings(event.target.value);
+        });
 
         const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
         const mobileMenu = document.getElementById('mobile-menu');
