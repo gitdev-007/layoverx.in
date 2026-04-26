@@ -142,7 +142,7 @@
 <div class="rounded-2xl border border-white/10 bg-surface-container/95 backdrop-blur-xl shadow-2xl shadow-black/40 p-3 space-y-1">
 <a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="hotel.html">All Experiences</a>
 <a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="hotel.html">Hotels &amp; Stays</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Food &amp; Dining</a>
+<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" data-food-dining-link href="/restaurant.html">Food &amp; Dining</a>
 <a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Spa &amp; Wellness</a>
 <a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Entertainment</a>
 <a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">City Tours</a>
@@ -188,7 +188,7 @@
 <div class="space-y-1 rounded-xl bg-surface-container/80 p-2">
 <a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="hotel.html">All Experiences</a>
 <a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="hotel.html">Hotels &amp; Stays</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="#">Food &amp; Dining</a>
+<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" data-food-dining-link href="/restaurant.html">Food &amp; Dining</a>
 <a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="#">Spa &amp; Wellness</a>
 <a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="#">Entertainment</a>
 <a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="#">City Tours</a>
@@ -595,6 +595,13 @@
                 if (icon) icon.textContent = 'menu';
             });
         });
+
+        const isRestaurantPage = window.location.pathname.endsWith('/restaurant.html') || window.location.pathname.endsWith('restaurant.html');
+        if (isRestaurantPage) {
+            document.querySelectorAll('[data-food-dining-link]').forEach((link) => {
+                link.classList.add('text-orange-500', 'bg-white/5');
+            });
+        }
 
         const fadeSections = document.querySelectorAll('.fade-section');
         if ('IntersectionObserver' in window) {
