@@ -149,7 +149,6 @@
 </div>
 </div>
 </div>
-<a class="text-neutral-400 hover:text-white transition-colors" href="#how-it-works">How it Works</a>
 <div class="relative nav-item">
 <button aria-expanded="false" class="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors" type="button">
 <span>Partner With Us</span>
@@ -166,16 +165,13 @@
 </div>
 </div>
 </div>
-<a class="text-neutral-400 hover:text-white transition-colors" href="#about-us">About Us</a>
+<a class="text-neutral-400 hover:text-white transition-colors" href="#about-us">About</a>
 <a class="text-neutral-400 hover:text-white transition-colors" href="#contact">Contact</a>
 </nav>
 </div>
 <div class="hidden md:flex items-center gap-6">
-<div class="flex items-center gap-4 text-white">
-<span class="material-symbols-outlined cursor-pointer hover:text-orange-400 transition-all duration-300">language</span>
-<span class="material-symbols-outlined cursor-pointer hover:text-orange-400 transition-all duration-300">search</span>
-</div>
-<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-label-md active:scale-95 duration-200">Book Now</button>
+<a class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-secondary hover:text-white hover:bg-white/[0.06] transition-colors" href="#">Sign In</a>
+<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-label-md active:scale-95 duration-200">Plan Layover</button>
 </div>
 <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation menu" class="md:hidden w-11 h-11 rounded-full border border-white/10 bg-white/5 text-white flex items-center justify-center" data-mobile-menu-toggle type="button">
 <span class="material-symbols-outlined">menu</span>
@@ -199,7 +195,6 @@
 </div>
 </div>
 </div>
-<a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-secondary hover:text-white transition" href="#how-it-works">How it Works</a>
 <div class="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
 <button aria-expanded="false" class="w-full flex items-center justify-between px-4 py-4 text-left text-white" data-mobile-dropdown-trigger="mobile-partner" type="button">
 <span>Partner With Us</span>
@@ -216,9 +211,10 @@
 </div>
 </div>
 </div>
-<a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-secondary hover:text-white transition" href="#about-us">About Us</a>
+<a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-secondary hover:text-white transition" href="#about-us">About</a>
 <a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-secondary hover:text-white transition" href="#contact">Contact</a>
-<button class="w-full bg-primary-container text-on-primary-container px-6 py-3 rounded-2xl font-label-md mt-3" type="button">Book Now</button>
+<a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-secondary hover:text-white transition" href="#">Sign In</a>
+<button class="w-full bg-primary-container text-on-primary-container px-6 py-3 rounded-2xl font-label-md mt-3" type="button">Plan Layover</button>
 </div>
 </div>
 </header>
@@ -232,22 +228,48 @@
 <div class="relative z-10 max-w-5xl mx-auto text-center">
 <span class="inline-block px-4 py-1.5 rounded-full bg-primary-container/15 text-primary font-label-md mb-8">Redefining Your Transit</span>
 <h1 class="font-headline-xl text-white mb-6 leading-tight">Make the Most of Your Layover</h1>
-<p class="text-body-lg text-secondary/80 max-w-2xl mx-auto mb-12">Find hotels, food, spa, and tours near your airport during layovers. Seamlessly integrated into your travel schedule.</p>
+<p class="text-body-lg text-secondary/80 max-w-2xl mx-auto mb-12">Explore curated airport-near experiences with a faster, simpler planning flow. Browse freely, compare options, and only sign in when you're ready to book.</p>
 <!-- Flagship Search Bar -->
-<div class="glass p-2 rounded-2xl md:rounded-full border border-white/10 shadow-2xl max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-2">
-<div class="flex-1 w-full px-6 py-3 flex items-center gap-3 border-b md:border-b-0 md:border-r border-white/10">
+<div class="glass p-3 rounded-[28px] border border-white/10 shadow-2xl max-w-5xl mx-auto">
+<div class="flex flex-col lg:flex-row items-stretch gap-2">
+<div class="flex-1 w-full px-5 py-3 flex items-center gap-3 border-b lg:border-b-0 lg:border-r border-white/10">
 <span class="material-symbols-outlined text-primary">flight_takeoff</span>
-<input class="bg-transparent border-none focus:ring-0 text-white placeholder-secondary/50 w-full font-body-md" placeholder="Airport or City" type="text"/>
+<div class="w-full text-left">
+<label class="block text-[11px] uppercase tracking-[0.18em] text-secondary/50 mb-1">Airport</label>
+<select class="bg-transparent border-none focus:ring-0 text-white w-full font-body-md p-0">
+<option>Mumbai (BOM)</option>
+<option>Delhi (DEL)</option>
+<option>Bengaluru (BLR)</option>
+<option>Dubai (DXB)</option>
+<option>Singapore (SIN)</option>
+</select>
 </div>
-<div class="flex-1 w-full px-6 py-3 flex items-center gap-3 border-b md:border-b-0 md:border-r border-white/10">
+</div>
+<div class="flex-1 w-full px-5 py-3 flex items-center gap-3 border-b lg:border-b-0 lg:border-r border-white/10">
 <span class="material-symbols-outlined text-primary">schedule</span>
-<input class="bg-transparent border-none focus:ring-0 text-white placeholder-secondary/50 w-full font-body-md" placeholder="Duration (e.g. 6h)" type="text"/>
+<div class="w-full text-left">
+<label class="block text-[11px] uppercase tracking-[0.18em] text-secondary/50 mb-1">Duration</label>
+<select class="bg-transparent border-none focus:ring-0 text-white w-full font-body-md p-0">
+<option>2-4 hrs</option>
+<option>4-6 hrs</option>
+<option>6-8 hrs</option>
+<option>8+ hrs</option>
+</select>
 </div>
-<div class="flex-1 w-full px-6 py-3 flex items-center gap-3">
+</div>
+<div class="flex-1 w-full px-5 py-3 flex items-center gap-3">
 <span class="material-symbols-outlined text-primary">calendar_today</span>
-<input class="bg-transparent border-none focus:ring-0 text-white placeholder-secondary/50 w-full font-body-md" placeholder="Date &amp; Time" type="text"/>
+<div class="w-full text-left">
+<label class="block text-[11px] uppercase tracking-[0.18em] text-secondary/50 mb-1">Date &amp; Time</label>
+<input class="bg-transparent border-none focus:ring-0 text-white w-full font-body-md p-0" type="datetime-local" value="2026-04-27T14:30"/>
 </div>
-<button class="w-full md:w-auto bg-primary-container text-on-primary-container px-10 py-4 rounded-full font-label-md hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary-container/20">Explore Experiences</button>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-3 mt-4">
+<button class="w-full sm:w-auto bg-primary-container text-on-primary-container px-8 py-4 rounded-full font-label-md hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-primary-container/20" type="button">Plan Layover</button>
+<button class="w-full sm:w-auto border border-white/10 bg-white/[0.04] text-white px-8 py-4 rounded-full font-label-md hover:bg-white/[0.08] transition-all" type="button">Explore Experiences</button>
+</div>
+<p class="text-secondary/60 text-sm text-left mt-4 px-2">Browse all experiences without signing in. Login is only required when you continue to booking or checkout.</p>
 </div>
 </div>
 </section>
@@ -447,21 +469,6 @@
 <h2 class="font-headline-xl text-white mb-6">Stay Updated with Smarter Travel</h2>
 <p class="text-body-lg text-secondary/80 mb-10">Get the latest updates on airport experiences, new locations, and exclusive travel insights.</p>
 <button class="bg-primary-container text-on-primary-container px-12 py-5 rounded-full font-label-md text-lg hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-primary-container/30">Start Exploring</button>
-</div>
-</section>
-<!-- Newsletter Signup -->
-<section class="py-16 px-8 bg-surface-container-low border-y border-white/5">
-<div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
-<div class="flex-1 text-center md:text-left">
-<h3 class="font-headline-md text-white mb-2">Stay Updated with Smarter Travel</h3>
-<p class="text-secondary/70">Get the latest updates on airport experiences, new locations, and exclusive travel insights.</p>
-</div>
-<div class="flex-1 w-full max-w-md">
-<form class="flex gap-2">
-<input class="flex-1 bg-surface-container-highest border-b border-white/20 focus:border-primary focus:ring-0 text-white rounded-lg px-4 font-body-md" placeholder="Email address" type="email"/>
-<button class="bg-white text-black px-6 py-3 rounded-lg font-label-md hover:bg-primary hover:text-white transition-colors" type="submit">Join</button>
-</form>
-</div>
 </div>
 </section>
 <!-- Contact Section -->
