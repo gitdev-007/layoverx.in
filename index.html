@@ -239,6 +239,12 @@
 <a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" data-entertainment-link href="/entertainment.html">Entertainment</a>
 <a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">City Tours</a>
 </div>
+<div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: #111; padding: 10px;">
+  <input type="email" id="email" placeholder="Email"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="handleSignup()">Sign Up</button>
+  <button onclick="handleLogin()">Login</button>
+</div>
 </div>
 </div>
 <div class="relative nav-item">
@@ -787,6 +793,46 @@
         } else {
             fadeSections.forEach((section) => section.classList.add('is-visible'));
         }
+      const supabase = window.supabaseClient;
+
+// SIGN UP
+async function signUp(email, password) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password
+  });
+
+  if (error) {
+    alert(error.message);
+  } else {
+    alert("Signup successful ✅");
+  }
+}
+
+// LOGIN
+async function signIn(email, password) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    alert(error.message);
+  } else {
+    alert("Login successful ✅");
+  }
+}
+function handleSignup() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  signUp(email, password);
+}
+
+function handleLogin() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  signIn(email, password);
+}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabaseClient.js"></script>
