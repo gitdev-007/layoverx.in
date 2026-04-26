@@ -124,9 +124,9 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .date-icon {
-            font-size: 22px;
-            color: #ff6b3d;
+        .calendar-icon {
+            font-size: 20px;
+            color: #4da3ff;
             opacity: 1;
             line-height: 1;
             display: inline-flex;
@@ -139,25 +139,39 @@
         }
         .duration-input {
             width: 80px;
-            padding: 6px;
-            border-radius: 6px;
-            border: 1px solid #444;
-            background: transparent;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: rgba(255,255,255,0.05);
             color: white;
+            outline: none;
+            font-size: 14px;
         }
         .duration-input::placeholder {
-            color: rgba(255, 255, 255, 0.65);
+            color: #888;
         }
-        .duration-dropdown {
-            color: #fff;
-            background: #1a1a1a;
-            border: 1px solid #444;
-            border-radius: 6px;
+        .duration-chips {
+            display: flex;
+            gap: 6px;
+        }
+        .chip {
             padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: rgba(255,255,255,0.05);
+            color: #ccc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 12px;
         }
-        .duration-dropdown option {
-            color: #000;
-            background: #fff;
+        .chip:hover {
+            border-color: #4da3ff;
+            color: #fff;
+        }
+        .chip.active {
+            background: #4da3ff;
+            color: #fff;
+            border-color: #4da3ff;
         }
     </style>
 </head>
@@ -286,19 +300,18 @@
 <label class="block text-[11px] uppercase tracking-[0.18em] text-secondary/50 mb-1">Duration</label>
 <div class="duration-container">
 <input class="duration-input" id="durationInput" max="24" min="1" placeholder="Enter hrs" type="number"/>
-<select class="duration-dropdown" id="durationDropdown">
-<option value="1">1 hr</option>
-<option value="2">2 hrs</option>
-<option value="3">3 hrs</option>
-<option value="4">4 hrs</option>
-<option value="6">6 hrs</option>
-<option value="8">8 hrs</option>
-</select>
+<div class="duration-chips" id="durationChips">
+<span class="chip" data-value="2">2h</span>
+<span class="chip" data-value="4">4h</span>
+<span class="chip" data-value="6">6h</span>
+<span class="chip active" data-value="8">8h</span>
+<span class="chip" data-value="12">12h</span>
+</div>
 </div>
 </div>
 </div>
 <div class="flex-1 w-full px-5 py-3 flex items-center gap-3">
-<span class="material-symbols-outlined date-icon">calendar_today</span>
+<span class="material-symbols-outlined calendar-icon">calendar_today</span>
 <div class="w-full text-left">
 <label class="block text-[11px] uppercase tracking-[0.18em] text-secondary/50 mb-1">Date &amp; Time</label>
 <input class="bg-transparent border-none focus:ring-0 text-white w-full font-body-md p-0" type="datetime-local" value="2026-04-27T14:30"/>
@@ -655,18 +668,32 @@
         }
 
         const durationInput = document.getElementById('durationInput');
-        const durationDropdown = document.getElementById('durationDropdown');
-        if (durationInput && durationDropdown) {
-            durationInput.value = durationDropdown.value;
-            durationDropdown.addEventListener('change', () => {
-                durationInput.value = durationDropdown.value;
+        const durationChips = document.querySelectorAll('#durationChips .chip');
+        if (durationInput && durationChips.length) {
+            const setActiveChip = (value) => {
+                durationChips.forEach((chip) => {
+                    chip.classList.toggle('active', chip.getAttribute('data-value') === String(value));
+                });
+            };
+
+            durationInput.value = '8';
+            setActiveChip(8);
+
+            durationChips.forEach((chip) => {
+                chip.addEventListener('click', () => {
+                    const value = chip.getAttribute('data-value');
+                    durationInput.value = value;
+                    setActiveChip(value);
+                });
             });
+
             durationInput.addEventListener('input', () => {
-                const parsedValue = Number(durationInput.value);
-                if (!Number.isFinite(parsedValue)) return;
-                const matchingOption = Array.from(durationDropdown.options).find((option) => Number(option.value) === parsedValue);
-                if (matchingOption) {
-                    durationDropdown.value = String(parsedValue);
+                const value = durationInput.value.trim();
+                const hasExactMatch = Array.from(durationChips).some((chip) => chip.getAttribute('data-value') === value);
+                if (hasExactMatch) {
+                    setActiveChip(value);
+                } else {
+                    durationChips.forEach((chip) => chip.classList.remove('active'));
                 }
             });
         }
