@@ -153,6 +153,41 @@
             transform: scale(1.01);
             box-shadow: 0 8px 20px rgba(11, 28, 48, 0.12);
         }
+        .sorting-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .sorting-label {
+            font-size: 14px;
+            color: #666;
+        }
+        .sorting-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .sort-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            color: #334155;
+        }
+        .sort-btn:hover {
+            border-color: #ff6b3d;
+        }
+        .sort-btn.active {
+            background: #ff6b3d;
+            color: white;
+            border-color: #ff6b3d;
+        }
         @media (max-width: 767px) {
             .listing-layout {
                 justify-content: center;
@@ -163,6 +198,15 @@
             }
             .listing-layout.show-details #level-1-panel {
                 transform: translateX(0);
+            }
+            .sorting-bar {
+                justify-content: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .sorting-options {
+                justify-content: flex-start;
             }
         }
     </style>
@@ -194,6 +238,13 @@
 <section class="pl-6 pt-2">
 <h2 class="text-node-title-lg font-node-title-lg text-on-background tracking-tight">RESTAURANTS NEAR MUMBAI AIRPORT</h2>
 <p class="text-sm text-outline mt-2">Discover curated dining experiences for your layover</p>
+<div class="flex items-center gap-3 mt-4 text-meta-label font-meta-label uppercase text-outline">
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="index.html"><span class="material-symbols-outlined text-sm">explore</span> EXPLORE</a>
+<span class="material-symbols-outlined">chevron_right</span>
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="restaurant.html"><span class="material-symbols-outlined text-sm">restaurant</span> RESTAURANTS</a>
+<span class="material-symbols-outlined">chevron_right</span>
+<a class="flex items-center gap-1 text-primary hover:text-secondary transition-colors" href="restaurant.html?name=Thai%20Naam"><span class="material-symbols-outlined text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span> RESTAURANT DETAIL PAGE</a>
+</div>
 </section>
 <div class="listing-layout relative" id="listing-layout">
 <div class="space-y-6 relative z-10 listing-panel" id="level-1-panel">
@@ -245,6 +296,15 @@
 <p class="text-[10px] font-bold text-outline mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">restaurant</span> STANDARD RESTAURANTS</p>
 <div class="grid grid-cols-2 gap-2" id="standard-restaurants"></div>
 </div>
+</div>
+</div>
+<div class="sorting-bar">
+<span class="sorting-label">Sort by</span>
+<div class="sorting-options">
+<button class="sort-btn active" data-sort="price-low" type="button">Price: Low → High</button>
+<button class="sort-btn" data-sort="price-high" type="button">Price: High → Low</button>
+<button class="sort-btn" data-sort="distance" type="button">Distance</button>
+<button class="sort-btn" data-sort="rating" type="button">Rating</button>
 </div>
 </div>
 </div>
@@ -506,6 +566,8 @@
         const distanceFilter = document.getElementById('distanceFilter');
         const priceFilter = document.getElementById('priceFilter');
         const typeFilter = document.getElementById('typeFilter');
+        const sortButtons = document.querySelectorAll('.sort-btn');
+        let currentSort = 'price-low';
 
         function createRestaurantCard(restaurant) {
             const toneClass = restaurant.type === 'Premium'
@@ -551,7 +613,13 @@
                 const typeOk = typeFilter.value === 'all' || item.type === typeFilter.value;
                 return cuisineOk && distanceOk && priceOk && typeOk;
             });
-            renderList(items);
+            const sortedItems = [...items].sort((a, b) => {
+                if (currentSort === 'rating') return b.ratingValue - a.ratingValue;
+                if (currentSort === 'distance') return parseFloat(a.distance) - parseFloat(b.distance);
+                if (currentSort === 'price-high') return parseInt(b.avgPrice.replace(/\D/g, ''), 10) - parseInt(a.avgPrice.replace(/\D/g, ''), 10);
+                return parseInt(a.avgPrice.replace(/\D/g, ''), 10) - parseInt(b.avgPrice.replace(/\D/g, ''), 10);
+            });
+            renderList(sortedItems);
         }
 
         function handleRestaurantSelection(restaurant) {
@@ -580,8 +648,16 @@
         [cuisineFilter, distanceFilter, priceFilter, typeFilter].forEach((filter) => {
             filter.addEventListener('change', applyFilters);
         });
+        sortButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                sortButtons.forEach((btn) => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentSort = button.getAttribute('data-sort') || 'price-low';
+                applyFilters();
+            });
+        });
 
         renderDetail(restaurantData[0]);
-        renderList(restaurantData);
+        applyFilters();
 </script>
 </body></html>
