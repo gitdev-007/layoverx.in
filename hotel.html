@@ -120,6 +120,41 @@
             transform: scale(1.02);
             box-shadow: 0 8px 20px rgba(11, 28, 48, 0.12);
         }
+        .sorting-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .sorting-label {
+            font-size: 14px;
+            color: #666;
+        }
+        .sorting-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .sort-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            color: #334155;
+        }
+        .sort-btn:hover {
+            border-color: #ff6b3d;
+        }
+        .sort-btn.active {
+            background: #ff6b3d;
+            color: white;
+            border-color: #ff6b3d;
+        }
         .listing-layout {
             display: flex;
             flex-wrap: wrap;
@@ -163,6 +198,15 @@
             }
             .listing-layout.show-details #level-1-panel {
                 transform: translateX(0);
+            }
+            .sorting-bar {
+                justify-content: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .sorting-options {
+                justify-content: flex-start;
             }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -310,12 +354,14 @@
 </div>
 </div>
 <!-- Footer Actions -->
-<div class="flex justify-end items-center text-meta-label pt-2">
-<select class="bg-surface border border-outline-variant rounded px-3 py-2 text-[12px] text-on-surface focus:border-primary focus:ring-0" id="sortOptions">
-<option value="price">Sort by Price</option>
-<option value="rating">Sort by Rating</option>
-<option value="popularity">Sort by Popularity</option>
-</select>
+<div class="sorting-bar">
+<span class="sorting-label">Sort by</span>
+<div class="sorting-options" id="sortOptions">
+<button class="sort-btn active" data-sort="price-low" type="button">Price: Low - High</button>
+<button class="sort-btn" data-sort="price-high" type="button">Price: High - Low</button>
+<button class="sort-btn" data-sort="distance" type="button">Distance</button>
+<button class="sort-btn" data-sort="rating" type="button">Rating</button>
+</div>
 </div>
 </div>
 </div>
@@ -568,6 +614,7 @@
         const premiumHotelsContainer = document.getElementById('premium-hotels');
         const standardHotelsContainer = document.getElementById('standard-hotels');
         const sortOptions = document.getElementById('sortOptions');
+        const sortButtons = document.querySelectorAll('.sort-btn');
         const listingLayout = document.getElementById('listing-layout');
         const level2Panel = document.getElementById('level-2-panel');
         const hotelDifferentiators = document.getElementById('hotel-differentiators');
@@ -630,10 +677,11 @@
             });
         }
 
-        function renderHotelListings(sortBy = 'price') {
+        function renderHotelListings(sortBy = 'price-low') {
             const sortedHotels = [...hotels].sort((a, b) => {
                 if (sortBy === 'rating') return b.ratingValue - a.ratingValue;
-                if (sortBy === 'popularity') return b.popularity - a.popularity;
+                if (sortBy === 'distance') return parseFloat(a.distance) - parseFloat(b.distance);
+                if (sortBy === 'price-high') return b.priceValue - a.priceValue;
                 return a.priceValue - b.priceValue;
             });
 
@@ -647,9 +695,14 @@
 
         updateHotelDetails(requestedHotel);
 
-        renderHotelListings(sortOptions.value);
-        sortOptions.addEventListener('change', (event) => {
-            renderHotelListings(event.target.value);
+        renderHotelListings();
+        sortButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                sortButtons.forEach((btn) => btn.classList.remove('active'));
+                button.classList.add('active');
+                const sortBy = button.getAttribute('data-sort') || 'price-low';
+                renderHotelListings(sortBy);
+            });
         });
 
         const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
