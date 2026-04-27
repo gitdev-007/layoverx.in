@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LayoverX | Select Options</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#cfc4c5",
+                        "surface-container-low": "#1b1b1b",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary-fixed-variant": "#474646",
+                        "on-tertiary": "#303030",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-container": "#000000",
+                        "on-primary-fixed-variant": "#474747",
+                        "secondary-container": "#4a4949",
+                        "surface-variant": "#353535",
+                        "surface-container-highest": "#353535",
+                        "primary": "#c6c6c6",
+                        "surface-tint": "#c6c6c6",
+                        "on-primary": "#303030",
+                        "surface-bright": "#393939",
+                        "inverse-primary": "#5e5e5e",
+                        "on-surface": "#e2e2e2",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#757575",
+                        "surface": "#131313",
+                        "on-primary-fixed": "#1b1b1b",
+                        "inverse-on-surface": "#303030",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "tertiary-fixed": "#e5e2e1",
+                        "outline": "#988e90",
+                        "inverse-surface": "#e2e2e2",
+                        "tertiary-container": "#000000",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "error": "#ffb4ab",
+                        "surface-container": "#1f1f1f",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-background": "#e2e2e2",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "background": "#131313",
+                        "tertiary": "#c8c6c5",
+                        "on-tertiary-container": "#767575",
+                        "secondary": "#c8c6c5",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed": "#1b1b1c",
+                        "on-secondary-container": "#bab8b7",
+                        "primary-fixed": "#e2e2e2",
+                        "error-container": "#93000a",
+                        "on-secondary": "#313030",
+                        "outline-variant": "#4c4546"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "2rem",
+                        "unit": "8px",
+                        "stack-md": "1rem",
+                        "stack-sm": "0.5rem",
+                        "gutter": "1.5rem",
+                        "container-padding": "2rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "display-xl": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-xl": ["60px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-[#FF6B00] selection:text-white antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] font-['Plus_Jakarta_Sans']">
+<div class="flex justify-between items-center h-20 px-8 max-w-[1920px] mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-white">LayoverX</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-white/60 hover:text-white transition-colors" href="explore_experiences.html">Explore</a>
+<a class="text-[#FF6B00] font-semibold" href="#">Options</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">Priority</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">Plan</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">Finalize</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors">notifications</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-white/10">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz9vLDL0oMi2fbzwCHtxNu90oBBYMhd-leHU0hL7t1P0FgroofN6woVUaW1qLJHg13XIzS9bjwLt35hwgSCfrVvEBTibbdy27lOzwCzIrBo4lTV3e2NBnlGm22ImtLMpIMClvhvTwhgYCgxt-OBzJVPo4IJHEId9_jy1MLIiKL6E1CnkO7CWJ19ul06eFfhPeIJDW-_y2C-_D1Fc32-7aMKbVLDXPC18Uyt7tmaIRUVWwRxRsx5QodJ-qOQZb0brSEBDCU4Hxo2IA"/>
+</div>
+</div>
+</div>
+</nav>
+
+<!-- TopAppBar (Sticky Context Bar) -->
+<div class="sticky top-20 w-full z-40 bg-[#121212]/80 backdrop-blur-md border-b border-white/5 shadow-lg font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-wide uppercase">
+<div class="flex justify-between items-center py-3 px-8 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#FF6B00]">flight_takeoff</span>
+<span class="text-white font-bold" id="contextSummary">SFO • 6h 30m • Oct 24</span>
+</div>
+<button class="flex items-center gap-2 hover:text-white transition-colors text-white/40 active:scale-95 duration-200">
+                Edit Context
+                <span class="material-symbols-outlined text-xs">edit</span>
+</button>
+</div>
+</div>
+
+<main class="max-w-7xl mx-auto px-8 pt-32 pb-40">
+<!-- Step Indicator -->
+<div class="flex justify-between max-w-2xl mx-auto mb-20 relative">
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-white/5 -z-10"></div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center text-xs font-bold border border-[#FF6B00]/20">✓</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Explore</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FF6B00] text-black flex items-center justify-center text-xs font-bold">2</div>
+<span class="text-[10px] font-semibold text-[#FF6B00] uppercase tracking-widest">Options</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">3</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Priority</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">4</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Plan</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">5</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Finalize</span>
+</div>
+</div>
+
+<div id="optionsContainer">
+    <!-- Dynamic Content -->
+</div>
+</main>
+
+<!-- Floating CTA -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-md px-4 z-50 hidden" id="ctaContainer">
+<button class="w-full bg-[#FF6B00] text-black font-bold py-5 rounded-2xl shadow-[0_20px_50px_rgba(255,107,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3" id="continueToPriorityBtn" type="button">
+            Continue to Priority
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+
+<script>
+const MOCK_OPTIONS = {
+    "Hotels": [
+        { id: "h1", title: "The Oberoi Transit", duration: "180 MIN", price: "$120", rating: "4.9", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBhE4jd4gvASnkYpCad8ZkFGP8EjYRtDrOIM4gv5zqgo82jn_Lg4ySHLH2q1_65Q9n1ibN5xpEt-HqW--014gjYePmi7m3V3vNi2YSNlu6dyvv3YYV41fcG2tOhe2mcy-wJCtFNHizmh2a4SN8PCYdWCkajrZf4CDWy_iewrpGFSxXzld8PY2BGj6HqgzGF_1-zdjwbrXlkvQkzlytVTwsV7n96K_gc0T_1BCS7i8GDr19aStt2ifH6mQnxdAAouMKyAazs-_RXluE", desc: "Terminal 2 • 5 min walk from gate" },
+        { id: "h2", title: "Niranta Airport Hotel", duration: "240 MIN", price: "$90", rating: "4.7", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuATVkR2KXkjynUzwChDVcZkDkKNFrDNseyf3wI6FNpzzIi9WSZIBh4fp5UEP4hylQCsTVoKcSOAVBzDSDkZOEzSqhWiGuwQVHP3Cote2EL6fvUHv6r6gjsDfoPSu0SBnPJ3SLxLuXLpeuyhYPaSOEgM5qaDyyq9CxdQuJLa7ZGavDOQjSFOuu8bEkLLp8-dE-p_Uq9a8kSpnMSGRLrtDVaiOMkEFxVvev0JD6S1hV7lDpM9_jf6AQ9U2715D53S3HRGxsyaYwvkSPY", desc: "Landside • Transit Hub" }
+    ],
+    "Food & Dining": [
+        { id: "f1", title: "GVK Lounge Dining", duration: "60 MIN", price: "$45", rating: "4.7", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAnlb-Uvm7dEPU6AWkMlCbloKh5IxUB3ljic1wAbqqQVrj0nkruSrqdAijamQH-s0-pnlTMd2YkbYfj6C693uWJfQz8AC4bQhnooO9w5gdQFdY5jE8WqPZbOvB2mJL4KUYgVG-JvCNyE4io4tOOdtB67fBhfyh0DA1MvQOu55h8BFPwN3JQ47jNyZx6z7Jjq3JskhVon26IPZhPyfkjAu37X1btu-1mREcuiDKKbSFbRvHw88E60f6qP19Y6cbTz6-x_M1q3c0ek0Q", desc: "Level 4 • Exclusive Access" },
+        { id: "f2", title: "Zia - Fine Indian", duration: "90 MIN", price: "$80", rating: "4.8", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC7bVECyHwsD_FPkeHUiZk7Pxa0MuWKHsQq2Tz3RNAiCZzR63Goe_Uo1ipzHHjXCUpuCaTamyDWnV012gRmq-a_PtAMr4DL1i-Rr4wuTfjjuFGYUbJ_GK-UTYndpd7mC-9lHr1SaNBZDcr-4NRqzfQaFJZcAzpEVClg19suEHsTqrKKoyxreJIdAaqVlV7EaVCOzpt6Bq11vGY9FlTU9MU7tWMaWrh7eXirWCxKSBuDoPKaeHfq006amnrEANkph3CX4cGBQA6c9K4", desc: "Main Concourse • Global Cuisine" }
+    ],
+    "Services": [
+        { id: "s1", title: "Heavenly Spa", duration: "90 MIN", price: "$65", rating: "4.8", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuChGy6LO-M3DdRHAZT1IKF0qWh4DqKAaQLDrffN4ndWvXBnuSS4ifNtkZmx4lvAdO6bL26WcxoJ2-CTJxCX0rXlfbI1FKtaAc634i3zmfS5X1fH62JyXPXoi3b2KqzLJ14PTMkh_em0t-ZKolV0Biji45shGHvLCk-Tt4mJ-NV0Bec5zaIA_upfRlog23PfNFyWHR6F23tS7GojOr8-wH7QNKQDMfD1XESxB75ZlppDUoIwTeEGrxuVYmKnxiQEIiUvrRpi0Js2RRc", desc: "Terminal 2 • Near Gate B12" }
+    ],
+    "Experiences": [
+        { id: "e1", title: "Gateway of India Tour", duration: "120 MIN", price: "$40", rating: "4.6", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCuBeISMzXQPmWmOmB0ft4zxGshz-gTXvzupRjlzTpxD0wsTviCiyUtRzn3emtm-4mFRNk1sshFtHHN9FZyFc9FDWyaeXk8ad4U6Y7UyLtvGZT44QPc8dYNFY5c6OXVhfZLSdC3IU4_UP8n0rqYmETKgd07B-ktbHUz7ty3qLWIl7TiyTUv8bovx2eJRJljeeXdMkeE2PHMnSIILL3EIFW2YYbK7lP6iYBfTpoF5c4mtXEICObvxAQEi9TN9RhLPY1HqUBaE-dfU3o", desc: "Guided mini tour • Private transport" }
+    ],
+    "Transport": [
+        { id: "t1", title: "BMW 7 Series Transfer", duration: "30 MIN", price: "$50", rating: "5.0", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAeuOcp48bW0hOY4l8pEuj6z5sWn30Mv5P4Av858FhP6Aa2LtthA85vYicS7BpPAsl0Yq--QwUBB5AEwKLBYSZK_wcWjf3LOMYYW4lHtyN8bM5mTCt0dmNm1ou6uR4nMoyA7TinsYas2aKSI-N3O4BPLSUt_lBIjUvm9j2LSLoK_PzaTxh9uPrF8Al8gh9WCdud3wx2Qm0Ft2Z4EiEmvCS650vh5cgfDw58zTGl8XjeXsKNB8Rkm_8Ns2TKIWh7_5ppRliaUpBOgSk", desc: "Airport to City Hub • Premium" }
+    ],
+    "Shopping": [
+        { id: "sh1", title: "Luxury Retail Therapy", duration: "45 MIN", price: "Free Entry", rating: "4.5", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAuRVO62zdv0fT7mYOWLqFAENE0C3MeiqWMzwxY8fvHyto_KpdrEHmKlTb3yj1AjwAyV-I0kFUXT1fE1sirgoM1OlTbrXAu611jENnrLd65-OQO_6NjkW9-X73Cy1n8a8PexPq9b46B2GYXDDPLM717YkZrqhb3R4DXpiPuhVulJmgU4WxGHuhAiJ6ppbKn9bfwMo_klweNRbwVxCPK_Thnnns4FVYXljJQBJP9sZnUdT6rrPEoWLRggCQhyECrW2vTQeqxBcKCD_8", desc: "Duty Free • Personal Shopper" }
+    ]
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    const airport = localStorage.getItem("airport") || "CSIA T2, Mumbai";
+    const duration = localStorage.getItem("duration") || "6.5";
+    const dateTime = localStorage.getItem("dateTime") || "2026-04-27T14:30";
+    const selectedServices = JSON.parse(localStorage.getItem("selectedServices") || "[]");
+
+    const contextSummary = document.getElementById("contextSummary");
+    const formattedDate = dateTime ? new Date(dateTime).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "No Date";
+    if (contextSummary) contextSummary.textContent = `${airport} • ${duration}h • ${formattedDate}`;
+
+    const optionsContainer = document.getElementById("optionsContainer");
+    const ctaContainer = document.getElementById("ctaContainer");
+    const continueBtn = document.getElementById("continueToPriorityBtn");
+    const selectedOptions = new Set();
+
+    function updateCTA() {
+        if (selectedOptions.size > 0) ctaContainer.classList.remove("hidden");
+        else ctaContainer.classList.add("hidden");
+    }
+
+    selectedServices.forEach(service => {
+        const options = MOCK_OPTIONS[service] || [];
+        if (options.length === 0) return;
+
+        const section = document.createElement("section");
+        section.className = "mb-16";
+        section.innerHTML = `
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <h2 class="font-headline-lg text-headline-lg text-white">${service} Options</h2>
+                    <p class="text-white/40">Highly recommended for your window</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                ${options.map(opt => `
+                    <div class="glass-card rounded-2xl overflow-hidden group border border-transparent transition-all" data-option-id="${opt.id}">
+                        <div class="h-48 relative">
+                            <img src="${opt.image}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#FF6B00] border border-white/10">
+                                ${opt.duration}
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-headline-md text-lg text-white">${opt.title}</h3>
+                                <div class="flex items-center gap-1 text-[#FF6B00]">
+                                    <span class="material-symbols-outlined text-sm">star</span>
+                                    <span class="text-xs font-bold">${opt.rating}</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-white/40 mb-2">${opt.desc}</p>
+                            <p class="text-[#FF6B00] font-bold mb-6">${opt.price}</p>
+                            <button class="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold text-sm hover:bg-[#FF6B00] hover:text-black transition-all select-opt-btn" data-id="${opt.id}">Select</button>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        optionsContainer.appendChild(section);
+    });
+
+    optionsContainer.addEventListener("click", (e) => {
+        if (e.target.classList.contains("select-opt-btn")) {
+            const btn = e.target;
+            const id = btn.getAttribute("data-id");
+            const card = btn.closest("[data-option-id]");
+            
+            if (selectedOptions.has(id)) {
+                selectedOptions.delete(id);
+                btn.textContent = "Select";
+                btn.classList.remove("bg-[#FF6B00]", "text-black");
+                btn.classList.add("bg-white/5", "text-white");
+                card.classList.remove("border-[#FF6B00]", "ring-1", "ring-[#FF6B00]/20");
+            } else {
+                selectedOptions.add(id);
+                btn.textContent = "Selected";
+                btn.classList.add("bg-[#FF6B00]", "text-black");
+                btn.classList.remove("bg-white/5", "text-white");
+                card.classList.add("border-[#FF6B00]", "ring-1", "ring-[#FF6B00]/20");
+            }
+            updateCTA();
+        }
+    });
+
+    continueBtn.addEventListener("click", () => {
+        const selectedArray = [];
+        selectedOptions.forEach(id => {
+            Object.values(MOCK_OPTIONS).forEach(opts => {
+                const found = opts.find(o => o.id === id);
+                if (found) selectedArray.push(found);
+            });
+        });
+        localStorage.setItem("selectedOptions", JSON.stringify(selectedArray));
+        window.location.href = "priority.html";
+    });
+});
+</script>
+</body></html>

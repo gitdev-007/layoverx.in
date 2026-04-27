@@ -3,7 +3,7 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>LayoverX | Choose Your Experiences</title>
+<title>LayoverX | Finalize Plan</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -110,11 +110,11 @@
 <div class="flex justify-between items-center h-20 px-8 max-w-[1920px] mx-auto">
 <div class="text-2xl font-bold tracking-tighter text-white">LayoverX</div>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-[#FF6B00] font-semibold" href="#">Explore</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Options</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Priority</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Plan</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Finalize</a>
+<a class="text-white/60 hover:text-white transition-colors" href="explore_experiences.html">Explore</a>
+<a class="text-white/60 hover:text-white transition-colors" href="options.html">Options</a>
+<a class="text-white/60 hover:text-white transition-colors" href="priority.html">Priority</a>
+<a class="text-white/60 hover:text-white transition-colors" href="plan.html">Plan</a>
+<a class="text-[#FF6B00] font-semibold" href="#">Finalize</a>
 </div>
 <div class="flex items-center gap-6">
 <span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors">notifications</span>
@@ -139,126 +139,116 @@
 </div>
 </div>
 
-<main class="max-w-7xl mx-auto px-8 pt-32 pb-40">
-<!-- Step Indicator -->
-<div class="flex justify-between max-w-2xl mx-auto mb-20 relative">
-<div class="absolute top-1/2 left-0 w-full h-[1px] bg-white/5 -z-10"></div>
-<div class="flex flex-col items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-[#FF6B00] text-black flex items-center justify-center text-xs font-bold">1</div>
-<span class="text-[10px] font-semibold text-[#FF6B00] uppercase tracking-widest">Explore</span>
-</div>
-<div class="flex flex-col items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">2</div>
-<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Options</span>
-</div>
-<div class="flex flex-col items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">3</div>
-<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Priority</span>
-</div>
-<div class="flex flex-col items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">4</div>
-<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Plan</span>
-</div>
-<div class="flex flex-col items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">5</div>
-<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Finalize</span>
-</div>
-</div>
+<main class="max-w-5xl mx-auto px-8 pt-32 pb-40 grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <!-- Summary Section -->
+    <div class="lg:col-span-7">
+        <h2 class="font-headline-lg text-headline-lg text-white mb-8">Plan Summary</h2>
+        <div class="glass-card p-8 rounded-3xl border-white/10 space-y-6" id="summaryContainer">
+            <!-- Dynamic Summary -->
+        </div>
+    </div>
 
-<!-- Section 1: Choose Services -->
-<section class="mb-24" id="servicesSection">
-<h2 class="font-headline-lg text-headline-lg text-white mb-8">Choose Your Experiences</h2>
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" id="servicesGrid">
-<!-- Card 1: Hotels -->
-<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Hotels">
-<span class="material-symbols-outlined text-[#FF6B00] mb-4 text-3xl">hotel</span>
-<p class="font-headline-md text-sm text-white">Hotels</p>
-<p class="text-xs text-white/40 mt-1">Quiet rest zones</p>
-</div>
-<!-- Card 2: Food -->
-<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Food & Dining">
-<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl">restaurant</span>
-<p class="font-headline-md text-sm text-white">Food &amp; Dining</p>
-<p class="text-xs text-white/40 mt-1">Local &amp; Global</p>
-</div>
-<!-- Card 3: Airport Services -->
-<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Services">
-<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl">airport_shuttle</span>
-<p class="font-headline-md text-sm text-white">Services</p>
-<p class="text-xs text-white/40 mt-1">Lounges &amp; Spa</p>
-</div>
-<!-- Card 4: Local -->
-<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Experiences">
-<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl">explore</span>
-<p class="font-headline-md text-sm text-white">Experiences</p>
-<p class="text-xs text-white/40 mt-1">City highlights</p>
-</div>
-<!-- Card 5: Transport -->
-<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Transport">
-<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl">directions_car</span>
-<p class="font-headline-md text-sm text-white">Transport</p>
-<p class="text-xs text-white/40 mt-1">Private chauffeur</p>
-</div>
-<!-- Card 6: Shopping -->
-<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Shopping">
-<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl">shopping_bag</span>
-<p class="font-headline-md text-sm text-white">Shopping</p>
-<p class="text-xs text-white/40 mt-1">Duty free premium</p>
-</div>
-</div>
-</section>
+    <!-- Payment Section -->
+    <div class="lg:col-span-5">
+        <h2 class="font-headline-lg text-headline-lg text-white mb-8">Payment</h2>
+        <div class="glass-card p-8 rounded-3xl border-white/10">
+            <div class="space-y-4 mb-8">
+                <button class="w-full py-4 rounded-2xl bg-white text-black font-bold flex items-center justify-center gap-3 hover:bg-neutral-200 transition-all">
+                    <span class="material-symbols-outlined">account_balance_wallet</span>
+                    Pay with Google Pay
+                </button>
+                <div class="flex items-center gap-4 text-white/20">
+                    <div class="h-px flex-grow bg-white/10"></div>
+                    <span class="text-[10px] uppercase font-bold tracking-widest">or credit card</span>
+                    <div class="h-px flex-grow bg-white/10"></div>
+                </div>
+                <div class="space-y-4">
+                    <input type="text" placeholder="Card Number" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:border-[#FF6B00] outline-none transition-all">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" placeholder="MM/YY" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:border-[#FF6B00] outline-none transition-all">
+                        <input type="text" placeholder="CVC" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:border-[#FF6B00] outline-none transition-all">
+                    </div>
+                </div>
+            </div>
+            <button class="w-full bg-[#FF6B00] text-black font-bold py-5 rounded-2xl shadow-[0_20px_50px_rgba(255,107,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3" id="completeBookingBtn">
+                Complete Booking
+                <span class="material-symbols-outlined">lock</span>
+            </button>
+        </div>
+    </div>
 </main>
 
-<!-- Floating CTA -->
-<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-md px-4 z-50 hidden" id="ctaContainer">
-<button class="w-full bg-[#FF6B00] text-black font-bold py-5 rounded-2xl shadow-[0_20px_50px_rgba(255,107,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3" id="continueToOptionsBtn" type="button">
-            Continue to Options
-            <span class="material-symbols-outlined">arrow_forward</span>
-</button>
+<!-- Hidden Success Overlay -->
+<div class="hidden fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center text-center px-8" id="successOverlay">
+<div class="w-24 h-24 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/20 flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-[#FF6B00] text-5xl">check_circle</span>
+</div>
+<h1 class="font-display-xl text-4xl text-white mb-4">Payment Successful</h1>
+<p class="text-white/60 max-w-md mb-12">Your layover plan is confirmed. We've sent the details and your digital pass to your email.</p>
+<button class="px-12 py-4 bg-[#FF6B00] text-black font-bold rounded-xl" onclick="window.location.href='index.html'">Return Home</button>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const airport = localStorage.getItem("airport") || "CSIA T2, Mumbai";
-  const duration = localStorage.getItem("duration") || "6.5";
-  const dateTime = localStorage.getItem("dateTime") || "2026-04-27T14:30";
+    const airport = localStorage.getItem("airport") || "CSIA T2, Mumbai";
+    const durationHours = parseFloat(localStorage.getItem("duration") || "6.5");
+    const dateTime = localStorage.getItem("dateTime") || "2026-04-27T14:30";
+    const finalPlan = JSON.parse(localStorage.getItem("finalPlan") || "[]");
 
-  const contextSummary = document.getElementById("contextSummary");
-  const formattedDate = dateTime ? new Date(dateTime).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "No Date";
-  if (contextSummary) contextSummary.textContent = `${airport} • ${duration}h • ${formattedDate}`;
+    const contextSummary = document.getElementById("contextSummary");
+    const formattedDate = dateTime ? new Date(dateTime).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "No Date";
+    if (contextSummary) contextSummary.textContent = `${airport} • ${durationHours}h • ${formattedDate}`;
 
-  const selectedServices = new Set();
-  const ctaContainer = document.getElementById("ctaContainer");
-  const continueBtn = document.getElementById("continueToOptionsBtn");
+    const summaryContainer = document.getElementById("summaryContainer");
+    const completeBookingBtn = document.getElementById("completeBookingBtn");
+    const successOverlay = document.getElementById("successOverlay");
 
-  function updateCTA() {
-    if (selectedServices.size > 0) {
-      ctaContainer.classList.remove("hidden");
-    } else {
-      ctaContainer.classList.add("hidden");
-    }
-  }
+    let totalCost = 0;
+    let totalMinutes = 0;
 
-  document.querySelectorAll("[data-service-card]").forEach((card) => {
-    card.addEventListener("click", () => {
-      const key = card.getAttribute("data-service-card");
-      if (selectedServices.has(key)) {
-        selectedServices.delete(key);
-        card.classList.remove("border-[#FF6B00]", "ring-1", "ring-[#FF6B00]/20");
-        card.classList.add("border-transparent");
-      } else {
-        selectedServices.add(key);
-        card.classList.add("border-[#FF6B00]", "ring-1", "ring-[#FF6B00]/20");
-        card.classList.remove("border-transparent");
-      }
-      updateCTA();
+    const itemsHtml = finalPlan.map(item => {
+        const costMatch = item.price.match(/\d+/);
+        const cost = costMatch ? parseInt(costMatch[0]) : 0;
+        const minutes = parseInt(item.duration.match(/\d+/)[0]);
+        totalCost += cost;
+        totalMinutes += minutes;
+        
+        return `
+            <div class="flex justify-between items-center py-4 border-b border-white/5 last:border-0">
+                <div>
+                    <h4 class="text-white font-bold">${item.title}</h4>
+                    <p class="text-xs text-white/40 uppercase tracking-widest">${item.duration}</p>
+                </div>
+                <span class="text-white font-bold">${item.price}</span>
+            </div>
+        `;
+    }).join('');
+
+    summaryContainer.innerHTML = `
+        <div class="space-y-4">
+            ${itemsHtml}
+        </div>
+        <div class="pt-8 space-y-4">
+            <div class="flex justify-between text-sm">
+                <span class="text-white/40">Total Planned Time</span>
+                <span class="text-white font-bold">${Math.floor(totalMinutes/60)}h ${totalMinutes%60}m</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-white/40">Layover Duration</span>
+                <span class="text-white font-bold">${durationHours}h</span>
+            </div>
+            <div class="h-px bg-white/10 w-full"></div>
+            <div class="flex justify-between items-end">
+                <span class="text-[#FF6B00] font-bold">Total Amount</span>
+                <span class="text-3xl font-black text-white">$${totalCost}</span>
+            </div>
+        </div>
+    `;
+
+    completeBookingBtn.addEventListener("click", () => {
+        successOverlay.classList.remove("hidden");
+        localStorage.clear(); // Clear storage after booking
     });
-  });
-
-  continueBtn?.addEventListener("click", () => {
-    localStorage.setItem("selectedServices", JSON.stringify(Array.from(selectedServices)));
-    window.location.href = "options.html";
-  });
 });
 </script>
 </body></html>

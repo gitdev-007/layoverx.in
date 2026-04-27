@@ -377,11 +377,14 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'E1',location:'js/main.js:~exploreExperiencesBtn',message:'Explore Experiences clicked with current gate state',data:{tagName:exploreExperiencesBtn.tagName,href:exploreExperiencesBtn.getAttribute('href')||'',hasUser:!!user,hasAirport:!!airportValue,hasDuration:hasDuration,hasDateTime:!!dateTimeValue},timestamp:Date.now()})}).catch(()=>{});
         // #endregion
 
+        // Removed mandatory login check to allow browsing without signing in
+        /*
         if (!user) {
           setExploreError('Please sign up or log in to continue.');
           openAuthModal();
           return;
         }
+        */
 
         const missingFields = [];
         if (!hasAirport) missingFields.push('Airport');
