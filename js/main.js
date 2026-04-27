@@ -285,6 +285,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const navSignIn = document.querySelector('[data-nav-signin]');
   const exploreExperiencesBtn = document.getElementById('exploreExperiencesBtn');
   const airportText = document.querySelector('.airport-text');
+  const airportField = document.getElementById('airportField');
+  const exploreError = document.getElementById('exploreError');
+
+  function setExploreError(message) {
+    if (!exploreError) return;
+    exploreError.textContent = message || '';
+    exploreError.classList.toggle('hidden', !message);
+  }
+
+  function markFieldError(fieldEl, hasError) {
+    if (!fieldEl) return;
+    fieldEl.classList.toggle('border-red-500', hasError);
+  }
 
   function ensureAccountMenu(containerEl, user) {
     if (!containerEl) return;
@@ -348,16 +361,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (exploreExperiencesBtn) {
-      exploreExperiencesBtn.addEventListener('click', async () => {
+      exploreExperiencesBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        setExploreError('');
+
         const airportValue = (airportText?.textContent || '').trim();
         const durationRaw = (durationInput?.value || '').trim();
         const durationValue = durationRaw || ((document.getElementById('durationValue')?.textContent || '').trim());
         const dateTimeValue = (datetimeInput?.value || '').trim();
         const user = await checkUser();
+        const hasAirport = Boolean(airportValue && airportValue !== 'Select Airport');
         const hasDuration = Boolean(durationRaw || (durationValue && durationValue !== 'Select Duration'));
+        const hasDateTime = Boolean(dateTimeValue);
         // #region agent log
         fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'E1',location:'js/main.js:~exploreExperiencesBtn',message:'Explore Experiences clicked with current gate state',data:{tagName:exploreExperiencesBtn.tagName,href:exploreExperiencesBtn.getAttribute('href')||'',hasUser:!!user,hasAirport:!!airportValue,hasDuration:hasDuration,hasDateTime:!!dateTimeValue},timestamp:Date.now()})}).catch(()=>{});
         // #endregion
+
+        if (!user) {
+          setExploreError('Please sign up or log in to continue.');
+          openAuthModal();
+          return;
+        }
+
+        const missingFields = [];
+        if (!hasAirport) missingFields.push('Airport');
+        if (!hasDuration) missingFields.push('Duration');
+        if (!hasDateTime) missingFields.push('Date & Time');
+
+        markFieldError(airportField, !hasAirport);
+        markFieldError(durationInput, !hasDuration);
+        markFieldError(datetimeInput, !hasDateTime);
+
+        if (missingFields.length > 0) {
+          setExploreError(`Please fill: ${missingFields.join(', ')}`);
+          return;
+        }
+
+        localStorage.setItem('airport', airportValue);
+        localStorage.setItem('duration', durationRaw || durationValue.replace('h', ''));
+        localStorage.setItem('dateTime', dateTimeValue);
+        window.location.href = 'explore_experiences.html';
       });
     } else {
       // #region agent log

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LayoverX | Premium Travel Orchestration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#cfc4c5",
+                        "surface-container-low": "#1b1b1b",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary-fixed-variant": "#474646",
+                        "on-tertiary": "#303030",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-container": "#000000",
+                        "on-primary-fixed-variant": "#474747",
+                        "secondary-container": "#4a4949",
+                        "surface-variant": "#353535",
+                        "surface-container-highest": "#353535",
+                        "primary": "#c6c6c6",
+                        "surface-tint": "#c6c6c6",
+                        "on-primary": "#303030",
+                        "surface-bright": "#393939",
+                        "inverse-primary": "#5e5e5e",
+                        "on-surface": "#e2e2e2",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#757575",
+                        "surface": "#131313",
+                        "on-primary-fixed": "#1b1b1b",
+                        "inverse-on-surface": "#303030",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "tertiary-fixed": "#e5e2e1",
+                        "outline": "#988e90",
+                        "inverse-surface": "#e2e2e2",
+                        "tertiary-container": "#000000",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "error": "#ffb4ab",
+                        "surface-container": "#1f1f1f",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-background": "#e2e2e2",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "background": "#131313",
+                        "tertiary": "#c8c6c5",
+                        "on-tertiary-container": "#767575",
+                        "secondary": "#c8c6c5",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed": "#1b1b1c",
+                        "on-secondary-container": "#bab8b7",
+                        "primary-fixed": "#e2e2e2",
+                        "error-container": "#93000a",
+                        "on-secondary": "#313030",
+                        "outline-variant": "#4c4546"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "2rem",
+                        "unit": "8px",
+                        "stack-md": "1rem",
+                        "stack-sm": "0.5rem",
+                        "gutter": "1.5rem",
+                        "container-padding": "2rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "display-xl": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-xl": ["60px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .step-active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #FF6B00;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-[#FF6B00] selection:text-white antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] font-['Plus_Jakarta_Sans']">
+<div class="flex justify-between items-center h-20 px-8 max-w-[1920px] mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-white">LayoverX</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-white/60 hover:text-white transition-colors" href="#servicesSection">Explore</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#optionsSection">Options</a>
+<a class="text-[#FF6B00] font-semibold border-b-2 border-[#FF6B00] pb-1" href="#prioritySection">Priority</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#timelineSection">Plan</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#summarySection">Finalize</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors" data-icon="settings">settings</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-white/10">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="professional headshot of a businessman in a dark suit with a clean neutral background, high-end photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz9vLDL0oMi2fbzwCHtxNu90oBBYMhd-leHU0hL7t1P0FgroofN6woVUaW1qLJHg13XIzS9bjwLt35hwgSCfrVvEBTibbdy27lOzwCzIrBo4lTV3e2NBnlGm22ImtLMpIMClvhvTwhgYCgxt-OBzJVPo4IJHEId9_jy1MLIiKL6E1CnkO7CWJ19ul06eFfhPeIJDW-_y2C-_D1Fc32-7aMKbVLDXPC18Uyt7tmaIRUVWwRxRsx5QodJ-qOQZb0brSEBDCU4Hxo2IA"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopAppBar (Sticky Context Bar) -->
+<div class="sticky top-20 w-full z-40 bg-[#121212]/80 backdrop-blur-md border-b border-white/5 shadow-lg font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-wide uppercase">
+<div class="flex justify-between items-center py-3 px-8 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#FF6B00]" data-icon="flight_takeoff">flight_takeoff</span>
+<span class="text-white font-bold" id="contextSummary">SFO • 6h 30m • Oct 24</span>
+</div>
+<button class="flex items-center gap-2 hover:text-white transition-colors text-white/40 active:scale-95 duration-200">
+                Edit Context
+                <span class="material-symbols-outlined text-xs" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<main class="max-w-7xl mx-auto px-8 pt-32 pb-40">
+<!-- Step Indicator -->
+<div class="flex justify-between max-w-2xl mx-auto mb-20 relative">
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-white/5 -z-10"></div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FF6B00] text-black flex items-center justify-center text-xs font-bold">1</div>
+<span class="text-[10px] font-semibold text-[#FF6B00] uppercase tracking-widest">Explore</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">2</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Options</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5 ring-4 ring-[#FF6B00]/20">3</div>
+<span class="text-[10px] font-semibold text-white uppercase tracking-widest">Priority</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">4</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Plan</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">5</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Finalize</span>
+</div>
+</div>
+<!-- Section 1: Choose Services -->
+<section class="mb-24" id="servicesSection">
+<h2 class="font-headline-lg text-headline-lg text-white mb-8">Choose Your Experiences</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<!-- Card 1: Hotels -->
+<div class="glass-card p-6 rounded-xl border-[#FF6B00]/40 ring-1 ring-[#FF6B00]/20 group cursor-pointer hover:bg-white/5 transition-all" data-service-card="Hotels">
+<span class="material-symbols-outlined text-[#FF6B00] mb-4 text-3xl" data-icon="hotel">hotel</span>
+<p class="font-headline-md text-sm text-white">Hotels</p>
+<p class="text-xs text-white/40 mt-1">Quiet rest zones</p>
+</div>
+<!-- Card 2: Food -->
+<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all" data-service-card="Food & Dining">
+<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl" data-icon="restaurant">restaurant</span>
+<p class="font-headline-md text-sm text-white">Food &amp; Dining</p>
+<p class="text-xs text-white/40 mt-1">Local &amp; Global</p>
+</div>
+<!-- Card 3: Airport Services -->
+<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all" data-service-card="Services">
+<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl" data-icon="airport_shuttle">airport_shuttle</span>
+<p class="font-headline-md text-sm text-white">Services</p>
+<p class="text-xs text-white/40 mt-1">Lounges &amp; Spa</p>
+</div>
+<!-- Card 4: Local -->
+<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all" data-service-card="Experiences">
+<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl" data-icon="explore">explore</span>
+<p class="font-headline-md text-sm text-white">Experiences</p>
+<p class="text-xs text-white/40 mt-1">City highlights</p>
+</div>
+<!-- Card 5: Transport -->
+<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all" data-service-card="Transport">
+<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl" data-icon="directions_car">directions_car</span>
+<p class="font-headline-md text-sm text-white">Transport</p>
+<p class="text-xs text-white/40 mt-1">Private chauffeur</p>
+</div>
+<!-- Card 6: Shopping -->
+<div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all" data-service-card="Shopping">
+<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl" data-icon="shopping_bag">shopping_bag</span>
+<p class="font-headline-md text-sm text-white">Shopping</p>
+<p class="text-xs text-white/40 mt-1">Duty free premium</p>
+</div>
+</div>
+</section>
+<!-- Section 2: Choose Options -->
+<section class="mb-24" id="optionsSection">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-white">Refine Your Selection</h2>
+<p class="text-white/40">Highly recommended for your 6h 30m window</p>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5"><span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span></button>
+<button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5"><span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Option 1 -->
+<div class="glass-card rounded-2xl overflow-hidden group" data-option-card data-option-title="The Oberoi Transit" data-option-duration="180 MIN">
+<div class="h-48 relative">
+<img alt="Luxury Hotel" class="w-full h-full object-cover" data-alt="ultra-modern luxury hotel lobby with minimalist charcoal furniture, warm amber lighting, and high-end materials" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhE4jd4gvASnkYpCad8ZkFGP8EjYRtDrOIM4gv5zqgo82jn_Lg4ySHLH2q1_65Q9n1ibN5xpEt-HqW--014gjYePmi7m3V3vNi2YSNlu6dyvv3YYV41fcG2tOhe2mcy-wJCtFNHizmh2a4SN8PCYdWCkajrZf4CDWy_iewrpGFSxXzld8PY2BGj6HqgzGF_1-zdjwbrXlkvQkzlytVTwsV7n96K_gc0T_1BCS7i8GDr19aStt2ifH6mQnxdAAouMKyAazs-_RXluE"/>
+<div class="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#FF6B00] border border-white/10">
+                            98% TIME FIT
+                        </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-lg text-white">The Oberoi Transit</h3>
+<div class="flex items-center gap-1 text-[#FF6B00]">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="text-xs font-bold">4.9</span>
+</div>
+</div>
+<p class="text-sm text-white/40 mb-6">Terminal 2 • 5 min walk from gate</p>
+<button class="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold text-sm hover:bg-[#FF6B00] hover:text-black transition-all" data-option-action>Select Stay</button>
+</div>
+</div>
+<!-- Option 2 -->
+<div class="glass-card rounded-2xl overflow-hidden ring-2 ring-[#FF6B00] shadow-[0_0_40px_rgba(255,107,0,0.15)]" data-option-card data-option-title="GVK Lounge Dining" data-option-duration="60 MIN">
+<div class="h-48 relative">
+<img alt="Fine Dining" class="w-full h-full object-cover" data-alt="close-up of a gourmet signature cocktail and a small artistic plate of food in a dimly lit, high-end airport lounge" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnlb-Uvm7dEPU6AWkMlCbloKh5IxUB3ljic1wAbqqQVrj0nkruSrqdAijamQH-s0-pnlTMd2YkbYfj6C693uWJfQz8AC4bQhnooO9w5gdQFdY5jE8WqPZbOvB2mJL4KUYgVG-JvCNyE4io4tOOdtB67fBhfyh0DA1MvQOu55h8BFPwN3JQ47jNyZx6z7Jjq3JskhVon26IPZhPyfkjAu37X1btu-1mREcuiDKKbSFbRvHw88E60f6qP19Y6cbTz6-x_M1q3c0ek0Q"/>
+<div class="absolute top-4 right-4 bg-[#FF6B00] px-3 py-1 rounded-full text-[10px] font-bold text-black">
+                            SELECTED
+                        </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-lg text-white">GVK Lounge Dining</h3>
+<div class="flex items-center gap-1 text-[#FF6B00]">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="text-xs font-bold">4.7</span>
+</div>
+</div>
+<p class="text-sm text-white/40 mb-6">Level 4 • Exclusive Access</p>
+<button class="w-full py-3 rounded-xl bg-[#FF6B00] text-black font-semibold text-sm transition-all" data-option-action>Add to Plan</button>
+</div>
+</div>
+<!-- Option 3 -->
+<div class="glass-card rounded-2xl overflow-hidden group" data-option-card data-option-title="Heavenly Spa" data-option-duration="90 MIN">
+<div class="h-48 relative">
+<img alt="Luxury Spa" class="w-full h-full object-cover" data-alt="serene high-end spa room with dark stone walls, soft lighting, and luxury skincare products" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChGy6LO-M3DdRHAZT1IKF0qWh4DqKAaQLDrffN4ndWvXBnuSS4ifNtkZmx4lvAdO6bL26WcxoJ2-CTJxCX0rXlfbI1FKtaAc634i3zmfS5X1fH62JyXPXoi3b2KqzLJ14PTMkh_em0t-ZKolV0Biji45shGHvLCk-Tt4mJ-NV0Bec5zaIA_upfRlog23PfNFyWHR6F23tS7GojOr8-wH7QNKQDMfD1XESxB75ZlppDUoIwTeEGrxuVYmKnxiQEIiUvrRpi0Js2RRc"/>
+<div class="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#FF6B00] border border-white/10">
+                            85% TIME FIT
+                        </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-lg text-white">Heavenly Spa</h3>
+<div class="flex items-center gap-1 text-[#FF6B00]">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="text-xs font-bold">4.8</span>
+</div>
+</div>
+<p class="text-sm text-white/40 mb-6">Terminal 2 • Near Gate B12</p>
+<button class="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold text-sm hover:bg-[#FF6B00] hover:text-black transition-all" data-option-action>Select Spa</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Set Priority & Plan Builder -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24" id="prioritySection">
+<!-- Set Priority -->
+<div class="lg:col-span-5">
+<h2 class="font-headline-lg text-headline-lg text-white mb-8">Priority List</h2>
+<div class="space-y-4" id="priorityList">
+<div class="glass-card p-4 rounded-xl flex items-center gap-4 cursor-move border-l-4 border-[#FF6B00]">
+<span class="text-white/20 font-bold text-xl italic">01</span>
+<div class="flex-grow">
+<p class="text-white font-semibold">GVK Lounge Dining</p>
+<p class="text-xs text-white/40">Essential Meal</p>
+</div>
+<div class="bg-white/5 px-2 py-1 rounded text-[10px] font-bold text-white/60">TOP PRIORITY</div>
+<span class="material-symbols-outlined text-white/20" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<div class="glass-card p-4 rounded-xl flex items-center gap-4 cursor-move border-l-4 border-white/10">
+<span class="text-white/20 font-bold text-xl italic">02</span>
+<div class="flex-grow">
+<p class="text-white font-semibold">The Oberoi Stay</p>
+<p class="text-xs text-white/40">3h Power Nap</p>
+</div>
+<div class="bg-white/5 px-2 py-1 rounded text-[10px] font-bold text-white/60">RELAXATION</div>
+<span class="material-symbols-outlined text-white/20" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<div class="glass-card p-4 rounded-xl flex items-center gap-4 cursor-move border-l-4 border-white/10">
+<span class="text-white/20 font-bold text-xl italic">03</span>
+<div class="flex-grow">
+<p class="text-white font-semibold">Luxury Retail Therapy</p>
+<p class="text-xs text-white/40">Quick Browsing</p>
+</div>
+<div class="bg-white/5 px-2 py-1 rounded text-[10px] font-bold text-white/60">OPTIONAL</div>
+<span class="material-symbols-outlined text-white/20" data-icon="drag_indicator">drag_indicator</span>
+</div>
+</div>
+</div>
+<!-- Plan Builder (Timeline) -->
+<div class="lg:col-span-7" id="timelineSection">
+<h2 class="font-headline-lg text-headline-lg text-white mb-8">Visual Timeline</h2>
+<div class="relative pl-12 border-l border-white/5 py-4 space-y-8" id="timelineList">
+<!-- Timeline Marker -->
+<div class="absolute -left-[5px] top-4 w-2 h-2 rounded-full bg-[#FF6B00]"></div>
+<div class="absolute -left-[5px] bottom-4 w-2 h-2 rounded-full bg-white/20"></div>
+<!-- Activity 1 -->
+<div class="relative">
+<span class="absolute -left-20 top-0 text-[10px] font-bold text-white/40">10:30 AM</span>
+<div class="glass-card p-5 rounded-2xl bg-white/5 border-white/10">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-[#FF6B00] text-sm" data-icon="flight_land">flight_land</span>
+<h4 class="text-white font-bold">Arrive at CSIA T2</h4>
+</div>
+<p class="text-xs text-white/40">Deboarding &amp; Security Clearance</p>
+</div>
+</div>
+<!-- Activity 2 -->
+<div class="relative">
+<span class="absolute -left-20 top-0 text-[10px] font-bold text-white/40">11:15 AM</span>
+<div class="glass-card p-5 rounded-2xl bg-[#FF6B00]/10 border-[#FF6B00]/20">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#FF6B00] text-sm" data-icon="restaurant">restaurant</span>
+<h4 class="text-white font-bold">GVK Lounge Dining</h4>
+</div>
+<span class="text-[10px] font-bold text-[#FF6B00]">60 MIN</span>
+</div>
+<p class="text-xs text-white/40">Premium buffet access confirmed</p>
+</div>
+</div>
+<!-- Activity 3 -->
+<div class="relative">
+<span class="absolute -left-20 top-0 text-[10px] font-bold text-white/40">12:15 PM</span>
+<div class="glass-card p-5 rounded-2xl bg-white/5 border-white/10 opacity-50">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white/40 text-sm" data-icon="shopping_bag">shopping_bag</span>
+<h4 class="text-white/60 font-bold">Duty Free Shopping</h4>
+</div>
+<span class="text-[10px] font-bold text-white/20">30 MIN</span>
+</div>
+<p class="text-xs text-white/20">Browsing luxury boutique zone</p>
+</div>
+</div>
+<!-- Activity 4 -->
+<div class="relative">
+<span class="absolute -left-20 top-0 text-[10px] font-bold text-white/40">12:45 PM</span>
+<div class="glass-card p-5 rounded-2xl bg-[#FF6B00]/10 border-[#FF6B00]/20">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#FF6B00] text-sm" data-icon="bed">bed</span>
+<h4 class="text-white font-bold">The Oberoi Nap</h4>
+</div>
+<span class="text-[10px] font-bold text-[#FF6B00]">180 MIN</span>
+</div>
+<p class="text-xs text-white/40">Confirmed reservation in Quiet Zone</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 4: Warnings & Insights -->
+<section class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-6 rounded-2xl bg-error-container/20 border border-error/20 flex gap-4 items-start">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<div>
+<h4 class="text-error font-bold text-sm">Tight Transit Window</h4>
+<p class="text-xs text-on-error-container mt-1">Your nap ends only 45 mins before boarding. We suggest setting a wake-up call 15 mins earlier for safety.</p>
+</div>
+</div>
+<div class="p-6 rounded-2xl bg-[#FF6B00]/10 border border-[#FF6B00]/20 flex gap-4 items-start">
+<span class="material-symbols-outlined text-[#FF6B00]" data-icon="lightbulb">lightbulb</span>
+<div>
+<h4 class="text-[#FF6B00] font-bold text-sm">Insider Suggestion</h4>
+<p class="text-xs text-white/60 mt-1">The GVK Lounge is typically quietest at 11 AM. You've picked the perfect time for dining.</p>
+</div>
+</div>
+</section>
+<!-- Section 5: Summary -->
+<section class="mb-24 glass-card p-8 rounded-3xl border-white/10 max-w-2xl mx-auto" id="summarySection">
+<h3 class="text-center font-headline-md text-white mb-8">Layover Summary</h3>
+<div class="flex items-center justify-between py-4 border-b border-white/5">
+<span class="text-white/60">Total Layover Duration</span>
+<span class="text-white font-bold uppercase tracking-tighter" id="summaryDuration">6h 30m</span>
+</div>
+<div class="flex items-center justify-between py-4 border-b border-white/5">
+<span class="text-white/60">Planned Activities</span>
+<span class="text-white font-bold uppercase tracking-tighter" id="summaryPlanned">4h 30m</span>
+</div>
+<div class="flex items-center justify-between py-4 border-b border-white/5">
+<span class="text-white/60">Security &amp; Walking Buffer</span>
+<span class="text-white font-bold uppercase tracking-tighter">1h 15m</span>
+</div>
+<div class="flex items-center justify-between pt-6">
+<span class="text-[#FF6B00] font-bold">Unallocated Safe Time</span>
+<span class="text-[#FF6B00] font-extrabold text-xl tracking-tighter" id="summaryUnallocated">45m</span>
+</div>
+</section>
+</main>
+<!-- Floating CTA -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-md px-4 z-50">
+<button class="w-full bg-[#FF6B00] text-black font-bold py-5 rounded-2xl shadow-[0_20px_50px_rgba(255,107,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3" id="finalizePlanBtn" type="button">
+            Finalize My Layover Plan
+            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Hidden Confirmation State (Absolute Full Screen Overlay Placeholder) -->
+<div class="hidden fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center text-center px-8" id="confirmationOverlay">
+<div class="w-24 h-24 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/20 flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-[#FF6B00] text-5xl" data-icon="check_circle">check_circle</span>
+</div>
+<h1 class="font-display-xl text-display-xl text-white mb-4">Your Plan is Ready</h1>
+<p class="text-white/60 max-w-md mb-12">We've synchronized your itinerary with your calendar and sent a digital pass to your wallet.</p>
+<button class="px-12 py-4 bg-white text-black font-bold rounded-xl" id="viewPassBtn" type="button">View Digital Pass</button>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const airport = localStorage.getItem("airport") || "Unknown Airport";
+  const duration = localStorage.getItem("duration") || "N/A";
+  const dateTime = localStorage.getItem("dateTime") || "";
+
+  const contextSummary = document.getElementById("contextSummary");
+  const summaryDuration = document.getElementById("summaryDuration");
+  const summaryPlanned = document.getElementById("summaryPlanned");
+  const summaryUnallocated = document.getElementById("summaryUnallocated");
+  const priorityList = document.getElementById("priorityList");
+  const timelineList = document.getElementById("timelineList");
+  const finalizePlanBtn = document.getElementById("finalizePlanBtn");
+  const confirmationOverlay = document.getElementById("confirmationOverlay");
+  const viewPassBtn = document.getElementById("viewPassBtn");
+
+  const formattedDate = dateTime ? new Date(dateTime).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "No Date";
+  if (contextSummary) contextSummary.textContent = `${airport} • ${duration}h • ${formattedDate}`;
+  if (summaryDuration) summaryDuration.textContent = `${duration}h`;
+
+  const selectedServices = new Set();
+  const selectedOptions = [];
+
+  function recalcSummary() {
+    const plannedMinutes = selectedOptions.reduce((sum, item) => sum + item.minutes, 0);
+    const totalMinutes = Number(duration) > 0 ? Number(duration) * 60 : 0;
+    const unallocated = Math.max(totalMinutes - plannedMinutes, 0);
+    if (summaryPlanned) summaryPlanned.textContent = `${Math.floor(plannedMinutes / 60)}h ${plannedMinutes % 60}m`;
+    if (summaryUnallocated) summaryUnallocated.textContent = `${Math.floor(unallocated / 60)}h ${unallocated % 60}m`;
+  }
+
+  function renderPriority() {
+    if (!priorityList) return;
+    priorityList.innerHTML = "";
+    selectedOptions.forEach((item, index) => {
+      const row = document.createElement("div");
+      row.className = "glass-card p-4 rounded-xl flex items-center gap-4 border-l-4 border-[#FF6B00]";
+      row.innerHTML = `
+        <span class="text-white/20 font-bold text-xl italic">${String(index + 1).padStart(2, "0")}</span>
+        <div class="flex-grow">
+          <p class="text-white font-semibold">${item.title}</p>
+          <p class="text-xs text-white/40">${item.minutes} min planned</p>
+        </div>
+        <div class="flex gap-2">
+          <button type="button" class="w-7 h-7 rounded-md border border-white/10 text-white/80" data-up="${index}">↑</button>
+          <button type="button" class="w-7 h-7 rounded-md border border-white/10 text-white/80" data-down="${index}">↓</button>
+        </div>
+      `;
+      priorityList.appendChild(row);
+    });
+  }
+
+  function renderTimeline() {
+    if (!timelineList) return;
+    const staticFirst = `
+      <div class="relative">
+        <span class="absolute -left-20 top-0 text-[10px] font-bold text-white/40">Start</span>
+        <div class="glass-card p-5 rounded-2xl bg-white/5 border-white/10">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="material-symbols-outlined text-[#FF6B00] text-sm">flight_land</span>
+            <h4 class="text-white font-bold">Arrive at ${airport}</h4>
+          </div>
+          <p class="text-xs text-white/40">Journey context loaded from your previous step.</p>
+        </div>
+      </div>`;
+    const dynamic = selectedOptions.map((item, i) => `
+      <div class="relative">
+        <span class="absolute -left-20 top-0 text-[10px] font-bold text-white/40">#${i + 1}</span>
+        <div class="glass-card p-5 rounded-2xl bg-[#FF6B00]/10 border-[#FF6B00]/20">
+          <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[#FF6B00] text-sm">event</span>
+              <h4 class="text-white font-bold">${item.title}</h4>
+            </div>
+            <span class="text-[10px] font-bold text-[#FF6B00]">${item.minutes} MIN</span>
+          </div>
+          <p class="text-xs text-white/40">Selected from Explore Experiences.</p>
+        </div>
+      </div>`).join("");
+    timelineList.innerHTML = staticFirst + dynamic;
+  }
+
+  document.querySelectorAll("[data-service-card]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const key = card.getAttribute("data-service-card");
+      if (selectedServices.has(key)) selectedServices.delete(key);
+      else selectedServices.add(key);
+      card.classList.toggle("ring-1");
+      card.classList.toggle("ring-[#FF6B00]/30");
+      card.classList.toggle("border-[#FF6B00]/40");
+    });
+  });
+
+  document.querySelectorAll("[data-option-card]").forEach((card) => {
+    const btn = card.querySelector("[data-option-action]");
+    btn?.addEventListener("click", () => {
+      const title = card.getAttribute("data-option-title");
+      const dur = card.getAttribute("data-option-duration") || "60 MIN";
+      const minutes = Number((dur.match(/\d+/) || ["60"])[0]);
+      const existing = selectedOptions.find((x) => x.title === title);
+      if (!existing) selectedOptions.push({ title, minutes });
+      renderPriority();
+      renderTimeline();
+      recalcSummary();
+      btn.textContent = "Added";
+      btn.classList.add("bg-[#FF6B00]", "text-black");
+    });
+  });
+
+  priorityList?.addEventListener("click", (e) => {
+    const up = e.target.getAttribute("data-up");
+    const down = e.target.getAttribute("data-down");
+    if (up !== null) {
+      const i = Number(up);
+      if (i > 0) [selectedOptions[i - 1], selectedOptions[i]] = [selectedOptions[i], selectedOptions[i - 1]];
+    } else if (down !== null) {
+      const i = Number(down);
+      if (i < selectedOptions.length - 1) [selectedOptions[i + 1], selectedOptions[i]] = [selectedOptions[i], selectedOptions[i + 1]];
+    } else {
+      return;
+    }
+    renderPriority();
+    renderTimeline();
+  });
+
+  finalizePlanBtn?.addEventListener("click", () => {
+    if (selectedOptions.length === 0) {
+      alert("Please add at least one option to your plan.");
+      return;
+    }
+    confirmationOverlay?.classList.remove("hidden");
+  });
+
+  viewPassBtn?.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+});
+</script>
+</body></html>

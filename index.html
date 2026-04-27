@@ -328,7 +328,7 @@
 <span class="material-symbols-outlined text-primary">flight_takeoff</span>
 <div class="w-full text-left">
 <label class="block text-[11px] uppercase tracking-[0.18em] text-secondary/50 mb-1">Airport</label>
-<div class="airport-container" role="button" tabindex="0">
+<div class="airport-container" id="airportField" role="button" tabindex="0">
 <span class="airport-text">CSIA T2, Mumbai</span>
 <span class="dropdown-arrow">⌄</span>
 </div>
@@ -366,8 +366,9 @@
 </div>
 </div>
 <div class="flex flex-col sm:flex-row gap-3 mt-4 justify-center">
-<a class="w-full sm:w-auto border border-white/10 bg-white/[0.04] text-white px-8 py-4 rounded-full font-label-md hover:bg-white/[0.08] transition-all inline-flex items-center justify-center" href="hotel.html" id="exploreExperiencesBtn">Explore Experiences</a>
+<button class="w-full sm:w-auto border border-white/10 bg-white/[0.04] text-white px-8 py-4 rounded-full font-label-md hover:bg-white/[0.08] transition-all inline-flex items-center justify-center" id="exploreExperiencesBtn" type="button">Explore Experiences</button>
 </div>
+<p class="hidden text-sm text-red-400 mt-3 px-2 text-left" id="exploreError" role="alert" aria-live="polite"></p>
 <p class="text-secondary/60 text-sm text-left mt-4 px-2">Browse all experiences without signing in. Login is only required when you continue to booking or checkout.</p>
 </div>
 </div>
