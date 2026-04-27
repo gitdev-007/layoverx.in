@@ -1,0 +1,6 @@
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"A","location":"index.html:~supabase-init","message":"Supabase init starting (DOMContentLoaded)","data":{"hasWindowSupabase":true},"timestamp":1777280590950}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"C","location":"index.html:~supabase-init","message":"Supabase initialized and assigned to window","data":{"hasSupabaseClient":true,"url":"https://wxgcpopghopfyuaqbbfb.supabase.co","keyLength":46},"timestamp":1777280590957}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"B","location":"index.html:~getSupabase","message":"getSupabase returning supabaseClient","data":{"hasSupabaseClient":true},"timestamp":1777280620997}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"B","location":"index.html:~getSupabase","message":"getSupabase returning supabaseClient","data":{"hasSupabaseClient":true},"timestamp":1777280623619}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"B","location":"index.html:~getSupabase","message":"getSupabase returning supabaseClient","data":{"hasSupabaseClient":true},"timestamp":1777280625760}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"B","location":"index.html:~getSupabase","message":"getSupabase returning supabaseClient","data":{"hasSupabaseClient":true},"timestamp":1777280626121}

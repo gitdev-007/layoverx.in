@@ -262,8 +262,8 @@
 </nav>
 </div>
 <div class="hidden md:flex items-center gap-6">
-<a class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-secondary hover:text-white hover:bg-white/[0.06] transition-colors" href="#">Sign In</a>
-<a class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-label-md active:scale-95 duration-200 inline-flex items-center" href="hotel.html">Plan Layover</a>
+<a class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-secondary hover:text-white hover:bg-white/[0.06] transition-colors" data-nav-signin href="#">Sign In</a>
+<a class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-label-md active:scale-95 duration-200 inline-flex items-center" data-nav-plan href="hotel.html">Plan Layover</a>
 </div>
 <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation menu" class="md:hidden w-11 h-11 rounded-full border border-white/10 bg-white/5 text-white flex items-center justify-center" data-mobile-menu-toggle type="button">
 <span class="material-symbols-outlined">menu</span>
@@ -652,11 +652,59 @@
 </div>
 </div>
 </footer>
-<div style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 12px; z-index:9999;">
-  <input type="email" id="email" placeholder="Email"><br><br>
-  <input type="password" id="password" placeholder="Password"><br><br>
-  <button onclick="handleSignup()">Sign Up</button>
-  <button onclick="handleLogin()">Login</button>
+<!-- Auth Modal -->
+<div aria-hidden="true" class="fixed inset-0 z-[9999] hidden" id="authModalRoot">
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-auth-backdrop></div>
+  <div class="relative mx-auto mt-24 w-[92vw] max-w-md">
+    <div class="rounded-3xl border border-white/10 bg-surface-container/95 shadow-2xl shadow-black/50 overflow-hidden">
+      <div class="px-6 pt-6 pb-4 flex items-start justify-between gap-4">
+        <div>
+          <h3 class="text-white font-headline-md leading-tight">Continue to LayoverX</h3>
+          <p class="text-secondary/70 text-sm mt-1">Sign in to continue your journey.</p>
+        </div>
+        <button aria-label="Close" class="w-10 h-10 rounded-full border border-white/10 bg-white/[0.04] text-white hover:bg-white/[0.08] transition flex items-center justify-center" data-auth-close type="button">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="px-6 pb-6 space-y-4">
+        <button class="w-full bg-primary-container text-on-primary-container px-5 py-3 rounded-2xl font-label-md hover:scale-[1.01] active:scale-[0.99] transition flex items-center justify-center gap-3" data-auth-google type="button">
+          <span class="material-symbols-outlined text-[20px]">account_circle</span>
+          Continue with Google
+        </button>
+
+        <div class="flex items-center gap-3">
+          <div class="h-px flex-1 bg-white/10"></div>
+          <div class="text-secondary/60 text-xs uppercase tracking-widest">or</div>
+          <div class="h-px flex-1 bg-white/10"></div>
+        </div>
+
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm text-secondary/80 mb-2" for="authEmail">Email</label>
+            <input autocomplete="email" class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="authEmail" placeholder="you@example.com" type="email"/>
+          </div>
+          <div>
+            <label class="block text-sm text-secondary/80 mb-2" for="authPassword">Password</label>
+            <input autocomplete="current-password" class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="authPassword" placeholder="••••••••" type="password"/>
+          </div>
+        </div>
+
+        <button class="w-full border border-white/10 bg-white/[0.04] text-white px-5 py-3 rounded-2xl font-label-md hover:bg-white/[0.08] transition" data-auth-continue type="button">
+          Continue
+        </button>
+
+        <div class="flex items-center justify-center gap-2 text-sm text-secondary/70">
+          <span data-auth-mode-label>New here?</span>
+          <button class="text-primary hover:underline" data-auth-toggle type="button">Sign Up</button>
+        </div>
+
+        <p class="text-xs text-secondary/50 leading-relaxed">
+          By continuing, you agree to our Terms and Privacy Policy.
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -799,14 +847,8 @@ function getSupabase() {
 if (!window.supabaseClient) {
 console.error("Supabase not loaded");
 alert("Supabase client not loaded");
-// #region agent log
-fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'B',location:'index.html:~getSupabase',message:'getSupabase missing window.supabaseClient',data:{hasSupabase:!!window.supabase,hasSupabaseClient:!!window.supabaseClient},timestamp:Date.now()})}).catch(()=>{});
-// #endregion
 return null;
 }
-// #region agent log
-fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'B',location:'index.html:~getSupabase',message:'getSupabase returning supabaseClient',data:{hasSupabaseClient:!!window.supabaseClient},timestamp:Date.now()})}).catch(()=>{});
-// #endregion
 return window.supabaseClient;
 }
 
@@ -836,17 +878,169 @@ if (error) alert(error.message);
 else alert("Login successful");
 }
 
-window.handleSignup = function handleSignup() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  signUp(email, password);
-};
+async function signInWithGoogle() {
+  const supabaseClient = getSupabase();
+  if (!supabaseClient) return;
+  await supabaseClient.auth.signInWithOAuth({ provider: "google" });
+}
 
-window.handleLogin = function handleLogin() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  signIn(email, password);
-};
+async function checkUser() {
+  const supabaseClient = getSupabase();
+  if (!supabaseClient) return null;
+  const { data: { user } } = await supabaseClient.auth.getUser();
+  if (user) {
+    console.log("User logged in:", user.email);
+  }
+  return user;
+}
+
+// Auth modal state + wiring
+const authModalRoot = document.getElementById('authModalRoot');
+const authBackdrop = authModalRoot?.querySelector('[data-auth-backdrop]');
+const authClose = authModalRoot?.querySelector('[data-auth-close]');
+const authGoogleBtn = authModalRoot?.querySelector('[data-auth-google]');
+const authContinueBtn = authModalRoot?.querySelector('[data-auth-continue]');
+const authToggleBtn = authModalRoot?.querySelector('[data-auth-toggle]');
+const authModeLabel = authModalRoot?.querySelector('[data-auth-mode-label]');
+const authEmail = document.getElementById('authEmail');
+const authPassword = document.getElementById('authPassword');
+
+let authMode = 'signIn'; // 'signIn' | 'signUp'
+
+function setAuthMode(nextMode) {
+  authMode = nextMode;
+  if (!authModeLabel || !authToggleBtn) return;
+  if (authMode === 'signIn') {
+    authModeLabel.textContent = 'New here?';
+    authToggleBtn.textContent = 'Sign Up';
+  } else {
+    authModeLabel.textContent = 'Already have an account?';
+    authToggleBtn.textContent = 'Sign In';
+  }
+}
+
+function openAuthModal() {
+  if (!authModalRoot) return;
+  authModalRoot.classList.remove('hidden');
+  authModalRoot.setAttribute('aria-hidden', 'false');
+  setAuthMode(authMode);
+  if (authEmail) authEmail.focus();
+}
+
+function closeAuthModal() {
+  if (!authModalRoot) return;
+  authModalRoot.classList.add('hidden');
+  authModalRoot.setAttribute('aria-hidden', 'true');
+}
+
+authBackdrop?.addEventListener('click', closeAuthModal);
+authClose?.addEventListener('click', closeAuthModal);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeAuthModal();
+});
+
+authGoogleBtn?.addEventListener('click', async () => {
+  try { await signInWithGoogle(); } catch (e) { alert(e?.message || String(e)); }
+});
+
+authToggleBtn?.addEventListener('click', () => {
+  setAuthMode(authMode === 'signIn' ? 'signUp' : 'signIn');
+});
+
+authContinueBtn?.addEventListener('click', async () => {
+  const email = authEmail?.value?.trim();
+  const password = authPassword?.value || '';
+  if (!email || !password) {
+    alert('Please enter email and password');
+    return;
+  }
+  try {
+    if (authMode === 'signUp') await signUp(email, password);
+    else await signIn(email, password);
+  } catch (e) {
+    alert(e?.message || String(e));
+  }
+});
+
+// Navbar auth + gating
+const navSignIn = document.querySelector('[data-nav-signin]');
+const navPlanLayover = document.querySelector('[data-nav-plan]');
+
+function ensureAccountMenu(containerEl, user) {
+  if (!containerEl) return;
+  containerEl.innerHTML = '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'relative';
+  wrapper.innerHTML = `
+    <button type="button" class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-white hover:bg-white/[0.06] transition-colors inline-flex items-center gap-2" data-account-trigger>
+      <span class="material-symbols-outlined text-[18px]">person</span>
+      <span class="max-w-[180px] truncate">${user?.email || 'Account'}</span>
+      <span class="material-symbols-outlined text-[18px]">expand_more</span>
+    </button>
+    <div class="nav-dropdown absolute right-0 top-full pt-3 min-w-[220px]" data-account-menu>
+      <div class="rounded-2xl border border-white/10 bg-surface-container/95 backdrop-blur-xl shadow-2xl shadow-black/40 p-2 space-y-1">
+        <div class="px-3 py-2 text-xs text-secondary/70">${user?.email || ''}</div>
+        <button class="w-full text-left rounded-xl px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" data-account-logout type="button">Logout</button>
+      </div>
+    </div>
+  `;
+  containerEl.appendChild(wrapper);
+
+  const trigger = wrapper.querySelector('[data-account-trigger]');
+  const menu = wrapper.querySelector('[data-account-menu]');
+  const logoutBtn = wrapper.querySelector('[data-account-logout]');
+
+  const toggleMenu = () => menu?.classList.toggle('open');
+  trigger?.addEventListener('click', toggleMenu);
+  document.addEventListener('click', (e) => {
+    if (!wrapper.contains(e.target)) menu?.classList.remove('open');
+  });
+  logoutBtn?.addEventListener('click', async () => {
+    try {
+      const supabaseClient = getSupabase();
+      if (!supabaseClient) return;
+      await supabaseClient.auth.signOut();
+      window.location.reload();
+    } catch (e) {
+      alert(e?.message || String(e));
+    }
+  });
+}
+
+async function bootAuthUI() {
+  const user = await checkUser();
+
+  if (navSignIn) {
+    if (user) {
+      ensureAccountMenu(navSignIn.parentElement, user);
+    } else {
+      navSignIn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openAuthModal();
+      });
+    }
+  }
+
+  if (navPlanLayover) {
+    navPlanLayover.addEventListener('click', async (e) => {
+      const u = await checkUser();
+      if (!u) {
+        e.preventDefault();
+        openAuthModal();
+      }
+    });
+  }
+}
+
+function bootAuthUIWhenSupabaseReady() {
+  if (window.supabaseClient) {
+    bootAuthUI();
+    return;
+  }
+  window.addEventListener('supabase:ready', () => bootAuthUI(), { once: true });
+}
+
+bootAuthUIWhenSupabaseReady();
 });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -854,9 +1048,6 @@ window.handleLogin = function handleLogin() {
 document.addEventListener("DOMContentLoaded", () => {
 
   console.log("Supabase init starting");
-  // #region agent log
-  fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'A',location:'index.html:~supabase-init',message:'Supabase init starting (DOMContentLoaded)',data:{hasWindowSupabase:!!window.supabase},timestamp:Date.now()})}).catch(()=>{});
-  // #endregion
 
   const supabaseClient = window.supabase.createClient(
     "https://wxgcpopghopfyuaqbbfb.supabase.co",
@@ -866,9 +1057,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.supabaseClient = supabaseClient;
 
   console.log("Supabase initialized");
-  // #region agent log
-  fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'C',location:'index.html:~supabase-init',message:'Supabase initialized and assigned to window',data:{hasSupabaseClient:!!window.supabaseClient,url:'https://wxgcpopghopfyuaqbbfb.supabase.co',keyLength:("sb_publishable_Sq0N68LRTlfMDXX1KNFABQ_kgO56I-_".length)},timestamp:Date.now()})}).catch(()=>{});
-  // #endregion
+  window.dispatchEvent(new Event('supabase:ready'));
 
 });
 </script>
