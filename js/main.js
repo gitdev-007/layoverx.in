@@ -155,10 +155,19 @@ document.addEventListener("DOMContentLoaded", () => {
   async function signInWithGoogle() {
     const supabaseClient = getSupabase();
     if (!supabaseClient) throw new Error('Supabase client not loaded.');
-    await supabaseClient.auth.signInWithOAuth({
+    // #region agent log
+    fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'H10',location:'js/main.js:~signInWithGoogle',message:'Google OAuth started',data:{redirectTo:window.location.origin + "/dashboard.html"},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
+    const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: window.location.origin + "/dashboard.html" }
     });
+    if (error) {
+      // #region agent log
+      fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'H10',location:'js/main.js:~signInWithGoogle',message:'Google OAuth returned error',data:{errorMessage:error.message},timestamp:Date.now()})}).catch(()=>{});
+      // #endregion
+      throw error;
+    }
   }
 
   async function getSession() {

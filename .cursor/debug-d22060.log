@@ -8,3 +8,17 @@
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H4","location":"js/main.js:~DOMContentLoaded","message":"DOMContentLoaded fired in main.js","data":{"hasSignInBtn":true},"timestamp":1777304630924}
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H1","location":"js/main.js:~signInBtn","message":"signInBtn handler fired","data":{"id":"signInBtn","tag":"A"},"timestamp":1777304637339}
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H5","location":"js/main.js:~openAuthModal","message":"openAuthModal executed","data":{"modalHidden":false},"timestamp":1777304637347}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H6","location":"js/supabaseClient.js:1","message":"Supabase config evaluated","data":{"hasUrl":true,"hasAnonKey":true,"urlStartsWithHttps":false,"anonKeyLength":22},"timestamp":1777304876107}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H7","location":"js/supabaseClient.js:~createClient","message":"Supabase client initialization failed","data":{"errorMessage":"Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL."},"timestamp":1777304876108}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H2","location":"js/main.js:1","message":"Main JS evaluated","data":{"readyState":"loading","hasSupabase":true,"hasSupabaseClient":false},"timestamp":1777304876345}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H4","location":"js/main.js:~DOMContentLoaded","message":"DOMContentLoaded fired in main.js","data":{"hasSignInBtn":true},"timestamp":1777304876348}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H1","location":"js/main.js:~signInBtn","message":"signInBtn handler fired","data":{"id":"signInBtn","tag":"A"},"timestamp":1777304878359}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H5","location":"js/main.js:~openAuthModal","message":"openAuthModal executed","data":{"modalHidden":false},"timestamp":1777304878367}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H9","location":"js/main.js:~signIn","message":"signIn called","data":{"hasEmail":true,"passwordLength":9},"timestamp":1777304886689}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":false},"timestamp":1777304886690}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H9","location":"js/main.js:~signIn","message":"signIn called","data":{"hasEmail":true,"passwordLength":9},"timestamp":1777304888618}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":false},"timestamp":1777304888619}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":false},"timestamp":1777304890969}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":false},"timestamp":1777304898738}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":false},"timestamp":1777304899884}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":false},"timestamp":1777304900786}
