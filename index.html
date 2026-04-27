@@ -795,42 +795,38 @@
         }
 const supabase = window.supabaseClient;
 
-// SIGN UP
-async function signUp(email, password) {
-  const client = window.supabaseClient || supabase;
-  if (!client) {
-    alert("Supabase client not loaded");
-    return;
-  }
-  const { data, error } = await client.auth.signUp({
-    email,
-    password
-  });
-
-  if (error) {
-    alert(error.message);
-  } else {
-    alert("Signup successful");
-  }
+function getSupabase() {
+if (!window.supabaseClient) {
+alert("Supabase client not loaded");
+return null;
+}
+return window.supabaseClient;
 }
 
-// LOGIN
-async function signIn(email, password) {
-  const client = window.supabaseClient || supabase;
-  if (!client) {
-    alert("Supabase client not loaded");
-    return;
-  }
-  const { data, error } = await client.auth.signInWithPassword({
-    email,
-    password
-  });
+async function signUp(email, password) {
+const supabase = getSupabase();
+if (!supabase) return;
 
-  if (error) {
-    alert(error.message);
-  } else {
-    alert("Login successful");
-  }
+const { error } = await supabase.auth.signUp({
+email,
+password
+});
+
+if (error) alert(error.message);
+else alert("Signup successful");
+}
+
+async function signIn(email, password) {
+const supabase = getSupabase();
+if (!supabase) return;
+
+const { error } = await supabase.auth.signInWithPassword({
+email,
+password
+});
+
+if (error) alert(error.message);
+else alert("Login successful");
 }
 function handleSignup() {
   const email = document.getElementById("email").value;
@@ -845,5 +841,5 @@ function handleLogin() {
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabaseClient.js"></script>
+<script src="./js/supabaseClient.js"></script>
 </body></html>
