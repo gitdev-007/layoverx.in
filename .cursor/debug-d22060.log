@@ -59,3 +59,40 @@
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305248333}
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305250286}
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H5","location":"js/main.js:~openAuthModal","message":"openAuthModal executed","data":{"modalHidden":false},"timestamp":1777305250295}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H6","location":"js/supabaseClient.js:1","message":"Supabase config evaluated","data":{"hasUrl":true,"hasAnonKey":true,"urlStartsWithHttps":true,"anonKeyLength":46},"timestamp":1777305452130}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H7","location":"js/supabaseClient.js:~createClient","message":"Supabase client initialized","data":{"hasWindowSupabaseClient":true},"timestamp":1777305452136}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H2","location":"js/main.js:1","message":"Main JS evaluated","data":{"readyState":"loading","hasSupabase":true,"hasSupabaseClient":true},"timestamp":1777305452140}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H4","location":"js/main.js:~DOMContentLoaded","message":"DOMContentLoaded fired in main.js","data":{"hasSignInBtn":true},"timestamp":1777305452143}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305452145}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305452180}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H1","location":"js/main.js:~signInBtn","message":"signInBtn handler fired","data":{"id":"signInBtn","tag":"A"},"timestamp":1777305454222}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H5","location":"js/main.js:~openAuthModal","message":"openAuthModal executed","data":{"modalHidden":false},"timestamp":1777305454227}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H5","location":"js/main.js:~openAuthModal","message":"openAuthModal executed","data":{"modalHidden":false},"timestamp":1777305454228}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P1","location":"js/main.js:~navPlanLayover","message":"Plan Layover clicked","data":{"href":"hotel.html"},"timestamp":1777305457248}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305457249}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P2","location":"js/main.js:~navPlanLayover","message":"Plan Layover redirected to modal for unauthenticated user","data":{},"timestamp":1777305457263}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H5","location":"js/main.js:~openAuthModal","message":"openAuthModal executed","data":{"modalHidden":false},"timestamp":1777305457266}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P2","location":"js/main.js:~navPlanLayover","message":"Plan Layover user state resolved","data":{"hasUser":false},"timestamp":1777305457263}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305513146}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H10","location":"js/main.js:~signInWithGoogle","message":"Google OAuth started","data":{"redirectTo":"https://layoverx-in.vercel.app/dashboard.html"},"timestamp":1777305513146}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H6","location":"js/supabaseClient.js:1","message":"Supabase config evaluated","data":{"hasUrl":true,"hasAnonKey":true,"urlStartsWithHttps":true,"anonKeyLength":46},"timestamp":1777305580872}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H4","location":"js/main.js:~DOMContentLoaded","message":"DOMContentLoaded fired in main.js","data":{"hasSignInBtn":true},"timestamp":1777305580928}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H2","location":"js/main.js:1","message":"Main JS evaluated","data":{"readyState":"loading","hasSupabase":true,"hasSupabaseClient":true},"timestamp":1777305580879}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305580929}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305581531}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H7","location":"js/supabaseClient.js:~createClient","message":"Supabase client initialized","data":{"hasWindowSupabaseClient":true},"timestamp":1777305580877}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P1","location":"js/main.js:~navPlanLayover","message":"Plan Layover clicked","data":{"href":"hotel.html"},"timestamp":1777305586849}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305586850}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P2","location":"js/main.js:~navPlanLayover","message":"Plan Layover user state resolved","data":{"hasUser":false},"timestamp":1777305586869}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H5","location":"js/main.js:~openAuthModal","message":"openAuthModal executed","data":{"modalHidden":false},"timestamp":1777305586875}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P2","location":"js/main.js:~navPlanLayover","message":"Plan Layover redirected to modal for unauthenticated user","data":{},"timestamp":1777305586869}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P1","location":"js/main.js:~navPlanLayover","message":"Plan Layover clicked","data":{"href":"hotel.html"},"timestamp":1777305728789}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P2","location":"js/main.js:~navPlanLayover","message":"Plan Layover redirected to modal for unauthenticated user","data":{},"timestamp":1777305728794}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H5","location":"js/main.js:~openAuthModal","message":"openAuthModal executed","data":{"modalHidden":false},"timestamp":1777305728798}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305728790}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P2","location":"js/main.js:~navPlanLayover","message":"Plan Layover user state resolved","data":{"hasUser":false},"timestamp":1777305728794}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777305757196}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P1","location":"js/main.js:~navPlanLayover","message":"Plan Layover clicked","data":{"href":"hotel.html"},"timestamp":1777305757195}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P2","location":"js/main.js:~navPlanLayover","message":"Plan Layover user state resolved","data":{"hasUser":false},"timestamp":1777305757204}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"P2","location":"js/main.js:~navPlanLayover","message":"Plan Layover redirected to modal for unauthenticated user","data":{},"timestamp":1777305757204}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H5","location":"js/main.js:~openAuthModal","message":"openAuthModal executed","data":{"modalHidden":false},"timestamp":1777305757207}
