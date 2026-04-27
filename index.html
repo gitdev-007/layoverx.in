@@ -690,6 +690,8 @@
           </div>
         </div>
 
+        <div class="hidden text-sm text-red-400" id="authError" role="alert" aria-live="polite"></div>
+
         <button class="w-full border border-white/10 bg-white/[0.04] text-white px-5 py-3 rounded-2xl font-label-md hover:bg-white/[0.08] transition" data-auth-continue type="button">
           Continue
         </button>
@@ -706,6 +708,8 @@
     </div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
         const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
@@ -845,43 +849,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function getSupabase() {
 if (!window.supabaseClient) {
-console.error("Supabase not loaded");
-alert("Supabase client not loaded");
 return null;
 }
 return window.supabaseClient;
+}
+
+function setAuthError(message) {
+  const el = document.getElementById('authError');
+  if (!el) return;
+  el.textContent = message || '';
+  el.classList.toggle('hidden', !message);
+}
+
+function normalizeAuthErrorMessage(error) {
+  const msg = (error?.message || '').trim();
+  if (!msg) return 'Something went wrong. Please try again.';
+  return msg;
 }
 
 async function signUp(email, password) {
 const supabaseClient = getSupabase();
 if (!supabaseClient) return;
 
-const { error } = await supabaseClient.auth.signUp({
-email,
-password
-});
-
-if (error) alert(error.message);
-else alert("Signup successful");
+const { error } = await supabaseClient.auth.signUp({ email, password });
+if (error) throw error;
+window.location.href = "dashboard.html";
 }
 
 async function signIn(email, password) {
 const supabaseClient = getSupabase();
 if (!supabaseClient) return;
 
-const { error } = await supabaseClient.auth.signInWithPassword({
-email,
-password
-});
-
-if (error) alert(error.message);
-else alert("Login successful");
+const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+if (error) throw error;
+window.location.href = "dashboard.html";
 }
 
 async function signInWithGoogle() {
   const supabaseClient = getSupabase();
   if (!supabaseClient) return;
-  await supabaseClient.auth.signInWithOAuth({ provider: "google" });
+  await supabaseClient.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: window.location.origin + "/dashboard.html" }
+  });
 }
 
 async function checkUser() {
@@ -892,6 +902,13 @@ async function checkUser() {
     console.log("User logged in:", user.email);
   }
   return user;
+}
+
+async function getSession() {
+  const supabaseClient = getSupabase();
+  if (!supabaseClient) return null;
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  return session || null;
 }
 
 // Auth modal state + wiring
@@ -924,6 +941,7 @@ function openAuthModal() {
   authModalRoot.classList.remove('hidden');
   authModalRoot.setAttribute('aria-hidden', 'false');
   setAuthMode(authMode);
+  setAuthError('');
   if (authEmail) authEmail.focus();
 }
 
@@ -940,7 +958,8 @@ document.addEventListener('keydown', (e) => {
 });
 
 authGoogleBtn?.addEventListener('click', async () => {
-  try { await signInWithGoogle(); } catch (e) { alert(e?.message || String(e)); }
+  setAuthError('');
+  try { await signInWithGoogle(); } catch (e) { setAuthError(normalizeAuthErrorMessage(e)); }
 });
 
 authToggleBtn?.addEventListener('click', () => {
@@ -951,14 +970,15 @@ authContinueBtn?.addEventListener('click', async () => {
   const email = authEmail?.value?.trim();
   const password = authPassword?.value || '';
   if (!email || !password) {
-    alert('Please enter email and password');
+    setAuthError('Please enter email and password.');
     return;
   }
+  setAuthError('');
   try {
     if (authMode === 'signUp') await signUp(email, password);
     else await signIn(email, password);
   } catch (e) {
-    alert(e?.message || String(e));
+    setAuthError(normalizeAuthErrorMessage(e));
   }
 });
 
@@ -1000,15 +1020,16 @@ function ensureAccountMenu(containerEl, user) {
       const supabaseClient = getSupabase();
       if (!supabaseClient) return;
       await supabaseClient.auth.signOut();
-      window.location.reload();
+      window.location.href = "/";
     } catch (e) {
-      alert(e?.message || String(e));
+      setAuthError(normalizeAuthErrorMessage(e));
     }
   });
 }
 
 async function bootAuthUI() {
-  const user = await checkUser();
+  const session = await getSession();
+  const user = session?.user || await checkUser();
 
   if (navSignIn) {
     if (user) {
@@ -1041,24 +1062,6 @@ function bootAuthUIWhenSupabaseReady() {
 }
 
 bootAuthUIWhenSupabaseReady();
-});
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  console.log("Supabase init starting");
-
-  const supabaseClient = window.supabase.createClient(
-    "https://wxgcpopghopfyuaqbbfb.supabase.co",
-    "sb_publishable_Sq0N68LRTlfMDXX1KNFABQ_kgO56I-_"
-  );
-
-  window.supabaseClient = supabaseClient;
-
-  console.log("Supabase initialized");
-  window.dispatchEvent(new Event('supabase:ready'));
-
 });
 </script>
 </body></html>

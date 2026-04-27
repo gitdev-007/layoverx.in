@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LayoverX | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&amp;display=swap" rel="stylesheet"/>
+    <style>
+      .glass { background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+  </head>
+  <body class="bg-[#121414] text-[#e2e2e2] font-['Manrope'] min-h-screen">
+    <header class="w-full border-b border-white/10 bg-neutral-950/70 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto px-6 md:px-8 py-4 flex items-center justify-between gap-6">
+        <a class="text-2xl font-black tracking-tighter text-white font-['Plus_Jakarta_Sans']" href="/">LayoverX</a>
+        <div class="flex items-center gap-3">
+          <div class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-white inline-flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">person</span>
+            <span class="max-w-[240px] truncate" id="userEmail">Loading…</span>
+          </div>
+          <button class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.04] text-white hover:bg-white/[0.08] transition" id="logoutBtn" type="button">
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 md:px-8 py-16">
+      <div class="glass rounded-[28px] border border-white/10 shadow-2xl shadow-black/30 p-8 md:p-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-white font-['Plus_Jakarta_Sans'] tracking-tight">Dashboard</h1>
+        <p class="text-white/70 mt-2">You’re signed in. Continue planning your layover with personalized access.</p>
+
+        <div class="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+          <p class="text-sm text-white/60 uppercase tracking-widest">Signed in as</p>
+          <p class="text-lg text-white mt-2 font-semibold" id="userEmailCard">Loading…</p>
+          <div class="hidden mt-4 text-sm text-red-400" id="dashError" role="alert" aria-live="polite"></div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script>
+      function setDashError(message) {
+        const el = document.getElementById('dashError');
+        if (!el) return;
+        el.textContent = message || '';
+        el.classList.toggle('hidden', !message);
+      }
+
+      async function boot() {
+        const supabase = window.supabaseClient;
+        if (!supabase) {
+          setDashError('Supabase client not loaded.');
+          return;
+        }
+
+        const { data: { user }, error } = await supabase.auth.getUser();
+        if (error) {
+          setDashError(error.message || 'Unable to verify session.');
+          return;
+        }
+
+        if (!user) {
+          window.location.href = "/";
+          return;
+        }
+
+        const email = user.email || 'Account';
+        const header = document.getElementById('userEmail');
+        const card = document.getElementById('userEmailCard');
+        if (header) header.textContent = email;
+        if (card) card.textContent = email;
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        logoutBtn?.addEventListener('click', async () => {
+          setDashError('');
+          const { error: signOutError } = await supabase.auth.signOut();
+          if (signOutError) {
+            setDashError(signOutError.message || 'Failed to sign out.');
+            return;
+          }
+          window.location.href = "/";
+        });
+      }
+
+      if (window.supabaseClient) boot();
+      else window.addEventListener('supabase:ready', () => boot(), { once: true });
+    </script>
+  </body>
+</html>
+
