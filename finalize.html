@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="flex justify-between items-center py-4 border-b border-white/5 last:border-0">
                 <div>
                     <h4 class="text-white font-bold">${item.title}</h4>
-                    <p class="text-xs text-white/40 uppercase tracking-widest">${item.duration}</p>
+                    <p class="text-xs text-white/40 uppercase tracking-widest">${item.duration} • ${item.category}</p>
                 </div>
                 <span class="text-white font-bold">${item.price}</span>
             </div>
@@ -240,14 +240,15 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="h-px bg-white/10 w-full"></div>
             <div class="flex justify-between items-end">
                 <span class="text-[#FF6B00] font-bold">Total Amount</span>
-                <span class="text-3xl font-black text-white">$${totalCost}</span>
+                <span class="text-3xl font-black text-white">Rs ${totalCost}</span>
             </div>
         </div>
     `;
 
     completeBookingBtn.addEventListener("click", () => {
         successOverlay.classList.remove("hidden");
-        localStorage.clear(); // Clear storage after booking
+        // We keep local storage for a better demo experience, or clear it if requested.
+        // localStorage.clear(); 
     });
 });
 </script>

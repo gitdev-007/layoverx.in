@@ -102,6 +102,11 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-[#FF6B00] selection:text-white antialiased">
@@ -168,9 +173,9 @@
 <div class="flex justify-between items-center mb-12">
     <div>
         <h2 class="font-headline-lg text-headline-lg text-white">Visual Timeline</h2>
-        <p class="text-white/40">Your synchronized layover itinerary</p>
+        <p class="text-white/40">Optimize your layover with precision</p>
     </div>
-    <button class="px-6 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm font-semibold hover:bg-white/10 transition-all" id="editToggleBtn">Edit Plan</button>
+    <button class="px-6 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm font-semibold hover:bg-[#FF6B00] hover:text-black transition-all" id="editToggleBtn">Edit Plan</button>
 </div>
 
 <div class="relative pl-12 border-l border-white/5 py-4 space-y-8" id="timelineContainer">
@@ -178,6 +183,21 @@
 </div>
 
 </main>
+
+<!-- Replace Modal -->
+<div class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-8" id="replaceModal">
+    <div class="glass-card w-full max-w-2xl rounded-3xl p-8 max-h-[80vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-8">
+            <h3 class="text-2xl font-bold text-white">Select Replacement</h3>
+            <button class="text-white/40 hover:text-white" id="closeReplaceModal">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="replacementOptions">
+            <!-- Dynamic Options -->
+        </div>
+    </div>
+</div>
 
 <!-- Floating CTA -->
 <div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-md px-4 z-50" id="ctaContainer">
@@ -188,6 +208,33 @@
 </div>
 
 <script>
+const REAL_SERVICES_DATA = {
+    "Hotels": [
+        { id: "h1", category: "Hotels", title: "The Orchid Hotel", duration: "120 MIN", price: "Rs 1200", rating: "4.8", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBhE4jd4gvASnkYpCad8ZkFGP8EjYRtDrOIM4gv5zqgo82jn_Lg4ySHLH2q1_65Q9n1ibN5xpEt-HqW--014gjYePmi7m3V3vNi2YSNlu6dyvv3YYV41fcG2tOhe2mcy-wJCtFNHizmh2a4SN8PCYdWCkajrZf4CDWy_iewrpGFSxXzld8PY2BGj6HqgzGF_1-zdjwbrXlkvQkzlytVTwsV7n96K_gc0T_1BCS7i8GDr19aStt2ifH6mQnxdAAouMKyAazs-_RXluE", desc: "0.8 km from BOM • Eco-friendly luxury" },
+        { id: "h2", category: "Hotels", title: "Hotel Sahara Star", duration: "120 MIN", price: "Rs 1400", rating: "4.7", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuATVkR2KXkjynUzwChDVcZkDkKNFrDNseyf3wI6FNpzzIi9WSZIBh4fp5UEP4hylQCsTVoKcSOAVBzDSDkZOEzSqhWiGuwQVHP3Cote2EL6fvUHv6r6gjsDfoPSu0SBnPJ3SLxLuXLpeuyhYPaSOEgM5qaDyyq9CxdQuJLa7ZGavDOQjSFOuu8bEkLLp8-dE-p_Uq9a8kSpnMSGRLrtDVaiOMkEFxVvev0JD6S1hV7lDpM9_jf6AQ9U2715D53S3HRGxsyaYwvkSPY", desc: "1.2 km from BOM • Iconic glass dome" },
+        { id: "h3", category: "Hotels", title: "Taj Santacruz", duration: "120 MIN", price: "Rs 1800", rating: "4.9", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC7bVECyHwsD_FPkeHUiZk7Pxa0MuWKHsQq2Tz3RNAiCZzR63Goe_Uo1ipzHHjXCUpuCaTamyDWnV012gRmq-a_PtAMr4DL1i-Rr4wuTfjjuFGYUbJ_GK-UTYndpd7mC-9lHr1SaNBZDcr-4NRqzfQaFJZcAzpEVClg19suEHsTqrKKoyxreJIdAaqVlV7EaVCOzpt6Bq11vGY9FlTU9MU7tWMaWrh7eXirWCxKSBuDoPKaeHfq006amnrEANkph3CX4cGBQA6c9K4", desc: "2.4 km from BOM • Signature Taj luxury" }
+    ],
+    "Food & Dining": [
+        { id: "f1", category: "Food & Dining", title: "Thai Naam", duration: "60 MIN", price: "Rs 1199", rating: "4.6", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAnlb-Uvm7dEPU6AWkMlCbloKh5IxUB3ljic1wAbqqQVrj0nkruSrqdAijamQH-s0-pnlTMd2YkbYfj6C693uWJfQz8AC4bQhnooO9w5gdQFdY5jE8WqPZbOvB2mJL4KUYgVG-JvCNyE4io4tOOdtB67fBhfyh0DA1MvQOu55h8BFPwN3JQ47jNyZx6z7Jjq3JskhVon26IPZhPyfkjAu37X1btu-1mREcuiDKKbSFbRvHw88E60f6qP19Y6cbTz6-x_M1q3c0ek0Q", desc: "2.1 km from BOM • Authentic Thai cuisine" },
+        { id: "f2", category: "Food & Dining", title: "JW Cafe", duration: "90 MIN", price: "Rs 1499", rating: "4.7", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuChGy6LO-M3DdRHAZT1IKF0qWh4DqKAaQLDrffN4ndWvXBnuSS4ifNtkZmx4lvAdO6bL26WcxoJ2-CTJxCX0rXlfbI1FKtaAc634i3zmfS5X1fH62JyXPXoi3b2KqzLJ14PTMkh_em0t-ZKolV0Biji45shGHvLCk-Tt4mJ-NV0Bec5zaIA_upfRlog23PfNFyWHR6F23tS7GojOr8-wH7QNKQDMfD1XESxB75ZlppDUoIwTeEGrxuVYmKnxiQEIiUvrRpi0Js2RRc", desc: "1.8 km from BOM • Large global buffet" },
+        { id: "f3", category: "Food & Dining", title: "Peshawri", duration: "90 MIN", price: "Rs 1599", rating: "4.8", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAuRVO62zdv0fT7mYOWLqFAENE0C3MeiqWMzwxY8fvHyto_KpdrEHmKlTb3yj1AjwAyV-I0kFUXT1fE1sirgoM1OlTbrXAu611jENnrLd65-OQO_6NjkW9-X73Cy1n8a8PexPq9b46B2GYXDDPLM717YkZrqhb3R4DXpiPuhVulJmgU4WxGHuhAiJ6ppbKn9bfwMo_klweNRbwVxCPK_Thnnns4FVYXljJQBJP9sZnUdT6rrPEoWLRggCQhyECrW2vTQeqxBcKCD_8", desc: "2.4 km from BOM • Luxury kebab dining" }
+    ],
+    "Services": [
+        { id: "s1", category: "Services", title: "Jiva Spa", duration: "60 MIN", price: "Rs 3960", rating: "4.8", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCuBeISMzXQPmWmOmB0ft4zxGshz-gTXvzupRjlzTpxD0wsTviCiyUtRzn3emtm-4mFRNk1sshFtHHN9FZyFc9FDWyaeXk8ad4U6Y7UyLtvGZT44QPc8dYNFY5c6OXVhfZLSdC3IU4_UP8n0rqYmETKgd07B-ktbHUz7ty3qLWIl7TiyTUv8bovx2eJRJljeeXdMkeE2PHMnSIILL3EIFW2YYbK7lP6iYBfTpoF5c4mtXEICObvxAQEi9TN9RhLPY1HqUBaE-dfU3o", desc: "1.6 km from BOM • Ayurvedic luxury spa" },
+        { id: "s2", category: "Services", title: "Quan Spa", duration: "60 MIN", price: "Rs 4840", rating: "4.7", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuATVkR2KXkjynUzwChDVcZkDkKNFrDNseyf3wI6FNpzzIi9WSZIBh4fp5UEP4hylQCsTVoKcSOAVBzDSDkZOEzSqhWiGuwQVHP3Cote2EL6fvUHv6r6gjsDfoPSu0SBnPJ3SLxLuXLpeuyhYPaSOEgM5qaDyyq9CxdQuJLa7ZGavDOQjSFOuu8bEkLLp8-dE-p_Uq9a8kSpnMSGRLrtDVaiOMkEFxVvev0JD6S1hV7lDpM9_jf6AQ9U2715D53S3HRGxsyaYwvkSPY", desc: "1.8 km from BOM • Luxury hydrotherapy" }
+    ],
+    "Experiences": [
+        { id: "e1", category: "Experiences", title: "KidZania Mumbai", duration: "120 MIN", price: "Rs 1180", rating: "4.7", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAeuOcp48bW0hOY4l8pEuj6z5sWn30Mv5P4Av858FhP6Aa2LtthA85vYicS7BpPAsl0Yq--QwUBB5AEwKLBYSZK_wcWjf3LOMYYW4lHtyN8bM5mTCt0dmNm1ou6uR4nMoyA7TinsYas2aKSI-N3O4BPLSUt_lBIjUvm9j2LSLoK_PzaTxh9uPrF8Al8gh9WCdud3wx2Qm0Ft2Z4EiEmvCS650vh5cgfDw58zTGl8XjeXsKNB8Rkm_8Ns2TKIWh7_5ppRliaUpBOgSk", desc: "7.9 km from BOM • Edutainment roleplay" },
+        { id: "e2", category: "Experiences", title: "Clue Hunt", duration: "60 MIN", price: "Rs 1656", rating: "4.6", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAnlb-Uvm7dEPU6AWkMlCbloKh5IxUB3ljic1wAbqqQVrj0nkruSrqdAijamQH-s0-pnlTMd2YkbYfj6C693uWJfQz8AC4bQhnooO9w5gdQFdY5jE8WqPZbOvB2mJL4KUYgVG-JvCNyE4io4tOOdtB67fBhfyh0DA1MvQOu55h8BFPwN3JQ47jNyZx6z7Jjq3JskhVon26IPZhPyfkjAu37X1btu-1mREcuiDKKbSFbRvHw88E60f6qP19Y6cbTz6-x_M1q3c0ek0Q", desc: "5.4 km from BOM • Escape room challenge" }
+    ],
+    "Transport": [
+        { id: "t1", category: "Transport", title: "BMW 7 Series", duration: "30 MIN", price: "Rs 4500", rating: "5.0", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBhE4jd4gvASnkYpCad8ZkFGP8EjYRtDrOIM4gv5zqgo82jn_Lg4ySHLH2q1_65Q9n1ibN5xpEt-HqW--014gjYePmi7m3V3vNi2YSNlu6dyvv3YYV41fcG2tOhe2mcy-wJCtFNHizmh2a4SN8PCYdWCkajrZf4CDWy_iewrpGFSxXzld8PY2BGj6HqgzGF_1-zdjwbrXlkvQkzlytVTwsV7n96K_gc0T_1BCS7i8GDr19aStt2ifH6mQnxdAAouMKyAazs-_RXluE", desc: "Premium airport transfer" }
+    ],
+    "Shopping": [
+        { id: "sh1", category: "Shopping", title: "Luxury Retail", duration: "45 MIN", price: "Free", rating: "4.5", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAuRVO62zdv0fT7mYOWLqFAENE0C3MeiqWMzwxY8fvHyto_KpdrEHmKlTb3yj1AjwAyV-I0kFUXT1fE1sirgoM1OlTbrXAu611jENnrLd65-OQO_6NjkW9-X73Cy1n8a8PexPq9b46B2GYXDDPLM717YkZrqhb3R4DXpiPuhVulJmgU4WxGHuhAiJ6ppbKn9bfwMo_klweNRbwVxCPK_Thnnns4FVYXljJQBJP9sZnUdT6rrPEoWLRggCQhyECrW2vTQeqxBcKCD_8", desc: "Duty Free • Personal Shopper" }
+    ]
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     const airport = localStorage.getItem("airport") || "CSIA T2, Mumbai";
     const durationHours = parseFloat(localStorage.getItem("duration") || "6.5");
@@ -201,7 +248,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const timelineContainer = document.getElementById("timelineContainer");
     const confirmPlanBtn = document.getElementById("confirmPlanBtn");
     const editToggleBtn = document.getElementById("editToggleBtn");
+    const replaceModal = document.getElementById("replaceModal");
+    const replacementOptions = document.getElementById("replacementOptions");
+    const closeReplaceModal = document.getElementById("closeReplaceModal");
+
     let isEditMode = false;
+    let replacingIndex = -1;
 
     function renderTimeline() {
         timelineContainer.innerHTML = `
@@ -209,53 +261,98 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="absolute -left-[5px] bottom-4 w-2 h-2 rounded-full bg-white/20"></div>
         `;
 
-        // Arrival
         const arrivalTime = new Date(dateTime);
         addTimelineItem("Arrive at " + airport, "Start of layover", arrivalTime, "flight_land", false);
 
-        let currentTime = new Date(arrivalTime.getTime() + 45 * 60000); // 45m buffer for deboarding/security
+        let currentTime = new Date(arrivalTime.getTime() + 45 * 60000); 
 
         priorityList.forEach((item, index) => {
             const minutes = parseInt(item.duration.match(/\d+/)[0]);
-            addTimelineItem(item.title, item.duration + " • " + item.price, new Date(currentTime), "event", true, index);
-            currentTime = new Date(currentTime.getTime() + minutes * 60000 + 15 * 60000); // Add activity time + 15m transition
+            addTimelineItem(item.title, item.category + " • " + item.price, new Date(currentTime), "event", true, index, minutes);
+            currentTime = new Date(currentTime.getTime() + minutes * 60000 + 15 * 60000); 
         });
 
-        // Departure
         const departureTime = new Date(arrivalTime.getTime() + durationHours * 3600000);
         addTimelineItem("Boarding at " + airport, "45 min before flight", new Date(departureTime.getTime() - 45 * 60000), "flight_takeoff", false);
     }
 
-    function addTimelineItem(title, subtitle, time, icon, isActivity, index) {
+    function addTimelineItem(title, subtitle, time, icon, isActivity, index, duration) {
         const timeStr = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const div = document.createElement("div");
         div.className = "relative group";
         div.innerHTML = `
             <span class="absolute -left-28 top-0 text-[10px] font-bold text-white/40 w-20 text-right">${timeStr}</span>
             <div class="glass-card p-5 rounded-2xl ${isActivity ? 'bg-[#FF6B00]/5 border-[#FF6B00]/20' : 'bg-white/5 border-white/10'} flex justify-between items-center">
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 flex-grow">
                     <span class="material-symbols-outlined ${isActivity ? 'text-[#FF6B00]' : 'text-white/40'} text-xl">${icon}</span>
-                    <div>
+                    <div class="flex-grow">
                         <h4 class="text-white font-bold text-sm">${title}</h4>
                         <p class="text-[10px] text-white/40 uppercase tracking-wider mt-0.5">${subtitle}</p>
                     </div>
                 </div>
                 ${isActivity && isEditMode ? `
-                    <div class="flex gap-2">
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-lg border border-white/10">
+                            <input type="number" value="${duration}" class="w-12 bg-transparent text-white text-xs font-bold text-center outline-none" onchange="updateDuration(${index}, this.value)">
+                            <span class="text-[10px] text-white/40 font-bold">MIN</span>
+                        </div>
+                        <button class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white text-[10px] font-bold hover:bg-white/10" onclick="openReplace(${index})">REPLACE</button>
                         <button class="w-8 h-8 rounded-lg bg-red-500/10 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all" onclick="deleteItem(${index})">
                             <span class="material-symbols-outlined text-sm">delete</span>
                         </button>
                     </div>
+                ` : isActivity ? `
+                     <span class="text-[10px] font-bold text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-1 rounded">${duration} MIN</span>
                 ` : ''}
             </div>
         `;
         timelineContainer.appendChild(div);
     }
 
+    window.updateDuration = (index, newVal) => {
+        const val = parseInt(newVal);
+        if (val > 0) {
+            priorityList[index].duration = val + " MIN";
+            renderTimeline();
+        }
+    };
+
     window.deleteItem = (index) => {
         priorityList.splice(index, 1);
         renderTimeline();
     };
+
+    window.openReplace = (index) => {
+        replacingIndex = index;
+        const category = priorityList[index].category;
+        const options = REAL_SERVICES_DATA[category] || [];
+        
+        replacementOptions.innerHTML = options.map(opt => `
+            <div class="glass-card p-4 rounded-2xl border border-white/5 hover:border-[#FF6B00]/30 cursor-pointer transition-all" onclick="replaceItem('${opt.id}', '${category}')">
+                <div class="flex gap-4">
+                    <img src="${opt.image}" class="w-16 h-16 rounded-xl object-cover">
+                    <div>
+                        <h4 class="text-white font-bold text-sm">${opt.title}</h4>
+                        <p class="text-[10px] text-white/40 mt-1">${opt.desc}</p>
+                        <p class="text-[#FF6B00] font-bold text-xs mt-2">${opt.price}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        replaceModal.classList.remove("hidden");
+    };
+
+    window.replaceItem = (id, category) => {
+        const newItem = REAL_SERVICES_DATA[category].find(o => o.id === id);
+        if (newItem) {
+            priorityList[replacingIndex] = JSON.parse(JSON.stringify(newItem));
+            replaceModal.classList.add("hidden");
+            renderTimeline();
+        }
+    };
+
+    closeReplaceModal.onclick = () => replaceModal.classList.add("hidden");
 
     editToggleBtn.addEventListener("click", () => {
         isEditMode = !isEditMode;
