@@ -3,4 +3,4 @@ const supabaseClient = window.supabase.createClient(
   "sb_publishable_Sq0N68LRTlfMDXX1KNFABQ_kgO56I-_"
 );
 
-window.supabaseClient = supabase;
+window.supabaseClient = supabaseClient;

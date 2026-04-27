@@ -239,12 +239,6 @@
 <a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" data-entertainment-link href="/entertainment.html">Entertainment</a>
 <a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">City Tours</a>
 </div>
-<div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: #111; padding: 10px;">
-  <input type="email" id="email" placeholder="Email"><br>
-  <input type="password" id="password" placeholder="Password"><br>
-  <button onclick="handleSignup()">Sign Up</button>
-  <button onclick="handleLogin()">Login</button>
-</div>
 </div>
 </div>
 <div class="relative nav-item">
@@ -658,6 +652,12 @@
 </div>
 </div>
 </footer>
+<div style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 12px; z-index:9999;">
+  <input type="email" id="email" placeholder="Email"><br><br>
+  <input type="password" id="password" placeholder="Password"><br><br>
+  <button onclick="handleSignup()">Sign Up</button>
+  <button onclick="handleLogin()">Login</button>
+</div>
 <script>
         const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -793,11 +793,16 @@
         } else {
             fadeSections.forEach((section) => section.classList.add('is-visible'));
         }
-      const supabase = window.supabaseClient;
+const supabase = window.supabaseClient;
 
 // SIGN UP
 async function signUp(email, password) {
-  const { data, error } = await supabase.auth.signUp({
+  const client = window.supabaseClient || supabase;
+  if (!client) {
+    alert("Supabase client not loaded");
+    return;
+  }
+  const { data, error } = await client.auth.signUp({
     email,
     password
   });
@@ -805,13 +810,18 @@ async function signUp(email, password) {
   if (error) {
     alert(error.message);
   } else {
-    alert("Signup successful ✅");
+    alert("Signup successful");
   }
 }
 
 // LOGIN
 async function signIn(email, password) {
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const client = window.supabaseClient || supabase;
+  if (!client) {
+    alert("Supabase client not loaded");
+    return;
+  }
+  const { data, error } = await client.auth.signInWithPassword({
     email,
     password
   });
@@ -819,7 +829,7 @@ async function signIn(email, password) {
   if (error) {
     alert(error.message);
   } else {
-    alert("Login successful ✅");
+    alert("Login successful");
   }
 }
 function handleSignup() {
