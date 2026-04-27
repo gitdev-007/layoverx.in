@@ -794,14 +794,27 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             fadeSections.forEach((section) => section.classList.add('is-visible'));
         }
-async function signUp(email, password) {
-const supabase = window.supabaseClient;
-if (!supabase) {
+
+function getSupabase() {
+if (!window.supabaseClient) {
+console.error("Supabase not loaded");
 alert("Supabase client not loaded");
-return;
+// #region agent log
+fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'B',location:'index.html:~getSupabase',message:'getSupabase missing window.supabaseClient',data:{hasSupabase:!!window.supabase,hasSupabaseClient:!!window.supabaseClient},timestamp:Date.now()})}).catch(()=>{});
+// #endregion
+return null;
+}
+// #region agent log
+fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'B',location:'index.html:~getSupabase',message:'getSupabase returning supabaseClient',data:{hasSupabaseClient:!!window.supabaseClient},timestamp:Date.now()})}).catch(()=>{});
+// #endregion
+return window.supabaseClient;
 }
 
-const { error } = await supabase.auth.signUp({
+async function signUp(email, password) {
+const supabaseClient = getSupabase();
+if (!supabaseClient) return;
+
+const { error } = await supabaseClient.auth.signUp({
 email,
 password
 });
@@ -811,13 +824,10 @@ else alert("Signup successful");
 }
 
 async function signIn(email, password) {
-const supabase = window.supabaseClient;
-if (!supabase) {
-alert("Supabase client not loaded");
-return;
-}
+const supabaseClient = getSupabase();
+if (!supabaseClient) return;
 
-const { error } = await supabase.auth.signInWithPassword({
+const { error } = await supabaseClient.auth.signInWithPassword({
 email,
 password
 });
@@ -841,17 +851,25 @@ window.handleLogin = function handleLogin() {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-    const supabaseClient = window.supabase.createClient(
-      "YOUR_PROJECT_URL",
-      "YOUR_ANON_KEY"
-    );
+  console.log("Supabase init starting");
+  // #region agent log
+  fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'A',location:'index.html:~supabase-init',message:'Supabase init starting (DOMContentLoaded)',data:{hasWindowSupabase:!!window.supabase},timestamp:Date.now()})}).catch(()=>{});
+  // #endregion
 
-    window.supabaseClient = supabaseClient;
+  const supabaseClient = window.supabase.createClient(
+    "https://wxgcpopghopfyuaqbbfb.supabase.co",
+    "sb_publishable_Sq0N68LRTlfMDXX1KNFABQ_kgO56I-_"
+  );
 
-    console.log("Supabase initialized");
+  window.supabaseClient = supabaseClient;
 
-  });
+  console.log("Supabase initialized");
+  // #region agent log
+  fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'C',location:'index.html:~supabase-init',message:'Supabase initialized and assigned to window',data:{hasSupabaseClient:!!window.supabaseClient,url:'https://wxgcpopghopfyuaqbbfb.supabase.co',keyLength:("sb_publishable_Sq0N68LRTlfMDXX1KNFABQ_kgO56I-_".length)},timestamp:Date.now()})}).catch(()=>{});
+  // #endregion
+
+});
 </script>
 </body></html>
