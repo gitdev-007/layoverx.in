@@ -134,6 +134,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function signUp(email, password) {
+    // #region agent log
+    fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'P3',location:'js/main.js:~signUp',message:'signUp called',data:{hasEmail:!!email,passwordLength:typeof password==='string'?password.length:0},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
     const supabaseClient = getSupabase();
     if (!supabaseClient) throw new Error('Supabase client not loaded.');
     const { error } = await supabaseClient.auth.signUp({ email, password });
@@ -327,8 +330,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (navPlanLayover) {
       navPlanLayover.addEventListener('click', async (e) => {
+        // #region agent log
+        fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'P1',location:'js/main.js:~navPlanLayover',message:'Plan Layover clicked',data:{href:navPlanLayover.getAttribute('href')},timestamp:Date.now()})}).catch(()=>{});
+        // #endregion
         const u = await checkUser();
-        if (!u) { e.preventDefault(); openAuthModal(); }
+        // #region agent log
+        fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'P2',location:'js/main.js:~navPlanLayover',message:'Plan Layover user state resolved',data:{hasUser:!!u},timestamp:Date.now()})}).catch(()=>{});
+        // #endregion
+        if (!u) {
+          e.preventDefault();
+          // #region agent log
+          fetch('http://127.0.0.1:7386/ingest/906f7911-d4a7-47af-abdd-10f049d51ba8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d22060'},body:JSON.stringify({sessionId:'d22060',runId:'pre-fix',hypothesisId:'P2',location:'js/main.js:~navPlanLayover',message:'Plan Layover redirected to modal for unauthenticated user',data:{},timestamp:Date.now()})}).catch(()=>{});
+          // #endregion
+          openAuthModal();
+        }
       });
     }
   }
