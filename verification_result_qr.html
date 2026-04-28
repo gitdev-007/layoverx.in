@@ -62,12 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const continueBtn = document.querySelector('button');
     if (continueBtn) {
         continueBtn.addEventListener('click', () => {
+            console.log("Continue button clicked - navigating to options");
             // Store verification flag in sessionStorage
             sessionStorage.setItem('isVerified', 'true');
             sessionStorage.setItem('verifiedPassenger', JSON.stringify(verificationData.data));
             
-            // Redirect to main website
-            window.location.href = 'explore_experiences.html';
+            // Redirect to options page to continue the journey
+            window.location.href = 'options.html';
         });
     }
     

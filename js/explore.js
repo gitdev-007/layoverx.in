@@ -50,17 +50,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 5. Continue Button Logic
+    // 5. Continue Button Logic - Start QR Verification Flow
     continueBtn?.addEventListener("click", () => {
         if (selectedServices.size > 0) {
-            // Also store as 'selectedExperiences' if specifically requested by some legacy logic
-            localStorage.setItem("selectedExperiences", JSON.stringify(Array.from(selectedServices)));
+            console.log("Explore button clicked - starting QR flow");
             
+            // Store selected services for later use
+            localStorage.setItem("selectedExperiences", JSON.stringify(Array.from(selectedServices)));
+            localStorage.setItem("selectedServices", JSON.stringify(Array.from(selectedServices)));
+            
+            // Navigate to QR upload page instead of options
             if (typeof window.handleStepNavigation === 'function') {
-                window.handleStepNavigation("options.html");
+                window.handleStepNavigation("qr_upload_state_qr.html");
             } else {
-                window.location.href = "options.html";
+                window.location.href = "qr_upload_state_qr.html";
             }
+        } else {
+            console.log("No services selected - cannot proceed");
         }
     });
 
