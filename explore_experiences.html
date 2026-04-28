@@ -221,6 +221,19 @@ fetch('/components/header.html')
 <script src="js/main.js"></script>
 <script src="js/explore.js"></script>
 <script>
+// QR Verification Protection for Explore Experiences Page
+document.addEventListener("DOMContentLoaded", () => {
+  const isVerified = localStorage.getItem("isVerified");
+  
+  if (isVerified !== "true") {
+    console.log("User not verified - redirecting to QR upload");
+    window.location.href = "qr_upload_state_qr.html";
+  } else {
+    console.log("User verified - allowing access to explore experiences");
+  }
+});
+</script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
   const airport = localStorage.getItem("airport") || "CSIA T2, Mumbai";
   const duration = localStorage.getItem("duration") || "6.5";
