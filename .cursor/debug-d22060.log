@@ -932,3 +932,4 @@
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H4","location":"js/main.js:~DOMContentLoaded","message":"DOMContentLoaded fired in main.js","data":{"hasSignInBtn":true},"timestamp":1777407231208}
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777407231210}
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777407231287}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"E2","location":"js/main.js:~exploreExperiencesBtn","message":"Explore Experiences button not found","data":{},"timestamp":1777407592479}

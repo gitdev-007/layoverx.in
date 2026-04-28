@@ -15,11 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const progressBar = document.querySelector('.bg-primary');
     const cancelButton = document.querySelector('button');
     
-    // Get verification data from sessionStorage
-    const verificationData = JSON.parse(sessionStorage.getItem('qrVerification') || '{}');
+    // Get QR file from localStorage
+    const qrFileData = localStorage.getItem('qrFile');
     
-    if (!verificationData.verificationId) {
-        // No verification in progress, redirect to upload
+    if (!qrFileData) {
+        // No file found, redirect to upload
         window.location.href = 'qr_upload_state_qr.html';
         return;
     }
@@ -33,61 +33,97 @@ document.addEventListener("DOMContentLoaded", () => {
         { progress: 100, status: 'Complete', icon: 'check_circle' }
     ];
     
-    // Simulate real-time processing
-    function updateProcessing() {
-        if (currentProgress >= 100) {
-            // Processing complete, check final status
-            if (verificationData.verified) {
-                // Redirect to verification result page
-                setTimeout(() => {
-                    window.location.href = 'verification_result_qr.html';
-                }, 1000);
-            } else {
-                // Redirect to final result page
-                setTimeout(() => {
-                    window.location.href = 'final_result_qr.html';
-                }, 1000);
-            }
-            return;
-        }
-        
-        const currentStep = processingSteps.find((step, index) => {
-            return currentProgress >= step.progress;
-        });
-        
-        if (currentStep) {
-            // Update UI
-            percentageDisplay.textContent = currentStep.progress + '%';
-            statusText.textContent = currentStep.status;
-            progressBar.style.width = currentStep.progress + '%';
+    // Update UI with current processing step
+    function updateProcessing(step) {
+        if (step) {
+            percentageDisplay.textContent = step.progress + '%';
+            statusText.textContent = step.status;
+            progressBar.style.width = step.progress + '%';
             
             // Update status indicator
             const statusIndicator = document.querySelector('.text-blue-600');
             if (statusIndicator) {
                 statusIndicator.innerHTML = `
                     <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-                    ${currentStep.status}
+                    ${step.status}
                 `;
             }
         }
-        
-        currentProgress += 25;
     }
     
-    // Start processing simulation
-    const processingInterval = setInterval(() => {
-        updateProcessing();
-    }, 1500);
+    // Process QR file
+    async function processQRFile() {
+        try {
+            const fileData = JSON.parse(qrFileData);
+            console.log('Processing QR file:', fileData.name);
+            
+            // Update UI to show processing
+            updateProcessing(processingSteps[0]);
+            
+            // Call backend API to process QR
+            const response = await fetch('/api/process-qr', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    file: fileData.data,
+                    name: fileData.name,
+                    type: fileData.type
+                })
+            });
+            
+            updateProcessing(processingSteps[1]);
+            
+            if (!response.ok) {
+                throw new Error('Failed to process QR code');
+            }
+            
+            const result = await response.json();
+            updateProcessing(processingSteps[2]);
+            
+            if (result.success && result.qrData) {
+                // Store QR data in localStorage
+                localStorage.setItem('qrData', JSON.stringify({
+                    success: true,
+                    qrData: result.qrData,
+                    timestamp: new Date().toISOString(),
+                    fileName: fileData.name
+                }));
+                
+                updateProcessing(processingSteps[3]);
+                updateProcessing(processingSteps[4]);
+                
+                // Redirect to verification result page
+                setTimeout(() => {
+                    window.location.href = 'verification_result_qr.html';
+                }, 1000);
+                
+            } else {
+                throw new Error('QR code not detected or invalid');
+            }
+            
+        } catch (error) {
+            console.error('QR processing error:', error);
+            
+            // Show error and redirect back to upload
+            alert('QR code could not be processed. Please try again.');
+            localStorage.removeItem('qrFile');
+            
+            setTimeout(() => {
+                window.location.href = 'qr_upload_state_qr.html';
+            }, 1000);
+        }
+    }
     
     // Cancel processing
     cancelButton.addEventListener('click', () => {
-        clearInterval(processingInterval);
-        sessionStorage.removeItem('qrVerification');
+        localStorage.removeItem('qrFile');
         window.location.href = 'qr_upload_state_qr.html';
     });
     
     // Start processing immediately
-    updateProcessing();
+    processQRFile();
 });
 </script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>

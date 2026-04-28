@@ -9,57 +9,211 @@
 <script src="js/main.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // Get verification data from sessionStorage
-    const verificationData = JSON.parse(sessionStorage.getItem('qrVerification') || '{}');
+    // Get QR result from localStorage
+    const qrResultStorage = localStorage.getItem('qrResult');
     
-    if (!verificationData.verificationId) {
-        // No verification data, redirect to upload
+    if (!qrResultStorage) {
+        // No QR result found, redirect to upload
         window.location.href = 'qr_upload_state_qr.html';
         return;
     }
     
-    // Update page with verification data
-    if (verificationData.verified) {
-        // This should not happen - verified users go to verification_result_qr.html
-        window.location.href = 'verification_result_qr.html';
-        return;
-    }
-    
-    // Show failure details
-    const systemMessageEl = document.querySelector('.text-on-surface.font-semibold.text-right');
-    const timestampEl = document.querySelector('.text-on-surface.font-semibold.text-right');
-    const terminalIdEl = document.querySelector('.text-on-surface.font-semibold.text-right');
-    
-    if (systemMessageEl) {
-        systemMessageEl.textContent = verificationData.reason || 'ERR_SCAN_FORMAT_MISMATCH';
-    }
-    
-    if (timestampEl) {
-        timestampEl.textContent = new Date().toLocaleString();
-    }
-    
-    if (terminalIdEl) {
-        terminalIdEl.textContent = 'LHR-T5-B24';
-    }
-    
-    // Try again functionality
-    const tryAgainBtn = document.querySelector('button');
-    if (tryAgainBtn) {
-        tryAgainBtn.addEventListener('click', () => {
-            // Clear verification data and redirect to upload
-            sessionStorage.removeItem('qrVerification');
-            sessionStorage.removeItem('isVerified');
-            sessionStorage.removeItem('verifiedPassenger');
+    try {
+        const qrResult = JSON.parse(qrResultStorage);
+        console.log('Final QR result:', qrResult);
+        
+        // Update UI based on verification result
+        updateFinalUI(qrResult);
+        
+        // Clear storage after completion
+        clearStorage();
+        
+    } catch (error) {
+        console.error('Final result error:', error);
+        // Show error and redirect to upload
+        alert('Error loading verification result. Please try again.');
+        setTimeout(() => {
             window.location.href = 'qr_upload_state_qr.html';
-        });
+        }, 1000);
     }
     
-    // Manual receipt upload functionality
-    const manualUploadBtn = document.querySelectorAll('button')[1];
-    if (manualUploadBtn) {
-        manualUploadBtn.addEventListener('click', () => {
-            alert('Manual receipt upload feature coming soon. Please try scanning your QR code again.');
-        });
+    // Function to update UI based on final result
+    function updateFinalUI(result) {
+        const isValid = result.valid;
+        
+        if (isValid) {
+            // Show success case
+            showSuccessCase(result);
+        } else {
+            // Show failure case
+            showFailureCase(result);
+        }
+    }
+    
+    // Function to show success case
+    function showSuccessCase(result) {
+        // Update page title and header
+        document.title = 'SkyCheck - Verification Success';
+        const titleEl = document.querySelector('h1');
+        if (titleEl) {
+            titleEl.textContent = 'Verification Successful';
+        }
+        
+        // Update main message
+        const mainMessageEl = document.querySelector('.text-body-md');
+        if (mainMessageEl) {
+            mainMessageEl.textContent = 'You are a verified passenger. Access to premium services has been granted.';
+        }
+        
+        // Update status indicator
+        const statusEl = document.querySelector('.text-red-600');
+        if (statusEl) {
+            statusEl.textContent = 'VERIFIED';
+            statusEl.className = 'text-green-600 font-bold text-lg';
+        }
+        
+        // Update card background to success
+        const cardEl = document.querySelector('.bg-white');
+        if (cardEl) {
+            cardEl.classList.add('border-green-200', 'bg-green-50');
+        }
+        
+        // Update button to access/continue
+        const tryAgainBtn = document.querySelector('button');
+        if (tryAgainBtn) {
+            tryAgainBtn.textContent = 'Explore Services';
+            tryAgainBtn.className = 'w-full bg-green-600 text-white py-3 rounded-lg font-label-md hover:bg-green-700 transition-colors';
+            tryAgainBtn.addEventListener('click', () => {
+                // Set verification flag and redirect to explore
+                localStorage.setItem('isVerified', 'true');
+                window.location.href = 'explore_experiences.html';
+            });
+        }
+        
+        // Hide manual upload button
+        const manualUploadBtn = document.querySelectorAll('button')[1];
+        if (manualUploadBtn) {
+            manualUploadBtn.style.display = 'none';
+        }
+        
+        // Show passenger details
+        showPassengerDetails(result);
+    }
+    
+    // Function to show failure case
+    function showFailureCase(result) {
+        // Update page title and header
+        document.title = 'SkyCheck - Verification Failed';
+        const titleEl = document.querySelector('h1');
+        if (titleEl) {
+            titleEl.textContent = 'Verification Failed';
+        }
+        
+        // Update main message
+        const mainMessageEl = document.querySelector('.text-body-md');
+        if (mainMessageEl) {
+            mainMessageEl.textContent = 'We could not verify your QR code. Please try again or contact support.';
+        }
+        
+        // Update status indicator
+        const statusEl = document.querySelector('.text-red-600');
+        if (statusEl) {
+            statusEl.textContent = 'VERIFICATION FAILED';
+            statusEl.className = 'text-red-600 font-bold text-lg';
+        }
+        
+        // Update card background to error
+        const cardEl = document.querySelector('.bg-white');
+        if (cardEl) {
+            cardEl.classList.add('border-red-200', 'bg-red-50');
+        }
+        
+        // Show failure details
+        const systemMessageEl = document.querySelector('.text-on-surface.font-semibold.text-right');
+        const timestampEl = document.querySelector('.text-on-surface.font-semibold.text-right');
+        const terminalIdEl = document.querySelector('.text-on-surface.font-semibold.text-right');
+        
+        if (systemMessageEl) {
+            systemMessageEl.textContent = result.error || 'QR_CODE_INVALID';
+        }
+        
+        if (timestampEl) {
+            timestampEl.textContent = new Date().toLocaleString();
+        }
+        
+        if (terminalIdEl) {
+            terminalIdEl.textContent = 'LHR-T5-B24';
+        }
+        
+        // Try again functionality
+        const tryAgainBtn = document.querySelector('button');
+        if (tryAgainBtn) {
+            tryAgainBtn.textContent = 'Try Again';
+            tryAgainBtn.className = 'w-full bg-red-600 text-white py-3 rounded-lg font-label-md hover:bg-red-700 transition-colors';
+            tryAgainBtn.addEventListener('click', () => {
+                window.location.href = 'qr_upload_state_qr.html';
+            });
+        }
+        
+        // Manual receipt upload functionality
+        const manualUploadBtn = document.querySelectorAll('button')[1];
+        if (manualUploadBtn) {
+            manualUploadBtn.addEventListener('click', () => {
+                alert('Manual receipt upload feature coming soon. Please try scanning your QR code again.');
+            });
+        }
+    }
+    
+    // Function to show passenger details (for success case)
+    function showPassengerDetails(result) {
+        // Create passenger details section
+        const detailsContainer = document.createElement('div');
+        detailsContainer.className = 'mt-6 p-4 bg-green-100 rounded-lg border border-green-200';
+        detailsContainer.innerHTML = `
+            <h3 class="font-label-md font-semibold text-green-900 mb-3">Passenger Details</h3>
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                    <span class="text-green-700">Name:</span>
+                    <span class="text-green-900 font-medium">${result.name || 'N/A'}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-green-700">Flight:</span>
+                    <span class="text-green-900 font-medium">${result.flight || 'N/A'}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-green-700">Time:</span>
+                    <span class="text-green-900 font-medium">${result.time || 'N/A'}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-green-700">Verification ID:</span>
+                    <span class="text-green-900 font-medium">${result.verificationId || 'N/A'}</span>
+                </div>
+            </div>
+        `;
+        
+        // Insert details before the buttons
+        const buttonContainer = document.querySelector('.flex.justify-center');
+        if (buttonContainer) {
+            buttonContainer.parentNode.insertBefore(detailsContainer, buttonContainer);
+        }
+    }
+    
+    // Function to clear storage
+    function clearStorage() {
+        // Clear QR-related storage but keep verification flag if valid
+        const qrResult = JSON.parse(localStorage.getItem('qrResult') || '{}');
+        
+        if (qrResult.valid) {
+            // Keep verification flag, clear QR data
+            localStorage.removeItem('qrFile');
+            localStorage.removeItem('qrData');
+        } else {
+            // Clear everything for failed verification
+            localStorage.removeItem('qrFile');
+            localStorage.removeItem('qrData');
+            localStorage.removeItem('qrResult');
+            localStorage.removeItem('isVerified');
+        }
     }
 });
 </script>

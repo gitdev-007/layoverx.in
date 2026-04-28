@@ -127,53 +127,37 @@ document.addEventListener("DOMContentLoaded", () => {
         
         updateProgress(2);
         
-        const formData = new FormData();
-        formData.append('qrImage', selectedFile);
+        // Convert file to Base64 for storage
+        const reader = new FileReader();
         
-        try {
-            const response = await fetch('http://localhost:3001/api/verify-qr', {
-                method: 'POST',
-                body: formData
-            });
+        reader.onload = async (e) => {
+            const base64Data = e.target.result;
             
-            const result = await response.json();
-            verificationId = result.verificationId;
+            // Store file in localStorage
+            const fileData = {
+                name: selectedFile.name,
+                type: selectedFile.type,
+                size: selectedFile.size,
+                data: base64Data,
+                timestamp: new Date().toISOString()
+            };
             
-            if (result.status === 'verified') {
-                updateProgress(3);
-                // Store verification data in sessionStorage
-                sessionStorage.setItem('qrVerification', JSON.stringify({
-                    verified: true,
-                    data: result.data,
-                    verificationId: result.verificationId,
-                    timestamp: result.timestamp
-                }));
-                
-                // Redirect to verification result page after delay
-                setTimeout(() => {
-                    window.location.href = 'verification_result_qr.html';
-                }, 1500);
-            } else {
-                updateProgress(4);
-                // Store failure data
-                sessionStorage.setItem('qrVerification', JSON.stringify({
-                    verified: false,
-                    reason: result.reason,
-                    verificationId: result.verificationId,
-                    timestamp: result.timestamp
-                }));
-                
-                // Show error and redirect to final result page
-                setTimeout(() => {
-                    window.location.href = 'final_result_qr.html';
-                }, 2000);
-            }
+            localStorage.setItem('qrFile', JSON.stringify(fileData));
             
-        } catch (error) {
-            console.error('Upload error:', error);
-            alert('Upload failed. Please try again.');
+            console.log('File stored in localStorage:', fileData.name);
+            
+            // Redirect to processing page
+            setTimeout(() => {
+                window.location.href = 'processing_state_qr.html';
+            }, 1000);
+        };
+        
+        reader.onerror = () => {
+            alert('Failed to read file. Please try again.');
             updateProgress(1);
-        }
+        };
+        
+        reader.readAsDataURL(selectedFile);
     }
     
     // Event listeners
