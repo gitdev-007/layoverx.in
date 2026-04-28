@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkyCheck - Verification Failed</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Get verification data from sessionStorage
+    const verificationData = JSON.parse(sessionStorage.getItem('qrVerification') || '{}');
+    
+    if (!verificationData.verificationId) {
+        // No verification data, redirect to upload
+        window.location.href = 'qr_upload_state_qr.html';
+        return;
+    }
+    
+    // Update page with verification data
+    if (verificationData.verified) {
+        // This should not happen - verified users go to verification_result_qr.html
+        window.location.href = 'verification_result_qr.html';
+        return;
+    }
+    
+    // Show failure details
+    const systemMessageEl = document.querySelector('.text-on-surface.font-semibold.text-right');
+    const timestampEl = document.querySelector('.text-on-surface.font-semibold.text-right');
+    const terminalIdEl = document.querySelector('.text-on-surface.font-semibold.text-right');
+    
+    if (systemMessageEl) {
+        systemMessageEl.textContent = verificationData.reason || 'ERR_SCAN_FORMAT_MISMATCH';
+    }
+    
+    if (timestampEl) {
+        timestampEl.textContent = new Date().toLocaleString();
+    }
+    
+    if (terminalIdEl) {
+        terminalIdEl.textContent = 'LHR-T5-B24';
+    }
+    
+    // Try again functionality
+    const tryAgainBtn = document.querySelector('button');
+    if (tryAgainBtn) {
+        tryAgainBtn.addEventListener('click', () => {
+            // Clear verification data and redirect to upload
+            sessionStorage.removeItem('qrVerification');
+            sessionStorage.removeItem('isVerified');
+            sessionStorage.removeItem('verifiedPassenger');
+            window.location.href = 'qr_upload_state_qr.html';
+        });
+    }
+    
+    // Manual receipt upload functionality
+    const manualUploadBtn = document.querySelectorAll('button')[1];
+    if (manualUploadBtn) {
+        manualUploadBtn.addEventListener('click', () => {
+            alert('Manual receipt upload feature coming soon. Please try scanning your QR code again.');
+        });
+    }
+});
+</script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d3e4fe",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f4f3fa",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-primary-fixed": "#00164e",
+                        "outline-variant": "#c5c5d3",
+                        "background": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d0e1fb",
+                        "surface-dim": "#dad9e1",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-primary-container": "#90a8ff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-secondary-container": "#54647a",
+                        "surface": "#faf8ff",
+                        "primary-container": "#1e3a8a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#272b2d",
+                        "surface-container-high": "#e9e7ef",
+                        "surface-bright": "#faf8ff",
+                        "tertiary-container": "#3d4143",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#444651",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-variant": "#e3e1e9",
+                        "primary": "#00236f",
+                        "inverse-surface": "#2f3036",
+                        "on-primary-fixed-variant": "#264191",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#4059aa",
+                        "primary-fixed": "#dce1ff",
+                        "surface-container": "#eeedf4",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "outline": "#757682",
+                        "secondary": "#505f76",
+                        "on-background": "#1a1b21",
+                        "inverse-primary": "#b6c4ff",
+                        "surface-container-highest": "#e3e1e9",
+                        "on-surface": "#1a1b21",
+                        "inverse-on-surface": "#f1f0f7",
+                        "on-tertiary-container": "#aaadaf",
+                        "on-secondary-fixed-variant": "#38485d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "2xl": "48px",
+                        "3xl": "64px",
+                        "margin-mobile": "16px",
+                        "container-max": "1200px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "0", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #F1F5F9;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-2">
+<span class="text-xl font-bold tracking-tight text-blue-900 dark:text-blue-400 font-headline-md">SkyCheck</span>
+</div>
+<nav class="hidden md:flex items-center gap-8 h-full">
+<a class="font-manrope text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Dashboard</a>
+<a class="font-manrope text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Verification</a>
+<a class="font-manrope text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">History</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-blue-900 dark:text-blue-400 active:opacity-80 transition-all" data-icon="help">help</button>
+<button class="material-symbols-outlined text-blue-900 dark:text-blue-400 active:opacity-80 transition-all" data-icon="settings">settings</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="User profile" data-alt="professional male portrait for user profile in airport security terminal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0sOaa1Gm9iX2TO7-E7BP9A8mcBvwmdZlMm358Sr-4-a45bi4Jc2ZnfzxnBRrejaL1SHW31CmADbJMws1maqjJD8InQDcuI8zT4GjMFeFUoqz5ll2SXdPv_NTn1O6G4Vq0GdTcfWgtKElFUWTjOicZdYU2cDRpyDkGaJnk81zs2p_6riiAaBhpY5ww9hzBd8AOcsQp6ECvDxve3Bo2g7cLN7SKg5bFL9u2p8h_Wr3P2KM_n1kedrJ6RB2veGI7Se2nbPIkSOEvm3E"/>
+</div>
+</div>
+</header>
+<!-- Main Content Cluster -->
+<div class="flex flex-1 pt-16">
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex flex-col w-24 h-screen pt-20 pb-8 fixed left-0 top-0 bg-slate-50 dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800">
+<div class="flex flex-col gap-6 items-center flex-1">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 p-2 hover:bg-slate-200 dark:hover:bg-slate-800 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-manrope text-xs font-semibold">Upload</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 p-2 hover:bg-slate-200 dark:hover:bg-slate-800 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1" data-icon="sync">sync</span>
+<span class="font-manrope text-xs font-semibold">Processing</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 p-2 hover:bg-slate-200 dark:hover:bg-slate-800 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1" data-icon="fact_check">fact_check</span>
+<span class="font-manrope text-xs font-semibold">Verification</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-blue-50 dark:bg-blue-900/30 text-blue-900 dark:text-blue-100 rounded-lg p-2 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-manrope text-xs font-semibold">Final</span>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-24 flex flex-col items-center px-gutter py-12">
+<div class="w-full max-w-[600px] flex flex-col items-center">
+<!-- Header -->
+<h1 class="font-headline-lg text-primary text-center mb-10">Flight QR Verification Result</h1>
+<!-- Step Progress Bar -->
+<div class="w-full flex items-center justify-between mb-12 relative px-4">
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-slate-200 -z-10 -translate-y-1/2"></div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center bg-background">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-sm mb-2 ring-4 ring-background">
+<span class="material-symbols-outlined text-lg" data-icon="check">check</span>
+</div>
+<span class="font-label-sm text-on-surface-variant">Upload</span>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center bg-background">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-sm mb-2 ring-4 ring-background">
+<span class="material-symbols-outlined text-lg" data-icon="check">check</span>
+</div>
+<span class="font-label-sm text-on-surface-variant">Processing</span>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center bg-background">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-sm mb-2 ring-4 ring-background">
+<span class="material-symbols-outlined text-lg" data-icon="check">check</span>
+</div>
+<span class="font-label-sm text-on-surface-variant">Verification</span>
+</div>
+<!-- Step 4 Active (Error State Override) -->
+<div class="flex flex-col items-center bg-background">
+<div class="w-8 h-8 rounded-full bg-error flex items-center justify-center text-white text-sm mb-2 ring-4 ring-background">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+</div>
+<span class="font-label-sm text-error font-bold">Final</span>
+</div>
+</div>
+<!-- Main Error Card -->
+<div class="w-full bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200 flex flex-col items-center p-xl">
+<div class="w-24 h-24 rounded-full bg-error-container flex items-center justify-center mb-lg">
+<span class="material-symbols-outlined text-error text-5xl" data-icon="error" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+<div class="text-center mb-xl">
+<span class="bg-error-container text-on-error-container px-4 py-1.5 rounded-full font-label-md text-sm mb-4 inline-block">Failure</span>
+<h2 class="font-headline-md text-on-surface mb-2">We couldn't verify your flight QR code.</h2>
+<p class="font-body-md text-on-surface-variant max-w-sm mx-auto">Unreadable code or invalid format.</p>
+</div>
+<div class="w-full space-y-gutter">
+<!-- Decorative Boarding Pass Separator Meta -->
+<div class="flex items-center gap-4 w-full opacity-30">
+<div class="h-px flex-1 bg-dashed bg-slate-300" style="background-image: linear-gradient(to right, #cbd5e1 50%, rgba(255,255,255,0) 0%); background-position: bottom; background-size: 8px 1px; background-repeat: repeat-x;"> </div>
+<span class="material-symbols-outlined text-slate-400" data-icon="airplane_ticket">airplane_ticket</span>
+<div class="h-px flex-1 bg-dashed bg-slate-300" style="background-image: linear-gradient(to right, #cbd5e1 50%, rgba(255,255,255,0) 0%); background-position: bottom; background-size: 8px 1px; background-repeat: repeat-x;"> </div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-lg border border-outline-variant/30 text-left w-full">
+<h3 class="font-label-md text-on-surface mb-sm">Verification Details</h3>
+<div class="grid grid-cols-2 gap-y-sm text-sm">
+<span class="text-on-surface-variant">System Message:</span>
+<span class="text-on-surface font-semibold text-right">ERR_SCAN_FORMAT_MISMATCH</span>
+<span class="text-on-surface-variant">Timestamp:</span>
+<span class="text-on-surface font-semibold text-right">2024-05-20 14:23 UTC</span>
+<span class="text-on-surface-variant">Terminal ID:</span>
+<span class="text-on-surface font-semibold text-right">LHR-T5-B24</span>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<button class="w-full bg-primary text-white py-4 rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-primary-container transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+                                Try Again
+                            </button>
+<button class="w-full bg-transparent text-secondary py-3 rounded-lg font-label-md border border-outline hover:bg-slate-50 transition-all">
+                                Upload Manual Receipt
+                            </button>
+</div>
+</div>
+</div>
+<!-- Guidance section -->
+<div class="mt-xl flex gap-gutter items-start p-lg bg-white/50 backdrop-blur-sm rounded-xl border border-white">
+<span class="material-symbols-outlined text-blue-900 mt-1" data-icon="lightbulb">lightbulb</span>
+<div class="flex-1">
+<h4 class="font-label-md text-on-surface">Tips for Scanning</h4>
+<ul class="text-body-sm text-on-surface-variant mt-sm space-y-1 list-disc pl-4">
+<li>Ensure the QR code is fully visible within the frame</li>
+<li>Check for glare or screen reflections</li>
+<li>Increase your mobile device brightness to maximum</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-6 px-8 flex flex-col md:flex-row justify-between items-center gap-4 mt-auto bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+<p class="font-manrope text-xs text-slate-600 dark:text-slate-400">© 2024 SkyCheck Aviation Security. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="font-manrope text-xs text-slate-500 dark:text-slate-500 hover:text-blue-800 dark:hover:text-blue-300 transition-opacity duration-150" href="#">Privacy Policy</a>
+<a class="font-manrope text-xs text-slate-500 dark:text-slate-500 hover:text-blue-800 dark:hover:text-blue-300 transition-opacity duration-150" href="#">Terms of Service</a>
+<a class="font-manrope text-xs text-slate-500 dark:text-slate-500 hover:text-blue-800 dark:hover:text-blue-300 transition-opacity duration-150" href="#">Support</a>
+</div>
+</footer>
+</body></html>

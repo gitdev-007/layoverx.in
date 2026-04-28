@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkyCheck - Verification Success</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Get verification data from sessionStorage
+    const verificationData = JSON.parse(sessionStorage.getItem('qrVerification') || '{}');
+    
+    if (!verificationData.verified || !verificationData.data) {
+        // No valid verification, redirect to upload
+        window.location.href = 'qr_upload_state_qr.html';
+        return;
+    }
+    
+    // Update page with verification data
+    const passengerNameEl = document.querySelector('.text-on-surface');
+    const flightNumberEl = document.querySelector('.text-on-surface');
+    const dateTimeEl = document.querySelector('.text-on-surface');
+    
+    if (verificationData.data) {
+        const data = verificationData.data;
+        
+        // Update passenger name
+        const nameElements = document.querySelectorAll('.text-on-surface');
+        if (nameElements[0]) {
+            nameElements[0].textContent = data.name || 'John Doe';
+        }
+        
+        // Update flight number
+        const flightElements = document.querySelectorAll('.text-on-surface');
+        if (flightElements[0]) {
+            flightElements[0].textContent = data.flight || 'BA123';
+        }
+        
+        // Update date and time
+        const dateTimeElements = document.querySelectorAll('.text-on-surface');
+        if (dateTimeElements[0]) {
+            const date = new Date(data.date || '2024-05-01');
+            dateTimeElements[0].textContent = date.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        // Update verification ID
+        const verificationIdEl = document.querySelector('strong');
+        if (verificationIdEl) {
+            verificationIdEl.textContent = verificationData.verificationId || 'AQ-992-881';
+        }
+    }
+    
+    // Continue button functionality
+    const continueBtn = document.querySelector('button');
+    if (continueBtn) {
+        continueBtn.addEventListener('click', () => {
+            // Store verification flag in sessionStorage
+            sessionStorage.setItem('isVerified', 'true');
+            sessionStorage.setItem('verifiedPassenger', JSON.stringify(verificationData.data));
+            
+            // Redirect to main website
+            window.location.href = 'explore_experiences.html';
+        });
+    }
+    
+    // Download receipt functionality
+    const downloadBtn = document.querySelectorAll('button')[1];
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+            // Create receipt data
+            const receiptData = {
+                verificationId: verificationData.verificationId,
+                passenger: verificationData.data.name,
+                flight: verificationData.data.flight,
+                date: verificationData.data.date,
+                timestamp: verificationData.timestamp,
+                status: 'VERIFIED'
+            };
+            
+            // Create and download receipt
+            const blob = new Blob([JSON.stringify(receiptData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `skycheck-receipt-${verificationData.verificationId}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    }
+});
+</script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#d3e4fe",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-low": "#f4f3fa",
+                      "tertiary-fixed": "#e0e3e5",
+                      "on-primary-fixed": "#00164e",
+                      "outline-variant": "#c5c5d3",
+                      "background": "#faf8ff",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#d0e1fb",
+                      "surface-dim": "#dad9e1",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#444749",
+                      "on-primary-container": "#90a8ff",
+                      "tertiary-fixed-dim": "#c4c7c9",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#191c1e",
+                      "on-secondary-container": "#54647a",
+                      "surface": "#faf8ff",
+                      "primary-container": "#1e3a8a",
+                      "primary-fixed-dim": "#b6c4ff",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#272b2d",
+                      "surface-container-high": "#e9e7ef",
+                      "surface-bright": "#faf8ff",
+                      "tertiary-container": "#3d4143",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#444651",
+                      "on-secondary-fixed": "#0b1c30",
+                      "surface-variant": "#e3e1e9",
+                      "primary": "#00236f",
+                      "inverse-surface": "#2f3036",
+                      "on-primary-fixed-variant": "#264191",
+                      "on-primary": "#ffffff",
+                      "surface-tint": "#4059aa",
+                      "primary-fixed": "#dce1ff",
+                      "surface-container": "#eeedf4",
+                      "on-error": "#ffffff",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "outline": "#757682",
+                      "secondary": "#505f76",
+                      "on-background": "#1a1b21",
+                      "inverse-primary": "#b6c4ff",
+                      "surface-container-highest": "#e3e1e9",
+                      "on-surface": "#1a1b21",
+                      "inverse-on-surface": "#f1f0f7",
+                      "on-tertiary-container": "#aaadaf",
+                      "on-secondary-fixed-variant": "#38485d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "gutter": "24px",
+                      "base": "4px",
+                      "lg": "24px",
+                      "2xl": "48px",
+                      "3xl": "64px",
+                      "margin-mobile": "16px",
+                      "container-max": "1200px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "headline-sm": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Manrope"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "0", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                      "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .success-glow {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-body-md text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar Shell -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-blue-900 dark:text-blue-400 font-headline-md">SkyCheck</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-manrope text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Dashboard</a>
+<a class="font-manrope text-sm font-medium text-blue-900 dark:text-blue-400 font-bold border-b-2 border-blue-900" href="#">Verification</a>
+<a class="font-manrope text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Logs</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-500 hover:text-blue-900 transition-all active:opacity-80" data-icon="help">help</button>
+<button class="material-symbols-outlined text-slate-500 hover:text-blue-900 transition-all active:opacity-80" data-icon="settings">settings</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="professional portrait of a security administrator in a minimalist office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4lWa4kSzKkkI4nBtto9cQipu9Wh3d3qFkKwXdlQBpqxvo_n33fiR26A4B2XKlXMbFd9oWPmBk3wBZHqXCQmPePtcAVVYwe5YBouLVwCuqiHE4OoUFjTyeKaMjL2qneYOXSt-IBOPc7C49_PPKkG6NlZnQjNoFceN3-Rsl1VW7hhC-jwnlr5X2LBI1-1Ug-F-jA3dkIBkXmAFqQoSzd3iDjhlTpWZz6xQqwu4f0868BgsVok11wmcvIC7ZptnyIvdeUxwqjxJhqpE"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar Shell (Desktop) -->
+<aside class="hidden md:flex flex-col w-24 h-screen pt-20 pb-8 fixed left-0 top-0 bg-slate-50 dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800">
+<div class="flex flex-col gap-6 px-3">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined mb-1" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-manrope text-xs font-semibold">Upload</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined mb-1" data-icon="sync">sync</span>
+<span class="font-manrope text-xs font-semibold">Processing</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-blue-50 dark:bg-blue-900/30 text-blue-900 dark:text-blue-100 rounded-lg p-2 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined mb-1" data-icon="fact_check" style="font-variation-settings: 'FILL' 1;">fact_check</span>
+<span class="font-manrope text-xs font-semibold">Verification</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined mb-1" data-icon="verified">verified</span>
+<span class="font-manrope text-xs font-semibold">Final</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="pt-24 pb-12 md:pl-32 px-6 max-w-7xl mx-auto">
+<div class="max-w-[800px] mx-auto">
+<!-- Header Section -->
+<div class="mb-8">
+<h1 class="font-headline-lg text-primary mb-2">Verification Result</h1>
+<p class="text-body-md text-secondary">The passenger credentials have been successfully cross-referenced with flight manifests.</p>
+</div>
+<!-- Progress Bar -->
+<div class="mb-10 flex items-center justify-between relative px-4">
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-slate-200 -z-10 -translate-y-1/2"></div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center gap-2 bg-slate-50 px-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+</div>
+<span class="font-label-sm text-secondary">Upload</span>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center gap-2 bg-slate-50 px-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+</div>
+<span class="font-label-sm text-secondary">Processing</span>
+</div>
+<!-- Step 3 Active -->
+<div class="flex flex-col items-center gap-2 bg-slate-50 px-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white ring-4 ring-primary/20">
+<div class="w-2 h-2 rounded-full bg-white"></div>
+</div>
+<span class="font-label-sm text-primary font-bold">Verification</span>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center gap-2 bg-slate-50 px-2">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-500">
+<span class="font-label-sm">4</span>
+</div>
+<span class="font-label-sm text-slate-400">Final</span>
+</div>
+</div>
+<!-- Verification Success Card -->
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm success-glow overflow-hidden mb-8">
+<div class="bg-emerald-50 px-8 py-6 border-b border-emerald-100 flex items-center gap-4">
+<div class="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[32px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<h2 class="font-headline-md text-emerald-900">Verification Success</h2>
+<span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Confirmed</span>
+</div>
+</div>
+<div class="p-8">
+<div class="grid md:grid-cols-2 gap-8">
+<!-- Flight Detail Information -->
+<div class="space-y-6">
+<div class="relative pb-6 border-b border-dashed border-slate-200">
+<span class="font-label-sm text-secondary block mb-1 uppercase tracking-widest">Passenger Name</span>
+<span class="font-headline-sm text-on-surface">John Doe</span>
+</div>
+<div class="flex gap-12">
+<div>
+<span class="font-label-sm text-secondary block mb-1 uppercase tracking-widest">Flight Number</span>
+<span class="font-headline-sm text-on-surface">BA123</span>
+</div>
+<div>
+<span class="font-label-sm text-secondary block mb-1 uppercase tracking-widest">Date &amp; Time</span>
+<span class="font-headline-sm text-on-surface">Oct 24, 10:00 AM</span>
+</div>
+</div>
+<div class="pt-4 flex items-center gap-2 text-emerald-600">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+<span class="text-body-sm font-semibold italic">Biometric link verified successfully</span>
+</div>
+</div>
+<!-- Stats & Visualization -->
+<div class="bg-slate-50 rounded-lg p-6 border border-slate-100">
+<h3 class="font-label-md text-primary mb-4 uppercase tracking-tighter">Validation Metrics</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-body-sm text-secondary">Verification Attempt</span>
+<span class="font-label-md text-primary">Attempt 1</span>
+</div>
+<div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full w-full"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-sm text-secondary">Success Rate</span>
+<span class="font-label-md text-emerald-600">100% Success Rate</span>
+</div>
+<div class="pt-4 border-t border-slate-200">
+<p class="text-body-sm text-secondary leading-relaxed">Securely matched with global aviation database ID: <strong>AQ-992-881</strong></p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Section -->
+<div class="mt-8 flex flex-col md:flex-row gap-4 items-center">
+<button class="w-full md:w-auto bg-primary text-white font-label-md px-8 py-3 rounded-lg hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2">
+                            Continue to Explore
+                            <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="w-full md:w-auto text-primary font-label-md px-8 py-3 rounded-lg border border-primary/20 hover:bg-primary/5 transition-all">
+                            Download Receipt
+                        </button>
+</div>
+</div>
+</div>
+<!-- FAQ Section -->
+<section class="mt-12">
+<h3 class="font-headline-sm text-primary mb-6">Frequently Asked Questions</h3>
+<div class="grid gap-4">
+<div class="bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-200 transition-colors">
+<h4 class="font-label-md text-on-surface mb-2">How long is this verification valid?</h4>
+<p class="text-body-sm text-secondary">Your SkyCheck verification is valid for 24 hours from the time of issue, or until your scheduled flight departure, whichever comes first.</p>
+</div>
+<div class="bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-200 transition-colors">
+<h4 class="font-label-md text-on-surface mb-2">Can I use this for international flights?</h4>
+<p class="text-body-sm text-secondary">Yes, SkyCheck is integrated with over 150 international carriers and regional security protocols for seamless cross-border travel.</p>
+</div>
+<div class="bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-200 transition-colors">
+<h4 class="font-label-md text-on-surface mb-2">What if my flight details change?</h4>
+<p class="text-body-sm text-secondary">If your airline updates your flight number or time, simply re-scan your latest digital boarding pass to sync the verification data.</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full py-6 px-8 flex flex-col md:flex-row justify-between items-center gap-4 mt-auto bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+<span class="font-manrope text-xs text-slate-500 dark:text-slate-500">© 2024 SkyCheck Aviation Security. All rights reserved.</span>
+<div class="flex items-center gap-6">
+<a class="font-manrope text-xs text-slate-500 hover:text-blue-800 dark:hover:text-blue-300 transition-opacity duration-150" href="#">Privacy Policy</a>
+<a class="font-manrope text-xs text-slate-500 hover:text-blue-800 dark:hover:text-blue-300 transition-opacity duration-150" href="#">Terms of Service</a>
+<a class="font-manrope text-xs text-slate-500 hover:text-blue-800 dark:hover:text-blue-300 transition-opacity duration-150" href="#">Support</a>
+</div>
+</footer>
+</body></html>

@@ -1,65 +1,66 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
+<html class="scroll-smooth" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>LayoverX | Finalize Plan</title>
+<title>LayoverX | Finalize Booking</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="css/styles.css" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     "colors": {
-                        "on-surface-variant": "#cfc4c5",
-                        "surface-container-low": "#1b1b1b",
-                        "surface-container-lowest": "#0e0e0e",
-                        "on-secondary-fixed-variant": "#474646",
-                        "on-tertiary": "#303030",
-                        "surface-container-high": "#2a2a2a",
-                        "primary-container": "#ff8c00",
-                        "on-primary-fixed-variant": "#474747",
-                        "secondary-container": "#4a4949",
-                        "surface-variant": "#353535",
-                        "surface-container-highest": "#353535",
-                        "primary": "#ffb77d",
-                        "surface-tint": "#c6c6c6",
-                        "on-primary": "#303030",
-                        "surface-bright": "#393939",
-                        "inverse-primary": "#5e5e5e",
-                        "on-surface": "#e2e2e2",
-                        "on-tertiary-fixed-variant": "#474746",
-                        "secondary-fixed": "#e5e2e1",
-                        "on-error-container": "#ffdad6",
-                        "on-primary-container": "#757575",
-                        "surface": "#131313",
-                        "on-primary-fixed": "#1b1b1b",
-                        "inverse-on-surface": "#303030",
-                        "on-error": "#690005",
-                        "tertiary-fixed-dim": "#c8c6c5",
-                        "tertiary-fixed": "#e5e2e1",
-                        "outline": "#988e90",
-                        "inverse-surface": "#e2e2e2",
-                        "tertiary-container": "#000000",
-                        "secondary-fixed-dim": "#c8c6c5",
-                        "error": "#ffb4ab",
-                        "surface-container": "#1f1f1f",
-                        "on-secondary-fixed": "#1c1b1b",
-                        "on-background": "#e2e2e2",
-                        "primary-fixed-dim": "#c6c6c6",
-                        "background": "#131313",
-                        "tertiary": "#c8c6c5",
-                        "on-tertiary-container": "#767575",
-                        "secondary": "#c8c6c5",
-                        "surface-dim": "#131313",
-                        "on-tertiary-fixed": "#1b1b1c",
-                        "on-secondary-container": "#bab8b7",
-                        "primary-fixed": "#e2e2e2",
-                        "error-container": "#93000a",
-                        "on-secondary": "#313030",
-                        "outline-variant": "#4c4546"
+                        "secondary-fixed-dim": "#d4bbff",
+                        "surface": "#f8f9fa",
+                        "on-surface": "#191c1d",
+                        "surface-bright": "#f8f9fa",
+                        "on-error": "#ffffff",
+                        "primary": "#0040df",
+                        "on-surface-variant": "#434656",
+                        "outline-variant": "#c4c5d9",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-secondary-container": "#fdf6ff",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary": "#993100",
+                        "on-tertiary-fixed": "#380d00",
+                        "on-primary-fixed-variant": "#0035bd",
+                        "surface-container": "#edeeef",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e1e3e4",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed": "#ffdbcf",
+                        "on-tertiary-container": "#ffece6",
+                        "background": "#f8f9fa",
+                        "inverse-primary": "#b8c3ff",
+                        "surface-dim": "#d9dadb",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-primary-fixed": "#001355",
+                        "primary-fixed": "#dde1ff",
+                        "on-secondary": "#ffffff",
+                        "outline": "#747688",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#c24100",
+                        "on-secondary-fixed-variant": "#5d00c2",
+                        "secondary-container": "#8d42ff",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "primary-container": "#2d5bff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e7e8e9",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "on-secondary-fixed": "#270058",
+                        "on-primary-container": "#efefff",
+                        "secondary": "#731be5",
+                        "secondary-fixed": "#ebdcff",
+                        "surface-tint": "#104af0",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed-variant": "#812900"
                     },
                     "borderRadius": {
                         "DEFAULT": "0.25rem",
@@ -68,193 +69,632 @@
                         "full": "9999px"
                     },
                     "spacing": {
-                        "stack-lg": "2rem",
-                        "unit": "8px",
-                        "stack-md": "1rem",
-                        "stack-sm": "0.5rem",
-                        "gutter": "1.5rem",
-                        "container-padding": "2rem",
+                        "xxl": "64px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "md": "16px",
                         "container-max": "1280px",
-                        "margin-mobile": "16px",
-                        "margin-desktop": "48px"
+                        "base": "4px",
+                        "xl": "32px",
+                        "gutter": "24px",
+                        "sm": "8px"
                     },
                     "fontFamily": {
-                        "headline-lg": ["Space Grotesk"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-sm": ["Inter"],
                         "body-md": ["Inter"],
-                        "display-xl": ["Plus Jakarta Sans"],
-                        "headline-md": ["Space Grotesk"],
-                        "label-sm": ["Inter"],
+                        "display": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
                         "body-lg": ["Inter"]
                     },
                     "fontSize": {
-                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
                         "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                        "display-xl": ["60px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
-                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "h3": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
                         "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
                     }
-                }
-            }
+                },
+            },
         }
     </script>
 <style>
-        .glass-dark {
-            background: rgba(20, 20, 22, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        body { opacity: 0; }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #104af0 0%, #731be5 100%);
+        }
+        .soft-glow {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .hover-glow:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
-<body class="bg-background text-on-background font-body-md selection:bg-[#FF6B00] selection:text-white antialiased">
-<!-- TopNavBar -->
-<header class="sticky top-0 z-50 w-full flex justify-between items-center px-6 py-4 bg-zinc-950/60 backdrop-blur-lg border-b border-white/10 shadow-2xl shadow-black/50">
-<div class="text-xl font-bold text-white tracking-widest uppercase font-['Space_Grotesk']">LayoverX</div>
-<nav class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] tracking-tight">
-<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="explore_experiences.html">Explore</a>
-<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="options.html">Options</a>
-<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="priority.html">Priority</a>
-<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="plan.html">Plan</a>
-<a class="text-orange-500 border-b-2 border-orange-500 pb-1 font-bold" href="finalize.html">Finalize</a>
-</nav>
-<div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-zinc-400 hover:text-white transition-all active:scale-95 duration-150">notifications</button>
-<button class="material-symbols-outlined text-zinc-400 hover:text-white transition-all active:scale-95 duration-150">account_circle</button>
-</div>
-</header>
+<body class="bg-surface font-body-md text-on-surface antialiased">
+<!-- Dynamic Header Injection -->
+<div id="header"></div>
+<script>
+fetch('/components/header.html')
+  .then(res => res.text())
+  .then(data => { 
+    document.getElementById('header').innerHTML = data; 
+  });
+</script>
 
-<main class="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop pt-12 pb-40">
-<!-- Step Indicator -->
-<div class="flex justify-between max-w-2xl mx-auto mb-20 relative">
-<div class="absolute top-1/2 left-0 w-full h-[1px] bg-white/5 -z-10"></div>
-<div class="flex flex-col items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center text-xs font-bold border border-[#FF6B00]/20">✓</div>
-<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Explore</span>
+<main class="max-w-[1280px] mx-auto px-5 pt-28 pb-xxl">
+<!-- Header Section & Progress -->
+<section class="mb-xl text-center md:text-left">
+<h1 class="font-h1 text-h1 mb-2">Finalize Your Booking</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-xl">Review your plan and complete your booking securely</p>
+<!-- Progress Indicator -->
+<div class="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-8 overflow-x-auto pb-4 hide-scrollbar">
+<div class="flex items-center gap-2 text-on-surface-variant opacity-60">
+<span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-xs font-bold">1</span>
+<span class="font-label-caps text-label-caps whitespace-nowrap">EXPLORE</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
 </div>
-<div class="flex flex-col items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center text-xs font-bold border border-[#FF6B00]/20">✓</div>
-<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Options</span>
+<div class="flex items-center gap-2 text-on-surface-variant opacity-60">
+<span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-xs font-bold">2</span>
+<span class="font-label-caps text-label-caps whitespace-nowrap">OPTIONS</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
 </div>
-<div class="flex flex-col items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center text-xs font-bold border border-[#FF6B00]/20">✓</div>
-<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Priority</span>
+<div class="flex items-center gap-2 text-on-surface-variant opacity-60">
+<span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-xs font-bold">3</span>
+<span class="font-label-caps text-label-caps whitespace-nowrap">PRIORITY + PLAN</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
 </div>
-<div class="flex flex-col items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center text-xs font-bold border border-[#FF6B00]/20">✓</div>
-<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Plan</span>
+<div class="flex items-center gap-2 text-primary">
+<span class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">4</span>
+<span class="font-label-caps text-label-caps whitespace-nowrap">FINALIZE</span>
+<!-- Main 2-Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Summary Panel -->
+<div class="lg:col-span-7 space-y-md">
+<h3 class="font-h3 text-h3 mb-md">Selected Experiences</h3>
+<div id="passengerInfo"></div>
+<div id="selectedItemsContainer">
+<!-- Dynamic Selected Items -->
 </div>
-<div class="flex flex-col items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-[#FF6B00] text-black flex items-center justify-center text-xs font-bold">5</div>
-<span class="text-[10px] font-semibold text-[#FF6B00] uppercase tracking-widest">Finalize</span>
+
+<!-- Calculation Summary -->
+<div class="bg-surface-container-low rounded-xl p-lg mt-xl space-y-sm">
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Total Duration</span>
+<span id="totalDuration">0 hours</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span id="subtotal">₹0</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant border-b border-outline-variant pb-sm">
+<span>Taxes &amp; fees</span>
+<span id="taxesFees">₹0</span>
+</div>
+<div class="flex justify-between font-h2 text-h2 pt-sm">
+<span>Final Total</span>
+<span class="text-primary" id="finalTotal">₹0</span>
 </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-    <!-- Summary Section -->
-    <div class="lg:col-span-7">
-        <h2 class="font-headline-lg text-headline-lg text-white mb-8">Plan Summary</h2>
-        <div class="glass-dark p-8 rounded-3xl border-white/10 space-y-6" id="summaryContainer">
-            <!-- Dynamic Summary -->
-        </div>
-    </div>
-
-    <!-- Payment Section -->
-    <div class="lg:col-span-5">
-        <h2 class="font-headline-lg text-headline-lg text-white mb-8 text-right">Payment</h2>
-        <div class="glass-dark p-8 rounded-3xl border-white/10">
-            <div class="space-y-4 mb-8">
-                <button class="w-full py-4 rounded-2xl bg-white text-black font-bold flex items-center justify-center gap-3 hover:bg-neutral-200 transition-all font-['Space_Grotesk']">
-                    <span class="material-symbols-outlined">account_balance_wallet</span>
-                    Pay with Google Pay
-                </button>
-                <div class="flex items-center gap-4 text-white/20">
-                    <div class="h-px flex-grow bg-white/10"></div>
-                    <span class="text-[10px] uppercase font-bold tracking-widest">or credit card</span>
-                    <div class="h-px flex-grow bg-white/10"></div>
-                </div>
-                <div class="space-y-4">
-                    <input type="text" placeholder="Card Number" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:border-[#FF6B00] outline-none transition-all">
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="text" placeholder="MM/YY" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:border-[#FF6B00] outline-none transition-all">
-                        <input type="text" placeholder="CVC" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:border-[#FF6B00] outline-none transition-all">
-                    </div>
-                </div>
-            </div>
-            <button class="w-full bg-[#FF6B00] text-black font-bold py-5 rounded-2xl shadow-[0_20px_50px_rgba(255,107,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3 font-['Space_Grotesk'] tracking-widest uppercase" id="completeBookingBtn">
-                Complete Booking
-                <span class="material-symbols-outlined">lock</span>
-            </button>
-        </div>
-    </div>
+<!-- FAQ Section -->
+<section class="pt-xl">
+<h3 class="font-h3 text-h3 mb-md">Frequently Asked Questions</h3>
+<div class="space-y-sm">
+<details class="bg-white rounded-xl soft-glow group">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none font-body-md font-semibold">
+<span>How safe is my payment?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-md pb-md text-on-surface-variant text-body-sm">
+We use industry-standard SSL encryption and partner with certified payment processors to ensure your financial data is never stored on our servers.
 </div>
+</details>
+<details class="bg-white rounded-xl soft-glow group">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none font-body-md font-semibold">
+<span>What is the refund policy?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-md pb-md text-on-surface-variant text-body-sm">
+Cancellations made 24 hours prior to the experience are eligible for a full refund. Same-day cancellations may incur a 50% fee.
+</div>
+</details>
+<details class="bg-white rounded-xl soft-glow group">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none font-body-md font-semibold">
+<span>What if my flight is delayed?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-md pb-md text-on-surface-variant text-body-sm">
+LayoverX monitors your flight status. If a delay affects your booking, we automatically offer rescheduling options or a full credit.
+</div>
+</details>
+</div>
+</section>
+</div>
+
+<!-- Right Column: Payment Panel -->
+<aside class="lg:col-span-5 lg:sticky lg:top-24">
+<div class="bg-white rounded-xl p-lg soft-glow border border-outline-variant/30">
+<h3 class="font-h3 text-h3 mb-md">Secure Payment</h3>
+<!-- Express Pay -->
+<div class="grid grid-cols-2 gap-sm mb-lg">
+<button class="flex items-center justify-center gap-2 border border-outline-variant p-3 rounded-lg hover:bg-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="google">google</span>
+<span class="font-semibold text-body-sm">Google Pay</span>
+</button>
+<button class="flex items-center justify-center gap-2 border border-outline-variant p-3 rounded-lg hover:bg-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="apple">ios</span>
+<span class="font-semibold text-body-sm">Apple Pay</span>
+</button>
+</div>
+<div class="relative py-4 flex items-center justify-center">
+<div class="border-t border-outline-variant w-full"></div>
+<span class="absolute bg-white px-3 text-body-sm text-on-surface-variant">Or pay with card</span>
+</div>
+
+<!-- Card Form -->
+<form id="paymentForm" class="space-y-md mb-lg">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">CARD NUMBER</label>
+<div class="relative">
+<input id="cardNumber" class="w-full bg-surface-container-lowest border-transparent focus:border-primary focus:ring-0 rounded-lg p-3 font-body-md" placeholder="XXXX XXXX XXXX XXXX" type="text" required/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">credit_card</span>
+</div>
+<span class="text-error text-xs hidden" id="cardNumberError">Please enter a valid card number</span>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">EXPIRY</label>
+<input id="expiry" class="w-full bg-surface-container-lowest border-transparent focus:border-primary focus:ring-0 rounded-lg p-3 font-body-md" placeholder="MM/YY" type="text" required/>
+<span class="text-error text-xs hidden" id="expiryError">Invalid expiry date</span>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">CVV</label>
+<input id="cvv" class="w-full bg-surface-container-lowest border-transparent focus:border-primary focus:ring-0 rounded-lg p-3 font-body-md" placeholder="***" type="password" required/>
+<span class="text-error text-xs hidden" id="cvvError">Invalid CVV</span>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">CARDHOLDER NAME</label>
+<input id="cardName" class="w-full bg-surface-container-lowest border-transparent focus:border-primary focus:ring-0 rounded-lg p-3 font-body-md" placeholder="John Doe" type="text" required/>
+<span class="text-error text-xs hidden" id="cardNameError">Please enter cardholder name</span>
+</div>
+<div class="pt-4 space-y-md">
+<h4 class="font-h3 text-body-md">Billing Details</h4>
+<div class="space-y-sm">
+<input id="email" class="w-full bg-surface-container-lowest border-transparent focus:border-primary focus:ring-0 rounded-lg p-3 font-body-md" placeholder="Email Address" type="email" required/>
+<input id="phone" class="w-full bg-surface-container-lowest border-transparent focus:border-primary focus:ring-0 rounded-lg p-3 font-body-md" placeholder="Phone Number" type="tel" required/>
+</div>
+</div>
+</form>
+
+<!-- Trust Signals -->
+<div class="bg-surface-container-low rounded-lg p-md mb-lg">
+<div class="grid grid-cols-2 gap-y-3">
+<div class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm">verified_user</span>
+100% Secure
+</div>
+<div class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm">lock</span>
+SSL Encrypted
+</div>
+<div class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm">money_off</span>
+No hidden fees
+</div>
+</div>
+<div class="mt-4 border-t border-outline-variant/30 pt-3">
+<a class="text-primary text-body-sm font-semibold hover:underline" href="#">Refund &amp; Cancellation Policy</a>
+</div>
+</div>
+
+<!-- Final CTA -->
+<button id="completeBookingBtn" class="w-full accent-gradient text-white font-h2 py-4 rounded-full shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+Complete Booking – <span id="ctaTotal">₹0</span>
+</button>
+<p class="mt-4 text-center text-label-caps text-on-surface-variant/70">
+By clicking complete, you agree to our Terms &amp; Data Policy.
+</p>
+</div>
+</aside>
+</div>
+
+<!-- Security/Legal Footer -->
+<section class="mt-xxl border-t border-outline-variant pt-lg text-center max-w-2xl mx-auto">
+<div class="flex justify-center gap-4 mb-4">
+<span class="material-symbols-outlined text-on-surface-variant/40" style="font-size: 40px;">shield</span>
+<span class="material-symbols-outlined text-on-surface-variant/40" style="font-size: 40px;">enhanced_encryption</span>
+<span class="material-symbols-outlined text-on-surface-variant/40" style="font-size: 40px;">security</span>
+</div>
+<p class="font-body-sm text-on-surface-variant">
+Your data is stored securely using 256-bit AES encryption. We never share your payment information with third-party vendors. All transaction records are maintained for your security and dispute resolution only.
+</p>
+</section>
 </main>
 
-<!-- Hidden Success Overlay -->
-<div class="hidden fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center text-center px-8" id="successOverlay">
-<div class="w-24 h-24 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/20 flex items-center justify-center mb-8">
-<span class="material-symbols-outlined text-[#FF6B00] text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<!-- Footer -->
+<footer class="w-full py-12 px-5 mt-24 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-[1280px] mx-auto text-sm font-['Plus_Jakarta_Sans'] text-gray-500">
+<div class="text-lg font-bold text-gray-900 dark:text-white">LayoverX</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="transition-all duration-300 text-gray-500 hover:text-gray-900 dark:hover:text-white opacity-80 hover:opacity-100" href="#">About</a>
+<a class="transition-all duration-300 text-gray-500 hover:text-gray-900 dark:hover:text-white opacity-80 hover:opacity-100" href="#">Contact</a>
+<a class="transition-all duration-300 text-gray-500 hover:text-gray-900 dark:hover:text-white opacity-80 hover:opacity-100" href="#">Terms &amp; Privacy</a>
+<a class="transition-all duration-300 text-gray-500 hover:text-gray-900 dark:hover:text-white opacity-80 hover:opacity-100" href="#">Help Center</a>
 </div>
-<h1 class="font-headline-lg text-4xl text-white mb-4">Payment Successful</h1>
-<p class="text-white/60 max-w-md mb-12">Your layover plan is confirmed. We've sent the details and your digital pass to your email.</p>
-<button class="px-12 py-4 bg-[#FF6B00] text-black font-bold rounded-xl font-['Space_Grotesk'] tracking-widest uppercase" onclick="window.location.href='index.html'">Return Home</button>
+<div class="text-gray-500"> 2024 LayoverX. All rights reserved.</div>
+</div>
+</footer>
+
+<!-- Success Modal -->
+<div id="successModal" class="hidden fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-5">
+<div class="bg-white rounded-2xl p-8 max-w-md w-full text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-h2 text-h2 mb-2">Payment Successful!</h2>
+<p class="text-body-md text-on-surface-variant mb-6">Your layover plan is confirmed. We've sent the details and your digital pass to your email.</p>
+<button onclick="window.location.href='index.html'" class="w-full accent-gradient text-white font-body-md py-3 rounded-lg hover:scale-[1.02] transition-transform">
+Return Home
+</button>
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabaseClient.js"></script>
 <script src="js/main.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    if (window.initStepNavigation) window.initStepNavigation(5);
-
-    const finalPlan = JSON.parse(localStorage.getItem("finalPlan") || "[]");
-    const summaryContainer = document.getElementById("summaryContainer");
-    const completeBookingBtn = document.getElementById("completeBookingBtn");
-    const successOverlay = document.getElementById("successOverlay");
-
-    let totalCost = 0;
-    let totalMinutes = 0;
-
-    const itemsHtml = finalPlan.map(item => {
-        const costMatch = (item.price || "0").match(/\d+/);
-        const cost = costMatch ? parseInt(costMatch[0]) : 0;
-        const durationMatch = (item.duration || "0").match(/\d+/);
-        const minutes = durationMatch ? parseInt(durationMatch[0]) : 0;
-        totalCost += cost;
-        totalMinutes += minutes;
-        
-        return `
-            <div class="flex justify-between items-center py-4 border-b border-white/5 last:border-0 transition-all duration-300 hover:bg-white/5 px-2 rounded-xl">
-                <div>
-                    <h4 class="text-white font-bold font-['Space_Grotesk']">${item.title}</h4>
-                    <p class="text-xs text-white/40 uppercase tracking-widest font-['Space_Grotesk']">${item.duration} • ${item.category}</p>
+// QR Verification Check
+function checkQRVerification() {
+    const isVerified = sessionStorage.getItem('isVerified') === 'true';
+    const verifiedPassenger = JSON.parse(sessionStorage.getItem('verifiedPassenger') || 'null');
+    
+    if (!isVerified || !verifiedPassenger) {
+        // Show verification required modal
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-50';
+        modal.innerHTML = `
+            <div class="bg-white rounded-xl p-8 max-w-md mx-4">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="material-symbols-outlined text-3xl text-blue-600">qr_code_scanner</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">QR Verification Required</h3>
+                    <p class="text-gray-600 mb-6">Please verify your flight QR code to continue with booking.</p>
+                    <div class="flex gap-4">
+                        <button onclick="window.location.href='qr_upload_state_qr.html'" class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                            Verify QR Code
+                        </button>
+                        <button onclick="this.closest('.fixed').remove()" class="px-6 py-3 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+                            Cancel
+                        </button>
+                    </div>
                 </div>
-                <span class="text-white font-bold font-['Space_Grotesk']">${item.price}</span>
             </div>
         `;
-    }).join('');
-
-    summaryContainer.innerHTML = `
-        <div class="space-y-4">
-            ${itemsHtml}
-        </div>
-        <div class="pt-8 space-y-4">
-            <div class="flex justify-between text-sm font-['Space_Grotesk'] uppercase tracking-widest">
-                <span class="text-white/40">Total Planned Time</span>
-                <span class="text-white font-bold">${Math.floor(totalMinutes/60)}h ${totalMinutes%60}m</span>
+        document.body.appendChild(modal);
+        
+        // Prevent access to finalize functionality
+        const completeBookingBtn = document.getElementById('completeBookingBtn');
+        if (completeBookingBtn) {
+            completeBookingBtn.disabled = true;
+            completeBookingBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            completeBookingBtn.textContent = 'QR Verification Required';
+        }
+        
+        return false;
+    }
+    
+    // Show verified passenger info
+    const passengerInfo = document.getElementById('passengerInfo');
+    if (passengerInfo && verifiedPassenger) {
+        passengerInfo.innerHTML = `
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-green-600">verified</span>
+                    <h4 class="font-semibold text-green-900">Verified Passenger</h4>
+                </div>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <span class="text-gray-600">Name:</span>
+                        <span class="font-medium">${verifiedPassenger.name}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-600">Flight:</span>
+                        <span class="font-medium">${verifiedPassenger.flight}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-600">Date:</span>
+                        <span class="font-medium">${verifiedPassenger.date}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-600">Seat:</span>
+                        <span class="font-medium">${verifiedPassenger.seat || 'N/A'}</span>
+                    </div>
+                </div>
             </div>
-            <div class="h-px bg-white/10 w-full"></div>
-            <div class="flex justify-between items-end">
-                <span class="text-[#FF6B00] font-bold font-['Space_Grotesk'] uppercase tracking-[0.2em]">Total Amount</span>
-                <span class="text-3xl font-black text-white font-['Space_Grotesk']">$${totalCost}</span>
-            </div>
-        </div>
-    `;
+        `;
+    }
+    
+    return true;
+}
 
-    completeBookingBtn.addEventListener("click", () => {
-        successOverlay.classList.remove("hidden");
+document.addEventListener("DOMContentLoaded", () => {
+    // Check QR verification first
+    if (!checkQRVerification()) {
+        return; // Stop execution if not verified
+    }
+    
+    if (window.initStepNavigation) window.initStepNavigation(4);
+
+    // Load selected items from localStorage
+    const selectedOptions = JSON.parse(localStorage.getItem("selectedOptions") || "[]");
+    const finalPlan = JSON.parse(localStorage.getItem("finalPlan") || "[]");
+    
+    // Use finalPlan if available, otherwise use selectedOptions
+    const items = finalPlan.length > 0 ? finalPlan : selectedOptions;
+    
+    const selectedItemsContainer = document.getElementById("selectedItemsContainer");
+    const paymentForm = document.getElementById("paymentForm");
+    const completeBookingBtn = document.getElementById("completeBookingBtn");
+    const successModal = document.getElementById("successModal");
+    
+    // Pricing elements
+    const totalDurationEl = document.getElementById("totalDuration");
+    const subtotalEl = document.getElementById("subtotal");
+    const taxesFeesEl = document.getElementById("taxesFees");
+    const finalTotalEl = document.getElementById("finalTotal");
+    const ctaTotalEl = document.getElementById("ctaTotal");
+    
+    // Form validation elements
+    const cardNumberInput = document.getElementById("cardNumber");
+    const expiryInput = document.getElementById("expiry");
+    const cvvInput = document.getElementById("cvv");
+    const cardNameInput = document.getElementById("cardName");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+    
+    let totalCost = 0;
+    let totalMinutes = 0;
+    
+    // Helper function to get category color and label
+    function getCategoryInfo(category) {
+        const categoryMap = {
+            'Hotels': { color: 'primary', label: 'STAY' },
+            'Food & Dining': { color: 'tertiary', label: 'DINING' },
+            'Services': { color: 'secondary', label: 'SPA' },
+            'Experiences': { color: 'primary', label: 'EXPERIENCE' }
+        };
+        return categoryMap[category] || { color: 'primary', label: 'EXPERIENCE' };
+    }
+    
+    // Render selected items
+    function renderItems() {
+        if (items.length === 0) {
+            selectedItemsContainer.innerHTML = `
+                <div class="bg-white rounded-xl p-lg soft-glow text-center">
+                    <p class="text-on-surface-variant">No items selected. Please go back and select experiences.</p>
+                </div>
+            `;
+            updatePricing();
+            return;
+        }
+        
+        const itemsHtml = items.map((item, index) => {
+            const costMatch = (item.price || "0").match(/\d+/);
+            const cost = costMatch ? parseInt(costMatch[0]) : 0;
+            const durationMatch = (item.duration || "0").match(/\d+/);
+            const minutes = durationMatch ? parseInt(durationMatch[0]) : 0;
+            totalCost += cost;
+            totalMinutes += minutes;
+            
+            const categoryInfo = getCategoryInfo(item.category || 'Experiences');
+            const imageUrl = item.image || 'https://via.placeholder.com/150x150';
+            
+            return `
+                <div class="bg-white rounded-xl p-md flex gap-md soft-glow hover-glow transition-all duration-300 relative group" data-item-id="${item.id}">
+                    <div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                        <img alt="${item.title}" class="w-full h-full object-cover" src="${imageUrl}"/>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="font-label-caps text-label-caps text-${categoryInfo.color} bg-${categoryInfo.color}/10 px-2 py-1 rounded">${categoryInfo.label}</span>
+                                <h4 class="font-h3 text-body-lg mt-1">${item.title}</h4>
+                                <p class="text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+                                    <span class="material-symbols-outlined text-xs">schedule</span> ${item.duration || 'Duration not specified'}
+                                </p>
+                            </div>
+                            <span class="font-h3 text-body-lg text-primary">${item.price}</span>
+                        </div>
+                    </div>
+                    <button class="absolute -top-2 -right-2 bg-white shadow-md rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity remove-item-btn" data-id="${item.id}">
+                        <span class="material-symbols-outlined text-lg text-error">close</span>
+                    </button>
+                </div>
+            `;
+        }).join('');
+        
+        selectedItemsContainer.innerHTML = itemsHtml;
+        updatePricing();
+    }
+    
+    // Update pricing calculations
+    function updatePricing() {
+        const subtotal = totalCost;
+        const taxesAndFees = Math.round(subtotal * 0.14); // 14% taxes and fees
+        const finalTotal = subtotal + taxesAndFees;
+        
+        // Update duration display
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        totalDurationEl.textContent = hours > 0 ? `${hours}h ${minutes}m` : `${minutes} minutes`;
+        
+        // Update pricing display
+        subtotalEl.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+        taxesFeesEl.textContent = `₹${taxesAndFees.toLocaleString('en-IN')}`;
+        finalTotalEl.textContent = `₹${finalTotal.toLocaleString('en-IN')}`;
+        ctaTotalEl.textContent = `₹${finalTotal.toLocaleString('en-IN')}`;
+        
+        // Update CTA button state
+        completeBookingBtn.disabled = items.length === 0;
+    }
+    
+    // Payment form validation
+    function validateForm() {
+        let isValid = true;
+        
+        // Card number validation (basic)
+        const cardNumber = cardNumberInput.value.replace(/\s/g, '');
+        if (cardNumber.length < 13 || cardNumber.length > 19 || !/^\d+$/.test(cardNumber)) {
+            document.getElementById('cardNumberError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('cardNumberError').classList.add('hidden');
+        }
+        
+        // Expiry validation
+        const expiry = expiryInput.value;
+        const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+        if (!expiryRegex.test(expiry)) {
+            document.getElementById('expiryError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('expiryError').classList.add('hidden');
+        }
+        
+        // CVV validation
+        const cvv = cvvInput.value;
+        if (cvv.length < 3 || cvv.length > 4 || !/^\d+$/.test(cvv)) {
+            document.getElementById('cvvError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('cvvError').classList.add('hidden');
+        }
+        
+        // Card name validation
+        if (cardNameInput.value.trim().length < 3) {
+            document.getElementById('cardNameError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('cardNameError').classList.add('hidden');
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) {
+            emailInput.style.borderColor = '#ba1a1a';
+            isValid = false;
+        } else {
+            emailInput.style.borderColor = '';
+        }
+        
+        // Phone validation (basic)
+        const phone = phoneInput.value.replace(/\D/g, '');
+        if (phone.length < 10) {
+            phoneInput.style.borderColor = '#ba1a1a';
+            isValid = false;
+        } else {
+            phoneInput.style.borderColor = '';
+        }
+        
+        return isValid;
+    }
+    
+    // Format card number input
+    cardNumberInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\s/g, '');
+        let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+        e.target.value = formattedValue;
     });
+    
+    // Format expiry input
+    expiryInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length >= 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2, 4);
+        }
+        e.target.value = value;
+    });
+    
+    // Remove item functionality
+    selectedItemsContainer.addEventListener('click', (e) => {
+        const removeBtn = e.target.closest('.remove-item-btn');
+        if (!removeBtn) return;
+        
+        const itemId = removeBtn.getAttribute('data-id');
+        const itemIndex = items.findIndex(item => item.id === itemId);
+        
+        if (itemIndex > -1) {
+            items.splice(itemIndex, 1);
+            
+            // Update localStorage
+            localStorage.setItem('selectedOptions', JSON.stringify(items));
+            if (finalPlan.length > 0) {
+                localStorage.setItem('finalPlan', JSON.stringify(items));
+            }
+            
+            // Recalculate and re-render
+            totalCost = 0;
+            totalMinutes = 0;
+            renderItems();
+        }
+    });
+    
+    // Form submission
+    paymentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        if (items.length === 0) {
+            alert('Please select at least one experience to continue.');
+            return;
+        }
+        
+        if (!validateForm()) {
+            return;
+        }
+        
+        // Show loading state
+        completeBookingBtn.innerHTML = `
+            <span class="material-symbols-outlined animate-spin">refresh</span>
+            Processing...
+        `;
+        completeBookingBtn.disabled = true;
+        
+        // Simulate payment processing
+        setTimeout(() => {
+            successModal.classList.remove('hidden');
+            completeBookingBtn.innerHTML = `Complete Booking – <span id="ctaTotal">₹${(totalCost + Math.round(totalCost * 0.14)).toLocaleString('en-IN')}</span>`;
+            completeBookingBtn.disabled = false;
+        }, 2000);
+    });
+    
+    // Real-time validation
+    [cardNumberInput, expiryInput, cvvInput, cardNameInput, emailInput, phoneInput].forEach(input => {
+        input.addEventListener('blur', validateForm);
+    });
+    
+    // Initialize the page
+    renderItems();
 });
 </script>
 </body></html>

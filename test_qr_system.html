@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Verification System Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-inter">
+    <div class="min-h-screen p-8">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold text-gray-900 mb-8">QR Verification System Test</h1>
+            
+            <!-- Test Results -->
+            <div id="testResults" class="space-y-4 mb-8"></div>
+            
+            <!-- Test Controls -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Test Controls</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button onclick="testQRUpload()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+                        Test QR Upload
+                    </button>
+                    <button onclick="testProcessing()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
+                        Test Processing State
+                    </button>
+                    <button onclick="testVerification()" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">
+                        Test Verification Result
+                    </button>
+                    <button onclick="testFinalResult()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors">
+                        Test Final Result
+                    </button>
+                    <button onclick="testSecurity()" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700 transition-colors">
+                        Test Security Protection
+                    </button>
+                    <button onclick="clearTestData()" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors">
+                        Clear Test Data
+                    </button>
+                </div>
+            </div>
+            
+            <!-- System Status -->
+            <div class="mt-8 bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">System Status</h2>
+                <div id="systemStatus" class="space-y-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addTestResult(test, status, message) {
+            const resultsDiv = document.getElementById('testResults');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `p-4 rounded-lg ${
+                status === 'pass' ? 'bg-green-50 border border-green-200' : 
+                status === 'fail' ? 'bg-red-50 border border-red-200' : 
+                'bg-yellow-50 border border-yellow-200'
+            }`;
+            
+            resultDiv.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-${
+                        status === 'pass' ? 'green-600' : 
+                        status === 'fail' ? 'red-600' : 'yellow-600'
+                    }">
+                        ${status === 'pass' ? 'check_circle' : 
+                          status === 'fail' ? 'error' : 'warning'}
+                    </span>
+                    <span class="font-semibold">${test}</span>
+                    <span class="text-sm text-gray-600">- ${message}</span>
+                </div>
+            `;
+            
+            resultsDiv.appendChild(resultDiv);
+        }
+
+        function updateSystemStatus() {
+            const statusDiv = document.getElementById('systemStatus');
+            const isVerified = sessionStorage.getItem('isVerified') === 'true';
+            const verificationData = JSON.parse(sessionStorage.getItem('qrVerification') || '{}');
+            const passengerData = JSON.parse(sessionStorage.getItem('verifiedPassenger') || 'null');
+            
+            statusDiv.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined ${isVerified ? 'text-green-600' : 'text-red-600'}">
+                        ${isVerified ? 'verified_user' : 'gpp_bad'}
+                    </span>
+                    <span>QR Verification Status: ${isVerified ? 'VERIFIED' : 'NOT VERIFIED'}</span>
+                </div>
+                <div class="text-sm text-gray-600">
+                    Verification ID: ${verificationData.verificationId || 'None'}
+                </div>
+                <div class="text-sm text-gray-600">
+                    Passenger: ${passengerData ? passengerData.name : 'None'}
+                </div>
+                <div class="text-sm text-gray-600">
+                    Flight: ${passengerData ? passengerData.flight : 'None'}
+                </div>
+            `;
+        }
+
+        function testQRUpload() {
+            // Test QR upload file exists and has proper structure
+            fetch('qr_upload_state_qr.html')
+                .then(response => {
+                    if (response.ok) {
+                        addTestResult('QR Upload Page', 'pass', 'qr_upload_state_qr.html exists and accessible');
+                        
+                        // Test for required elements
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = response.text();
+                        
+                        const hasFileInput = tempDiv.querySelector('input[type="file"]');
+                        const hasDropzone = tempDiv.querySelector('#dropzone');
+                        const hasProgressBar = tempDiv.querySelector('#progressBar');
+                        
+                        if (hasFileInput && hasDropzone && hasProgressBar) {
+                            addTestResult('QR Upload Elements', 'pass', 'All required elements present');
+                        } else {
+                            addTestResult('QR Upload Elements', 'fail', 'Missing required elements');
+                        }
+                    } else {
+                        addTestResult('QR Upload Page', 'fail', 'qr_upload_state_qr.html not found');
+                    }
+                })
+                .catch(error => {
+                    addTestResult('QR Upload Page', 'fail', `Error: ${error.message}`);
+                });
+        }
+
+        function testProcessing() {
+            fetch('processing_state_qr.html')
+                .then(response => {
+                    if (response.ok) {
+                        addTestResult('Processing Page', 'pass', 'processing_state_qr.html exists and accessible');
+                        
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = response.text();
+                        
+                        const hasProgressBar = tempDiv.querySelector('.bg-primary');
+                        const hasPercentage = tempDiv.querySelector('.text-\\[48px\\]');
+                        const hasStatus = tempDiv.querySelector('.text-body-md.font-bold');
+                        
+                        if (hasProgressBar && hasPercentage && hasStatus) {
+                            addTestResult('Processing Elements', 'pass', 'All required elements present');
+                        } else {
+                            addTestResult('Processing Elements', 'fail', 'Missing required elements');
+                        }
+                    } else {
+                        addTestResult('Processing Page', 'fail', 'processing_state_qr.html not found');
+                    }
+                })
+                .catch(error => {
+                    addTestResult('Processing Page', 'fail', `Error: ${error.message}`);
+                });
+        }
+
+        function testVerification() {
+            fetch('verification_result_qr.html')
+                .then(response => {
+                    if (response.ok) {
+                        addTestResult('Verification Result Page', 'pass', 'verification_result_qr.html exists and accessible');
+                    } else {
+                        addTestResult('Verification Result Page', 'fail', 'verification_result_qr.html not found');
+                    }
+                })
+                .catch(error => {
+                    addTestResult('Verification Result Page', 'fail', `Error: ${error.message}`);
+                });
+        }
+
+        function testFinalResult() {
+            fetch('final_result_qr.html')
+                .then(response => {
+                    if (response.ok) {
+                        addTestResult('Final Result Page', 'pass', 'final_result_qr.html exists and accessible');
+                    } else {
+                        addTestResult('Final Result Page', 'fail', 'final_result_qr.html not found');
+                    }
+                })
+                .catch(error => {
+                    addTestResult('Final Result Page', 'fail', `Error: ${error.message}`);
+                });
+        }
+
+        function testSecurity() {
+            fetch('finalize.html')
+                .then(response => {
+                    if (response.ok) {
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = response.text();
+                        
+                        const hasQRCheck = tempDiv.innerHTML.includes('checkQRVerification');
+                        const hasModal = tempDiv.innerHTML.includes('QR Verification Required');
+                        
+                        if (hasQRCheck && hasModal) {
+                            addTestResult('Security Protection', 'pass', 'QR verification protection implemented');
+                        } else {
+                            addTestResult('Security Protection', 'fail', 'Security protection not found');
+                        }
+                    } else {
+                        addTestResult('Security Protection', 'fail', 'finalize.html not found');
+                    }
+                })
+                .catch(error => {
+                    addTestResult('Security Protection', 'fail', `Error: ${error.message}`);
+                });
+        }
+
+        function clearTestData() {
+            sessionStorage.removeItem('qrVerification');
+            sessionStorage.removeItem('isVerified');
+            sessionStorage.removeItem('verifiedPassenger');
+            document.getElementById('testResults').innerHTML = '';
+            updateSystemStatus();
+            addTestResult('Test Data Cleared', 'pass', 'All session storage cleared');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateSystemStatus();
+            addTestResult('Test Suite Ready', 'pass', 'QR Verification System Test Suite loaded');
+        });
+    </script>
+</body>
+</html>
