@@ -788,4 +788,50 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("JS Loaded ✅");
+
+  const form = document.getElementById("contactForm");
+
+  if (!form) {
+    console.error("Form not found ❌");
+    return;
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // 🚨 THIS STOPS PAGE RELOAD
+
+    console.log("Form submit intercepted ✅");
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const message = form.message.value;
+
+    console.log("Sending request...");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      console.log("Response:", res);
+
+      if (res.ok) {
+        alert("Message sent successfully!");
+        form.reset();
+      } else {
+        alert("Failed to send message");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Something went wrong");
+    }
+  });
+});
+</script>
 </body></html>
