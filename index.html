@@ -744,71 +744,48 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="js/supabaseClient.js"></script>
 <script src="js/main.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  console.log("Contact form script loaded");
+console.log("JS LOADED SUCCESSFULLY");
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM loaded, looking for form");
   
-  const form = document.getElementById("contactForm");
-  
+  const form = document.querySelector("form");
+
   if (!form) {
-    console.log("Contact form not found!");
+    console.error("Form not found!");
     return;
   }
-  
-  console.log("Contact form found, adding event listener");
-  
-  // Remove any existing submit handlers
-  form.removeEventListener("submit", function() {});
-  
-  form.addEventListener("submit", async function (e) {
-    console.log("Submit event triggered!");
+
+  console.log("Form found, attaching listener");
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    
-    console.log("Default prevented, sending request...");
-    
-    const name = form.name.value;
-    const email = form.email.value;
-    const message = form.message.value;
-    
-    console.log("Form data:", { name, email, message: message.substring(0, 50) + "..." });
-    
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, message }),
-      });
-      
-      console.log("Response:", res);
-      
-      if (res.ok) {
-        alert("Message sent!");
-        form.reset();
-      } else {
-        alert("Failed!");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Network error!");
+
+    console.log("Form submit intercepted");
+
+    const name = form.querySelector('input[name="name"]').value;
+    const email = form.querySelector('input[name="email"]').value;
+    const message = form.querySelector('textarea[name="message"]').value;
+
+    console.log("Sending request...");
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, message }),
+    });
+
+    console.log("Response:", res);
+
+    if (res.ok) {
+      alert("Message sent!");
+      form.reset();
+    } else {
+      alert("Failed!");
     }
   });
-  
-  // Also add button click handler as backup
-  const button = form.querySelector('button[type="submit"]');
-  if (button) {
-    console.log("Found submit button, adding click handler");
-    button.addEventListener("click", function(e) {
-      console.log("Button clicked!");
-      e.preventDefault();
-      e.stopPropagation();
-      
-      // Trigger form submission
-      const event = new Event("submit", { bubbles: true, cancelable: true });
-      form.dispatchEvent(event);
-    });
-  }
 });
 </script>
 </body></html>
