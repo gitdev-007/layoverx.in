@@ -5,7 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>LayoverX | Finalize Plan</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
@@ -19,12 +19,12 @@
                         "on-secondary-fixed-variant": "#474646",
                         "on-tertiary": "#303030",
                         "surface-container-high": "#2a2a2a",
-                        "primary-container": "#000000",
+                        "primary-container": "#ff8c00",
                         "on-primary-fixed-variant": "#474747",
                         "secondary-container": "#4a4949",
                         "surface-variant": "#353535",
                         "surface-container-highest": "#353535",
-                        "primary": "#c6c6c6",
+                        "primary": "#ffb77d",
                         "surface-tint": "#c6c6c6",
                         "on-primary": "#303030",
                         "surface-bright": "#393939",
@@ -73,18 +73,21 @@
                         "stack-md": "1rem",
                         "stack-sm": "0.5rem",
                         "gutter": "1.5rem",
-                        "container-padding": "2rem"
+                        "container-padding": "2rem",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px"
                     },
                     "fontFamily": {
-                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Space Grotesk"],
                         "body-md": ["Inter"],
                         "display-xl": ["Plus Jakarta Sans"],
-                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Space Grotesk"],
                         "label-sm": ["Inter"],
                         "body-lg": ["Inter"]
                     },
                     "fontSize": {
-                        "headline-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
                         "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
                         "display-xl": ["60px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
                         "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
@@ -96,50 +99,33 @@
         }
     </script>
 <style>
-        .glass-card {
-            background: rgba(30, 30, 30, 0.6);
+        .glass-dark {
+            background: rgba(20, 20, 22, 0.6);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
         }
+        body { opacity: 0; }
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-[#FF6B00] selection:text-white antialiased">
 <!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] font-['Plus_Jakarta_Sans']">
-<div class="flex justify-between items-center h-20 px-8 max-w-[1920px] mx-auto">
-<div class="text-2xl font-bold tracking-tighter text-white">LayoverX</div>
-<div class="hidden md:flex items-center gap-8">
-<a href="explore_experiences.html">Explore</a>
-<a href="options.html">Options</a>
-<a href="priority.html">Priority</a>
-<a href="plan.html">Plan</a>
-<a href="finalize.html">Finalize</a>
-</div>
-<div class="flex items-center gap-6">
-<span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors">notifications</span>
-<div class="w-10 h-10 rounded-full overflow-hidden border border-white/10">
-<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz9vLDL0oMi2fbzwCHtxNu90oBBYMhd-leHU0hL7t1P0FgroofN6woVUaW1qLJHg13XIzS9bjwLt35hwgSCfrVvEBTibbdy27lOzwCzIrBo4lTV3e2NBnlGm22ImtLMpIMClvhvTwhgYCgxt-OBzJVPo4IJHEId9_jy1MLIiKL6E1CnkO7CWJ19ul06eFfhPeIJDW-_y2C-_D1Fc32-7aMKbVLDXPC18Uyt7tmaIRUVWwRxRsx5QodJ-qOQZb0brSEBDCU4Hxo2IA"/>
-</div>
-</div>
-</div>
+<header class="sticky top-0 z-50 w-full flex justify-between items-center px-6 py-4 bg-zinc-950/60 backdrop-blur-lg border-b border-white/10 shadow-2xl shadow-black/50">
+<div class="text-xl font-bold text-white tracking-widest uppercase font-['Space_Grotesk']">LayoverX</div>
+<nav class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] tracking-tight">
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="explore_experiences.html">Explore</a>
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="options.html">Options</a>
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="priority.html">Priority</a>
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="plan.html">Plan</a>
+<a class="text-orange-500 border-b-2 border-orange-500 pb-1 font-bold" href="finalize.html">Finalize</a>
 </nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-zinc-400 hover:text-white transition-all active:scale-95 duration-150">notifications</button>
+<button class="material-symbols-outlined text-zinc-400 hover:text-white transition-all active:scale-95 duration-150">account_circle</button>
+</div>
+</header>
 
-<!-- TopAppBar (Sticky Context Bar) -->
-<div class="sticky top-20 w-full z-40 bg-[#121212]/80 backdrop-blur-md border-b border-white/5 shadow-lg font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-wide uppercase">
-<div class="flex justify-between items-center py-3 px-8 w-full">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-[#FF6B00]">flight_takeoff</span>
-<span class="text-white font-bold" id="contextSummary">SFO • 6h 30m • Oct 24</span>
-</div>
-<button class="flex items-center gap-2 hover:text-white transition-colors text-white/40 active:scale-95 duration-200">
-                Edit Context
-                <span class="material-symbols-outlined text-xs">edit</span>
-</button>
-</div>
-</div>
-
-<main class="max-w-5xl mx-auto px-8 pt-32 pb-40">
+<main class="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop pt-12 pb-40">
 <!-- Step Indicator -->
 <div class="flex justify-between max-w-2xl mx-auto mb-20 relative">
 <div class="absolute top-1/2 left-0 w-full h-[1px] bg-white/5 -z-10"></div>
@@ -169,17 +155,17 @@
     <!-- Summary Section -->
     <div class="lg:col-span-7">
         <h2 class="font-headline-lg text-headline-lg text-white mb-8">Plan Summary</h2>
-        <div class="glass-card p-8 rounded-3xl border-white/10 space-y-6" id="summaryContainer">
+        <div class="glass-dark p-8 rounded-3xl border-white/10 space-y-6" id="summaryContainer">
             <!-- Dynamic Summary -->
         </div>
     </div>
 
     <!-- Payment Section -->
     <div class="lg:col-span-5">
-        <h2 class="font-headline-lg text-headline-lg text-white mb-8">Payment</h2>
-        <div class="glass-card p-8 rounded-3xl border-white/10">
+        <h2 class="font-headline-lg text-headline-lg text-white mb-8 text-right">Payment</h2>
+        <div class="glass-dark p-8 rounded-3xl border-white/10">
             <div class="space-y-4 mb-8">
-                <button class="w-full py-4 rounded-2xl bg-white text-black font-bold flex items-center justify-center gap-3 hover:bg-neutral-200 transition-all">
+                <button class="w-full py-4 rounded-2xl bg-white text-black font-bold flex items-center justify-center gap-3 hover:bg-neutral-200 transition-all font-['Space_Grotesk']">
                     <span class="material-symbols-outlined">account_balance_wallet</span>
                     Pay with Google Pay
                 </button>
@@ -196,7 +182,7 @@
                     </div>
                 </div>
             </div>
-            <button class="w-full bg-[#FF6B00] text-black font-bold py-5 rounded-2xl shadow-[0_20px_50px_rgba(255,107,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3" id="completeBookingBtn">
+            <button class="w-full bg-[#FF6B00] text-black font-bold py-5 rounded-2xl shadow-[0_20px_50px_rgba(255,107,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3 font-['Space_Grotesk'] tracking-widest uppercase" id="completeBookingBtn">
                 Complete Booking
                 <span class="material-symbols-outlined">lock</span>
             </button>
@@ -208,11 +194,11 @@
 <!-- Hidden Success Overlay -->
 <div class="hidden fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center text-center px-8" id="successOverlay">
 <div class="w-24 h-24 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/20 flex items-center justify-center mb-8">
-<span class="material-symbols-outlined text-[#FF6B00] text-5xl">check_circle</span>
+<span class="material-symbols-outlined text-[#FF6B00] text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
 </div>
-<h1 class="font-display-xl text-4xl text-white mb-4">Payment Successful</h1>
+<h1 class="font-headline-lg text-4xl text-white mb-4">Payment Successful</h1>
 <p class="text-white/60 max-w-md mb-12">Your layover plan is confirmed. We've sent the details and your digital pass to your email.</p>
-<button class="px-12 py-4 bg-[#FF6B00] text-black font-bold rounded-xl" onclick="window.location.href='index.html'">Return Home</button>
+<button class="px-12 py-4 bg-[#FF6B00] text-black font-bold rounded-xl font-['Space_Grotesk'] tracking-widest uppercase" onclick="window.location.href='index.html'">Return Home</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -222,15 +208,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     if (window.initStepNavigation) window.initStepNavigation(5);
 
-    const airport = localStorage.getItem("airport") || "CSIA T2, Mumbai";
-    const durationHours = parseFloat(localStorage.getItem("duration") || "6.5");
-    const dateTime = localStorage.getItem("dateTime") || "2026-04-27T14:30";
     const finalPlan = JSON.parse(localStorage.getItem("finalPlan") || "[]");
-
-    const contextSummary = document.getElementById("contextSummary");
-    const formattedDate = dateTime ? new Date(dateTime).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "No Date";
-    if (contextSummary) contextSummary.textContent = `${airport} • ${durationHours}h • ${formattedDate}`;
-
     const summaryContainer = document.getElementById("summaryContainer");
     const completeBookingBtn = document.getElementById("completeBookingBtn");
     const successOverlay = document.getElementById("successOverlay");
@@ -239,19 +217,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let totalMinutes = 0;
 
     const itemsHtml = finalPlan.map(item => {
-        const costMatch = item.price.match(/\d+/);
+        const costMatch = (item.price || "0").match(/\d+/);
         const cost = costMatch ? parseInt(costMatch[0]) : 0;
-        const minutes = parseInt(item.duration.match(/\d+/)[0]);
+        const durationMatch = (item.duration || "0").match(/\d+/);
+        const minutes = durationMatch ? parseInt(durationMatch[0]) : 0;
         totalCost += cost;
         totalMinutes += minutes;
         
         return `
-            <div class="flex justify-between items-center py-4 border-b border-white/5 last:border-0">
+            <div class="flex justify-between items-center py-4 border-b border-white/5 last:border-0 transition-all duration-300 hover:bg-white/5 px-2 rounded-xl">
                 <div>
-                    <h4 class="text-white font-bold">${item.title}</h4>
-                    <p class="text-xs text-white/40 uppercase tracking-widest">${item.duration} • ${item.category}</p>
+                    <h4 class="text-white font-bold font-['Space_Grotesk']">${item.title}</h4>
+                    <p class="text-xs text-white/40 uppercase tracking-widest font-['Space_Grotesk']">${item.duration} • ${item.category}</p>
                 </div>
-                <span class="text-white font-bold">${item.price}</span>
+                <span class="text-white font-bold font-['Space_Grotesk']">${item.price}</span>
             </div>
         `;
     }).join('');
@@ -261,18 +240,14 @@ document.addEventListener("DOMContentLoaded", () => {
             ${itemsHtml}
         </div>
         <div class="pt-8 space-y-4">
-            <div class="flex justify-between text-sm">
+            <div class="flex justify-between text-sm font-['Space_Grotesk'] uppercase tracking-widest">
                 <span class="text-white/40">Total Planned Time</span>
                 <span class="text-white font-bold">${Math.floor(totalMinutes/60)}h ${totalMinutes%60}m</span>
             </div>
-            <div class="flex justify-between text-sm">
-                <span class="text-white/40">Layover Duration</span>
-                <span class="text-white font-bold">${durationHours}h</span>
-            </div>
             <div class="h-px bg-white/10 w-full"></div>
             <div class="flex justify-between items-end">
-                <span class="text-[#FF6B00] font-bold">Total Amount</span>
-                <span class="text-3xl font-black text-white">Rs ${totalCost}</span>
+                <span class="text-[#FF6B00] font-bold font-['Space_Grotesk'] uppercase tracking-[0.2em]">Total Amount</span>
+                <span class="text-3xl font-black text-white font-['Space_Grotesk']">$${totalCost}</span>
             </div>
         </div>
     `;

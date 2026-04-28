@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#904d00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary": "#303034",
+                        "primary-fixed-dim": "#ffb77d",
+                        "surface": "#131315",
+                        "on-background": "#e5e1e4",
+                        "inverse-surface": "#e5e1e4",
+                        "surface-bright": "#39393b",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#e4e1e7",
+                        "on-primary": "#4d2600",
+                        "on-primary-container": "#623200",
+                        "on-surface": "#e5e1e4",
+                        "surface-container-highest": "#353437",
+                        "on-primary-fixed-variant": "#6e3900",
+                        "surface-container-lowest": "#0e0e10",
+                        "outline-variant": "#564334",
+                        "primary-fixed": "#ffdcc3",
+                        "secondary": "#c8c5cb",
+                        "background": "#131315",
+                        "tertiary": "#c7c6ca",
+                        "primary-container": "#ff8c00",
+                        "surface-container-low": "#1b1b1d",
+                        "on-secondary-fixed-variant": "#47464b",
+                        "error-container": "#93000a",
+                        "on-surface-variant": "#ddc1ae",
+                        "on-tertiary-fixed-variant": "#46464a",
+                        "tertiary-fixed": "#e4e1e6",
+                        "surface-container-high": "#2a2a2c",
+                        "on-secondary-fixed": "#1b1b1f",
+                        "on-tertiary-container": "#3e3e42",
+                        "tertiary-container": "#aaa9ae",
+                        "surface-tint": "#ffb77d",
+                        "on-secondary": "#303034",
+                        "on-tertiary-fixed": "#1b1b1f",
+                        "secondary-fixed-dim": "#c8c5cb",
+                        "surface-container": "#201f21",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#2f1500",
+                        "secondary-container": "#47464b",
+                        "primary": "#ffb77d",
+                        "tertiary-fixed-dim": "#c7c6ca",
+                        "surface-dim": "#131315",
+                        "outline": "#a48c7a",
+                        "inverse-on-surface": "#303032",
+                        "surface-variant": "#353437",
+                        "on-secondary-container": "#b6b4b9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Space Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Space Grotesk"],
+                        "display-lg": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-dark {
+            background: rgba(20, 20, 22, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+        .inner-glow:hover {
+            box-shadow: inset 0 0 15px rgba(255, 140, 0, 0.15);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Shell -->
+<header class="sticky top-0 z-50 w-full flex justify-between items-center px-6 py-4 bg-zinc-950/60 backdrop-blur-lg border-b border-white/10 shadow-2xl shadow-black/50">
+<div class="text-xl font-bold text-white tracking-widest uppercase font-['Space_Grotesk']">LayoverX</div>
+<nav class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] tracking-tight">
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="#">Explore</a>
+<a class="text-orange-500 border-b-2 border-orange-500 pb-1 font-bold" href="#">Options</a>
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="#">Priority</a>
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="#">Plan</a>
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="#">Finalize</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-zinc-400 hover:text-white transition-all active:scale-95 duration-150" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-zinc-400 hover:text-white transition-all active:scale-95 duration-150" data-icon="account_circle">account_circle</button>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 pb-32">
+<!-- Header Section -->
+<section class="mb-12">
+<h1 class="font-headline-lg text-headline-lg text-white mb-2">Choose Your Options</h1>
+<p class="font-body-lg text-body-lg text-zinc-400 max-w-2xl">Select specific experiences from your chosen categories to curate your perfect layover.</p>
+</section>
+<!-- Category Bar -->
+<section class="mb-10 overflow-x-auto hide-scrollbar">
+<div class="flex gap-4 min-w-max">
+<button class="px-8 py-3 rounded-full bg-orange-500 text-black font-bold font-headline-md text-sm transition-all hover:shadow-[0_0_20px_rgba(255,140,0,0.4)]">Hotels</button>
+<button class="px-8 py-3 rounded-full glass-dark text-zinc-300 font-medium font-headline-md text-sm hover:border-orange-500/50 transition-all">Food</button>
+<button class="px-8 py-3 rounded-full glass-dark text-zinc-300 font-medium font-headline-md text-sm hover:border-orange-500/50 transition-all">Transport</button>
+</div>
+</section>
+<!-- Recommended Section (Bento Carousel) -->
+<section class="mb-16">
+<div class="flex justify-between items-end mb-6">
+<h2 class="font-headline-md text-headline-md text-white">Recommended for You</h2>
+<div class="flex gap-2">
+<button class="p-2 rounded-full glass-dark text-zinc-400 hover:text-white"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<button class="p-2 rounded-full glass-dark text-zinc-400 hover:text-white"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-[450px]">
+<!-- Hero Featured Card -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="luxury hotel rooftop lounge at twilight with glowing pool and city skyline reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrmP1gev_MYGy6163kkEv9Q8tXJAb7KXA7iQ4l_sbBnsoyiSacJzMAUa98mOkaepC4etaA975UJoInjs-gytyBJD0HdO2XgbrCImCIAmOaEZ6sxN-f_t5qekIy8ozP5SXNDfUXBWrecXj58OUFCk6SLnIvi7A4nbZ75os9CoZgJQkUd6dMhffteZBpfN1xcfA0u5BiFA7gJLavOGGrCMQvUlsulycc0HaxqpmG2CPed52-uMO3PDFtHBSFonjdBiHAFPrgs4seMlE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<div class="flex items-center gap-2 mb-3">
+<span class="px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/50 text-orange-500 text-[10px] uppercase font-bold tracking-widest">Premium Selection</span>
+<div class="flex items-center text-orange-400 text-xs font-bold">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span> 4.9
+                            </div>
+</div>
+<h3 class="font-display-lg text-white mb-2">The Zenith Skyward Suite</h3>
+<p class="text-zinc-300 text-body-md max-w-lg mb-4 line-clamp-2">Experience unrivaled views of the runway through floor-to-ceiling soundproof glass, featuring a world-class oxygen bar and private spa.</p>
+<div class="flex justify-between items-center">
+<span class="text-white font-bold text-xl">$450 <span class="text-xs font-normal text-zinc-400">/ 6 hours</span></span>
+<button class="bg-white text-black px-6 py-2 rounded-lg font-bold hover:bg-orange-500 transition-colors">Select Now</button>
+</div>
+</div>
+</div>
+<!-- Secondary Featured Card -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="modern minimalist hotel room with warm ambient lighting and soft textures on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgpvsxGsLI9ONz0VMopwSLLEYpbNhJiT7nsdb2qsvqpXNfHiGCHROKpUmDSQS0EVQ4feOZ_fzzm5VrO9MwrqaQxxpigF4c927ORGH0X1lcv-CWczcV-eHK24L1aV6n_qf9ovaWuKfPrn0yV-GBTZ6V6ulIPxgc_mKKRr-QAtncw1vzLOV-MbiwPTqD-hZ8gD5hFfvwL-6AXeN-4ANMr6p0_-rL_sK8zLzLjIwkYTW6OV8dNpGVrY8OLW5qMGdcfmEhey0e-KT_KD4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6">
+<h3 class="font-headline-md text-white mb-2">Capsule Core 01</h3>
+<div class="flex items-center text-zinc-400 text-xs mb-4">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="location_on">location_on</span> Terminal 3, Gate B
+                        </div>
+<span class="text-white font-bold text-lg">$89 <span class="text-xs font-normal text-zinc-400">/ 4 hours</span></span>
+</div>
+</div>
+</div>
+</section>
+<!-- Filters Row -->
+<section class="flex flex-wrap items-center gap-4 mb-8">
+<span class="text-zinc-500 text-sm font-medium">Filter by:</span>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg glass-dark border-orange-500/30 text-orange-400 text-sm font-semibold">
+                    Price <span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg glass-dark text-zinc-300 text-sm font-semibold">
+                    Rating <span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg glass-dark text-zinc-300 text-sm font-semibold">
+                    Distance <span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+<div class="ml-auto flex items-center gap-2">
+<span class="text-zinc-500 text-sm">Showing 14 results</span>
+</div>
+</section>
+<!-- Options Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="glass-dark rounded-xl overflow-hidden inner-glow transition-all duration-300 group">
+<div class="relative h-48">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="close-up of luxury bedding in a dark moody hotel room with orange accent pillow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSetmRv9FpvpppIrzDfgMumBNxsVQ3pRSNvltLdO84mHD1lLAu2A82I2WECOm080hloxtAX8lG8CAXteuez76iAisTT4HAZo0epLQEksl6mfBuv7ZMod43TUO2TlUEkZ2pvjiEweZ5YAZ9l8R1MuUpSAggPOYnhn-py4aSAjV2KML52SVezXCV0apY_kC-tzhoRjoLKKW28dvzNDAZrn_NClX59csgjDVHG92_DDTOgcJlyA4UsePlWdJ-4OyVn-sWTJfF-Ob9UZ0"/>
+<div class="absolute top-4 right-4 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-white text-xs font-bold">
+                        $120
+                    </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-lg text-white">Cloud Nine Sleep Lounge</h4>
+<div class="flex items-center text-orange-500 text-xs font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span> 4.7
+                        </div>
+</div>
+<p class="text-zinc-500 text-sm mb-4 line-clamp-2">Ergonomic zero-gravity sleep pods with noise-cancellation technology.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400 text-[10px] font-bold uppercase tracking-tighter">Luxury</span>
+<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400 text-[10px] font-bold uppercase tracking-tighter">Fast Check-in</span>
+</div>
+<button class="w-full py-3 rounded-lg border border-zinc-800 text-white font-bold text-sm hover:border-orange-500 hover:text-orange-500 transition-all active:scale-[0.98]">Select</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-dark rounded-xl overflow-hidden inner-glow transition-all duration-300 group">
+<div class="relative h-48">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="elegant hotel exterior with warm lights and sleek architecture against night sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj2PtB0HkiqXvkfLPwCCKNQ1BZHNT1e4Y2963yTZW3EadZupNLs6ZBY16TGx1yxNFCAnoKQmFR8uyfk-bnMt9fvkedMMMjMO7nMy28Q4v6XQVF6umkbtkxqf76Nck9XxtBRzYp5CWDVfNREEBgqq9oW9f4qzb06QiUvgTOUYdGL4j_CtfQ5A8UYKnJfhmId_FtcaBzi-Li7sZmkP8m-C0yntmJgetBTw9Ry8fBBp4lY0FqcMVSlxtyXH4e9IygAv-JOKD_Cm46Kio"/>
+<div class="absolute top-4 right-4 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-white text-xs font-bold">
+                        $310
+                    </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-lg text-white">The Meridian Grand</h4>
+<div class="flex items-center text-orange-500 text-xs font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span> 4.9
+                        </div>
+</div>
+<p class="text-zinc-500 text-sm mb-4 line-clamp-2">Connected directly to the terminal via a private luxury walkway.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400 text-[10px] font-bold uppercase tracking-tighter">Exclusive</span>
+<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400 text-[10px] font-bold uppercase tracking-tighter">Shower Access</span>
+</div>
+<button class="w-full py-3 rounded-lg border border-zinc-800 text-white font-bold text-sm hover:border-orange-500 hover:text-orange-500 transition-all active:scale-[0.98]">Select</button>
+</div>
+</div>
+<!-- Card 3 (Selected State) -->
+<div class="glass-dark border-orange-500/50 ring-1 ring-orange-500/50 rounded-xl overflow-hidden inner-glow transition-all duration-300 group">
+<div class="relative h-48">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="zen hotel garden at night with minimal lighting and water features" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxzCk6BmsvQI21_lGos4G4hpXJGRHu5rmB24gW00grsxSvWTrV9_ZOxC2YTDLohsa3yb5P1oOMWhdRSETrurEYNRV86GpNULGYwUD8HM2u_sCdbVJMWfgj5UG0ANE22v1IMQ5t-BSMJrLpPWPhugEh1McrjwnrIpik_qMjY53WSCRyA8B3THSbN9uSlOJ42rHHEAyHg7xVBWMVeWxLyMS_brXSzn5CqKMAEhRYaj3HtbNz2pfarE6CZeprwtA0SSMtSqqL3gszKXw"/>
+<div class="absolute top-4 right-4 px-2 py-1 bg-orange-500 rounded text-black text-xs font-bold">
+                        $240
+                    </div>
+<div class="absolute inset-0 bg-orange-500/10 backdrop-blur-[2px]"></div>
+<div class="absolute top-4 left-4">
+<span class="material-symbols-outlined bg-orange-500 text-black rounded-full p-1 text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-lg text-white">Zenith Wellness Hub</h4>
+<div class="flex items-center text-orange-500 text-xs font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span> 4.8
+                        </div>
+</div>
+<p class="text-zinc-500 text-sm mb-4 line-clamp-2">Detox and recharge with infra-red saunas and localized cryotherapy.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400 text-[10px] font-bold uppercase tracking-tighter">Spa</span>
+<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400 text-[10px] font-bold uppercase tracking-tighter">Health</span>
+</div>
+<button class="w-full py-3 rounded-lg bg-orange-500 text-black font-bold text-sm shadow-[0_0_15px_rgba(255,140,0,0.3)] transition-all active:scale-[0.98]">Deselect</button>
+</div>
+</div>
+<!-- More grid items can be added here -->
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 bg-zinc-950/80 backdrop-blur-2xl border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<div class="hidden md:flex flex-col">
+<span class="text-orange-500 font-['Space_Grotesk'] font-black text-xs uppercase tracking-widest mb-1">Status</span>
+<span class="text-white font-medium">3 options selected</span>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none flex items-center justify-center text-zinc-400 border border-zinc-800 rounded-lg px-8 py-3 hover:border-orange-500/50 font-['Space_Grotesk'] font-medium uppercase tracking-widest transition-all active:scale-98">
+<span class="material-symbols-outlined mr-2 text-sm" data-icon="arrow_back">arrow_back</span>
+                Back
+            </button>
+<button class="flex-1 md:flex-none flex items-center justify-center bg-orange-500 text-black rounded-lg px-8 py-3 font-bold font-['Space_Grotesk'] uppercase tracking-widest hover:shadow-[0_0_15px_rgba(255,140,0,0.3)] transition-all active:scale-98">
+                Next
+                <span class="material-symbols-outlined ml-2 text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</footer>
+</body></html>

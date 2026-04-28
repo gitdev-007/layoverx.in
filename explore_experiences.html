@@ -101,6 +101,13 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card.selected {
+            border-color: #ff7a00 !important;
+            background: rgba(255, 122, 0, 0.08) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(255, 122, 0, 0.15);
         }
         body { opacity: 0; } /* Managed by main.js transition */
     </style>
@@ -172,37 +179,37 @@
 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" id="servicesGrid">
 <!-- Card 1: Hotels -->
 <div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Hotels">
-<span class="material-symbols-outlined text-[#FF6B00] mb-4 text-3xl">hotel</span>
+<span class="material-symbols-outlined text-white/60 mb-4 text-3xl">hotel</span>
 <p class="font-headline-md text-sm text-white">Hotels</p>
 <p class="text-xs text-white/40 mt-1">Quiet rest zones</p>
 </div>
 <!-- Card 2: Food -->
 <div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Food & Dining">
-<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl">restaurant</span>
+<span class="material-symbols-outlined text-white/60 mb-4 text-3xl">restaurant</span>
 <p class="font-headline-md text-sm text-white">Food &amp; Dining</p>
 <p class="text-xs text-white/40 mt-1">Local &amp; Global</p>
 </div>
 <!-- Card 3: Airport Services -->
 <div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Services">
-<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl">airport_shuttle</span>
+<span class="material-symbols-outlined text-white/60 mb-4 text-3xl">airport_shuttle</span>
 <p class="font-headline-md text-sm text-white">Services</p>
 <p class="text-xs text-white/40 mt-1">Lounges &amp; Spa</p>
 </div>
 <!-- Card 4: Local -->
 <div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Experiences">
-<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl">explore</span>
+<span class="material-symbols-outlined text-white/60 mb-4 text-3xl">explore</span>
 <p class="font-headline-md text-sm text-white">Experiences</p>
 <p class="text-xs text-white/40 mt-1">City highlights</p>
 </div>
 <!-- Card 5: Transport -->
 <div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Transport">
-<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl">directions_car</span>
+<span class="material-symbols-outlined text-white/60 mb-4 text-3xl">directions_car</span>
 <p class="font-headline-md text-sm text-white">Transport</p>
 <p class="text-xs text-white/40 mt-1">Private chauffeur</p>
 </div>
 <!-- Card 6: Shopping -->
 <div class="glass-card p-6 rounded-xl group cursor-pointer hover:bg-white/5 transition-all border border-transparent" data-service-card="Shopping">
-<span class="material-symbols-outlined text-white/60 group-hover:text-white mb-4 text-3xl">shopping_bag</span>
+<span class="material-symbols-outlined text-white/60 mb-4 text-3xl">shopping_bag</span>
 <p class="font-headline-md text-sm text-white">Shopping</p>
 <p class="text-xs text-white/40 mt-1">Duty free premium</p>
 </div>

@@ -5,7 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>LayoverX | Select Options</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
@@ -19,12 +19,12 @@
                         "on-secondary-fixed-variant": "#474646",
                         "on-tertiary": "#303030",
                         "surface-container-high": "#2a2a2a",
-                        "primary-container": "#000000",
+                        "primary-container": "#ff8c00",
                         "on-primary-fixed-variant": "#474747",
                         "secondary-container": "#4a4949",
                         "surface-variant": "#353535",
                         "surface-container-highest": "#353535",
-                        "primary": "#c6c6c6",
+                        "primary": "#ffb77d",
                         "surface-tint": "#c6c6c6",
                         "on-primary": "#303030",
                         "surface-bright": "#393939",
@@ -73,18 +73,21 @@
                         "stack-md": "1rem",
                         "stack-sm": "0.5rem",
                         "gutter": "1.5rem",
-                        "container-padding": "2rem"
+                        "container-padding": "2rem",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px"
                     },
                     "fontFamily": {
-                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Space Grotesk"],
                         "body-md": ["Inter"],
                         "display-xl": ["Plus Jakarta Sans"],
-                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Space Grotesk"],
                         "label-sm": ["Inter"],
                         "body-lg": ["Inter"]
                     },
                     "fontSize": {
-                        "headline-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
                         "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
                         "display-xl": ["60px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
                         "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
@@ -96,11 +99,21 @@
         }
     </script>
 <style>
-        .glass-card {
-            background: rgba(30, 30, 30, 0.6);
+        .glass-card, .glass-dark {
+            background: rgba(20, 20, 22, 0.6);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+        .inner-glow:hover {
+            box-shadow: inset 0 0 15px rgba(255, 140, 0, 0.15);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
         body { opacity: 0; }
     </style>
@@ -140,7 +153,7 @@
 </div>
 </div>
 
-<main class="max-w-7xl mx-auto px-8 pt-32 pb-40">
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-12 pb-40">
 <!-- Step Indicator -->
 <div class="flex justify-between max-w-2xl mx-auto mb-20 relative">
 <div class="absolute top-1/2 left-0 w-full h-[1px] bg-white/5 -z-10"></div>
@@ -166,18 +179,78 @@
 </div>
 </div>
 
-<div id="optionsContainer">
-    <!-- Dynamic Content will be injected here via js/options.js -->
+<!-- Header Section -->
+<section class="mb-12">
+<h1 class="font-headline-lg text-headline-lg text-white mb-2">Choose Your Options</h1>
+<p class="font-body-lg text-body-lg text-zinc-400 max-w-2xl">Select specific experiences from your chosen categories to curate your perfect layover.</p>
+</section>
+
+<!-- Category Bar -->
+<section class="mb-10 overflow-x-auto hide-scrollbar">
+<div class="flex gap-4 min-w-max" id="categoryBar">
+    <!-- Dynamic Categories -->
+</div>
+</section>
+
+<!-- Dynamic Content Area -->
+<div id="dynamicContent">
+    <!-- Recommended Section -->
+    <section class="mb-16 hidden" id="recommendedSection">
+        <div class="flex justify-between items-end mb-6">
+            <h2 class="font-headline-md text-headline-md text-white">Recommended for You</h2>
+            <div class="flex gap-2">
+                <button class="p-2 rounded-full glass-dark text-zinc-400 hover:text-white"><span class="material-symbols-outlined">chevron_left</span></button>
+                <button class="p-2 rounded-full glass-dark text-zinc-400 hover:text-white"><span class="material-symbols-outlined">chevron_right</span></button>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[450px]" id="featuredGrid">
+            <!-- Dynamic Featured Cards -->
+        </div>
+    </section>
+
+    <!-- Filters Row -->
+    <section class="flex flex-wrap items-center gap-4 mb-8">
+        <span class="text-zinc-500 text-sm font-medium">Filter by:</span>
+        <div class="flex gap-2">
+            <button class="flex items-center gap-2 px-4 py-2 rounded-lg glass-dark border-orange-500/30 text-orange-400 text-sm font-semibold">
+                Price <span class="material-symbols-outlined text-sm">expand_more</span>
+            </button>
+            <button class="flex items-center gap-2 px-4 py-2 rounded-lg glass-dark text-zinc-300 text-sm font-semibold">
+                Rating <span class="material-symbols-outlined text-sm">expand_more</span>
+            </button>
+            <button class="flex items-center gap-2 px-4 py-2 rounded-lg glass-dark text-zinc-300 text-sm font-semibold">
+                Distance <span class="material-symbols-outlined text-sm">expand_more</span>
+            </button>
+        </div>
+        <div class="ml-auto flex items-center gap-2">
+            <span class="text-zinc-500 text-sm" id="resultCount">Showing 0 results</span>
+        </div>
+    </section>
+
+    <!-- Options Grid -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-12" id="optionsGrid">
+        <!-- Dynamic Option Cards -->
+    </section>
 </div>
 </main>
 
-<!-- Floating CTA -->
-<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-md px-4 z-50 hidden" id="ctaContainer">
-<button class="w-full bg-[#FF6B00] text-black font-bold py-5 rounded-2xl shadow-[0_20px_50px_rgba(255,107,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3" id="continueToPriorityBtn" type="button">
-            Continue to Priority
-            <span class="material-symbols-outlined">arrow_forward</span>
+<!-- Sticky Bottom CTA -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 bg-zinc-950/80 backdrop-blur-2xl border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<div class="hidden md:flex flex-col">
+<span class="text-orange-500 font-['Space_Grotesk'] font-black text-xs uppercase tracking-widest mb-1">Status</span>
+<span class="text-white font-medium" id="selectionStatus">0 options selected</span>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none flex items-center justify-center text-zinc-400 border border-zinc-800 rounded-lg px-8 py-3 hover:border-orange-500/50 font-['Space_Grotesk'] font-medium uppercase tracking-widest transition-all active:scale-98" onclick="window.handleStepNavigation('explore_experiences.html')">
+<span class="material-symbols-outlined mr-2 text-sm">arrow_back</span>
+                Back
+            </button>
+<button class="flex-1 md:flex-none flex items-center justify-center bg-orange-500 text-black rounded-lg px-8 py-3 font-bold font-['Space_Grotesk'] uppercase tracking-widest hover:shadow-[0_0_15px_rgba(255,140,0,0.3)] transition-all active:scale-98 disabled:opacity-50 disabled:grayscale disabled:pointer-events-none" id="nextToPriorityBtn">
+                Next
+                <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
 </button>
 </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabaseClient.js"></script>
