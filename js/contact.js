@@ -4,8 +4,14 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    const contactForm = document.querySelector('form');
+    console.log('Contact form script loaded');
+    
+    // More specific selector for contact form
+    const contactForm = document.querySelector('#contact form') || document.querySelector('form');
     const submitButton = contactForm?.querySelector('button[type="submit"]');
+    
+    console.log('Contact form found:', !!contactForm);
+    console.log('Submit button found:', !!submitButton);
     
     if (!contactForm) {
         console.log('Contact form not found');
@@ -14,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Form submission handler
     contactForm.addEventListener('submit', async (e) => {
+        console.log('Form submission triggered');
         e.preventDefault();
         
         // Get form fields
@@ -21,10 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const emailInput = document.getElementById('contact-email');
         const messageInput = document.getElementById('contact-message');
         
+        console.log('Form inputs found:', !!nameInput, !!emailInput, !!messageInput);
+        
         // Get values
         const name = nameInput.value.trim();
         const email = emailInput.value.trim();
         const message = messageInput.value.trim();
+        
+        console.log('Form values:', { name, email, message: message.substring(0, 50) + '...' });
         
         // Basic validation
         if (!name || !email || !message) {
@@ -47,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         try {
+            console.log('About to send API request to /api/contact');
+            
             // Send data to API
             const response = await fetch('/api/contact', {
                 method: 'POST',
@@ -60,7 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             });
             
+            console.log('API response received:', response.status, response.statusText);
+            
             const result = await response.json();
+            console.log('API response data:', result);
             
             if (result.success) {
                 // Success
