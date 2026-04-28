@@ -920,3 +920,15 @@
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H4","location":"js/main.js:~DOMContentLoaded","message":"DOMContentLoaded fired in main.js","data":{"hasSignInBtn":true},"timestamp":1777406860784}
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777406860786}
 {"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777406860914}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H6","location":"js/supabaseClient.js:1","message":"Supabase config evaluated","data":{"hasUrl":true,"hasAnonKey":true,"urlStartsWithHttps":true,"anonKeyLength":46},"timestamp":1777407194299}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H2","location":"js/main.js:1","message":"Main JS evaluated","data":{"readyState":"loading","hasSupabase":true,"hasSupabaseClient":true},"timestamp":1777407194305}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777407194309}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H7","location":"js/supabaseClient.js:~createClient","message":"Supabase client initialized","data":{"hasWindowSupabaseClient":true},"timestamp":1777407194302}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777407195921}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H4","location":"js/main.js:~DOMContentLoaded","message":"DOMContentLoaded fired in main.js","data":{"hasSignInBtn":true},"timestamp":1777407194307}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H6","location":"js/supabaseClient.js:1","message":"Supabase config evaluated","data":{"hasUrl":true,"hasAnonKey":true,"urlStartsWithHttps":true,"anonKeyLength":46},"timestamp":1777407231163}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H7","location":"js/supabaseClient.js:~createClient","message":"Supabase client initialized","data":{"hasWindowSupabaseClient":true},"timestamp":1777407231166}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H2","location":"js/main.js:1","message":"Main JS evaluated","data":{"readyState":"loading","hasSupabase":true,"hasSupabaseClient":true},"timestamp":1777407231171}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H4","location":"js/main.js:~DOMContentLoaded","message":"DOMContentLoaded fired in main.js","data":{"hasSignInBtn":true},"timestamp":1777407231208}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777407231210}
+{"sessionId":"d22060","runId":"pre-fix","hypothesisId":"H8","location":"js/main.js:~getSupabase","message":"getSupabase invoked","data":{"hasSupabaseClient":true},"timestamp":1777407231287}

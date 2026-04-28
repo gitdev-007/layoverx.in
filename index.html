@@ -609,20 +609,22 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 </div>
 <div class="rounded-[28px] border border-white/10 bg-surface-container/90 p-8 md:p-10 shadow-2xl shadow-black/20">
-<form id="contactForm" class="space-y-5">
-<div>
-<label class="block text-sm text-secondary/80 mb-2" for="contact-name">Name</label>
-<input class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="contact-name" name="name" placeholder="Your name" type="text"/>
-</div>
-<div>
-<label class="block text-sm text-secondary/80 mb-2" for="contact-email">Email</label>
-<input class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="contact-email" name="email" placeholder="you@example.com" type="email"/>
-</div>
-<div>
-<label class="block text-sm text-secondary/80 mb-2" for="contact-message">Message</label>
-<textarea class="w-full min-h-[160px] rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0 resize-y" id="contact-message" name="message" placeholder="Tell us a little about your inquiry"></textarea>
-</div>
-<button class="w-full sm:w-auto bg-primary-container text-on-primary-container px-8 py-3 rounded-2xl font-label-md hover:scale-[1.01] active:scale-[0.99] transition" type="submit">Send Message</button>
+<form id="contactForm">
+  <div class="space-y-5">
+    <div>
+      <label class="block text-sm text-secondary/80 mb-2" for="contact-name">Name</label>
+      <input name="name" required class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="contact-name" placeholder="Your name" type="text"/>
+    </div>
+    <div>
+      <label class="block text-sm text-secondary/80 mb-2" for="contact-email">Email</label>
+      <input name="email" required class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="contact-email" placeholder="you@example.com" type="email"/>
+    </div>
+    <div>
+      <label class="block text-sm text-secondary/80 mb-2" for="contact-message">Message</label>
+      <textarea name="message" required class="w-full min-h-[160px] rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0 resize-y" id="contact-message" placeholder="Tell us a little about your inquiry"></textarea>
+    </div>
+    <button type="submit" class="w-full sm:w-auto bg-primary-container text-on-primary-container px-8 py-3 rounded-2xl font-label-md hover:scale-[1.01] active:scale-[0.99] transition">Send Message</button>
+  </div>
 </form>
 </div>
 </div>
@@ -744,71 +746,26 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="js/supabaseClient.js"></script>
 <script src="js/main.js"></script>
 <script>
-console.log("JS LOADED SUCCESSFULLY");
+console.log("JS FILE LOADED");
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM loaded, looking for form");
-  
-  const form = document.querySelector("form");
-
-  if (!form) {
-    console.error("Form not found!");
-    return;
-  }
-
-  console.log("Form found, attaching listener");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    console.log("Form submit intercepted");
-
-    const name = form.querySelector('input[name="name"]').value;
-    const email = form.querySelector('input[name="email"]').value;
-    const message = form.querySelector('textarea[name="message"]').value;
-
-    console.log("Sending request...");
-
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, message }),
-    });
-
-    console.log("Response:", res);
-
-    if (res.ok) {
-      alert("Message sent!");
-      form.reset();
-    } else {
-      alert("Failed!");
-    }
-  });
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("JS Loaded ✅");
-
   const form = document.getElementById("contactForm");
 
   if (!form) {
-    console.error("Form not found ❌");
+    console.error("Form NOT FOUND");
     return;
   }
 
-  form.addEventListener("submit", async function (e) {
+  console.log("Form connected");
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault(); // 🚨 THIS STOPS PAGE RELOAD
 
-    console.log("Form submit intercepted ✅");
+    console.log("Submitting form...");
 
     const name = form.name.value;
     const email = form.email.value;
     const message = form.message.value;
-
-    console.log("Sending request...");
 
     try {
       const res = await fetch("/api/contact", {
