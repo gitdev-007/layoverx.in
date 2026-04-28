@@ -756,10 +756,15 @@ document.addEventListener("DOMContentLoaded", function() {
   
   console.log("Contact form found, adding event listener");
   
+  // Remove any existing submit handlers
+  form.removeEventListener("submit", function() {});
+  
   form.addEventListener("submit", async function (e) {
+    console.log("Submit event triggered!");
     e.preventDefault();
+    e.stopPropagation();
     
-    console.log("Sending request...");
+    console.log("Default prevented, sending request...");
     
     const name = form.name.value;
     const email = form.email.value;
@@ -767,23 +772,43 @@ document.addEventListener("DOMContentLoaded", function() {
     
     console.log("Form data:", { name, email, message: message.substring(0, 50) + "..." });
     
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, message }),
-    });
-    
-    console.log("Response:", res);
-    
-    if (res.ok) {
-      alert("Message sent!");
-      form.reset();
-    } else {
-      alert("Failed!");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+      
+      console.log("Response:", res);
+      
+      if (res.ok) {
+        alert("Message sent!");
+        form.reset();
+      } else {
+        alert("Failed!");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Network error!");
     }
   });
+  
+  // Also add button click handler as backup
+  const button = form.querySelector('button[type="submit"]');
+  if (button) {
+    console.log("Found submit button, adding click handler");
+    button.addEventListener("click", function(e) {
+      console.log("Button clicked!");
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Trigger form submission
+      const event = new Event("submit", { bubbles: true, cancelable: true });
+      form.dispatchEvent(event);
+    });
+  }
 });
 </script>
 </body></html>
