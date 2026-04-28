@@ -110,11 +110,11 @@
 <div class="flex justify-between items-center h-20 px-8 max-w-[1920px] mx-auto">
 <div class="text-2xl font-bold tracking-tighter text-white">LayoverX</div>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-white/60 hover:text-white transition-colors" href="explore_experiences.html">Explore</a>
-<a class="text-white/60 hover:text-white transition-colors" href="options.html">Options</a>
-<a class="text-[#FF6B00] font-semibold" href="#">Priority</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Plan</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Finalize</a>
+<a href="explore_experiences.html">Explore</a>
+<a href="options.html">Options</a>
+<a href="priority.html">Priority</a>
+<a href="plan.html">Plan</a>
+<a href="finalize.html">Finalize</a>
 </div>
 <div class="flex items-center gap-6">
 <span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors">notifications</span>
@@ -182,8 +182,13 @@
 </button>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/main.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+    if (window.initStepNavigation) window.initStepNavigation(3);
+
     const airport = localStorage.getItem("airport") || "CSIA T2, Mumbai";
     const duration = localStorage.getItem("duration") || "6.5";
     const dateTime = localStorage.getItem("dateTime") || "2026-04-27T14:30";
@@ -227,13 +232,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const temp = selectedOptions[index];
             selectedOptions[index] = selectedOptions[newIndex];
             selectedOptions[newIndex] = temp;
+            localStorage.setItem("priorityList", JSON.stringify(selectedOptions));
             renderList();
+            if (window.initStepNavigation) window.initStepNavigation(3);
         }
     };
 
     buildPlanBtn.addEventListener("click", () => {
         localStorage.setItem("priorityList", JSON.stringify(selectedOptions));
-        window.location.href = "plan.html";
+        window.handleStepNavigation("plan.html");
     });
 
     renderList();

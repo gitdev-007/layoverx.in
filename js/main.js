@@ -412,6 +412,92 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // --- CENTRAL ARCHITECT & NAVIGATION ---
+  const AppState = {
+      getKeys: () => ({
+          services: 'selectedServices',
+          options: 'selectedOptions',
+          priority: 'priorityList',
+          plan: 'finalPlan'
+      }),
+      save: (key, data) => localStorage.setItem(key, JSON.stringify(data)),
+      get: (key) => JSON.parse(localStorage.getItem(key) || '[]'),
+      validateStep: (targetPage) => {
+          const keys = AppState.getKeys();
+          const validation = {
+              "explore_experiences.html": true,
+              "options.html": AppState.get(keys.services).length > 0,
+              "priority.html": AppState.get(keys.options).length > 0,
+              "plan.html": AppState.get(keys.priority).length > 0,
+              "finalize.html": AppState.get(keys.plan).length > 0
+          };
+          return validation[targetPage] || false;
+      }
+  };
+
+  window.handleStepNavigation = function(targetPage) {
+      if (AppState.validateStep(targetPage)) {
+          document.body.style.opacity = '0';
+          setTimeout(() => { window.location.href = targetPage; }, 300);
+      } else {
+          const alertBox = document.createElement('div');
+          alertBox.className = "fixed top-24 left-1/2 -translate-x-1/2 z-[100] glass-card px-6 py-4 rounded-2xl border border-red-500/50 text-white flex items-center gap-3 animate-bounce shadow-[0_0_50px_rgba(239,68,68,0.2)]";
+          alertBox.innerHTML = `<span class="material-symbols-outlined text-red-500">warning</span><p class="font-bold text-sm">Please complete the previous step first.</p>`;
+          document.body.appendChild(alertBox);
+          setTimeout(() => alertBox.remove(), 3000);
+      }
+  };
+
+  window.initStepNavigation = function(currentStep) {
+      const steps = [
+          { id: 1, name: "Explore", page: "explore_experiences.html", key: 'services' },
+          { id: 2, name: "Options", page: "options.html", key: 'options' },
+          { id: 3, name: "Priority", page: "priority.html", key: 'priority' },
+          { id: 4, name: "Plan", page: "plan.html", key: 'plan' },
+          { id: 5, name: "Finalize", page: "finalize.html", key: null }
+      ];
+
+      document.querySelectorAll('nav .md\\:flex a').forEach(link => {
+          const text = link.textContent.trim();
+          const step = steps.find(s => s.name === text);
+          if (step) {
+              link.onclick = (e) => { e.preventDefault(); window.handleStepNavigation(step.page); };
+              if (step.id === currentStep) link.className = 'text-[#FF6B00] font-semibold';
+              else if (!AppState.validateStep(step.page)) link.className = 'text-white/20 cursor-not-allowed';
+              else link.className = 'text-white/60 hover:text-white transition-colors';
+          }
+      });
+
+      const indicators = document.querySelectorAll('.flex.justify-between.max-w-2xl.mx-auto.mb-20.relative > div:not(.absolute)');
+      indicators.forEach((indicator, index) => {
+          const stepId = index + 1;
+          const step = steps[index];
+          const circle = indicator.querySelector('.w-8.h-8');
+          const label = indicator.querySelector('span');
+          if (!circle || !label) return;
+
+          const isAllowed = AppState.validateStep(step.page);
+          indicator.style.cursor = isAllowed ? 'pointer' : 'not-allowed';
+          indicator.onclick = () => isAllowed && window.handleStepNavigation(step.page);
+
+          if (stepId < currentStep) {
+              circle.innerHTML = '✓';
+              circle.className = 'w-8 h-8 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center text-xs font-bold border border-[#FF6B00]/20';
+          } else if (stepId === currentStep) {
+              circle.innerHTML = stepId;
+              circle.className = 'w-8 h-8 rounded-full bg-[#FF6B00] text-black flex items-center justify-center text-xs font-bold';
+              label.classList.add('text-[#FF6B00]');
+          } else {
+              circle.innerHTML = stepId;
+              circle.className = 'w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5';
+              if (!isAllowed) indicator.style.opacity = '0.3';
+          }
+      });
+  };
+
+  document.body.style.transition = 'opacity 0.3s ease';
+  document.body.style.opacity = '1';
+
   function bootAuthUIWhenSupabaseReady() {
     if (window.supabaseClient) { bootAuthUI(); return; }
     window.addEventListener('supabase:ready', () => bootAuthUI(), { once: true });

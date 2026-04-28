@@ -102,6 +102,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
+        body { opacity: 0; } /* Managed by main.js transition */
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-[#FF6B00] selection:text-white antialiased">
@@ -110,11 +111,11 @@
 <div class="flex justify-between items-center h-20 px-8 max-w-[1920px] mx-auto">
 <div class="text-2xl font-bold tracking-tighter text-white">LayoverX</div>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-[#FF6B00] font-semibold" href="#">Explore</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Options</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Priority</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Plan</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Finalize</a>
+<a href="explore_experiences.html">Explore</a>
+<a href="options.html">Options</a>
+<a href="priority.html">Priority</a>
+<a href="plan.html">Plan</a>
+<a href="finalize.html">Finalize</a>
 </div>
 <div class="flex items-center gap-6">
 <span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors">notifications</span>
@@ -145,7 +146,7 @@
 <div class="absolute top-1/2 left-0 w-full h-[1px] bg-white/5 -z-10"></div>
 <div class="flex flex-col items-center gap-3">
 <div class="w-8 h-8 rounded-full bg-[#FF6B00] text-black flex items-center justify-center text-xs font-bold">1</div>
-<span class="text-[10px] font-semibold text-[#FF6B00] uppercase tracking-widest">Explore</span>
+<span class="text-[10px] font-semibold uppercase tracking-widest">Explore</span>
 </div>
 <div class="flex flex-col items-center gap-3">
 <div class="w-8 h-8 rounded-full bg-surface-container-highest text-white/60 flex items-center justify-center text-xs font-bold border border-white/5">2</div>
@@ -217,6 +218,10 @@
 </button>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/main.js"></script>
+<script src="js/explore.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const airport = localStorage.getItem("airport") || "CSIA T2, Mumbai";
@@ -226,39 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const contextSummary = document.getElementById("contextSummary");
   const formattedDate = dateTime ? new Date(dateTime).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "No Date";
   if (contextSummary) contextSummary.textContent = `${airport} • ${duration}h • ${formattedDate}`;
-
-  const selectedServices = new Set();
-  const ctaContainer = document.getElementById("ctaContainer");
-  const continueBtn = document.getElementById("continueToOptionsBtn");
-
-  function updateCTA() {
-    if (selectedServices.size > 0) {
-      ctaContainer.classList.remove("hidden");
-    } else {
-      ctaContainer.classList.add("hidden");
-    }
-  }
-
-  document.querySelectorAll("[data-service-card]").forEach((card) => {
-    card.addEventListener("click", () => {
-      const key = card.getAttribute("data-service-card");
-      if (selectedServices.has(key)) {
-        selectedServices.delete(key);
-        card.classList.remove("border-[#FF6B00]", "ring-1", "ring-[#FF6B00]/20");
-        card.classList.add("border-transparent");
-      } else {
-        selectedServices.add(key);
-        card.classList.add("border-[#FF6B00]", "ring-1", "ring-[#FF6B00]/20");
-        card.classList.remove("border-transparent");
-      }
-      updateCTA();
-    });
-  });
-
-  continueBtn?.addEventListener("click", () => {
-    localStorage.setItem("selectedServices", JSON.stringify(Array.from(selectedServices)));
-    window.location.href = "options.html";
-  });
 });
 </script>
 </body></html>

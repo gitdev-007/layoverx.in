@@ -110,11 +110,11 @@
 <div class="flex justify-between items-center h-20 px-8 max-w-[1920px] mx-auto">
 <div class="text-2xl font-bold tracking-tighter text-white">LayoverX</div>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-white/60 hover:text-white transition-colors" href="explore_experiences.html">Explore</a>
-<a class="text-white/60 hover:text-white transition-colors" href="options.html">Options</a>
-<a class="text-white/60 hover:text-white transition-colors" href="priority.html">Priority</a>
-<a class="text-white/60 hover:text-white transition-colors" href="plan.html">Plan</a>
-<a class="text-[#FF6B00] font-semibold" href="#">Finalize</a>
+<a href="explore_experiences.html">Explore</a>
+<a href="options.html">Options</a>
+<a href="priority.html">Priority</a>
+<a href="plan.html">Plan</a>
+<a href="finalize.html">Finalize</a>
 </div>
 <div class="flex items-center gap-6">
 <span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors">notifications</span>
@@ -139,7 +139,33 @@
 </div>
 </div>
 
-<main class="max-w-5xl mx-auto px-8 pt-32 pb-40 grid grid-cols-1 lg:grid-cols-12 gap-12">
+<main class="max-w-5xl mx-auto px-8 pt-32 pb-40">
+<!-- Step Indicator -->
+<div class="flex justify-between max-w-2xl mx-auto mb-20 relative">
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-white/5 -z-10"></div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center text-xs font-bold border border-[#FF6B00]/20">✓</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Explore</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center text-xs font-bold border border-[#FF6B00]/20">✓</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Options</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center text-xs font-bold border border-[#FF6B00]/20">✓</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Priority</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center text-xs font-bold border border-[#FF6B00]/20">✓</div>
+<span class="text-[10px] font-semibold text-white/40 uppercase tracking-widest">Plan</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FF6B00] text-black flex items-center justify-center text-xs font-bold">5</div>
+<span class="text-[10px] font-semibold text-[#FF6B00] uppercase tracking-widest">Finalize</span>
+</div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
     <!-- Summary Section -->
     <div class="lg:col-span-7">
         <h2 class="font-headline-lg text-headline-lg text-white mb-8">Plan Summary</h2>
@@ -176,6 +202,7 @@
             </button>
         </div>
     </div>
+</div>
 </main>
 
 <!-- Hidden Success Overlay -->
@@ -188,8 +215,13 @@
 <button class="px-12 py-4 bg-[#FF6B00] text-black font-bold rounded-xl" onclick="window.location.href='index.html'">Return Home</button>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/main.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+    if (window.initStepNavigation) window.initStepNavigation(5);
+
     const airport = localStorage.getItem("airport") || "CSIA T2, Mumbai";
     const durationHours = parseFloat(localStorage.getItem("duration") || "6.5");
     const dateTime = localStorage.getItem("dateTime") || "2026-04-27T14:30";
@@ -247,8 +279,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     completeBookingBtn.addEventListener("click", () => {
         successOverlay.classList.remove("hidden");
-        // We keep local storage for a better demo experience, or clear it if requested.
-        // localStorage.clear(); 
     });
 });
 </script>

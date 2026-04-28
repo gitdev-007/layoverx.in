@@ -115,11 +115,11 @@
 <div class="flex justify-between items-center h-20 px-8 max-w-[1920px] mx-auto">
 <div class="text-2xl font-bold tracking-tighter text-white">LayoverX</div>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-white/60 hover:text-white transition-colors" href="explore_experiences.html">Explore</a>
-<a class="text-white/60 hover:text-white transition-colors" href="options.html">Options</a>
-<a class="text-white/60 hover:text-white transition-colors" href="priority.html">Priority</a>
-<a class="text-[#FF6B00] font-semibold" href="#">Plan</a>
-<a class="text-white/60 hover:text-white transition-colors" href="#">Finalize</a>
+<a href="explore_experiences.html">Explore</a>
+<a href="options.html">Options</a>
+<a href="priority.html">Priority</a>
+<a href="plan.html">Plan</a>
+<a href="finalize.html">Finalize</a>
 </div>
 <div class="flex items-center gap-6">
 <span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors">notifications</span>
@@ -207,12 +207,15 @@
 </button>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/main.js"></script>
 <script>
 const REAL_SERVICES_DATA = {
     "Hotels": [
         { id: "h1", category: "Hotels", title: "The Orchid Hotel", duration: "120 MIN", price: "Rs 1200", rating: "4.8", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBhE4jd4gvASnkYpCad8ZkFGP8EjYRtDrOIM4gv5zqgo82jn_Lg4ySHLH2q1_65Q9n1ibN5xpEt-HqW--014gjYePmi7m3V3vNi2YSNlu6dyvv3YYV41fcG2tOhe2mcy-wJCtFNHizmh2a4SN8PCYdWCkajrZf4CDWy_iewrpGFSxXzld8PY2BGj6HqgzGF_1-zdjwbrXlkvQkzlytVTwsV7n96K_gc0T_1BCS7i8GDr19aStt2ifH6mQnxdAAouMKyAazs-_RXluE", desc: "0.8 km from BOM • Eco-friendly luxury" },
         { id: "h2", category: "Hotels", title: "Hotel Sahara Star", duration: "120 MIN", price: "Rs 1400", rating: "4.7", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuATVkR2KXkjynUzwChDVcZkDkKNFrDNseyf3wI6FNpzzIi9WSZIBh4fp5UEP4hylQCsTVoKcSOAVBzDSDkZOEzSqhWiGuwQVHP3Cote2EL6fvUHv6r6gjsDfoPSu0SBnPJ3SLxLuXLpeuyhYPaSOEgM5qaDyyq9CxdQuJLa7ZGavDOQjSFOuu8bEkLLp8-dE-p_Uq9a8kSpnMSGRLrtDVaiOMkEFxVvev0JD6S1hV7lDpM9_jf6AQ9U2715D53S3HRGxsyaYwvkSPY", desc: "1.2 km from BOM • Iconic glass dome" },
-        { id: "h3", category: "Hotels", title: "Taj Santacruz", duration: "120 MIN", price: "Rs 1800", rating: "4.9", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC7bVECyHwsD_FPkeHUiZk7Pxa0MuWKHsQq2Tz3RNAiCZzR63Goe_Uo1ipzHHjXCUpuCaTamyDWnV012gRmq-a_PtAMr4DL1i-Rr4wuTfjjuFGYUbJ_GK-UTYndpd7mC-9lHr1SaNBZDcr-4NRqzfQaFJZcAzpEVClg19suEHsTqrKKoyxreJIdAaqVlV7EaVCOzpt6Bq11vGY9FlTU9MU7tWMaWrh7eXirWCxKSBuDoPKaeHfq006amnrEANkph3CX4cGBQA6c9K4", desc: "2.4 km from BOM • Signature Taj luxury" }
+        { id: "h3", category: "Hotels", title: "Taj Santacruz", duration: "120 MIN", price: "Rs 1800", rating: "4.9", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC7bVECyHwsD_FPkeHUiZk7Pxa0MuWKHsQq2Tz3RNAiCZzR63Goe_Uo1ipzHHjXCUpuCaTamyDWnV012gRmq-a_PtAMr4DL1i-Rr4wuTfjjuFGYUbJ_GK-UTYndpd7mC-9lHr1SaNBZDcr-4NRpjQaFJZcAzpEVClg19suEHsTqrKKoyxreJIdAaqVlV7EaVCOzpt6Bq11vGY9FlTU9MU7tWMaWrh7eXirWCxKSBuDoPKaeHfq006amnrEANkph3CX4cGBQA6c9K4", desc: "2.4 km from BOM • Signature Taj luxury" }
     ],
     "Food & Dining": [
         { id: "f1", category: "Food & Dining", title: "Thai Naam", duration: "60 MIN", price: "Rs 1199", rating: "4.6", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAnlb-Uvm7dEPU6AWkMlCbloKh5IxUB3ljic1wAbqqQVrj0nkruSrqdAijamQH-s0-pnlTMd2YkbYfj6C693uWJfQz8AC4bQhnooO9w5gdQFdY5jE8WqPZbOvB2mJL4KUYgVG-JvCNyE4io4tOOdtB67fBhfyh0DA1MvQOu55h8BFPwN3JQ47jNyZx6z7Jjq3JskhVon26IPZhPyfkjAu37X1btu-1mREcuiDKKbSFbRvHw88E60f6qP19Y6cbTz6-x_M1q3c0ek0Q", desc: "2.1 km from BOM • Authentic Thai cuisine" },
@@ -236,6 +239,8 @@ const REAL_SERVICES_DATA = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+    if (window.initStepNavigation) window.initStepNavigation(4);
+
     const airport = localStorage.getItem("airport") || "CSIA T2, Mumbai";
     const durationHours = parseFloat(localStorage.getItem("duration") || "6.5");
     const dateTime = localStorage.getItem("dateTime") || "2026-04-27T14:30";
@@ -254,6 +259,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let isEditMode = false;
     let replacingIndex = -1;
+
+    function savePlanState() {
+        localStorage.setItem("finalPlan", JSON.stringify(priorityList));
+        if (window.initStepNavigation) window.initStepNavigation(4);
+    }
 
     function renderTimeline() {
         timelineContainer.innerHTML = `
@@ -313,12 +323,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const val = parseInt(newVal);
         if (val > 0) {
             priorityList[index].duration = val + " MIN";
+            savePlanState();
             renderTimeline();
         }
     };
 
     window.deleteItem = (index) => {
         priorityList.splice(index, 1);
+        savePlanState();
         renderTimeline();
     };
 
@@ -347,6 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const newItem = REAL_SERVICES_DATA[category].find(o => o.id === id);
         if (newItem) {
             priorityList[replacingIndex] = JSON.parse(JSON.stringify(newItem));
+            savePlanState();
             replaceModal.classList.add("hidden");
             renderTimeline();
         }
@@ -361,11 +374,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     confirmPlanBtn.addEventListener("click", () => {
-        localStorage.setItem("finalPlan", JSON.stringify(priorityList));
-        window.location.href = "finalize.html";
+        savePlanState();
+        window.handleStepNavigation("finalize.html");
     });
 
     renderTimeline();
+    // Initial state save to enable the "Finalize" link if data exists
+    if (priorityList.length > 0) savePlanState();
 });
 </script>
 </body></html>
