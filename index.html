@@ -743,89 +743,47 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabaseClient.js"></script>
 <script src="js/main.js"></script>
-<script src="js/contact.js"></script>
 <script>
-// Simple, working contact form handler
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Contact form script loaded');
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("Contact form script loaded");
+  
+  const form = document.getElementById("contactForm");
+  
+  if (!form) {
+    console.log("Contact form not found!");
+    return;
+  }
+  
+  console.log("Contact form found, adding event listener");
+  
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
     
-    const contactForm = document.getElementById('contactForm');
+    console.log("Sending request...");
     
-    if (!contactForm) {
-        console.log('Contact form not found!');
-        return;
-    }
+    const name = form.name.value;
+    const email = form.email.value;
+    const message = form.message.value;
     
-    console.log('Contact form found, adding event listener');
+    console.log("Form data:", { name, email, message: message.substring(0, 50) + "..." });
     
-    contactForm.addEventListener('submit', function(e) {
-        console.log('Form submitted!');
-        e.preventDefault();
-        
-        // Get form values
-        const name = this.name.value.trim();
-        const email = this.email.value.trim();
-        const message = this.message.value.trim();
-        
-        console.log('Form values:', { name, email, message: message.substring(0, 50) + '...' });
-        
-        // Basic validation
-        if (!name || !email || !message) {
-            alert('Please fill in all required fields.');
-            return;
-        }
-        
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address.');
-            return;
-        }
-        
-        // Get button and show loading state
-        const button = this.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
-        button.disabled = true;
-        button.textContent = 'Sending...';
-        
-        console.log('Sending request to /api/contact');
-        
-        // Send API request
-        fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                message: message
-            })
-        })
-        .then(response => {
-            console.log('Response received:', response.status, response.statusText);
-            return response.json();
-        })
-        .then(result => {
-            console.log('Response data:', result);
-            
-            if (result.success) {
-                alert('Message sent successfully! We\'ll get back to you soon.');
-                contactForm.reset();
-            } else {
-                alert('Failed to send message: ' + (result.error || 'Unknown error'));
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Network error. Please check your connection and try again.');
-        })
-        .finally(() => {
-            // Restore button
-            button.disabled = false;
-            button.textContent = originalText;
-        });
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, message }),
     });
+    
+    console.log("Response:", res);
+    
+    if (res.ok) {
+      alert("Message sent!");
+      form.reset();
+    } else {
+      alert("Failed!");
+    }
+  });
 });
 </script>
 </body></html>
