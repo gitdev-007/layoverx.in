@@ -121,43 +121,66 @@ document.addEventListener("DOMContentLoaded", () => {
     // Upload and verification
     async function uploadAndVerify() {
         if (!selectedFile) {
-            alert('Please select a file first.');
+            alert("Please upload a file");
             return;
         }
-        
+
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+
+        // Disable button and show loading state
+        const verifyBtn = document.getElementById('verifyBtn');
+        verifyBtn.disabled = true;
+        verifyBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Processing QR...';
         updateProgress(2);
-        
-        // Convert file to Base64 for storage
-        const reader = new FileReader();
-        
-        reader.onload = async (e) => {
-            const base64Data = e.target.result;
-            
-            // Store file in localStorage
-            const fileData = {
-                name: selectedFile.name,
-                type: selectedFile.type,
-                size: selectedFile.size,
-                data: base64Data,
-                timestamp: new Date().toISOString()
-            };
-            
-            localStorage.setItem('qrFile', JSON.stringify(fileData));
-            
-            console.log('File stored in localStorage:', fileData.name);
-            
-            // Redirect to processing page
-            setTimeout(() => {
-                window.location.href = 'processing_state_qr.html';
-            }, 1000);
-        };
-        
-        reader.onerror = () => {
-            alert('Failed to read file. Please try again.');
+
+        try {
+            const res = await fetch("/api/verify-qr", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await res.json();
+            console.log('QR verification response:', data);
+
+            if (data.success) {
+                // Store result for verification page
+                localStorage.setItem('qrResult', JSON.stringify({
+                    success: true,
+                    data: data.data,
+                    timestamp: new Date().toISOString()
+                }));
+                
+                updateProgress(4);
+                
+                // Redirect to success page
+                setTimeout(() => {
+                    window.location.href = "verification_result_qr.html?status=success";
+                }, 1000);
+            } else {
+                // Store result for verification page
+                localStorage.setItem('qrResult', JSON.stringify({
+                    success: false,
+                    error: data.error || 'QR code could not be decoded',
+                    timestamp: new Date().toISOString()
+                }));
+                
+                updateProgress(1);
+                
+                // Redirect to failure page
+                setTimeout(() => {
+                    window.location.href = "verification_result_qr.html?status=failed";
+                }, 1000);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Verification failed");
             updateProgress(1);
-        };
-        
-        reader.readAsDataURL(selectedFile);
+        } finally {
+            // Re-enable button
+            verifyBtn.disabled = false;
+            verifyBtn.innerHTML = 'Verify QR';
+        }
     }
     
     // Event listeners
@@ -472,34 +495,159 @@ document.addEventListener("DOMContentLoaded", () => {
                             </button>
 </div>
 </div>
-<!-- Boarding Pass Mockup Decorative Section -->
-<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
-<div class="bg-white border-2 border-dashed border-slate-300 p-4 rounded-lg flex items-center gap-4">
-<div class="w-16 h-16 bg-slate-100 rounded flex items-center justify-center">
-<span class="material-symbols-outlined text-slate-300">qr_code_2</span>
+<!-- Number of Travelers Section -->
+<div class="mt-8">
+<label class="block font-label-md text-label-md text-primary mb-2">Number of Travelers</label>
+<input type="number" id="travelerCount" min="1" max="10" value="1" class="w-full px-4 py-3 border border-slate-200 rounded-lg font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" />
+<p class="font-body-sm text-body-sm text-secondary mt-1">Select the number of travelers in your group (1-10)</p>
 </div>
-<div class="space-y-1">
-<div class="h-3 w-24 bg-slate-100 rounded"></div>
-<div class="h-2 w-16 bg-slate-50 rounded"></div>
-</div>
-</div>
-<div class="bg-white border-2 border-dashed border-slate-300 p-4 rounded-lg flex items-center gap-4">
-<div class="w-16 h-16 bg-slate-100 rounded flex items-center justify-center">
-<span class="material-symbols-outlined text-slate-300">picture_as_pdf</span>
-</div>
-<div class="space-y-1">
-<div class="h-3 w-24 bg-slate-100 rounded"></div>
-<div class="h-2 w-16 bg-slate-50 rounded"></div>
-</div>
-</div>
-</div>
-</div>
+<!-- Dynamic QR Upload Container -->
+<div id="qrUploadContainer" class="mt-8"></div>
 </div>
 </div>
 </main>
+<script>
+// Dynamic QR Upload System with Replace and Remove functionality
+const travelerInput = document.getElementById("travelerCount");
+const uploadContainer = document.getElementById("qrUploadContainer");
+
+travelerInput.addEventListener("change", renderInputs);
+
+function renderInputs() {
+  const count = parseInt(travelerInput.value);
+  uploadContainer.innerHTML = "";
+
+  for (let i = 0; i < count; i++) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "qr-block";
+    wrapper.style.marginBottom = "15px";
+
+    const label = document.createElement("label");
+    label.innerText = `Traveler ${i + 1}`;
+    label.style.fontWeight = "bold";
+    label.style.display = "block";
+    label.style.marginBottom = "8px";
+
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".png,.jpg,.jpeg,.pdf";
+    fileInput.name = "qrFiles";
+    fileInput.required = true;
+    fileInput.style.marginRight = "10px";
+
+    const fileName = document.createElement("span");
+    fileName.innerText = "No file selected";
+    fileName.style.marginLeft = "10px";
+    fileName.style.color = "#666";
+    fileName.style.fontSize = "14px";
+
+    fileInput.addEventListener("change", () => {
+      if (fileInput.files.length) {
+        fileName.innerText = fileInput.files[0].name;
+        fileName.style.color = "#333";
+      }
+    });
+
+    // Replace Button
+    const replaceBtn = document.createElement("button");
+    replaceBtn.innerText = "Replace";
+    replaceBtn.type = "button";
+    replaceBtn.style.marginLeft = "10px";
+    replaceBtn.style.padding = "5px 10px";
+    replaceBtn.style.backgroundColor = "#007bff";
+    replaceBtn.style.color = "white";
+    replaceBtn.style.border = "none";
+    replaceBtn.style.borderRadius = "4px";
+    replaceBtn.style.cursor = "pointer";
+
+    replaceBtn.onclick = () => {
+      fileInput.click();
+    };
+
+    // Remove Button
+    const removeBtn = document.createElement("button");
+    removeBtn.innerText = "Remove";
+    removeBtn.type = "button";
+    removeBtn.style.marginLeft = "10px";
+    removeBtn.style.padding = "5px 10px";
+    removeBtn.style.backgroundColor = "#ff4d4d";
+    removeBtn.style.color = "white";
+    removeBtn.style.border = "none";
+    removeBtn.style.borderRadius = "4px";
+    removeBtn.style.cursor = "pointer";
+
+    removeBtn.onclick = () => {
+      wrapper.remove();
+
+      // Update traveler count accordingly
+      const remaining = document.querySelectorAll(".qr-block").length;
+      travelerInput.value = remaining;
+    };
+
+    // Create button container
+    const buttonContainer = document.createElement("div");
+    buttonContainer.style.marginTop = "10px";
+
+    wrapper.appendChild(label);
+    wrapper.appendChild(fileInput);
+    wrapper.appendChild(fileName);
+    buttonContainer.appendChild(replaceBtn);
+    buttonContainer.appendChild(removeBtn);
+    wrapper.appendChild(buttonContainer);
+
+    uploadContainer.appendChild(wrapper);
+  }
+}
+
+// Update verify button logic to handle removed inputs
+document.getElementById("verifyBtn").addEventListener("click", async () => {
+  const fileInputs = document.querySelectorAll('.qr-block input[type="file"]');
+
+  if (fileInputs.length === 0) {
+    alert("Please upload at least one QR code");
+    return;
+  }
+
+  const formData = new FormData();
+
+  for (let input of fileInputs) {
+    if (!input.files.length) {
+      alert("All QR slots must have a file or be removed");
+      return;
+    }
+    formData.append("files", input.files[0]);
+  }
+
+  document.getElementById("verifyBtn").disabled = true;
+
+  try {
+    const res = await fetch("/api/verify-multiple-qr", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      window.location.href = "/verification_result_qr.html?status=success";
+    } else {
+      window.location.href = "/verification_result_qr.html?status=failed";
+    }
+  } catch (error) {
+    console.error("Verification failed:", error);
+    alert("Verification failed. Please try again.");
+  } finally {
+    document.getElementById("verifyBtn").disabled = false;
+  }
+});
+
+// Initial render
+renderInputs();
+</script>
 <!-- Footer -->
 <footer class="w-full py-6 px-8 flex flex-col md:flex-row justify-between items-center gap-4 mt-auto bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
-<p class="font-manrope text-xs text-slate-600 dark:text-slate-400">© 2024 SkyCheck Aviation Security. All rights reserved.</p>
+<p class="font-manrope text-xs text-slate-600 dark:text-slate-400"> 2024 SkyCheck Aviation Security. All rights reserved.</p>
+<p class="font-manrope text-xs text-slate-600 dark:text-slate-400"> 2024 SkyCheck Aviation Security. All rights reserved.</p>
 <div class="flex gap-6">
 <a class="font-manrope text-xs text-slate-500 hover:text-blue-900 transition-opacity" href="#">Privacy Policy</a>
 <a class="font-manrope text-xs text-slate-500 hover:text-blue-900 transition-opacity" href="#">Terms of Service</a>
