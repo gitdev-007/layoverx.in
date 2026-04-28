@@ -609,7 +609,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 </div>
 <div class="rounded-[28px] border border-white/10 bg-surface-container/90 p-8 md:p-10 shadow-2xl shadow-black/20">
-<form class="space-y-5">
+<form id="contactForm" class="space-y-5">
 <div>
 <label class="block text-sm text-secondary/80 mb-2" for="contact-name">Name</label>
 <input class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="contact-name" name="name" placeholder="Your name" type="text"/>
@@ -745,82 +745,87 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="js/main.js"></script>
 <script src="js/contact.js"></script>
 <script>
-// Fallback contact form handler
-function sendMessage() {
-    console.log('Fallback sendMessage function called');
+// Simple, working contact form handler
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Contact form script loaded');
     
-    const name = document.getElementById('contact-name')?.value?.trim();
-    const email = document.getElementById('contact-email')?.value?.trim();
-    const message = document.getElementById('contact-message')?.value?.trim();
+    const contactForm = document.getElementById('contactForm');
     
-    console.log('Fallback form values:', { name, email, message: message?.substring(0, 50) + '...' });
-    
-    if (!name || !email || !message) {
-        alert('Please fill in all required fields.');
+    if (!contactForm) {
+        console.log('Contact form not found!');
         return;
     }
     
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address.');
-        return;
-    }
+    console.log('Contact form found, adding event listener');
     
-    const button = document.querySelector('button[type="submit"]');
-    if (button) {
+    contactForm.addEventListener('submit', function(e) {
+        console.log('Form submitted!');
+        e.preventDefault();
+        
+        // Get form values
+        const name = this.name.value.trim();
+        const email = this.email.value.trim();
+        const message = this.message.value.trim();
+        
+        console.log('Form values:', { name, email, message: message.substring(0, 50) + '...' });
+        
+        // Basic validation
+        if (!name || !email || !message) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+        
+        // Get button and show loading state
+        const button = this.querySelector('button[type="submit"]');
+        const originalText = button.textContent;
         button.disabled = true;
         button.textContent = 'Sending...';
-    }
-    
-    console.log('Fallback: About to send API request to /api/contact');
-    
-    fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            name,
-            email,
-            message
-        })
-    })
-    .then(response => {
-        console.log('Fallback: API response received:', response.status, response.statusText);
-        return response.json();
-    })
-    .then(result => {
-        console.log('Fallback: API response data:', result);
         
-        if (result.success) {
-            alert('Message sent successfully! We\'ll get back to you soon.');
-            document.querySelector('form').reset();
-        } else {
-            alert('Failed to send message: ' + (result.error || 'Unknown error'));
-        }
-    })
-    .catch(error => {
-        console.error('Fallback: Contact form error:', error);
-        alert('Network error. Please check your connection and try again.');
-    })
-    .finally(() => {
-        if (button) {
+        console.log('Sending request to /api/contact');
+        
+        // Send API request
+        fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                message: message
+            })
+        })
+        .then(response => {
+            console.log('Response received:', response.status, response.statusText);
+            return response.json();
+        })
+        .then(result => {
+            console.log('Response data:', result);
+            
+            if (result.success) {
+                alert('Message sent successfully! We\'ll get back to you soon.');
+                contactForm.reset();
+            } else {
+                alert('Failed to send message: ' + (result.error || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Network error. Please check your connection and try again.');
+        })
+        .finally(() => {
+            // Restore button
             button.disabled = false;
-            button.textContent = 'Send Message';
-        }
-    });
-}
-
-// Also add onclick to the button as backup
-document.addEventListener('DOMContentLoaded', () => {
-    const submitButton = document.querySelector('form button[type="submit"]');
-    if (submitButton) {
-        submitButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            console.log('Button clicked directly');
-            sendMessage();
+            button.textContent = originalText;
         });
-    }
+    });
 });
 </script>
 </body></html>
