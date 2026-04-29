@@ -8,213 +8,144 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="css/styles.css" rel="stylesheet"/>
+<link href="/css/styles.css" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             "colors": {
-                    "outline-variant": "#5b403a",
-                    "on-secondary": "#313030",
-                    "error-container": "#93000a",
-                    "primary-fixed": "#ffdad2",
-                    "on-secondary-container": "#bab8b7",
-                    "on-tertiary-fixed": "#1b1b1c",
-                    "surface-dim": "#121414",
-                    "secondary": "#c8c6c5",
-                    "on-tertiary-container": "#2b2b2b",
-                    "tertiary": "#c8c6c5",
-                    "background": "#121414",
-                    "primary-fixed-dim": "#ffb4a3",
-                    "on-background": "#e2e2e2",
-                    "on-secondary-fixed": "#1c1b1b",
-                    "surface-container": "#1e2020",
-                    "error": "#ffb4ab",
-                    "secondary-fixed-dim": "#c8c6c5",
-                    "tertiary-container": "#949292",
-                    "inverse-surface": "#e2e2e2",
-                    "outline": "#aa8981",
-                    "tertiary-fixed": "#e5e2e1",
-                    "tertiary-fixed-dim": "#c8c6c5",
-                    "on-error": "#690005",
-                    "inverse-on-surface": "#2f3131",
-                    "on-primary-fixed": "#3d0700",
-                    "surface": "#121414",
-                    "on-primary-container": "#590e00",
-                    "on-error-container": "#ffdad6",
-                    "secondary-fixed": "#e5e2e1",
-                    "on-tertiary-fixed-variant": "#474746",
-                    "on-surface": "#e2e2e2",
-                    "inverse-primary": "#b52700",
-                    "surface-bright": "#38393a",
-                    "on-primary": "#621000",
-                    "surface-tint": "#ffb4a3",
-                    "primary": "#ffb4a3",
-                    "surface-container-highest": "#333535",
-                    "surface-variant": "#333535",
-                    "secondary-container": "#4a4949",
-                    "on-primary-fixed-variant": "#8a1b00",
-                    "primary-container": "#ff5a33",
-                    "surface-container-high": "#282a2b",
-                    "on-tertiary": "#303030",
-                    "on-secondary-fixed-variant": "#474646",
-                    "surface-container-lowest": "#0c0f0f",
-                    "surface-container-low": "#1a1c1c",
-                    "on-surface-variant": "#e3beb6"
+              "on-surface-variant": "#cfc4c5",
+              "surface-container-low": "#1b1b1b",
+              "surface-container-lowest": "#0e0e0e",
+              "on-secondary-fixed-variant": "#474646",
+              "on-tertiary": "#303030",
+              "surface-container-high": "#2a2a2a",
+              "primary-container": "#000000",
+              "on-primary-fixed-variant": "#474747",
+              "secondary-container": "#4a4949",
+              "surface-variant": "#353535",
+              "surface-container-highest": "#353535",
+              "primary": "#c6c6c6",
+              "surface-tint": "#c6c6c6",
+              "on-primary": "#303030",
+              "surface-bright": "#393939",
+              "inverse-primary": "#5e5e5e",
+              "on-surface": "#e2e2e2",
+              "on-tertiary-fixed-variant": "#474746",
+              "secondary-fixed": "#e5e2e1",
+              "on-error-container": "#ffdad6",
+              "on-primary-container": "#757575",
+              "surface": "#131313",
+              "on-primary-fixed": "#1b1b1b",
+              "inverse-on-surface": "#303030",
+              "on-error": "#690005",
+              "tertiary-fixed-dim": "#c8c6c5",
+              "tertiary-fixed": "#e5e2e1",
+              "outline": "#988e90",
+              "inverse-surface": "#e2e2e2",
+              "tertiary-container": "#000000",
+              "secondary-fixed-dim": "#c8c6c5",
+              "error": "#ffb4ab",
+              "surface-container": "#1f1f1f",
+              "on-secondary-fixed": "#1c1b1b",
+              "on-background": "#e2e2e2",
+              "primary-fixed-dim": "#c6c6c6",
+              "background": "#131313",
+              "tertiary": "#c8c6c5",
+              "on-tertiary-container": "#767575",
+              "secondary": "#c8c6c5",
+              "surface-dim": "#131313",
+              "on-tertiary-fixed": "#1b1b1c",
+              "on-secondary-container": "#bab8b7",
+              "primary-fixed": "#e2e2e2",
+              "error-container": "#93000a",
+              "on-secondary": "#313030",
+              "outline-variant": "#4c4546"
             },
             "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
             },
             "spacing": {
-                    "margin-mobile": "20px",
-                    "margin-desktop": "64px",
-                    "gutter": "24px",
-                    "unit": "8px",
-                    "container-max": "1280px"
+              "stack-lg": "2rem",
+              "unit": "8px",
+              "stack-md": "1rem",
+              "stack-sm": "0.5rem",
+              "gutter": "1.5rem",
+              "container-padding": "2rem"
             },
             "fontFamily": {
-                    "body-md": ["Manrope"],
-                    "label-md": ["Manrope"],
-                    "body-lg": ["Manrope"],
-                    "headline-md": ["Plus Jakarta Sans"],
-                    "headline-xl": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"]
+              "headline-lg": ["Plus Jakarta Sans"],
+              "body-md": ["Inter"],
+              "display-xl": ["Plus Jakarta Sans"],
+              "headline-md": ["Plus Jakarta Sans"],
+              "label-sm": ["Inter"],
+              "body-lg": ["Inter"]
             },
             "fontSize": {
-                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
-                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              "headline-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+              "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+              "display-xl": ["60px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+              "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+              "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
             }
-          },
-        },
+          }
+        }
       }
     </script>
 <style>
-        .glass { background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        html { scroll-behavior: smooth; }
-        body { scroll-padding-top: 110px; }
-        .nav-dropdown {
-            opacity: 0;
-            transform: translateY(10px);
-            visibility: hidden;
-            pointer-events: none;
-            transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+        .hero-gradient {
+            background: radial-gradient(circle at top left, rgba(255, 107, 0, 0.05), transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(0, 64, 223, 0.05), transparent 40%);
         }
-        .nav-dropdown.open,
-        .nav-item:hover .nav-dropdown,
-        .nav-item:focus-within .nav-dropdown {
-            opacity: 1;
-            transform: translateY(0);
-            visibility: visible;
-            pointer-events: auto;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .search-container {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+        }
+        .airport-input:focus-within {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .datetime-input::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
         }
         .fade-section {
             opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 700ms ease, transform 700ms ease;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .fade-section.is-visible {
+        .fade-section.active {
             opacity: 1;
             transform: translateY(0);
         }
-        .calendar-icon {
-            font-size: 20px;
-            color: #4da3ff;
-            opacity: 1;
-            line-height: 1;
-            display: inline-flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        .datetime-input {
-            opacity: 0;
-            position: absolute;
-            pointer-events: none;
-            width: 0;
-            height: 0;
-        }
-        .airport-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            width: 100%;
-            cursor: pointer;
-        }
-        .airport-text {
-            color: #fff;
-            font-size: 16px;
-        }
-        .dropdown-arrow {
-            color: #fff;
-            font-size: 16px;
-            line-height: 1;
-        }
-        .duration-container {
+        .nav-link {
             position: relative;
-            width: 100%;
         }
-        .duration-display {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            cursor: pointer;
-            width: 100%;
-            color: #fff;
-            font-size: 16px;
-        }
-        .duration-dropdown-panel {
+        .nav-link::after {
+            content: '';
             position: absolute;
-            top: calc(100% + 8px);
+            bottom: -4px;
             left: 0;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 10px;
-            padding: 12px;
-            margin-top: 8px;
-            z-index: 10;
-            min-width: 260px;
+            width: 0;
+            height: 2px;
+            background: #FF6B00;
+            transition: width 0.3s ease;
         }
-        .duration-input {
+        .nav-link:hover::after {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            border: 1px solid #333;
-            background: rgba(255,255,255,0.05);
-            color: white;
-            outline: none;
-            font-size: 14px;
         }
-        .duration-input::placeholder {
-            color: #888;
-        }
-        .duration-options {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .chip {
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid #333;
-            background: rgba(255,255,255,0.05);
-            color: #ccc;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 12px;
-        }
-        .chip:hover {
-            border-color: #4da3ff;
+        .material-symbols-outlined {
             color: #fff;
         }
     </style>
@@ -223,12 +154,13 @@
 <!-- Dynamic Header Injection -->
 <div id="header"></div>
 <script>
-fetch('/components/header.html')
+fetch('/header.html')
   .then(res => res.text())
   .then(data => { 
     document.getElementById('header').innerHTML = data; 
   });
 </script>
+
 <script>
 // QR Verification Gate for Explore Experiences
 function handleExploreClick() {
@@ -236,11 +168,11 @@ function handleExploreClick() {
   
   if (isVerified === "true") {
     // User is verified, allow access to explore experiences
-    window.location.href = "explore_experiences.html";
+    window.location.href = "/explore_experiences.html";
   } else {
     // User is not verified, redirect to QR upload flow
     console.log("User not verified - redirecting to QR upload");
-    window.location.href = "qr_upload_state_qr.html";
+    window.location.href = "/qr_upload_state_qr.html";
   }
 }
 
@@ -250,154 +182,72 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("Verification status on load:", isVerified);
 });
 </script>
+
 <!-- Top Navigation -->
 <header class="fixed top-0 w-full z-50 bg-neutral-950/75 backdrop-blur-md shadow-2xl shadow-black/40 border-b border-white/10">
 <div class="max-w-7xl mx-auto px-6 md:px-8 py-4 flex justify-between items-center gap-6">
 <div class="flex items-center gap-8 lg:gap-12">
-<a class="text-2xl font-black tracking-tighter text-white" href="#">LayoverX</a>
+<a class="text-2xl font-black tracking-tighter text-white" href="/index.html">LayoverX</a>
 <nav class="hidden md:flex items-center gap-6 lg:gap-8 font-['Plus_Jakarta_Sans'] text-sm tracking-wide">
-<div class="relative nav-item">
-<button aria-expanded="false" class="flex items-center gap-1 text-orange-500 border-b-2 border-orange-500 pb-1 transition-colors" type="button" onclick="handleExploreClick()">
-<span>Explore</span>
-<span class="material-symbols-outlined text-[18px]">expand_more</span>
-</button>
-<div class="nav-dropdown absolute left-0 top-full pt-4 min-w-[240px]">
-<div class="rounded-2xl border border-white/10 bg-surface-container/95 backdrop-blur-xl shadow-2xl shadow-black/40 p-3 space-y-1">
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="hotel.html">All Experiences</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="hotel.html">Hotels &amp; Stays</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" data-food-dining-link href="/restaurant.html">Food &amp; Dining</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" data-spa-link href="/spa.html">Spa &amp; Wellness</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" data-entertainment-link href="/entertainment.html">Entertainment</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">City Tours</a>
-</div>
-</div>
-</div>
-<div class="relative nav-item">
-<button aria-expanded="false" class="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors" type="button">
-<span>Partner With Us</span>
-<span class="material-symbols-outlined text-[18px]">expand_more</span>
-</button>
-<div class="nav-dropdown absolute left-0 top-full pt-4 min-w-[280px]">
-<div class="rounded-2xl border border-white/10 bg-surface-container/95 backdrop-blur-xl shadow-2xl shadow-black/40 p-3 space-y-1">
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="hotel.html">Hotels</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Restaurants &amp; Cafes</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Spa &amp; Wellness</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Entertainment &amp; Gaming</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">Transport Services</a>
-<a class="block rounded-xl px-4 py-3 text-secondary hover:text-white hover:bg-white/5 hover:scale-[1.02] transition duration-200" href="#">City Tour Operators</a>
-</div>
-</div>
-</div>
-<a class="text-neutral-400 hover:text-white transition-colors" href="#about-us">About</a>
-<a class="text-neutral-400 hover:text-white transition-colors" href="#contact">Contact</a>
+<a class="nav-link text-neutral-400 hover:text-white transition-colors" href="/explore_experiences.html">Explore</a>
+<a class="nav-link text-neutral-400 hover:text-white transition-colors" href="/options.html">Options</a>
+<a class="nav-link text-neutral-400 hover:text-white transition-colors" href="/priority.html">Priority</a>
+<a class="nav-link text-neutral-400 hover:text-white transition-colors" href="/plan.html">Plan</a>
+<a class="nav-link text-neutral-400 hover:text-white transition-colors" href="/finalize.html">Finalize</a>
+<a class="nav-link text-neutral-400 hover:text-white transition-colors" href="#about-us">About</a>
+<a class="nav-link text-neutral-400 hover:text-white transition-colors" href="#contact">Contact</a>
 </nav>
 </div>
 <div class="hidden md:flex items-center gap-6">
-<a class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-secondary hover:text-white hover:bg-white/[0.06] transition-colors" data-nav-signin id="signInBtn" href="#">Sign In</a>
-<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-label-md active:scale-95 duration-200 inline-flex items-center" data-nav-plan type="button">Plan Layover</button>
-</div>
-<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation menu" class="md:hidden w-11 h-11 rounded-full border border-white/10 bg-white/5 text-white flex items-center justify-center" data-mobile-menu-toggle type="button">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-<div class="md:hidden hidden border-t border-white/10 bg-neutral-950/95 backdrop-blur-xl" id="mobile-menu">
-<div class="px-6 py-5 space-y-3 font-['Plus_Jakarta_Sans']">
-<div class="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
-<button aria-expanded="false" class="w-full flex items-center justify-between px-4 py-4 text-left text-white" data-mobile-dropdown-trigger="mobile-explore" type="button">
-<span>Explore</span>
-<span class="material-symbols-outlined text-[18px] transition-transform">expand_more</span>
-</button>
-<div class="hidden px-3 pb-3" data-mobile-dropdown="mobile-explore">
-<div class="space-y-1 rounded-xl bg-surface-container/80 p-2">
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="hotel.html">All Experiences</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="hotel.html">Hotels &amp; Stays</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" data-food-dining-link href="/restaurant.html">Food &amp; Dining</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" data-spa-link href="/spa.html">Spa &amp; Wellness</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" data-entertainment-link href="/entertainment.html">Entertainment</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="#">City Tours</a>
-</div>
-</div>
-</div>
-<div class="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
-<button aria-expanded="false" class="w-full flex items-center justify-between px-4 py-4 text-left text-white" data-mobile-dropdown-trigger="mobile-partner" type="button">
-<span>Partner With Us</span>
-<span class="material-symbols-outlined text-[18px] transition-transform">expand_more</span>
-</button>
-<div class="hidden px-3 pb-3" data-mobile-dropdown="mobile-partner">
-<div class="space-y-1 rounded-xl bg-surface-container/80 p-2">
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="hotel.html">Hotels</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="#">Restaurants &amp; Cafes</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="#">Spa &amp; Wellness</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="#">Entertainment &amp; Gaming</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="#">Transport Services</a>
-<a class="block rounded-lg px-3 py-3 text-secondary hover:text-white hover:bg-white/5 transition" href="#">City Tour Operators</a>
-</div>
-</div>
-</div>
-<a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-secondary hover:text-white transition" href="#about-us">About</a>
-<a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-secondary hover:text-white transition" href="#contact">Contact</a>
-<a class="block rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-secondary hover:text-white transition" href="#">Sign In</a>
-<a class="w-full bg-primary-container text-on-primary-container px-6 py-3 rounded-2xl font-label-md mt-3 text-center block" href="hotel.html">Plan Layover</a>
+<a class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-[#c8c6c5] hover:text-white hover:bg-white/[0.06] transition-colors" href="#">Sign In</a>
 </div>
 </div>
 </header>
-<main>
 <!-- Hero Section -->
-<section class="relative min-h-screen flex items-center pt-24 px-8 overflow-hidden">
-<div class="absolute inset-0 z-0">
-<img class="w-full h-full object-cover opacity-40" data-alt="Cinematic wide shot of a modern airport terminal lounge with large windows at sunset, warm orange and purple hues reflecting on sleek floors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7bVECyHwsD_FPkeHUiZk7Pxa0MuWKHsQq2Tz3RNAiCZzR63Goe_Uo1ipzHHjXCUpuCaTamyDWnV012gRmq-a_PtAMr4DL1i-Rr4wuTfjjuFGYUbJ_GK-UTYndpd7mC-9lHr1SaNBZDcr-4NRqzfQaFJZcAzpEVClg19suEHsTqrKKoyxreJIdAaqVlV7EaVCOzpt6Bq11vGY9FlTU9MU7tWMaWrh7eXirWCxKSBuDoPKaeHfq006amnrEANkph3CX4cGBQA6c9K4"/>
-<div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface/80 to-surface"></div>
+<section class="relative min-h-[90vh] flex items-center justify-center pt-20 px-8 hero-gradient">
+<div class="max-w-4xl w-full text-center relative z-10">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 animate-fade-in">
+<span class="w-2 h-2 rounded-full bg-[#FF6B00] animate-pulse"></span>
+<span class="text-xs font-bold uppercase tracking-[0.2em] text-[#FF6B00]">New: Smart Layover Orchestration</span>
 </div>
-<div class="relative z-10 max-w-5xl mx-auto text-center">
-<span class="inline-block px-4 py-1.5 rounded-full bg-primary-container/15 text-primary font-label-md mb-8">Redefining Your Transit</span>
-<h1 class="font-headline-xl text-white mb-6 leading-tight">Your Layover. Your Experience.</h1>
-<p class="text-body-lg text-secondary/80 max-w-2xl mx-auto mb-12">Explore curated airport-near experiences with a faster, simpler planning flow. Browse freely, compare options, and only sign in when you're ready to book.</p>
-<!-- Flagship Search Bar -->
-<div class="glass p-3 rounded-[28px] border border-white/10 shadow-2xl max-w-5xl mx-auto">
-<div class="flex flex-col lg:flex-row items-stretch gap-2">
-<div class="flex-1 w-full px-5 py-3 flex items-center gap-3 border-b lg:border-b-0 lg:border-r border-white/10">
-<span class="material-symbols-outlined text-primary">flight_takeoff</span>
+<h1 class="font-display-xl text-display-xl text-white mb-8 tracking-tighter leading-[1.05]">
+                Elevating the art of the <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF9E4D]">journey.</span>
+</h1>
+<p class="text-lg md:text-xl text-secondary/60 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Experience luxury transit redefined. We curate and orchestrate your layover window with surgical precision, connecting you to premium airport services and local city highlights.
+            </p>
+<!-- Search Context Bar -->
+<div class="search-container rounded-3xl p-2 md:p-3 max-w-3xl mx-auto">
+<div class="flex flex-col md:flex-row items-stretch md:items-center">
+<div class="flex-1 px-5 py-3 border-b md:border-b-0 md:border-r border-white/5 flex items-center gap-3 group transition-all airport-input rounded-2xl">
+<span class="material-symbols-outlined text-[#FF6B00]">flight_takeoff</span>
 <div class="w-full text-left">
-<label class="block text-[11px] uppercase tracking-[0.18em] text-secondary/50 mb-1">Airport</label>
-<div class="airport-container" id="airportField" role="button" tabindex="0">
-<span class="airport-text">CSIA T2, Mumbai</span>
-<span class="dropdown-arrow">⌄</span>
+<label class="block text-[10px] uppercase tracking-[0.2em] text-secondary/50 mb-1">Departure Airport</label>
+<input class="bg-transparent border-none p-0 text-white font-body-md w-full focus:ring-0 placeholder:text-white/20" id="airport" placeholder="Where are you landing?" type="text" value="CSIA T2, Mumbai"/>
 </div>
 </div>
-</div>
-<div class="flex-1 w-full px-5 py-3 flex items-center gap-3 border-b lg:border-b-0 lg:border-r border-white/10">
-<span class="material-symbols-outlined text-primary">schedule</span>
+<div class="flex-1 px-5 py-3 border-b md:border-b-0 md:border-r border-white/5 flex items-center gap-3">
+<span class="material-symbols-outlined text-[#FF6B00]">timer</span>
 <div class="w-full text-left">
-<label class="block text-[11px] uppercase tracking-[0.18em] text-secondary/50 mb-1">Duration</label>
-<div class="duration-container">
-<div class="duration-display" id="durationDisplay" role="button" tabindex="0">
-<span id="durationValue">Select Duration</span>
-<span class="dropdown-arrow">⌄</span>
-</div>
-<div class="duration-dropdown-panel hidden" id="durationPanel">
-<input class="duration-input" id="durationInput" max="24" min="1" placeholder="Enter hours" type="number"/>
-<div class="duration-options" id="durationChips">
-<span class="chip" data-value="2">2h</span>
-<span class="chip" data-value="4">4h</span>
-<span class="chip" data-value="6">6h</span>
-<span class="chip" data-value="8">8h</span>
-<span class="chip" data-value="12">12h</span>
+<label class="block text-[10px] uppercase tracking-[0.2em] text-secondary/50 mb-1">Layover Window</label>
+<div class="flex items-center gap-2">
+<input class="bg-transparent border-none p-0 text-white font-body-md w-16 focus:ring-0" id="duration" step="0.5" type="number" value="6.5"/>
+<span class="text-white/40 text-sm font-bold uppercase tracking-widest">Hours</span>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="flex-1 w-full px-5 py-3 flex items-center gap-3">
-<span class="material-symbols-outlined calendar-icon">calendar_today</span>
+<div class="flex-1 px-5 py-3 flex items-center gap-3">
+<span class="material-symbols-outlined text-[#FF6B00]">calendar_today</span>
 <div class="w-full text-left">
-<label class="block text-[11px] uppercase tracking-[0.18em] text-secondary/50 mb-1">Date &amp; Time</label>
-<span class="text-white font-body-md" id="datetimeDisplay">2026-04-27 14:30</span>
-<input class="datetime-input" id="datetime" type="datetime-local" value="2026-04-27T14:30"/>
+<label class="block text-[10px] uppercase tracking-[0.2em] text-secondary/50 mb-1">Date &amp; Time</label>
+<input class="datetime-input bg-transparent border-none p-0 text-white font-body-md w-full focus:ring-0" id="datetime" type="datetime-local" value="2026-04-27T14:30"/>
 </div>
 </div>
 </div>
 <div class="flex flex-col sm:flex-row gap-3 mt-4 justify-center">
+<a href="/qr_upload_state_qr.html">
 <button class="w-full sm:w-auto border border-white/10 bg-white/[0.04] text-white px-8 py-4 rounded-full font-label-md hover:bg-white/[0.08] transition-all inline-flex items-center justify-center" id="exploreExperiencesBtn" type="button">Explore Experiences</button>
+</a>
 </div>
 <p class="hidden text-sm text-red-400 mt-3 px-2 text-left" id="exploreError" role="alert" aria-live="polite"></p>
 <p class="text-secondary/60 text-sm text-left mt-4 px-2">Browse all experiences without signing in. Login is only required when you continue to booking or checkout.</p>
@@ -412,372 +262,102 @@ document.addEventListener("DOMContentLoaded", () => {
 <h2 class="font-headline-lg text-white mb-5">A better way to use the hours between flights.</h2>
 <p class="text-body-lg text-secondary/80 leading-relaxed">LayoverX helps travelers turn transit time into something genuinely useful, restful, or memorable. We connect people with curated stays, dining, wellness, entertainment, and short local experiences located conveniently near major airports.</p>
 </div>
-<div class="space-y-6">
-<div class="rounded-[28px] border border-white/10 bg-surface-container/80 p-8">
-<h3 class="font-headline-md text-white mb-3">Built for modern transit</h3>
-<p class="text-secondary/75 leading-relaxed">From tight connections to extended layovers, every recommendation is selected with timing, access, and traveler confidence in mind.</p>
+<div class="grid grid-cols-2 gap-6">
+<div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-[#FF6B00]/40 transition-colors">
+<span class="material-symbols-outlined text-[#FF6B00] mb-4 text-3xl">airport_shuttle</span>
+<h4 class="text-white font-bold mb-2">Smart Proximity</h4>
+<p class="text-sm text-secondary/60">Only options within your reach given current traffic.</p>
 </div>
-<div class="rounded-[28px] border border-white/10 bg-surface-container-high/80 p-8">
-<h3 class="font-headline-md text-white mb-3">Trusted local partners</h3>
-<p class="text-secondary/75 leading-relaxed">We work with reliable nearby businesses so travelers can book quickly, arrive smoothly, and make the most of limited time on the ground.</p>
+<div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-[#FF6B00]/40 transition-colors">
+<span class="material-symbols-outlined text-[#FF6B00] mb-4 text-3xl">verified</span>
+<h4 class="text-white font-bold mb-2">Curated Quality</h4>
+<p class="text-sm text-secondary/60">Every experience is hand-picked for quality.</p>
 </div>
+<div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-[#FF6B00]/40 transition-colors">
+<span class="material-symbols-outlined text-[#FF6B00] mb-4 text-3xl">schedule</span>
+<h4 class="text-white font-bold mb-2">Dynamic Sync</h4>
+<p class="text-sm text-secondary/60">Real-time flight status syncs your itinerary.</p>
 </div>
-</div>
-</section>
-<!-- Features Bento Grid -->
-<section class="py-24 px-8 max-w-7xl mx-auto" id="how-it-works">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-<div class="group relative overflow-hidden rounded-3xl bg-surface-container border border-white/5 h-[400px]">
-<img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700" data-alt="Luxury airport spa interior with soft warm lighting, professional massage table, and bamboo elements for a calming atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuBeISMzXQPmWmOmB0ft4zxGshz-gTXvzupRjlzTpxD0wsTviCiyUtRzn3emtm-4mFRNk1sshFtHHN9FZyFc9FDWyaeXk8ad4U6Y7UyLtvGZT44QPc8dYNFY5c6OXVhfZLSdC3IU4_UP8n0rqYmETKgd07B-ktbHUz7ty3qLWIl7TiyTUv8bovx2eJRJljeeXdMkeE2PHMnSIILL3EIFW2YYbK7lP6iYBfTpoF5c4mtXEICObvxAQEi9TN9RhLPY1HqUBaE-dfU3o"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/20 to-transparent p-8 flex flex-col justify-end">
-<h3 class="font-headline-md text-white mb-2">Curated Layover Experiences</h3>
-<p class="text-secondary/70">Discover handpicked hotels, lounges, spas, and short city experiences designed specifically for travelers in transit. Every option is selected for convenience, quality, and proximity to the airport.</p>
-</div>
-</div>
-<a class="group relative overflow-hidden rounded-3xl bg-surface-container border border-white/5 h-[400px] block" href="hotel.html">
-<img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700" data-alt="Modern boutique hotel room interior with clean white linens, minimalist design, and a view of the airport runway at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATVkR2KXkjynUzwChDVcZkDkKNFrDNseyf3wI6FNpzzIi9WSZIBh4fp5UEP4hylQCsTVoKcSOAVBzDSDkZOEzSqhWiGuwQVHP3Cote2EL6fvUHv6r6gjsDfoPSu0SBnPJ3SLxLuXLpeuyhYPaSOEgM5qaDyyq9CxdQuJLa7ZGavDOQjSFOuu8bEkLLp8-dE-p_Uq9a8kSpnMSGRLrtDVaiOMkEFxVvev0JD6S1hV7lDpM9_jf6AQ9U2715D53S3HRGxsyaYwvkSPY"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/20 to-transparent p-8 flex flex-col justify-end">
-<h3 class="font-headline-md text-white mb-2">Flexible &amp; Time-Based Booking</h3>
-<p class="text-secondary/70">Book only for the time you need. No rigid schedules or full-day commitments - everything is optimized for your layover duration.</p>
-</div>
-</a>
-<div class="group relative overflow-hidden rounded-3xl bg-surface-container border border-white/5 h-[400px]">
-<img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700" data-alt="Close up of a traveler's hand holding a high-end smartphone displaying a sleek mobile boarding pass and booking confirmation UI" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeuOcp48bW0hOY4l8pEuj6z5sWn30Mv5P4Av858FhP6Aa2LtthA85vYicS7BpPAsl0Yq--QwUBB5AEwKLBYSZK_wcWjf3LOMYYW4lHtyN8bM5mTCt0dmNm1ou6uR4nMoyA7TinsYas2aKSI-N3O4BPLSUt_lBIjUvm9j2LSLoK_PzaTxh9uPrF8Al8gh9WCdud3wx2Qm0Ft2Z4EiEmvCS650vh5cgfDw58zTGl8XjeXsKNB8Rkm_8Ns2TKIWh7_5ppRliaUpBOgSk"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/20 to-transparent p-8 flex flex-col justify-end">
-<h3 class="font-headline-md text-white mb-2">Instant &amp; Seamless Booking</h3>
-<p class="text-secondary/70">Confirm your experience in seconds with real-time availability and secure checkout. Enjoy smooth entry with digital confirmations.</p>
+<div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-[#FF6B00]/40 transition-colors">
+<span class="material-symbols-outlined text-[#FF6B00] mb-4 text-3xl">lock</span>
+<h4 class="text-white font-bold mb-2">Secure Booking</h4>
+<p class="text-sm text-secondary/60">Manage everything through our secure gateway.</p>
 </div>
 </div>
-</div>
-</section>
-<!-- How It Works -->
-<section class="py-24 px-8 max-w-7xl mx-auto">
-<div class="text-center mb-16">
-<h2 class="font-headline-lg text-white mb-4">How It Works</h2>
-<div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-<div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-white/5 -z-10"></div>
-<div class="bg-surface p-8 text-center">
-<div class="w-16 h-16 bg-surface-container border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-6 text-primary font-bold text-xl">1</div>
-<h4 class="font-headline-md text-white mb-4">Enter Your Layover Details</h4>
-<p class="text-secondary/70">Provide your airport, arrival and departure times, and available layover duration so we can personalize your options.</p>
-</div>
-<div class="bg-surface p-8 text-center">
-<div class="w-16 h-16 bg-surface-container border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-6 text-primary font-bold text-xl">2</div>
-<h4 class="font-headline-md text-white mb-4">Explore Curated Experiences</h4>
-<p class="text-secondary/70">Browse verified hotels, lounges, spas, and city tours tailored to your time, budget, and location.</p>
-</div>
-<div class="bg-surface p-8 text-center">
-<div class="w-16 h-16 bg-surface-container border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-6 text-primary font-bold text-xl">3</div>
-<h4 class="font-headline-md text-white mb-4">Book Instantly &amp; Enjoy</h4>
-<p class="text-secondary/70">Secure your booking in seconds and head straight to your experience with complete confidence.</p>
-</div>
-</div>
-</section>
-<!-- Benefits -->
-<section class="py-24 px-8 bg-surface-container-lowest">
-<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-<div>
-<h2 class="font-headline-lg text-white mb-8">Travel Smarter, Not Harder</h2>
-<div class="space-y-6">
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary p-3 bg-primary/10 rounded-xl">timer</span>
-<div>
-<h5 class="text-white font-semibold mb-1">Save time</h5>
-<p class="text-secondary/70">No more wandering aimlessly through terminals. We direct you to the best spots instantly.</p>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary p-3 bg-primary/10 rounded-xl">explore</span>
-<div>
-<h5 class="text-white font-semibold mb-1">Discover nearby places</h5>
-<p class="text-secondary/70">Unlock hidden gems just minutes away from the airport gates.</p>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary p-3 bg-primary/10 rounded-xl">verified_user</span>
-<div>
-<h5 class="text-white font-semibold mb-1">Stress-free booking</h5>
-<p class="text-secondary/70">Real-time availability and guaranteed slots so you never miss your flight.</p>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary p-3 bg-primary/10 rounded-xl">sell</span>
-<div>
-<h5 class="text-white font-semibold mb-1">Verified options</h5>
-<p class="text-secondary/70">Choose from trusted partners selected for quality, convenience, and dependable service near the airport.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="relative">
-<img class="rounded-3xl shadow-2xl" data-alt="A satisfied traveler sitting in a premium airport lounge, working on a laptop with a cup of coffee, background showing blurred airplanes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuRVO62zdv0fT7mYOWLqFAENE0C3MeiqWMzwxY8fvHyto_KpdrEHmKlTb3yj1AjwAyV-I0kFUXT1fE1sirgoM1OlTbrXAu611jENnrLd65-OQO_6NjkW9-X73Cy1n8a8PexPq9b46B2GYXDDPLM717YkZrqhb3R4DXpiPuhVulJmgU4WxGHuhAiJ6ppbKn9bfwMo_klweNRbwVxCPK_Thnnns4FVYXljJQBJP9sZnUdT6rrPEoWLRggCQhyECrW2vTQeqxBcKCD_8"/>
-</div>
-</div>
-</section>
-<!-- About / Mission -->
-<section class="py-24 px-8 bg-surface-container-high">
-<div class="max-w-4xl mx-auto text-center">
-<h2 class="font-headline-lg text-white mb-6">Our Mission</h2>
-<p class="text-body-lg text-secondary/80 mb-8 leading-relaxed">
-                    At LayoverX, we believe every layover is an opportunity - not wasted time. Our mission is to transform idle hours between flights into meaningful, comfortable, and memorable experiences. We connect global travelers with trusted local services near airports, enabling them to relax, explore, and recharge - even within a few hours.
-                </p>
-<div class="flex justify-center gap-4">
-<span class="px-6 py-2 rounded-full border border-white/10 text-secondary text-sm">Founded 2026</span>
-</div>
-</div>
-</section>
-<!-- FAQ Section -->
-<section class="py-24 px-8 max-w-4xl mx-auto">
-<h2 class="font-headline-lg text-white mb-12 text-center">Frequently Asked Questions</h2>
-<div class="space-y-4">
-<details class="group bg-surface-container border border-white/5 rounded-2xl p-6">
-<summary class="flex justify-between items-center cursor-pointer list-none font-bold text-white">
-                        How does LayoverX booking work?
-                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<p class="mt-4 text-secondary/70">Simply enter your layover details, browse curated options, and book instantly with real-time availability.</p>
-</details>
-<details class="group bg-surface-container border border-white/5 rounded-2xl p-6">
-<summary class="flex justify-between items-center cursor-pointer list-none font-bold text-white">
-                        What happens if my flight is delayed or rescheduled?
-                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<p class="mt-4 text-secondary/70">We aim to provide flexible experiences. Many partners allow adjustments based on real-time travel changes.</p>
-</details>
-<details class="group bg-surface-container border border-white/5 rounded-2xl p-6">
-<summary class="flex justify-between items-center cursor-pointer list-none font-bold text-white">
-                        Is transportation included?
-                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<p class="mt-4 text-secondary/70">Some experiences include transport. Details are clearly mentioned on each listing.</p>
-</details>
-<details class="group bg-surface-container border border-white/5 rounded-2xl p-6">
-<summary class="flex justify-between items-center cursor-pointer list-none font-bold text-white">
-                        Are all services verified?
-                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<p class="mt-4 text-secondary/70">Yes, all partners are carefully vetted to ensure safety, quality, and reliability.</p>
-</details>
-<details class="group bg-surface-container border border-white/5 rounded-2xl p-6">
-<summary class="flex justify-between items-center cursor-pointer list-none font-bold text-white">
-                        Can I cancel or modify my booking?
-                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<p class="mt-4 text-secondary/70">Yes, depending on the provider's policy. Flexible cancellation options are available for many services.</p>
-</details>
-<details class="group bg-surface-container border border-white/5 rounded-2xl p-6">
-<summary class="flex justify-between items-center cursor-pointer list-none font-bold text-white">
-                        What types of experiences can I book?
-                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<p class="mt-4 text-secondary/70">Hotels, lounges, spa treatments, dining experiences, entertainment, and short city tours.</p>
-</details>
-<details class="group bg-surface-container border border-white/5 rounded-2xl p-6">
-<summary class="flex justify-between items-center cursor-pointer list-none font-bold text-white">
-                        Is LayoverX available in all airports?
-                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<p class="mt-4 text-secondary/70">We are expanding globally and currently operate in major international transit hubs.</p>
-</details>
-<details class="group bg-surface-container border border-white/5 rounded-2xl p-6">
-<summary class="flex justify-between items-center cursor-pointer list-none font-bold text-white">
-                        How do I contact support?
-                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<p class="mt-4 text-secondary/70">You can reach our support team via email or contact form available on the website.</p>
-</details>
 </div>
 </section>
 <!-- Contact Section -->
-<section class="py-24 px-8 fade-section" id="contact">
-<div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-start">
-<div class="rounded-[28px] border border-white/10 bg-surface-container-low p-8 md:p-10">
-<span class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-primary font-label-md mb-6">Contact</span>
-<h2 class="font-headline-lg text-white mb-4">Get in Touch</h2>
-<p class="text-secondary/80 text-body-lg leading-relaxed mb-8">Have a partnership inquiry, airport expansion idea, or product question? Our team is here to help.</p>
-<div class="space-y-4">
-<div class="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4">
-<p class="text-xs uppercase tracking-[0.18em] text-secondary/60 mb-2">Email</p>
-<a class="text-white hover:text-primary transition-colors" href="mailto:hello@layoverx.com">hello@layoverx.com</a>
+<section class="py-24 px-8 bg-surface-container-lowest fade-section" id="contact">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="font-display-xl text-4xl text-white mb-6">Connect with our Concierge</h2>
+<p class="text-secondary/60 mb-12 max-w-2xl mx-auto">Have specific requirements or a large group? Our premium orchestration team is here to help.</p>
+<div class="glass-card p-8 md:p-12 rounded-[32px] border border-white/10 text-left">
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6" id="contactForm">
+<div class="space-y-2">
+<label class="block text-xs uppercase tracking-widest text-secondary/50 ml-1">Your Name</label>
+<input class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#FF6B00] outline-none" name="name" required="" type="text"/>
 </div>
-<div class="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4">
-<p class="text-xs uppercase tracking-[0.18em] text-secondary/60 mb-2">Response Time</p>
-<p class="text-secondary/80">Typically within 1 business day</p>
+<div class="space-y-2">
+<label class="block text-xs uppercase tracking-widest text-secondary/50 ml-1">Email Address</label>
+<input class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#FF6B00] outline-none" name="email" required="" type="email"/>
 </div>
+<div class="md:col-span-2 space-y-2">
+<label class="block text-xs uppercase tracking-widest text-secondary/50 ml-1">Message</label>
+<textarea class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#FF6B00] outline-none min-h-[120px]" name="message" required=""></textarea>
 </div>
+<div class="md:col-span-2 pt-4">
+<button class="w-full bg-white text-black font-bold py-4 rounded-xl hover:bg-[#FF6B00] hover:text-white transition-all duration-300" type="submit">
+                        Send Concierge Request
+                    </button>
 </div>
-<div class="rounded-[28px] border border-white/10 bg-surface-container/90 p-8 md:p-10 shadow-2xl shadow-black/20">
-<form id="contactForm">
-  <div class="space-y-5">
-    <div>
-      <label class="block text-sm text-secondary/80 mb-2" for="contact-name">Name</label>
-      <input name="name" required class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="contact-name" placeholder="Your name" type="text"/>
-    </div>
-    <div>
-      <label class="block text-sm text-secondary/80 mb-2" for="contact-email">Email</label>
-      <input name="email" required class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="contact-email" placeholder="you@example.com" type="email"/>
-    </div>
-    <div>
-      <label class="block text-sm text-secondary/80 mb-2" for="contact-message">Message</label>
-      <textarea name="message" required class="w-full min-h-[160px] rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0 resize-y" id="contact-message" placeholder="Tell us a little about your inquiry"></textarea>
-    </div>
-    <button type="submit" class="w-full sm:w-auto bg-primary-container text-on-primary-container px-8 py-3 rounded-2xl font-label-md hover:scale-[1.01] active:scale-[0.99] transition">Send Message</button>
-  </div>
 </form>
 </div>
 </div>
 </section>
-</main>
 <!-- Footer -->
-<footer class="bg-[#121212] border-t border-white/5">
-<div class="w-full py-12 px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
-<div class="lg:col-span-2">
-<h4 class="text-xl font-bold text-white mb-4">LayoverX</h4>
-<p class="text-neutral-400 font-['Plus_Jakarta_Sans'] text-sm leading-relaxed max-w-sm">
-                    Transforming layovers into meaningful travel experiences worldwide.
-                </p>
-<p class="text-neutral-500 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest leading-relaxed mt-4">
-                    © 2026 LayoverX. All rights reserved.
-                </p>
-<div class="flex gap-4 mt-6">
-<a class="text-neutral-500 hover:text-orange-500 transition-colors" href="#">
-<span class="material-symbols-outlined">public</span>
-</a>
-<a class="text-neutral-500 hover:text-orange-500 transition-colors" href="#">
-<span class="material-symbols-outlined">rss_feed</span>
-</a>
-<a class="text-neutral-500 hover:text-orange-500 transition-colors" href="#">
-<span class="material-symbols-outlined">share</span>
-</a>
+<footer class="w-full py-12 px-8 border-t border-white/5 bg-black">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-2xl font-bold tracking-tighter text-white">LayoverX</div>
+<div class="flex flex-wrap justify-center gap-8 text-sm font-['Plus_Jakarta_Sans'] text-secondary/40">
+<a class="hover:text-white transition-colors" href="/index.html">Home</a>
+<a class="hover:text-white transition-colors" href="/explore_experiences.html">Explore</a>
+<a class="hover:text-white transition-colors" href="/options.html">Options</a>
+<a class="hover:text-white transition-colors" href="/priority.html">Priority</a>
+<a class="hover:text-white transition-colors" href="/plan.html">Plan</a>
 </div>
-</div>
-<div>
-<p class="text-orange-500 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest mb-6">Company</p>
-<ul class="space-y-4">
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">About</a></li>
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Careers</a></li>
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Contact</a></li>
-</ul>
-</div>
-<div>
-<p class="text-orange-500 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest mb-6">Explore</p>
-<ul class="space-y-4">
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Experiences</a></li>
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Airports</a></li>
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">City Guides</a></li>
-</ul>
-</div>
-<div>
-<p class="text-orange-500 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest mb-6">Support</p>
-<ul class="space-y-4">
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Help Center</a></li>
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Safety</a></li>
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Cancellation</a></li>
-</ul>
-</div>
-<div>
-<p class="text-orange-500 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest mb-6">Legal</p>
-<ul class="space-y-4">
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Privacy Policy</a></li>
-<li><a class="text-neutral-500 hover:text-orange-500 transition-colors font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest" href="#">Terms of Service</a></li>
-</ul>
-</div>
+<div class="text-secondary/20 text-xs"> 2026 LayoverX. Orchestrating transitions.</div>
 </div>
 </footer>
-<!-- Auth Modal -->
-<div aria-hidden="true" class="fixed inset-0 z-[9999] hidden" id="authModalRoot">
-  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-auth-backdrop></div>
-  <div class="relative mx-auto mt-24 w-[92vw] max-w-md">
-    <div class="rounded-3xl border border-white/10 bg-surface-container/95 shadow-2xl shadow-black/50 overflow-hidden">
-      <div class="px-6 pt-6 pb-4 flex items-start justify-between gap-4">
-        <div>
-          <h3 class="text-white font-headline-md leading-tight">Continue to LayoverX</h3>
-          <p class="text-secondary/70 text-sm mt-1">Sign in to continue your journey.</p>
-        </div>
-        <button aria-label="Close" class="w-10 h-10 rounded-full border border-white/10 bg-white/[0.04] text-white hover:bg-white/[0.08] transition flex items-center justify-center" data-auth-close type="button">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
-
-      <div class="px-6 pb-6 space-y-4">
-        <button class="w-full bg-primary-container text-on-primary-container px-5 py-3 rounded-2xl font-label-md hover:scale-[1.01] active:scale-[0.99] transition flex items-center justify-center gap-3" data-auth-google type="button">
-          <span class="material-symbols-outlined text-[20px]">account_circle</span>
-          Continue with Google
-        </button>
-
-        <div class="flex items-center gap-3">
-          <div class="h-px flex-1 bg-white/10"></div>
-          <div class="text-secondary/60 text-xs uppercase tracking-widest">or</div>
-          <div class="h-px flex-1 bg-white/10"></div>
-        </div>
-
-        <div class="space-y-3">
-          <div>
-            <label class="block text-sm text-secondary/80 mb-2" for="authEmail">Email</label>
-            <input autocomplete="email" class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="authEmail" placeholder="you@example.com" type="email"/>
-          </div>
-          <div>
-            <label class="block text-sm text-secondary/80 mb-2" for="authPassword">Password</label>
-            <input autocomplete="current-password" class="w-full rounded-2xl border border-white/10 bg-surface-container-highest/80 px-4 py-3 text-white placeholder-secondary/40 focus:border-primary focus:ring-0" id="authPassword" placeholder="••••••••" type="password"/>
-          </div>
-        </div>
-
-        <div class="hidden text-sm text-red-400" id="authError" role="alert" aria-live="polite"></div>
-
-        <button class="w-full border border-white/10 bg-white/[0.04] text-white px-5 py-3 rounded-2xl font-label-md hover:bg-white/[0.08] transition" data-auth-continue type="button">
-          Continue
-        </button>
-
-        <div class="flex items-center justify-center gap-2 text-sm text-secondary/70">
-          <span data-auth-mode-label>New here?</span>
-          <button class="text-primary hover:underline" data-auth-toggle type="button">Sign Up</button>
-        </div>
-
-        <p class="text-xs text-secondary/50 leading-relaxed">
-          By continuing, you agree to our Terms and Privacy Policy.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabaseClient.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/supabaseClient.js"></script>
+<script src="/js/main.js"></script>
 <script>
-console.log("JS FILE LOADED");
-
+// Fade-in animation on scroll
 document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll('.fade-section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entries[0].isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  sections.forEach(section => observer.observe(section));
+
+  // Handle contact form
   const form = document.getElementById("contactForm");
-
-  if (!form) {
-    console.error("Form NOT FOUND");
-    return;
-  }
-
-  console.log("Form connected");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // 🚨 THIS STOPS PAGE RELOAD
-
-    console.log("Submitting form...");
-
-    const name = form.name.value;
-    const email = form.email.value;
-    const message = form.message.value;
-
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name, email, message })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
       });
-
-      console.log("Response:", res);
-
       if (res.ok) {
         alert("Message sent successfully!");
         form.reset();
