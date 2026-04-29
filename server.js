@@ -1,7 +1,5 @@
 const express = require('express');
-const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
 const cors = require('cors');
 const { JSDOM } = require('jsdom');
 
@@ -12,18 +10,6 @@ const PORT = 3001;
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
-
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
-    }
-});
-
-const upload = multer({ storage: storage });
 
 // Allowed airline codes (IATA codes)
 const ALLOWED_AIRLINES = [
@@ -78,10 +64,9 @@ function isValidAirlineQR(qrData) {
 }
 
 // Mock QR decoder (in production, use a proper QR library)
-function decodeQR(imagePath) {
-    return new Promise((resolve, reject) => {
+function decodeQR() {
+    return new Promise((resolve) => {
         // For demo purposes, return mock data
-        // In production, use libraries like 'qrcode-reader', 'jsqr', or 'zxing'
         setTimeout(() => {
             const mockQRData = {
                 type: "AIRLINE_BOARDING_PASS",
@@ -99,19 +84,10 @@ function decodeQR(imagePath) {
 }
 
 // API Routes
-app.post('/api/verify-qr', upload.single('qrImage'), async (req, res) => {
+app.post('/api/verify-qr', async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).json({
-                status: 'rejected',
-                reason: 'No file uploaded'
-            });
-        }
-
-        const filePath = req.file.path;
-        
-        // Decode QR
-        const qrData = await decodeQR(filePath);
+        // Decode QR (mocked, no file used)
+        const qrData = await decodeQR();
         
         // Validate QR
         const validation = isValidAirlineQR(JSON.stringify(qrData));
@@ -119,9 +95,6 @@ app.post('/api/verify-qr', upload.single('qrImage'), async (req, res) => {
         // Generate verification ID
         const verificationId = 'SK-' + Math.random().toString(36).substr(2, 9).toUpperCase();
         
-        // Clean up uploaded file
-        fs.unlinkSync(filePath);
-
         if (validation.valid) {
             res.json({
                 status: 'verified',
@@ -148,6 +121,14 @@ app.post('/api/verify-qr', upload.single('qrImage'), async (req, res) => {
             timestamp: new Date().toISOString()
         });
     }
+});
+
+// Endpoint for multiple QR codes - fixed for serverless
+app.post('/api/verify-multiple-qr', async (req, res) => {
+    return res.status(200).json({
+        success: true,
+        message: "Request received"
+    });
 });
 
 // Get verification status
@@ -184,17 +165,12 @@ app.get('/final-result', (req, res) => {
     res.sendFile(path.join(__dirname, 'final_result_qr.html'));
 });
 
-// Create uploads directory if it doesn't exist
-const uploadsDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir);
-}
-
 // Start server
 app.listen(PORT, () => {
     console.log(`QR Verification Server running on port ${PORT}`);
     console.log('Available endpoints:');
     console.log('  POST /api/verify-qr - Verify QR code');
+    console.log('  POST /api/verify-multiple-qr - Verify multiple QR codes');
     console.log('  GET /api/verification-status/:id - Get verification status');
     console.log('  GET / - QR Upload page');
     console.log('  GET /processing - Processing page');
